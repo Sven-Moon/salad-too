@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "salad-too"
+  "defaultProject": "salad-too",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

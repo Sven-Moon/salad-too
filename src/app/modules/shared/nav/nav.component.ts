@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
+  thisPosition: string = '';
 
   constructor() { }
 
   ngOnInit(): void {
+    this.thisPosition = "20%"
   }
+
 
 }
