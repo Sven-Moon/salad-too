@@ -2,7 +2,7 @@ import { HttpRequest, HttpEvent, HttpHandler, HttpInterceptor, HttpResponse } fr
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
-import { staticData } from "../models/staticData";
+import { staticData } from "../models/StaticData";
 
 @Injectable({ providedIn: 'root' })
 export class MockStaticDataInterceptor implements HttpInterceptor {

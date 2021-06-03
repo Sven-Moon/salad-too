@@ -4,3 +4,7 @@ $warning: #a7d49b;
 $primary: #1c3a13;
 $neutral: #fec0aa;
 $success: #92ac86;
+
+$minBarHeight: 2rem;
+$maxBarHeight: 6vh;
+$barHeight: calc(max(#{$minBarHeight}, #{$maxBarHeight}));

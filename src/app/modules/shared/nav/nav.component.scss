@@ -1,23 +1,24 @@
 @import "src/styles.scss";
 
 .nav-wrap {
-  padding: 0 1vmin;
+  padding: 0;
   position: relative;
 }
 
 img {
   position: relative;
   object-fit: contain;
-  height: 4vh;
+  height: calc(#{$barHeight} * 0.8);
   margin: 1vh 1vh;
   z-index: 1;
+  float: left;
 }
 
 .cart {
   display: inline-block;
   position: relative;
-  width: 6vh;
-  height: 6vh;
+  width: $barHeight;
+  height: $barHeight;
 }
 
 .badge {
@@ -32,7 +33,7 @@ img {
   color: white;
   justify-content: center;
   align-items: center;
-  font-size: 2.5vh;
+  font-size: calc(#{$barHeight} * 0.25);
   z-index: 2;
 }
 

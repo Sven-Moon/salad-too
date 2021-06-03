@@ -1,4 +1,17 @@
+@import "/src/styles.scss";
+
 .app-wrap {
-  min-width: 360px;
-  overflow-x: hide;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 280px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+}
+.main-panel-wrap {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - #{$barHeight});
+  margin-top: $barHeight;
 }

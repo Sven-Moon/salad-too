@@ -11,6 +11,9 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { reducers, metaReducers } from './store';
+import { AppMockInterceptors } from './barrels/app-mocks';
+import { SharedModule } from './modules/shared/shared.module';
+import { OrderModule } from './modules/order/order.module';
 
 @NgModule({
   declarations: [
@@ -21,14 +24,18 @@ import { reducers, metaReducers } from './store';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    OrderModule,
+    SharedModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
-  providers: [],
+  providers: [
+    ...(environment.useMocking ? AppMockInterceptors : [])
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
