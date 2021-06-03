@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { selectNavPointer } from '../state/shared.selectors';
 
 @Component({
   selector: 'app-nav',
@@ -6,13 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  thisPosition: string = '';
+  navPointer$: Observable<string> = of('0%')
 
-  constructor() { }
+  constructor(
+    private store: Store
+  ) { }
 
   ngOnInit(): void {
-    this.thisPosition = "20%"
+    this.navPointer$ = this.store.select(selectNavPointer)
   }
 
 
 }
+
