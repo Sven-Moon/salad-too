@@ -1,19 +1,18 @@
-import { ItemGroup } from "./Item";
 
 export interface Ingredient {
-  [id: string]: {
-    name: string
-    type: string
-    image: string
-    itemGroup: string[]
-  }
+  id: string
+  name: string
+  type: string
+  image: string
+  itemType: string[]
 }
 
 export type Ingredients = Ingredient[]
 
 export interface IngredientType {
-  [id: string]: {
-    price: string
-    selectType: 'single' | 'multiple'
-  }
+  id: string
+  price: string
+  selectType: 'single' | 'multiple'
 }
+
+export type IngredientTypes = IngredientType[]

@@ -1,13 +1,18 @@
-import { Ingredient, IngredientType } from "./Ingredient";
-import { Item } from "./Item";
-import { Dessert, Drink, DrinkType, Side } from "./ItemType";
+import { Ingredients, IngredientTypes } from "./Ingredient";
+import { Desserts, Drinks, DrinkTypes, Items, Sides } from "./Item";
+import { Contacts, Users } from "./User";
 
 export interface staticData {
-  items: Item,
-  ingredients: Ingredient,
-  ingredientTypes: IngredientType,
-  drinks: Drink,
-  drinkTypes: DrinkType,
-  desserts: Dessert
-  sides: Side
+  items: Items,
+  ingredients: Ingredients,
+  ingredientTypes: IngredientTypes,
+  drinks: Drinks,
+  drinkTypes: DrinkTypes,
+  desserts: Desserts
+  sides: Sides
+}
+
+export interface userData {
+  users: Users
+  contacts: Contacts
 }
