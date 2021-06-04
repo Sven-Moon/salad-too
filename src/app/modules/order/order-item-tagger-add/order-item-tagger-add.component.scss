@@ -1,0 +1,27 @@
+@import "src/styles.scss";
+
+.profile-wrap {
+  display: flex;
+  flex-flow: row nowrap;
+  border-radius: 0.5rem;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+}
+
+.actions {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.profile-img {
+  object-fit: scale-down;
+  height: 2rem;
+}
+
+.form-control {
+  height: 1.25rem;
+  margin-right: 0.5rem;
+}

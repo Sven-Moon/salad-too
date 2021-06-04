@@ -1,0 +1,82 @@
+@import "/src/styles.scss";
+
+$taggerHeight: 4rem;
+$typeHeight: 3rem;
+$buttonHeight: 4rem;
+$panel-padding-vert: 0.5rem;
+$panel-padding-side: 1rem;
+$border-wide: 0.5rem;
+
+.select-wrap {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: scroll;
+  justify-content: center;
+}
+
+.tagger {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  width: 100%;
+  height: $taggerHeight;
+}
+
+.popup-cover {
+  position: absolute;
+  top: $barHeight;
+  left: 0;
+  width: 100%;
+  height: calc(100% - #{$barHeight});
+  background-color: rgba(232, 232, 232, 0.65);
+  margin: 0;
+  border-radius: 0;
+}
+
+.popup-wrap {
+  position: absolute;
+  display: flex;
+  flex-flow: row wrap;
+  top: $taggerHeight;
+  width: calc(
+    100% - 2 *
+      (#{$panel-padding-side} + #{$border-wide} + #{$panel-padding-side})
+  );
+  margin: $panel-padding-side;
+  padding: $panel-padding-vert $panel-padding-side;
+  border: $border-wide solid $warning;
+  border-radius: 1rem;
+}
+
+.picker {
+  border: $border-wide solid $warning;
+  background-color: $action;
+}
+
+.adder {
+  border: $border-wide solid $neutral;
+  background-color: $neutral-light;
+}
+
+.item-type {
+  display: flex;
+  height: $typeHeight;
+  box-shadow: 2px 2px 2px 1px $shadow;
+  margin: 0.5rem;
+  justify-content: space-between;
+  padding: $panel-padding-vert $panel-padding-side;
+  font-size: calc(#{$typeHeight} - #{$panel-padding-vert});
+}
+
+.type-img {
+  object-fit: scale-down;
+  height: 100%;
+}
+
+.exit {
+  margin-inline: auto;
+  margin-top: 1rem;
+  width: 75%;
+  background-color: $primary-btn;
+  color: $bg-white;
+}

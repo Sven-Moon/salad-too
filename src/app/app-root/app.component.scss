@@ -10,8 +10,10 @@
   flex-direction: column;
 }
 .main-panel-wrap {
-  position: relative;
+  // position: relative;
   width: 100vw;
+  max-width: 1200px;
   height: calc(100vh - #{$barHeight});
   margin-top: $barHeight;
+  margin-inline: auto;
 }

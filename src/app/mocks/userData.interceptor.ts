@@ -2,7 +2,7 @@ import { HttpRequest, HttpEvent, HttpHandler, HttpInterceptor, HttpResponse } fr
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
-import { userData } from "../models/staticData";
+import { userData } from "../models/StaticData";
 
 @Injectable({ providedIn: 'root' })
 export class MockUserDataInterceptor implements HttpInterceptor {
@@ -26,6 +26,7 @@ export class MockUserDataInterceptor implements HttpInterceptor {
       "users": [
         {
           "id": "abc123",
+
           "name": "Mike Danforth",
           "phoneNumber": "987-654-3210",
           "email": "MikeDanforth@npr.com",

@@ -1,0 +1,39 @@
+@import "/src/styles.scss";
+@import "../order-type-select/order-type-select.component.scss";
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-top: $padding;
+  padding-bottom: $padding;
+  height: calc(#{$taggerHeight} - (#{$padding} * 2));
+  width: 94vw;
+  padding-inline: $panel-padding-side;
+}
+
+.item-msg {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  align-items: center;
+}
+
+.profile-wrap {
+  display: flex;
+  flex-flow: row nowrap;
+  border-radius: 0.5rem;
+  background-color: $primary;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-img {
+  object-fit: scale-down;
+  height: calc(100% - #{$padding} / 2);
+}
+
+.form-control {
+  height: calc(100% - #{$padding} * 4);
+  margin-right: 0.5rem;
+}

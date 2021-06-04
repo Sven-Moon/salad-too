@@ -3,9 +3,12 @@ import {
   ActionReducerMap,
   createFeatureSelector,
   createSelector,
-  MetaReducer
+  MetaReducer, StoreModule
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
+import * as fromUser from './user/user.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './user/user.effects';
 
 
 export interface State {

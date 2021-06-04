@@ -12,6 +12,7 @@ export interface Contact {
   id: string
   name: string
   phoneNumber: string
+  img: string
 }
 
 export type Contacts = Contact[]

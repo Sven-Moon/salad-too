@@ -1,0 +1,53 @@
+@import "src/styles.scss";
+
+.launch-wrap {
+  display: flex;
+  flex-flow: column;
+  padding: 2vmin;
+}
+
+.welcome {
+  height: 40vh;
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+.sandwich {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  top: 0;
+  left: 0%;
+}
+
+.salad {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  bottom: 0%;
+  right: 0%;
+}
+
+img {
+  object-fit: scale-down;
+}
+
+.buttons {
+  display: flex;
+  padding: 1rem;
+  margin-top: 15px;
+  width: 96%;
+  min-width: 300px;
+  height: 15vh;
+  min-height: 6rem;
+  max-height: 100px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  background-color: $warning;
+  border: 1px solid $primary;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  margin: 3vh auto;
+}

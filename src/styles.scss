@@ -1,10 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
 $danger: #8f3432;
-$warning: #a7d49b;
-$primary: #1c3a13;
-$neutral: #fec0aa;
+$warning: #a7d49b; // Granny smith apple
+$action: #42553a; // rifle green
+$bg-white: #f2f9f1; // mint creme
+$primary: hsl(106, 51%, 15%); // forest green traditional
+$primary-btn: #3b7b28; // sap green
+$primary-dark: #0f1f0a; // Phthalo Green
+$neutral: #fec0aa; // melon
+$neutral-light: #fff0eb; // seashell
 $success: #92ac86;
+$shadow: #999;
 
-$minBarHeight: 2rem;
-$maxBarHeight: 6vh;
-$barHeight: calc(max(#{$minBarHeight}, #{$maxBarHeight}));
+//debug
+.bord-1 {
+  border: 2px solid blue;
+}
+
+// $minBarHeight: 2rem;
+// $maxBarHeight: 6vh;
+// $barHeight: calc(max(#{$minBarHeight}, #{$maxBarHeight}));
+$barHeight: 2rem;
+$padding: 0.5rem;
+$padding-fc: calc(#{$padding / 2});
+
+.form-control {
+  border: 1px solid $primary-dark;
+  border-radius: 0.1rem;
+  width: 100%;
+  padding: $padding-fc calc(#{$padding-fc} * 2);
+  background-color: $bg-white;
+  margin: 0.2rem 0.3rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+button {
+  min-height: 3rem;
+  border-radius: 0.5rem;
+  font-size: 2rem;
+  padding-inline: 5%;
+  margin: 0.2rem;
+  font-weight: bold;
+}
