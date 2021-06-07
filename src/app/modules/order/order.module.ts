@@ -12,6 +12,10 @@ import { RouterModule } from '@angular/router';
 import { OrderItemTaggerComponent } from './order-item-tagger/order-item-tagger.component';
 import { OrderItemTaggerPickComponent } from './order-item-tagger-pick/order-item-tagger-pick.component';
 import { OrderItemTaggerAddComponent } from './order-item-tagger-add/order-item-tagger-add.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromState from './state/state.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { StateEffects } from './state/state.effects';
 
 
 @NgModule({
@@ -29,7 +33,9 @@ import { OrderItemTaggerAddComponent } from './order-item-tagger-add/order-item-
   imports: [
     CommonModule,
     OrderRoutingModule,
-    RouterModule
+    RouterModule,
+    StoreModule.forFeature(fromState.stateFeatureKey, fromState.reducer),
+    EffectsModule.forFeature([StateEffects])
   ]
 })
 export class OrderModule { }

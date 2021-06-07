@@ -4,12 +4,12 @@ import { OrderComponent } from './modules/order/order/order.component';
 
 const routes: Routes = [
   {
-    path: 'order', component: OrderComponent,
+    path: 'order/', component: OrderComponent,
     loadChildren: () => import('./modules/order/order.module')
       .then((m) => m.OrderModule)
   },
   // { path: 'pay', component: },
-  // { path: '', redirectTo: 'order', pathMatch: 'full' },
+  { path: '', redirectTo: 'order', pathMatch: 'full' },
 ];
 
 @NgModule({
