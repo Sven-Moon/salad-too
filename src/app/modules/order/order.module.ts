@@ -9,13 +9,17 @@ import { OrderLaunchComponent } from './order-launch/order-launch.component';
 import { OrderTypeSelectComponent } from './order-type-select/order-type-select.component';
 import { OrderCartComponent } from './order-cart/order-cart.component';
 import { RouterModule } from '@angular/router';
-import { OrderItemTaggerComponent } from './order-item-tagger/order-item-tagger.component';
-import { OrderItemTaggerPickComponent } from './order-item-tagger-pick/order-item-tagger-pick.component';
-import { OrderItemTaggerAddComponent } from './order-item-tagger-add/order-item-tagger-add.component';
 import { StoreModule } from '@ngrx/store';
-import * as fromState from './state/state.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { StateEffects } from './state/state.effects';
+import * as fromOrder from './state/order/order.reducer';
+import { OrderEffects } from './state/order/order.effects';
+import * as fromItem from './state/item/item.reducer';
+import { ItemEffects } from './state/item/item.effects';
+import * as fromCart from './state/cart/cart.reducer';
+import { CartEffects } from './state/cart/cart.effects';
+import { OrderItemOwnerComponent } from './order-item-owner/order-item-owner.component';
+import { OrderItemOwnerAddComponent } from './order-item-owner-add/order-item-owner-add.component';
+import { OrderItemOwnerPickComponent } from './order-item-owner-pick/order-item-owner-pick.component';
 
 
 @NgModule({
@@ -26,16 +30,20 @@ import { StateEffects } from './state/state.effects';
     OrderLaunchComponent,
     OrderTypeSelectComponent,
     OrderCartComponent,
-    OrderItemTaggerComponent,
-    OrderItemTaggerPickComponent,
-    OrderItemTaggerAddComponent
+    OrderItemOwnerComponent,
+    OrderItemOwnerAddComponent,
+    OrderItemOwnerPickComponent
   ],
   imports: [
     CommonModule,
     OrderRoutingModule,
     RouterModule,
-    StoreModule.forFeature(fromState.stateFeatureKey, fromState.reducer),
-    EffectsModule.forFeature([StateEffects])
+    //#region Store
+    StoreModule.forFeature(fromOrder.orderFeatureKey, fromOrder.reducer),
+    StoreModule.forFeature(fromItem.itemFeatureKey, fromItem.reducer),
+    EffectsModule.forFeature([ItemEffects, CartEffects]),
+    StoreModule.forFeature(fromCart.cartFeatureKey, fromCart.reducer)
+    //#endregion store
   ]
 })
 export class OrderModule { }

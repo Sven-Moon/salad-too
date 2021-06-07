@@ -1,6 +1,6 @@
 <div class="select-wrap">
-  <div class="tagger">
-    <app-order-item-tagger></app-order-item-tagger>
+  <div class="owner" (click)="openOwnerPick()">
+    <app-order-item-owner></app-order-item-owner>
   </div>
   <div class="item-type">
     Salads
@@ -25,12 +25,15 @@
   <button type="button" class="exit">
     Exit Order
   </button>
+
 </div>
 
-  <div [hidden]=!pickContactFlag class="popup-cover" (click)="closePickContact()">
-    <app-order-item-tagger-pick class="popup-wrap picker"></app-order-item-tagger-pick>
-  </div>
+<div [hidden]="hidePickContactFlag$" class="popup-cover"
+(click)="closeOwnerPick()">
+  <app-order-item-owner-pick class="popup-wrap picker"></app-order-item-owner-pick>
+</div>
 
-  <div [hidden]=!addContactFlag class="popup-cover" (click)="closeAddContact()">
-    <app-order-item-tagger-add class="popup-wrap adder"></app-order-item-tagger-add>
-  </div>
+<div [hidden]="hideAddContactFlag$ |async" class="popup-cover"
+(click)="closeAddContact()">
+  <app-order-item-owner-add class="popup-wrap adder"></app-order-item-owner-add>
+</div>

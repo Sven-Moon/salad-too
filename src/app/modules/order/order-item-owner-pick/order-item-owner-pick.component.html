@@ -1,10 +1,10 @@
 <div class="contacts">
-  <div class="profile-wrap" (click)="setProfileTag()">
+  <div class="profile-wrap" (click)="setItemOwner(user.id)">
     <img src='./assets/images/profile_1.png' class="profile-img" alt="">
     <div class="form-control">Guest (Me)</div>
   </div>
   <ng-container *ngFor="let contact of contacts">
-    <div class="profile-wrap" (click)="setProfileTag()">
+    <div class="profile-wrap" (click)="setItemOwner(contact.id)">
       <img src={{contact.img}} class="profile-img" alt="">
       <div class="form-control">{{contact.name}}</div>
     </div>

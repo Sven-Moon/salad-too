@@ -6,7 +6,7 @@
   justify-content: space-between;
   padding-top: $padding;
   padding-bottom: $padding;
-  height: calc(#{$taggerHeight} - (#{$padding} * 2));
+  height: calc(#{$ownerHeight} - (#{$padding} * 2));
   width: 94vw;
   padding-inline: $panel-padding-side;
 }

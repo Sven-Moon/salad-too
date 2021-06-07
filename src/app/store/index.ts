@@ -9,17 +9,24 @@ import { environment } from '../../environments/environment';
 import * as fromUser from './user/user.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './user/user.effects';
-import * as fromState from '../modules/order/state/state.reducer';
+import * as fromOrder from '../modules/order/state/order/order.reducer';
+import * as fromItem from '../modules/order/state/item/item.reducer';
+import * as fromCart from '../modules/order/state/cart/cart.reducer';
 
 
 export interface State {
 
-  [fromState.stateFeatureKey]: fromState.State;
+  [fromOrder.orderFeatureKey]: fromOrder.State;
+
+  [fromItem.itemFeatureKey]: fromItem.State;
+  [fromCart.cartFeatureKey]: fromCart.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
 
-  [fromState.stateFeatureKey]: fromState.reducer,
+  [fromOrder.orderFeatureKey]: fromOrder.reducer,
+  [fromItem.itemFeatureKey]: fromItem.reducer,
+  [fromCart.cartFeatureKey]: fromCart.reducer,
 };
 
 

@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { Contacts } from 'src/app/models/User';
-import { selectUserContacts } from 'src/app/store/user/user.selectors';
+import { setItemOwner } from '../state/item/item.actions';
 
 @Component({
-  selector: 'app-order-item-tagger-pick',
-  templateUrl: './order-item-tagger-pick.component.html',
-  styleUrls: ['./order-item-tagger-pick.component.scss']
+  selector: 'app-order-item-owner-pick',
+  templateUrl: './order-item-owner-pick.component.html',
+  styleUrls: ['./order-item-owner-pick.component.scss']
 })
-export class OrderItemTaggerPickComponent implements OnInit {
-  pickContactFlag: boolean
-  contacts$: Observable<string[]>
+export class OrderItemOwnerPickComponent implements OnInit {
+
+  user: {
+    id: "abc100",
+    name: "Sven"
+  }
 
   contacts: Contacts = [
     {
@@ -33,20 +35,23 @@ export class OrderItemTaggerPickComponent implements OnInit {
       img: './assets/images/profile_1.png'
     },
   ]
+
   constructor(
     private store: Store
   ) { }
 
   ngOnInit(): void {
-    this.contacts$ = this.store.select(selectUserContacts)
   }
 
-  openPickContact() {
-    this.pickContactFlag = true;
+  showAddContact() {
   }
 
-  setProfileTag() {
-    this.pickContactFlag = false
+  showSignInModal() {
+    // this.store.dispatch(showSignInModal())
+  }
+
+  public setItemOwner(id: string): void {
+    this.store.dispatch(setItemOwner({ id }))
   }
 
 }

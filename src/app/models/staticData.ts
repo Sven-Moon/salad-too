@@ -1,5 +1,6 @@
 import { Ingredients, IngredientTypes } from "./Ingredient";
-import { Desserts, Drinks, DrinkTypes, Items, Sides } from "./Item";
+import { Items } from "./Item";
+import { Desserts, Drinks, DrinkTypes, Sides } from "./ItemType";
 import { Contacts, Users } from "./User";
 
 export interface staticData {

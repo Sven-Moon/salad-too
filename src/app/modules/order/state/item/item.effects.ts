@@ -3,28 +3,28 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 
-import * as StateActions from './state.actions';
+import * as ItemActions from './item.actions';
 
 
 
 @Injectable()
-export class StateEffects {
+export class ItemEffects {
 
-  loadStates$ = createEffect(() => {
-    return this.actions$.pipe(
+  loadItems$ = createEffect(() => {
+    return this.actions$.pipe( 
 
-      ofType(StateActions.loadStates),
+      ofType(ItemActions.loadItems),
       concatMap(() =>
         /** An EMPTY observable only emits completion. Replace with your own observable API request */
         EMPTY.pipe(
-          map(data => StateActions.loadStatesSuccess({ data })),
-          catchError(error => of(StateActions.loadStatesFailure({ error }))))
+          map(data => ItemActions.loadItemsSuccess({ data })),
+          catchError(error => of(ItemActions.loadItemsFailure({ error }))))
       )
     );
   });
 
 
 
-  constructor(private actions$: Actions) { }
+  constructor(private actions$: Actions) {}
 
 }

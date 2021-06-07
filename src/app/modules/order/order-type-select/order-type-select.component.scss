@@ -1,6 +1,6 @@
 @import "/src/styles.scss";
 
-$taggerHeight: 4rem;
+$ownerHeight: 4rem;
 $typeHeight: 3rem;
 $buttonHeight: 4rem;
 $panel-padding-vert: 0.5rem;
@@ -14,12 +14,12 @@ $border-wide: 0.5rem;
   justify-content: center;
 }
 
-.tagger {
+.owner {
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
   width: 100%;
-  height: $taggerHeight;
+  height: $ownerHeight;
 }
 
 .popup-cover {
@@ -37,7 +37,7 @@ $border-wide: 0.5rem;
   position: absolute;
   display: flex;
   flex-flow: row wrap;
-  top: $taggerHeight;
+  top: $ownerHeight;
   width: calc(
     100% - 2 *
       (#{$panel-padding-side} + #{$border-wide} + #{$panel-padding-side})
