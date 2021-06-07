@@ -46,6 +46,9 @@ export const reducer = createReducer(
   on(ItemActions.closeAddContact, (state) => ({
     ...state, hideAddContactFlag: true
   })),
+  on(ItemActions.setItemType, (state, action) => ({
+    ...state, itemType: action.itemType
+  }))
 
 
 );

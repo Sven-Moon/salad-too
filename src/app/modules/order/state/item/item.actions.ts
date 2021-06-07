@@ -1,18 +1,22 @@
 import { createAction, props } from '@ngrx/store';
+import { ItemType } from 'src/app/models/ItemType';
 
 export const setItemOwner = createAction(
   '[Owner Pick] Set Item Owner', props<{ id: string }>()
 );
 
-export const openOwnerPick = createAction('[Owner] Open Owner Pick');
+export const openOwnerPick = createAction('[Owner Pick] Open Owner Pick');
 
-export const openAddContact = createAction('[Owner] Open Add Contact');
+export const openAddContact = createAction('[Owner Add] Open Add Contact');
 
-export const closeOwnerPick = createAction('[Owner] Close Owner Pick');
+export const closeOwnerPick = createAction('[Owner Pick] Close Owner Pick');
 
-export const closeAddContact = createAction('[Owner] Close Add Contact');
+export const closeAddContact = createAction('[Owner Add] Close Add Contact');
 
-
+export const setItemType = createAction(
+  '[Item Type Select] Set Item Type',
+  props<{ itemType: string }>()
+);
 
 
 

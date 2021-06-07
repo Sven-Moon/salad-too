@@ -20,6 +20,8 @@ import { CartEffects } from './state/cart/cart.effects';
 import { OrderItemOwnerComponent } from './order-item-owner/order-item-owner.component';
 import { OrderItemOwnerAddComponent } from './order-item-owner-add/order-item-owner-add.component';
 import { OrderItemOwnerPickComponent } from './order-item-owner-pick/order-item-owner-pick.component';
+import * as fromStaticData from './state/staticData/static-data.reducer';
+import { StaticDataEffects } from './state/staticData/static-data.effects';
 
 
 @NgModule({
@@ -41,8 +43,9 @@ import { OrderItemOwnerPickComponent } from './order-item-owner-pick/order-item-
     //#region Store
     StoreModule.forFeature(fromOrder.orderFeatureKey, fromOrder.reducer),
     StoreModule.forFeature(fromItem.itemFeatureKey, fromItem.reducer),
-    EffectsModule.forFeature([ItemEffects, CartEffects]),
-    StoreModule.forFeature(fromCart.cartFeatureKey, fromCart.reducer)
+    EffectsModule.forFeature([ItemEffects, CartEffects, StaticDataEffects]),
+    StoreModule.forFeature(fromCart.cartFeatureKey, fromCart.reducer),
+    StoreModule.forFeature(fromStaticData.staticDataFeatureKey, fromStaticData.reducer)
     //#endregion store
   ]
 })

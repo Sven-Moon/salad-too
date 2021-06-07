@@ -2,7 +2,7 @@ import { HttpRequest, HttpEvent, HttpHandler, HttpInterceptor, HttpResponse } fr
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
-import { staticData } from "../models/StaticData";
+import { StaticData } from "../models/StaticData";
 
 @Injectable({ providedIn: 'root' })
 export class MockStaticDataInterceptor implements HttpInterceptor {
@@ -11,6 +11,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
     if (req.method === 'GET' && req.url == 'https://localhost:3000/static-data/') {
+      console.log('triggered!')
       const orderStaticData = this.getStaticData()
       const response = new HttpResponse({
         body: orderStaticData
@@ -21,8 +22,8 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
   }
 
 
-  public getStaticData(): staticData {
-    let data: staticData = {
+  public getStaticData(): StaticData {
+    let data: StaticData = {
       "items": [
         {
           "id": "ham_sourdough",
@@ -80,6 +81,34 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "description": "This is some sample text describing a salad. You should think about this sandwich when you're hungry. But if you have no way of getting this sandwich, maybe don't.",
           "price": ''
         }
+      ],
+      "itemTypes": [
+        {
+          "id": "salad",
+          "name": "Salads",
+          "img": "./assets/images/salads_type.png"
+        },
+        {
+          "id": "sandwich",
+          "name": "Sandwiches",
+          "img": "./assets/images/sandwiches_type.png"
+        },
+        {
+          "id": "side",
+          "name": "Sides",
+          "img": "./assets/images/sides_type.png"
+        },
+        {
+          "id": "drink",
+          "name": "Drinks",
+          "img": "./assets/images/drinks_type.png"
+        },
+        {
+          "id": "dessert",
+          "name": "Desserts",
+          "img": "./assets/images/desserts_type.png"
+        },
+
       ],
       "ingredients": [
         {

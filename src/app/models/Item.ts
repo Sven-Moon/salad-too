@@ -5,7 +5,7 @@ import { Contact } from "./User";
 export interface Item {
   id: string
   name: string
-  itemType: ItemType
+  itemType: string
   ingredients: string[]
   img: string
   description: string

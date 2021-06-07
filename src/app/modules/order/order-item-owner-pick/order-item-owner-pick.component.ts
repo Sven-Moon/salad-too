@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { Contacts, User } from 'src/app/models/User';
+import { State } from 'src/app/store/user/user.reducer';
 import { selectUserState } from 'src/app/store/user/user.selectors';
 import { closeOwnerPick, openAddContact, setItemOwner } from '../state/item/item.actions';
 
@@ -11,7 +12,7 @@ import { closeOwnerPick, openAddContact, setItemOwner } from '../state/item/item
   styleUrls: ['./order-item-owner-pick.component.scss']
 })
 export class OrderItemOwnerPickComponent implements OnInit {
-  user$: Observable<User>
+  user$: Observable<State>
   // user: {
   //   id: "abc100",
   //   name: "Sven"

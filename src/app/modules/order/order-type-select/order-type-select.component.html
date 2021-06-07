@@ -2,7 +2,15 @@
   <div class="owner" (click)="openOwnerPick()">
     <app-order-item-owner></app-order-item-owner>
   </div>
-  <div class="item-type">
+  <ng-container *ngFor="let type of itemTypes$ |async">
+    <div class="item-type">
+      {{type.name}}
+      <img src={{type.img}} class="type-img" alt=""
+      (click)="setItemType(type.id)">
+    </div>
+  </ng-container>
+
+  <!-- <div class="item-type">
     Salads
     <img src=".\assets\images\salads_type.png" class="type-img" alt="">
   </div>
@@ -14,7 +22,7 @@
     Sides
     <img src=".\assets\images\sides_type.png" class="type-img" alt="">
   </div>
-  <div class="item-type">
+  <div class="item-type" (click)="setItemType('drink')">
     Drinks
     <img src=".\assets\images\drinks_type.png" class="type-img" alt="">
   </div>
@@ -25,7 +33,7 @@
   <button type="button" class="exit">
     Exit Order
   </button>
-</div>
+</div> -->
 
 <div [hidden]="hidePickContactFlag$ |async" class="popup-cover">
   <app-order-item-owner-pick class="popup-wrap picker"></app-order-item-owner-pick>

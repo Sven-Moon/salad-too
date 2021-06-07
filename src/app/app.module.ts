@@ -14,6 +14,7 @@ import { reducers, metaReducers } from './store';
 import { AppMockInterceptors } from './barrels/app-mocks';
 import { SharedModule } from './modules/shared/shared.module';
 import { OrderModule } from './modules/order/order.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { OrderModule } from './modules/order/order.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     OrderModule,
     SharedModule,
     StoreModule.forRoot({}, {}),

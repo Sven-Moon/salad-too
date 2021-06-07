@@ -1,4 +1,10 @@
-export type ItemType = "salad" | "sandwich" | "drink" | "dessert" | "side"
+export type ItemType = {
+  id: string
+  name: string
+  img: string
+}
+
+export type ItemTypes = ItemType[]
 
 export interface Sandwich {
   id: string

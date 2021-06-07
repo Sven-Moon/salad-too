@@ -12,6 +12,7 @@ import { UserEffects } from './user/user.effects';
 import * as fromOrder from '../modules/order/state/order/order.reducer';
 import * as fromItem from '../modules/order/state/item/item.reducer';
 import * as fromCart from '../modules/order/state/cart/cart.reducer';
+import * as fromStaticData from '../modules/order/state/staticData/static-data.reducer';
 
 
 export interface State {
@@ -20,6 +21,7 @@ export interface State {
   [fromItem.itemFeatureKey]: fromItem.State;
   [fromCart.cartFeatureKey]: fromCart.State;
   [fromUser.userFeatureKey]: fromUser.State;
+  [fromStaticData.staticDataFeatureKey]: fromStaticData.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -28,6 +30,7 @@ export const reducers: ActionReducerMap<State> = {
   [fromItem.itemFeatureKey]: fromItem.reducer,
   [fromCart.cartFeatureKey]: fromCart.reducer,
   [fromUser.userFeatureKey]: fromUser.reducer,
+  [fromStaticData.staticDataFeatureKey]: fromStaticData.reducer,
 };
 
 

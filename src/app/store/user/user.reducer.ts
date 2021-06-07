@@ -5,7 +5,8 @@ import * as UserActions from './user.actions';
 export const userFeatureKey = 'user';
 
 export interface State extends User {
-
+  "signedIn": boolean
+  error: any
 }
 
 export const initialState: State = {
@@ -14,8 +15,9 @@ export const initialState: State = {
   "phoneNumber": "",
   "email": "",
   "contacts": [],
-  "profileImage": "./assets/images/profile_1.png",
-  "signedIn": false
+  "img": "./assets/images/profile_1.png",
+  "signedIn": false,
+  "error": undefined
 };
 
 
