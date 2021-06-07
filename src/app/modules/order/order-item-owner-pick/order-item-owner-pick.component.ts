@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Contacts } from 'src/app/models/User';
-import { setItemOwner } from '../state/item/item.actions';
+import { Observable } from 'rxjs/internal/Observable';
+import { Contacts, User } from 'src/app/models/User';
+import { selectUserState } from 'src/app/store/user/user.selectors';
+import { closeOwnerPick, openAddContact, setItemOwner } from '../state/item/item.actions';
 
 @Component({
   selector: 'app-order-item-owner-pick',
@@ -9,11 +11,11 @@ import { setItemOwner } from '../state/item/item.actions';
   styleUrls: ['./order-item-owner-pick.component.scss']
 })
 export class OrderItemOwnerPickComponent implements OnInit {
-
-  user: {
-    id: "abc100",
-    name: "Sven"
-  }
+  user$: Observable<User>
+  // user: {
+  //   id: "abc100",
+  //   name: "Sven"
+  // }
 
   contacts: Contacts = [
     {
@@ -41,9 +43,15 @@ export class OrderItemOwnerPickComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.user$ = this.store.select(selectUserState)
   }
 
-  showAddContact() {
+  openAddContact() {
+    this.store.dispatch(openAddContact())
+  }
+
+  closeOwnerPick() {
+    this.store.dispatch(closeOwnerPick())
   }
 
   showSignInModal() {

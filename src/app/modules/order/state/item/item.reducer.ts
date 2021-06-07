@@ -21,8 +21,8 @@ export const initialState: State = {
   price: null,
   custom: null,
   owner: null,
-  hidePickContactFlag: false,
-  hideAddContactFlag: false
+  hidePickContactFlag: true,
+  hideAddContactFlag: true
 };
 
 
@@ -35,16 +35,16 @@ export const reducer = createReducer(
 
   // Item Owner Select
   on(ItemActions.openOwnerPick, (state) => ({
-    ...state, hidePickContactFlag: true
-  })),
-  on(ItemActions.openAddContact, (state) => ({
-    ...state, hideAddContactFlag: true
-  })),
-  on(ItemActions.closeOwnerPick, (state) => ({
     ...state, hidePickContactFlag: false
   })),
-  on(ItemActions.closeAddContact, (state) => ({
+  on(ItemActions.openAddContact, (state) => ({
     ...state, hideAddContactFlag: false
+  })),
+  on(ItemActions.closeOwnerPick, (state) => ({
+    ...state, hidePickContactFlag: true
+  })),
+  on(ItemActions.closeAddContact, (state) => ({
+    ...state, hideAddContactFlag: true
   })),
 
 

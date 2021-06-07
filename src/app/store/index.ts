@@ -17,9 +17,9 @@ import * as fromCart from '../modules/order/state/cart/cart.reducer';
 export interface State {
 
   [fromOrder.orderFeatureKey]: fromOrder.State;
-
   [fromItem.itemFeatureKey]: fromItem.State;
   [fromCart.cartFeatureKey]: fromCart.State;
+  [fromUser.userFeatureKey]: fromUser.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -27,6 +27,7 @@ export const reducers: ActionReducerMap<State> = {
   [fromOrder.orderFeatureKey]: fromOrder.reducer,
   [fromItem.itemFeatureKey]: fromItem.reducer,
   [fromCart.cartFeatureKey]: fromCart.reducer,
+  [fromUser.userFeatureKey]: fromUser.reducer,
 };
 
 

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
+import { User } from 'src/app/models/User';
 import * as itemActions from 'src/app/modules/order/state/item/item.actions'
+import { selectUserState } from 'src/app/store/user/user.selectors';
 
 @Component({
   selector: 'app-order-item-owner',
@@ -10,12 +12,14 @@ import * as itemActions from 'src/app/modules/order/state/item/item.actions'
 })
 export class OrderItemOwnerComponent implements OnInit {
   itemType$: Observable<string>
+  user$: Observable<User>
 
   constructor(
     private store: Store
   ) { }
 
   ngOnInit(): void {
+    this.user$ = this.store.select(selectUserState)
   }
 
   openOwnerPick(): void {

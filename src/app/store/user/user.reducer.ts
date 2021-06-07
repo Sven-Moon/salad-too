@@ -9,11 +9,13 @@ export interface State extends User {
 }
 
 export const initialState: State = {
-  "id": "",
-  "name": "",
+  "id": "abc100",
+  "name": "Guest",
   "phoneNumber": "",
   "email": "",
-  "contacts": []
+  "contacts": [],
+  "profileImage": "./assets/images/profile_1.png",
+  "signedIn": false
 };
 
 

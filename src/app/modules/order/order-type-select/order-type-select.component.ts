@@ -11,28 +11,21 @@ import { selectAddContactFlag, selectItemState, selectPickOwnerFlag } from '../s
   styleUrls: ['./order-type-select.component.scss']
 })
 export class OrderTypeSelectComponent implements OnInit {
-  // hidePickContactFlag$: Observable<boolean>
-  hidePickContactFlag$: boolean
+  hidePickContactFlag$: Observable<boolean>
   hideAddContactFlag$: Observable<boolean>
-  itemState: Observable<State>
 
   constructor(
     private store: Store
   ) { }
 
   ngOnInit(): void {
-    // this.hidePickContactFlag$ = this.store.select(selectPickOwnerFlag)
-    this.store.select(selectPickOwnerFlag).subscribe(flag =>
-      this.hidePickContactFlag$ = flag
-    )
-    this.hideAddContactFlag$ = this.store.select(selectAddContactFlag),
-      console.log(this.hideAddContactFlag$)
+    this.hidePickContactFlag$ = this.store.select(selectPickOwnerFlag)
+    this.hideAddContactFlag$ = this.store.select(selectAddContactFlag)
   }
 
   // open THINGS
 
   openOwnerPick() {
-    console.log("openOwnerPick fired")
     this.store.dispatch(openOwnerPick())
   }
 
@@ -41,10 +34,6 @@ export class OrderTypeSelectComponent implements OnInit {
   }
 
   // close THINGS
-
-  closeOwnerPick() {
-    this.store.dispatch(closeOwnerPick())
-  }
 
   closeAddContact() {
     this.store.dispatch(closeAddContact())

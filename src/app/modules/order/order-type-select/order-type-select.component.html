@@ -25,15 +25,12 @@
   <button type="button" class="exit">
     Exit Order
   </button>
-
 </div>
 
-<div [hidden]="hidePickContactFlag$" class="popup-cover"
-(click)="closeOwnerPick()">
+<div [hidden]="hidePickContactFlag$ |async" class="popup-cover">
   <app-order-item-owner-pick class="popup-wrap picker"></app-order-item-owner-pick>
 </div>
 
-<div [hidden]="hideAddContactFlag$ |async" class="popup-cover"
-(click)="closeAddContact()">
+<div [hidden]="hideAddContactFlag$ |async" class="popup-cover">
   <app-order-item-owner-add class="popup-wrap adder"></app-order-item-owner-add>
 </div>

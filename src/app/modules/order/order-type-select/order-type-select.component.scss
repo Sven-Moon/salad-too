@@ -51,11 +51,13 @@ $border-wide: 0.5rem;
 .picker {
   border: $border-wide solid $warning;
   background-color: $action;
+  z-index: 1;
 }
 
 .adder {
   border: $border-wide solid $neutral;
   background-color: $neutral-light;
+  z-index: 2;
 }
 
 .item-type {

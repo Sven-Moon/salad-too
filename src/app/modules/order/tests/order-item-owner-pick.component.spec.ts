@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrderItemOwnerPickComponent } from './order-item-owner-pick.component';
+import { OrderItemOwnerPickComponent } from '../order-item-owner-pick/order-item-owner-pick.component';
 
 describe('OrderItemOwnerPickComponent', () => {
   let component: OrderItemOwnerPickComponent;
@@ -8,9 +8,9 @@ describe('OrderItemOwnerPickComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrderItemOwnerPickComponent ]
+      declarations: [OrderItemOwnerPickComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
