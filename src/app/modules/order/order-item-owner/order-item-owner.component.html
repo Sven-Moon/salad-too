@@ -1,4 +1,4 @@
-<div class="wrapper" (click)="openOwnerPick()" *ngIf="user$ |async as user">
+<div class="wrapper" *ngIf="user$ |async as user">
   <div class="item-msg">This {{itemType$ |async }} is for...</div>
   <div class="profile-wrap">
     <img src="./assets/images/profile_1.png" class="profile-img" alt="">

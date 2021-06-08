@@ -5,7 +5,6 @@ $typeHeight: 3rem;
 $buttonHeight: 4rem;
 $panel-padding-vert: 0.5rem;
 $panel-padding-side: 1rem;
-$border-wide: 0.5rem;
 
 .select-wrap {
   display: flex;
@@ -15,14 +14,14 @@ $border-wide: 0.5rem;
 }
 
 .owner {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
+  // display: flex;
+  position: relative;
   width: 100%;
   height: $ownerHeight;
 }
 
 .popup-cover {
+  display: flex;
   position: absolute;
   top: $barHeight;
   left: 0;
@@ -34,30 +33,12 @@ $border-wide: 0.5rem;
 }
 
 .popup-wrap {
-  position: absolute;
   display: flex;
-  flex-flow: row wrap;
-  top: $ownerHeight;
-  width: calc(
-    100% - 2 *
-      (#{$panel-padding-side} + #{$border-wide} + #{$panel-padding-side})
-  );
-  margin: $panel-padding-side;
-  padding: $panel-padding-vert $panel-padding-side;
-  border: $border-wide solid $warning;
-  border-radius: 1rem;
-}
-
-.picker {
-  border: $border-wide solid $warning;
-  background-color: $action;
+  width: 100%;
+  max-width: 700px;
+  background-color: rgba(232, 232, 232, 0.65);
+  margin: $ownerHeight auto 0;
   z-index: 1;
-}
-
-.adder {
-  border: $border-wide solid $neutral;
-  background-color: $neutral-light;
-  z-index: 2;
 }
 
 .item-type {

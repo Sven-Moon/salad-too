@@ -12,7 +12,7 @@
 .main-panel-wrap {
   // position: relative;
   width: 100vw;
-  max-width: 1200px;
+  max-width: 768px;
   height: calc(100vh - #{$barHeight});
   margin-top: $barHeight;
   margin-inline: auto;

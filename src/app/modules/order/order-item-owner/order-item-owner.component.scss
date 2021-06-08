@@ -3,12 +3,10 @@
 
 .wrapper {
   display: flex;
-  justify-content: space-between;
-  padding-top: $padding;
-  padding-bottom: $padding;
+  justify-content: space-around;
+  padding: $padding 0;
   height: calc(#{$ownerHeight} - (#{$padding} * 2));
-  width: 94vw;
-  padding-inline: $panel-padding-side;
+  width: 100%;
 }
 
 .item-msg {

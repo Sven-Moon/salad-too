@@ -11,7 +11,6 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
     if (req.method === 'GET' && req.url == 'https://localhost:3000/static-data/') {
-      console.log('triggered!')
       const orderStaticData = this.getStaticData()
       const response = new HttpResponse({
         body: orderStaticData
