@@ -12,6 +12,17 @@ $neutral-light: #fff0eb; // seashell
 $success: #92ac86;
 $shadow: #999;
 
+$maxScreenWidth: 768px;
+$maxPopupWidth-lg: 700px;
+$maxPopupWidth-sm: 400px;
+
+// item-type
+$ownerHeight: 4rem;
+$typeHeight: 3rem;
+$buttonHeight: 4rem;
+$panel-padding-vert: 0.5rem;
+$panel-padding-side: 1rem;
+
 //debug
 .bord-1 {
   border: 2px solid blue;
@@ -43,4 +54,28 @@ button {
   padding-inline: 5%;
   margin: 0.2rem;
   font-weight: bold;
+}
+
+.card {
+  width: calc(100% - (2 * (1rem + 0.5rem)));
+  box-shadow: 2px 2px 2px 1px $shadow;
+  margin: 1rem;
+  padding: 0.5rem;
+  background-color: white;
+}
+
+.container {
+  width: 100%;
+  max-width: calc(100% - (2 * #{$panel-padding-side}));
+  padding: $panel-padding-vert $panel-padding-side;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
 }

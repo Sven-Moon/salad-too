@@ -28,7 +28,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "id": "ham_sourdough",
           "name": "Ham on Sourdough",
           "ingredients": ["ham", "sourdough", "cheddar"],
-          "itemType": "sandwich",
+          "itemGroup": "sandwich",
           "img": "./assets/images/specialties/ham_sourdough.png",
           "description": "This is some sample text describing a sandwich. You should think about this sandwich when you're hungry. But if you have no way of getting this sandwich, maybe don't.",
           "price": ''
@@ -43,7 +43,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
             "mustard",
             "lettuce"
           ],
-          "itemType": "sandwich",
+          "itemGroup": "sandwich",
           "img": "./assets/images/specialties/turkey_sandwich.png",
           "description": "This is some sample text describing a sandwich. You should think about this sandwich when you're hungry. But if you have no way of getting this sandwich, maybe don't.",
           "price": ''
@@ -60,7 +60,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
             "cucumbers",
             "ranch"
           ],
-          "itemType": "salad",
+          "itemGroup": "salad",
           "img": "./assets/images/specialties/cobb.png",
           "description": "This is some sample text describing a salad. You should think about this sandwich when you're hungry. But if you have no way of getting this sandwich, maybe don't.",
           "price": ''
@@ -75,13 +75,13 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
             "cranberries",
             "ham"
           ],
-          "itemType": "salad",
+          "itemGroup": "salad",
           "img": "./assets/images/specialties/svens_salad.png",
           "description": "This is some sample text describing a salad. You should think about this sandwich when you're hungry. But if you have no way of getting this sandwich, maybe don't.",
           "price": ''
         }
       ],
-      "itemTypes": [
+      "itemGroups": [
         {
           "id": "salad",
           "name": "Salads",
@@ -114,154 +114,154 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "id": "ham",
           "name": "Ham",
           "image": ".assets/images/ingredients/ham.png",
-          "itemType": ["salad", "sandwich"],
+          "itemGroup": ["salad", "sandwich"],
           "type": "Meat"
         },
         {
           "id": "turkey",
           "name": "Turkey",
           "image": ".assets/images/ingredients/turkey.png",
-          "itemType": ["salad", "sandwich"],
+          "itemGroup": ["salad", "sandwich"],
           "type": "Meat"
         },
         {
           "id": "roast_beef",
           "name": "Roast Beef",
           "image": ".assets/images/ingredients/roast_beef.png",
-          "itemType": ["sandwich"],
+          "itemGroup": ["sandwich"],
           "type": "Meat"
         },
         {
           "id": "red_lettuce",
           "name": "Red Lettuce",
           "image": ".assets/images/ingredients/red_lettuce.png",
-          "itemType": ["salad", "sandwich"],
+          "itemGroup": ["salad", "sandwich"],
           "type": "Greens"
         },
         {
           "id": "green_lettuce",
           "name": "Green Lettuce",
           "image": ".assets/images/ingredients/green_lettuce.png",
-          "itemType": ["salad", "sandwich"],
+          "itemGroup": ["salad", "sandwich"],
           "type": "Greens"
         },
         {
           "id": "mixed_greens",
           "name": "Mixed Greens",
           "image": ".assets/images/ingredients/mixed_greens.png",
-          "itemType": ["salad"],
+          "itemGroup": ["salad"],
           "type": "Greens"
         },
         {
           "id": "lettuce",
           "name": "Lettuce",
           "image": ".assets/images/ingredients/lettuce.png",
-          "itemType": ["sandwich"],
+          "itemGroup": ["sandwich"],
           "type": "Veggies"
         },
         {
           "id": "tomatoes",
           "name": "Tomatoes",
           "image": ".assets/images/ingredients/tomatoes.png",
-          "itemType": ["salad", "sandwich"],
+          "itemGroup": ["salad", "sandwich"],
           "type": "Veggies"
         },
         {
           "id": "pickles",
           "name": "Pickles",
           "image": ".assets/images/ingredients/Pickles.png",
-          "itemType": ["sandwich"],
+          "itemGroup": ["sandwich"],
           "type": "Veggies"
         },
         {
           "id": "onions",
           "name": "Onions",
           "image": ".assets/images/ingredients/onions.png",
-          "itemType": ["salad", "sandwich"],
+          "itemGroup": ["salad", "sandwich"],
           "type": "Veggies"
         },
         {
           "id": "cucumbers",
           "name": "Cucumbers",
           "image": ".assets/images/ingredients/cucumbers.png",
-          "itemType": ["salad"],
+          "itemGroup": ["salad"],
           "type": "Veggies"
         },
         {
           "id": "cheddar",
           "name": "Cheddar",
           "image": ".assets/images/ingredients/cheddar.png",
-          "itemType": ["salad", "sandwich"],
+          "itemGroup": ["salad", "sandwich"],
           "type": "Cheese"
         },
         {
           "id": "provolone",
           "name": "Provolone",
           "image": ".assets/images/ingredients/provolone.png",
-          "itemType": ["sandwich"],
+          "itemGroup": ["sandwich"],
           "type": "Cheese"
         },
         {
           "id": "blue_cheese",
           "name": "Blue Cheese",
           "image": ".assets/images/ingredients/blue_cheese.png",
-          "itemType": ["sandwich"],
+          "itemGroup": ["sandwich"],
           "type": "Cheese"
         },
         {
           "id": "sourdough",
           "name": "Sourdough",
           "image": ".assets/images/ingredients/sourdough.png",
-          "itemType": ["sandwich"],
+          "itemGroup": ["sandwich"],
           "type": "Bread"
         },
         {
           "id": "kaiser_roll",
           "name": "Kaiser Roll",
           "image": ".assets/images/ingredients/kaiser_roll.png",
-          "itemType": ["sandwich"],
+          "itemGroup": ["sandwich"],
           "type": "Bread"
         },
         {
           "id": "mustard",
           "name": "Mustard",
           "image": ".assets/images/ingredients/mustard.png",
-          "itemType": ["sandwich"],
+          "itemGroup": ["sandwich"],
           "type": "Condiments"
         },
         {
           "id": "mayo",
           "name": "Mayo",
           "image": ".assets/images/ingredients/mayo.png",
-          "itemType": ["sandwich"],
+          "itemGroup": ["sandwich"],
           "type": "Condiments"
         },
         {
           "id": "ranch",
           "name": "Ranch",
           "image": ".assets/images/ingredients/ranch.png",
-          "itemType": ["salad"],
+          "itemGroup": ["salad"],
           "type": "Dressings"
         },
         {
           "id": "almonds",
           "name": "Almonds",
           "image": ".assets/images/ingredients/almonds.png",
-          "itemType": ["salad"],
+          "itemGroup": ["salad"],
           "type": "Nuts/Fruit"
         },
         {
           "id": "cranberries",
           "name": "Cranberries",
           "image": ".assets/images/ingredients/cranberries.png",
-          "itemType": ["salad"],
+          "itemGroup": ["salad"],
           "type": "Nuts/Fruit"
         },
         {
           "id": "vinaigrette",
           "name": "Vinaigrette",
           "image": ".assets/images/ingredients/vinaigrette.png",
-          "itemType": ["salad"],
+          "itemGroup": ["salad"],
           "type": "Dressings"
         }
       ],

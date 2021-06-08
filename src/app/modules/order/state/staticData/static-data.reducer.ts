@@ -11,7 +11,7 @@ export interface State extends StaticData {
 
 export const initialState: State = {
   items: [],
-  itemTypes: [],
+  itemGroups: [],
   ingredients: [],
   ingredientTypes: [],
   drinks: [],
@@ -28,7 +28,7 @@ export const reducer = createReducer(
   on(StaticDataActions.loadStaticDataSuccess, (state, action) => ({
     ...state,
     items: action.data.items,
-    itemTypes: action.data.itemTypes,
+    itemGroups: action.data.itemGroups,
     ingredients: action.data.ingredients,
     ingredientTypes: action.data.ingredientTypes,
     drinks: action.data.drinks,

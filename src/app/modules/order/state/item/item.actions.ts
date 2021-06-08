@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ItemType } from 'src/app/models/ItemType';
+import { ItemGroup } from 'src/app/models/ItemGroup';
 
 export const setItemOwner = createAction(
   '[Owner Pick] Set Item Owner', props<{ id: string }>()
@@ -13,9 +13,9 @@ export const closeOwnerPick = createAction('[Owner Pick] Close Owner Pick');
 
 export const closeAddContact = createAction('[Owner Add] Close Add Contact');
 
-export const setItemType = createAction(
+export const setItemGroup = createAction(
   '[Item Type Select] Set Item Type',
-  props<{ itemType: string }>()
+  props<{ itemGroup: string }>()
 );
 
 

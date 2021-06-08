@@ -1,0 +1,103 @@
+@import "/src/styles.scss";
+
+// ITEM SELECT
+.item {
+  height: 10rem;
+  position: relative;
+}
+
+.name-price {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  text-align: center;
+}
+
+.name {
+  font-weight: bold;
+  font-size: large;
+  width: fit-content;
+  background-color: #0f1f1ac0;
+  color: white;
+  padding: 2.5% 5%;
+}
+
+.price {
+  width: fit-content;
+  min-width: 3rem;
+  padding-inline: 5%;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.img-desc {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  width: 100%;
+}
+
+.description {
+  margin-left: 20%;
+  margin-top: 1rem;
+  min-width: 40%;
+  padding: 0.1rem 0.2rem;
+  font-size: small;
+  background-color: #f2f9f1b6;
+  z-index: 2;
+  align-self: flex-end;
+}
+
+// OWNER SELECT
+.select-wrap {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: scroll;
+  justify-content: center;
+}
+
+.owner {
+  // display: flex;
+  position: relative;
+  width: 100%;
+  height: $ownerHeight;
+}
+
+// POPUP
+.popup-cover {
+  display: flex;
+  position: absolute;
+  top: $barHeight;
+  left: 0;
+  width: 100%;
+  height: calc(100% - #{$barHeight});
+  background-color: rgba(232, 232, 232, 0.65);
+  margin: 0;
+  border-radius: 0;
+}
+
+.popup-wrap {
+  display: flex;
+  width: 100%;
+  max-width: $maxPopupWidth-lg;
+  background-color: rgba(232, 232, 232, 0.65);
+  margin: $ownerHeight auto 0;
+  z-index: 1;
+}

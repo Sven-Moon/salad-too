@@ -11,7 +11,7 @@ import { selectUserState } from 'src/app/store/user/user.selectors';
   styleUrls: ['./order-item-owner.component.scss']
 })
 export class OrderItemOwnerComponent implements OnInit {
-  itemType$: Observable<string>
+  itemGroup$: Observable<string>
   user$: Observable<User>
 
   constructor(

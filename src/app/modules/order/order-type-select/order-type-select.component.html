@@ -1,19 +1,21 @@
 <div class="select-wrap">
   <app-order-item-owner class="owner" (click)="openOwnerPick()"></app-order-item-owner>
-  <ng-container *ngFor="let type of itemTypes$ |async">
-    <div class="item-type">
+  <ng-container *ngFor="let type of itemGroups$ |async">
+    <div class="item-type" (click)="setItemGroup(type.id)"
+    routerLink="../select-item">
       {{type.name}}
-      <img src={{type.img}} class="type-img" alt=""
-      (click)="setItemType(type.id)"
-      routerLink="./select-item">
+      <img src={{type.img}} class="type-img" alt="">
     </div>
   </ng-container>
 
-<div *ngIf="!(hidePickContactFlag$ |async)" class="popup-cover">
-  <app-order-item-owner-pick class="popup-wrap"></app-order-item-owner-pick>
-</div>
 
-<div *ngIf="!(hideAddContactFlag$ |async)" class="popup-cover">
-  <app-order-item-owner-add class="popup-wrap"></app-order-item-owner-add>
+  <!-- ---------- POPUPS! --------- -->
+  <div *ngIf="!(hidePickContactFlag$ |async)" class="popup-cover">
+    <app-order-item-owner-pick class="popup-wrap"></app-order-item-owner-pick>
+  </div>
+
+  <div *ngIf="!(hideAddContactFlag$ |async)" class="popup-cover">
+    <app-order-item-owner-add class="popup-wrap"></app-order-item-owner-add>
+  </div>
+  <button class="exit" routerLink="../">Exit Order</button>
 </div>
-<button class="exit" routerLink="../">Exit Order</button>

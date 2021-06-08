@@ -1,10 +1,5 @@
 @import "/src/styles.scss";
-
-$ownerHeight: 4rem;
-$typeHeight: 3rem;
-$buttonHeight: 4rem;
-$panel-padding-vert: 0.5rem;
-$panel-padding-side: 1rem;
+@import "../order/order.component.scss";
 
 .select-wrap {
   display: flex;
@@ -14,7 +9,6 @@ $panel-padding-side: 1rem;
 }
 
 .owner {
-  // display: flex;
   position: relative;
   width: 100%;
   height: $ownerHeight;
@@ -35,7 +29,7 @@ $panel-padding-side: 1rem;
 .popup-wrap {
   display: flex;
   width: 100%;
-  max-width: 700px;
+  max-width: $maxPopupWidth-lg;
   background-color: rgba(232, 232, 232, 0.65);
   margin: $ownerHeight auto 0;
   z-index: 1;

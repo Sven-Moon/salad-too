@@ -14,7 +14,7 @@ export interface State extends CartItem {
 export const initialState: State = {
   id: null,
   name: null,
-  itemType: null,
+  itemGroup: null,
   ingredients: [],
   img: null,
   description: null,
@@ -46,8 +46,8 @@ export const reducer = createReducer(
   on(ItemActions.closeAddContact, (state) => ({
     ...state, hideAddContactFlag: true
   })),
-  on(ItemActions.setItemType, (state, action) => ({
-    ...state, itemType: action.itemType
+  on(ItemActions.setItemGroup, (state, action) => ({
+    ...state, itemGroup: action.itemGroup
   }))
 
 

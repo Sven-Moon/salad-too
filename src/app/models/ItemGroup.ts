@@ -1,10 +1,10 @@
-export type ItemType = {
+export type ItemGroup = {
   id: string
   name: string
   img: string
 }
 
-export type ItemTypes = ItemType[]
+export type ItemGroups = ItemGroup[]
 
 export interface Sandwich {
   id: string
