@@ -8,10 +8,7 @@ export interface StaticData {
   itemGroups: ItemGroups,
   ingredients: Ingredients,
   ingredientTypes: IngredientTypes,
-  drinks: Drinks,
-  drinkTypes: DrinkTypes,
-  desserts: Desserts
-  sides: Sides
+  drinkTypes: DrinkTypes
 }
 
 export interface userData {

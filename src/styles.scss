@@ -79,3 +79,14 @@ button {
   display: flex;
   flex-direction: column;
 }
+
+.center-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.scroll-y {
+  overflow-y: scroll;
+}

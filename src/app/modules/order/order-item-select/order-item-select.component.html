@@ -1,28 +1,31 @@
 
-<div class="select-wrap">
+<div class="select-wrap scroll-y">
   <app-order-item-owner class="owner" (click)="openOwnerPick()"></app-order-item-owner>
 
 
 
-  <div class="container">
-    <ng-container *ngFor="let item of items">
-      <div class="card flex-col item">
+  <div class="container scroll-y">
+    <ng-container *ngFor="let item of items$ |async">
+      <div class="card flex-col item" (click)="setAsItem(item.id)">
         <div class="name-price container flex-row">
-          <div class="name">{{item.name}}</div>
+          <div class="name center-text">{{item.name}}</div>
           <div class="price form-control">${{item.price}}</div>
         </div>
-        <div class="description">{{item.description}}</div>
         <div class="background">
-          <div class="img-desc">
+          <div class="img-container">
             <img src="{{item.img}}" alt="">
           </div>
+        </div>
+        <div class="desc-container container">
+          <div class="img-window"></div>
+          <div class="description">{{item.description}}</div>
         </div>
       </div>
 
     </ng-container>
   </div>
   <hr>
-  <button class="exit" routerLink="../">Try a Different Category</button>
+  <button class="exit" routerLink="../select-item-type" (click)="back()">Try a Different Category</button>
 
   <!-- Popups -->
   <div *ngIf="!(hidePickContactFlag$ |async)" class="popup-cover">

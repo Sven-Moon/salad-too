@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { Item } from 'src/app/models/Item';
 import { ItemGroup } from 'src/app/models/ItemGroup';
 
 export const setItemOwner = createAction(
@@ -18,7 +19,17 @@ export const setItemGroup = createAction(
   props<{ itemGroup: string }>()
 );
 
+export const clearItemGroup = createAction('[Item Select] Clear Item Group');
 
+export const setItemId = createAction(
+  '[Item Select] Set Item Id (from user selection)',
+  props<{ id: string }>()
+);
+
+export const loadItem = createAction(
+  '[Item Select] Set Item Properties',
+  props<{ item: Item }>()
+);
 
 
 

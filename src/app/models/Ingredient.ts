@@ -3,7 +3,7 @@ export interface Ingredient {
   id: string
   name: string
   type: string
-  image: string
+  img: string
   itemGroup: string[]
 }
 

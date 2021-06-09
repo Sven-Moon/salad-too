@@ -8,7 +8,6 @@ export const itemFeatureKey = 'item';
 export interface State extends CartItem {
   hidePickContactFlag: boolean
   hideAddContactFlag: boolean
-
 }
 
 export const initialState: State = {
@@ -48,7 +47,25 @@ export const reducer = createReducer(
   })),
   on(ItemActions.setItemGroup, (state, action) => ({
     ...state, itemGroup: action.itemGroup
-  }))
+  })),
+  on(ItemActions.clearItemGroup, (state) => ({
+    ...state, itemGroup: null
+  })),
+  on(ItemActions.setItemId, (state, action) => ({
+    ...state, id: action.id
+  })),
+  on(ItemActions.loadItem, (state, action) => ({
+    ...state,
+    id: action.item.id,
+    name: action.item.name,
+    itemGroup: action.item.itemGroup,
+    ingredients: action.item.ingredients,
+    img: action.item.img,
+    description: action.item.description,
+    price: action.item.price,
+    custom: null,
+    owner: null,
+  })),
 
 
 );

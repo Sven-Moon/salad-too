@@ -1,8 +1,20 @@
+import { Item } from "./Item"
+
 export type ItemGroup = {
   id: string
   name: string
   img: string
 }
+
+export interface Sandwich extends Item {
+}
+
+export type Sandwiches = Sandwich[]
+
+export interface Salad extends Item {
+}
+
+export type Salads = Salad[]
 
 export type ItemGroups = ItemGroup[]
 
@@ -14,11 +26,7 @@ export interface Salad {
   id: string
 }
 
-export interface Drink {
-  id: string
-  name: string
-  type: string
-  image: string
+export interface Drink extends Item {
 }
 
 export type Drinks = Drink[]
@@ -30,20 +38,12 @@ export interface DrinkType {
 
 export type DrinkTypes = DrinkType[]
 
-export interface Side {
-  id: string
-  name: string
-  price: string
-  image: string
+export interface Side extends Item {
 }
 
 export type Sides = Side[]
 
-export interface Dessert {
-  id: string
-  name: string
-  image: string
-  price: string
+export interface Dessert extends Item {
 }
 
 export type Desserts = Dessert[]

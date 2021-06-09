@@ -14,10 +14,7 @@ export const initialState: State = {
   itemGroups: [],
   ingredients: [],
   ingredientTypes: [],
-  drinks: [],
   drinkTypes: [],
-  desserts: [],
-  sides: [],
   error: undefined
 };
 
@@ -31,10 +28,7 @@ export const reducer = createReducer(
     itemGroups: action.data.itemGroups,
     ingredients: action.data.ingredients,
     ingredientTypes: action.data.ingredientTypes,
-    drinks: action.data.drinks,
-    drinkTypes: action.data.items,
-    desserts: action.data.desserts,
-    sides: action.data.sides,
+    drinkTypes: action.data.drinkTypes
   })),
   on(StaticDataActions.loadStaticDataFailure, (state, action) => state),
   on(StaticDataActions.loadStaticDataFailure, (state, action) => ({

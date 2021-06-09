@@ -8,14 +8,17 @@ export interface Item {
   itemGroup: string
   img: string
   ingredients?: string[]
-  description: string
-  price: string
+  description?: string
+  price?: string
+  type?: string
 }
+
+export type Items = Item[]
 
 export interface CartItem extends Item {
   custom: boolean
   owner: string
+  price: string
 }
-
-export type Items = Item[]
+export type CartItems = CartItem[]
 
