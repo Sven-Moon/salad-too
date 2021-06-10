@@ -1,0 +1,43 @@
+<!-- <div class="modal"> -->
+  <div class="modal-header">
+    <div class=modal-title>Log In</div>
+    <button type="button" class="close" (click)="cancel()">x</button>
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="login-form flex-col flex-center">
+        <div class="form-group flex-col flex-center">
+          <label for="username">Username</label>
+          <input type="text" name="username" id=""
+          class="form-control" required>
+        </div> <!--  Username -->
+        <div class="form-group flex-col flex-center">
+          <label for="password">Password</label>
+          <input type="text" name="password" id=""
+          class="form-control"required>
+        </div> <!--  Password -->
+        <div class="form-group flex-col flex-center"
+        *ngIf="newUser">
+          <label for="confirm-password">Confirm Password</label>
+          <input
+           type="text" name="confirm-password" id=""
+          class="form-control" required>
+        </div> <!--  Confirm PW -->
+        <div class="newUser">
+          <input type="checkbox" name="newUser" id=""
+           [(ngModel)]="newUser">
+          <label for="newUser">I'm new here</label>
+        </div> <!--  checkbox -->
+      </div>
+    </form>
+    <div class="actions container flex-row">
+      <button class="btn btn-go" *ngIf="!newUser">Login</button>
+      <button class="btn btn-primary" *ngIf="newUser">
+        Sign Up
+      </button>
+      <button class="btn btn-cancel" (click)="cancel()">
+        Cancel
+      </button>
+    </div> <!--  actions -->
+  </div>
+<!-- </div> -->

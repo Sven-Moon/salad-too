@@ -1,0 +1,21 @@
+@import "/src/styles.scss";
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  width: 100%;
+}
+
+.form-control {
+  height: 1rem;
+  width: calc(100% - $panel-padding-side);
+}
+
+.actions {
+  justify-content: space-around;
+  justify-items: stretch;
+}
+
+.form-group {
+}

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs/internal/Observable';
 import { Contacts, User } from 'src/app/models/User';
 import { State } from 'src/app/store/user/user.reducer';
 import { selectUserState } from 'src/app/store/user/user.selectors';
+import { LoginModalComponent } from '../../auth/login-modal/login-modal.component';
 import { closeOwnerPick, openAddContact, setItemOwner } from '../state/item/item.actions';
 
 @Component({
@@ -12,6 +14,9 @@ import { closeOwnerPick, openAddContact, setItemOwner } from '../state/item/item
   styleUrls: ['./order-item-owner-pick.component.scss']
 })
 export class OrderItemOwnerPickComponent implements OnInit {
+  // --------- MODAL ---------
+  bsModalRef: BsModalRef
+
   user$: Observable<State>
   // user: {
   //   id: "abc100",
@@ -40,7 +45,8 @@ export class OrderItemOwnerPickComponent implements OnInit {
   ]
 
   constructor(
-    private store: Store
+    private store: Store,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
@@ -61,6 +67,13 @@ export class OrderItemOwnerPickComponent implements OnInit {
 
   public setItemOwner(id: string): void {
     this.store.dispatch(setItemOwner({ id }))
+  }
+
+  public openLogin() {
+    this.bsModalRef = this.modalService.show(LoginModalComponent,
+      // , {initial state}
+    )
+    this.bsModalRef.content.closeBtnName = 'Close'
   }
 
 }

@@ -13,6 +13,7 @@ import * as fromOrder from '../modules/order/state/order/order.reducer';
 import * as fromItem from '../modules/order/state/item/item.reducer';
 import * as fromCart from '../modules/order/state/cart/cart.reducer';
 import * as fromStaticData from '../modules/order/state/staticData/static-data.reducer';
+import * as fromAuth from './auth/auth.reducer';
 
 
 export interface State {
@@ -22,6 +23,7 @@ export interface State {
   [fromCart.cartFeatureKey]: fromCart.State;
   [fromUser.userFeatureKey]: fromUser.State;
   [fromStaticData.staticDataFeatureKey]: fromStaticData.State;
+  [fromAuth.authFeatureKey]: fromAuth.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -31,6 +33,7 @@ export const reducers: ActionReducerMap<State> = {
   [fromCart.cartFeatureKey]: fromCart.reducer,
   [fromUser.userFeatureKey]: fromUser.reducer,
   [fromStaticData.staticDataFeatureKey]: fromStaticData.reducer,
+  [fromAuth.authFeatureKey]: fromAuth.reducer,
 };
 
 

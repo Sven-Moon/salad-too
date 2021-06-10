@@ -15,6 +15,9 @@ import { AppMockInterceptors } from './barrels/app-mocks';
 import { SharedModule } from './modules/shared/shared.module';
 import { OrderModule } from './modules/order/order.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalModule } from 'ngx-bootstrap/modal'
+import { AuthModule } from './modules/auth/auth.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,10 +26,13 @@ import { HttpClientModule } from '@angular/common/http';
     NavComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    AuthModule,
+    BrowserModule,
+    FormsModule,
     HttpClientModule,
     OrderModule,
+    ModalModule.forRoot(),
     SharedModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
