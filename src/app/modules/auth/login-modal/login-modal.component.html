@@ -1,42 +1,70 @@
 <!-- <div class="modal"> -->
   <div class="modal-header">
     <div class=modal-title>Log In</div>
-    <button type="button" class="close" (click)="cancel()">x</button>
   </div>
   <div class="modal-body">
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" passwordsMatch>
       <div class="login-form flex-col flex-center">
         <div class="form-group flex-col flex-center">
           <label for="username">Username</label>
           <input type="text" name="username" id=""
-          class="form-control" required>
+          class="form-control" required
+          placeholder="Name" [(ngModel)]="form.username "#username="ngModel"
+          minlength="3">
+          <div *ngIf="username.errors?.minlength && (password.touched || password.dirty)">Username must be at least 3 characters in length.</div>
         </div> <!--  Username -->
         <div class="form-group flex-col flex-center">
           <label for="password">Password</label>
-          <input type="text" name="password" id=""
-          class="form-control"required>
+          <input type="password" name="password" id=""
+          class="form-control"required
+          placeholder="Password" [(ngModel)]="form.password" #password="ngModel"
+          pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$">
+          <div *ngIf="password.errors?.pattern && (password.touched || password.dirty)"> Password must contain a minimum of eight characters, at least one uppercase letter, one lowercase letter and one number</div>
         </div> <!--  Password -->
         <div class="form-group flex-col flex-center"
-        *ngIf="newUser">
-          <label for="confirm-password">Confirm Password</label>
+        *ngIf="form.newUser">
+          <label for="confirmPassword">Confirm Password</label>
           <input
-           type="text" name="confirm-password" id=""
-          class="form-control" required>
+          type="password"
+          name="confirmPassword"
+          id=""
+          class="form-control"
+          [(ngModel)]="form.confirmPassword"
+          #confirmPassword="ngModel">
         </div> <!--  Confirm PW -->
+        <div *ngIf="f.errors?.passwordsMatch && (f.controls.confirmPassword.touched || f.controls.confirmPassword.dirty)">No Matchy</div>
+        <div class="form-group flex-col flex-center"
+        *ngIf="form.newUser">
+          <label for="email">Email Address</label>
+          <input
+          type="text"
+          name="email"
+          id="email"
+          class="form-control"
+          [(ngModel)]="form.email"
+          #email="ngModel"
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+          required>
+          <div *ngIf="email.errors?.pattern && (f.touched || f.dirty)">
+            A valid email is required for registration.
+          </div>
+        </div> <!--  Email -->
         <div class="newUser">
-          <input type="checkbox" name="newUser" id=""
-           [(ngModel)]="newUser">
+          <input type="checkbox" name="newUser" id="newUser"
+           [(ngModel)]="form.newUser" #newUser="ngModel">
           <label for="newUser">I'm new here</label>
-        </div> <!--  checkbox -->
+        </div> <!--  New User -->
       </div>
     </form>
     <div class="actions container flex-row">
-      <button class="btn btn-go" *ngIf="!newUser">Login</button>
-      <button class="btn btn-primary" *ngIf="newUser">
-        Sign Up
+      <button type="submit" class="btn btn-go" *ngIf="!form.newUser">
+      Login
       </button>
-      <button class="btn btn-cancel" (click)="cancel()">
-        Cancel
+      <button type="button" class="btn btn-primary" *ngIf="form.newUser"  (click)="tellme(f)">
+        {{f.controls.email.valid}}
+      </button>
+      <button type="button" class="btn btn-cancel" (click)="cancel()">
+        {{f.valid}}
       </button>
     </div> <!--  actions -->
   </div>

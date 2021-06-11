@@ -10,7 +10,7 @@ export class MockUserDataInterceptor implements HttpInterceptor {
 
   public intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
-    if (req.method === 'GET' && req.url == 'https://localhost:3000/User-data/') {
+    if (req.method === 'GET' && req.url == 'https://localhost:3000/users/') {
       const orderUserData = this.getUserData()
       const response = new HttpResponse({
         body: orderUserData
@@ -22,6 +22,7 @@ export class MockUserDataInterceptor implements HttpInterceptor {
 
 
   public getUserData(): userData {
+    console.log('TOUCHED!')
     let data: userData = {
       "users": [
         {

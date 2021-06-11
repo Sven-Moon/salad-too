@@ -8,11 +8,13 @@ import * as fromAuth from '../../store/auth/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from '../../store/auth/auth.effects';
 import { FormsModule } from '@angular/forms';
+import { passwordsMatchDirective } from './resources/passwordMatch.directive';
 
 
 @NgModule({
   declarations: [
-    LoginModalComponent
+    LoginModalComponent,
+    passwordsMatchDirective
   ],
   imports: [
     AuthRoutingModule,

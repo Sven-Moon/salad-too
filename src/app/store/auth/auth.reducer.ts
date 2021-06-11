@@ -8,16 +8,45 @@ export interface State {
 }
 
 export const initialState: State = {
-
+  user: {
+    id: 'guest123',
+    name: 'Guest 123',
+    phoneNumber: null,
+    email: null,
+    contacts: [],
+    img: "./assets/images/profile_1.png",
+  },
+  error: null,
 };
 
 
 export const reducer = createReducer(
   initialState,
 
-  on(AuthActions.loadAuths, state => state),
-  on(AuthActions.loadAuthsSuccess, (state, action) => state),
-  on(AuthActions.loadAuthsFailure, (state, action) => state),
+  on(AuthActions.loginSuccess, (state, action) => ({
+    ...state,
+    user: action.user,
+    error: null
+  })),
+  on(AuthActions.loginFailure, (state, action) => ({
+    ...state,
+    user: null,
+    error: action.error
+  })),
+  on(AuthActions.registerUserSuccess, (state, action) => ({
+    ...state,
+    user: action.user,
+    error: null
+  })),
+  on(AuthActions.registerUserFailure, (state, action) => ({
+    ...state,
+    user: null,
+    error: action.error
+  })),
+  on(AuthActions.logOut, (state) => ({
+    ...state,
+    initialState
+  })),
 
 );
 
