@@ -9,10 +9,9 @@ export interface State {
 
 export const initialState: State = {
   user: {
-    id: 'guest123',
     name: 'Guest 123',
     phoneNumber: null,
-    email: null,
+    email: "guest123@saladtoo.com",
     contacts: [],
     img: "./assets/images/profile_1.png",
   },

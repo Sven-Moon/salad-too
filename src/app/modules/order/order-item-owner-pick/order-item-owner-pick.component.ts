@@ -25,22 +25,19 @@ export class OrderItemOwnerPickComponent implements OnInit {
 
   contacts: Contacts = [
     {
-      id: "abc111",
-      name: "Jim Bob",
-      phoneNumber: "978-231-1121",
-      img: './assets/images/profile_1.png'
+      "email": "BillKurtis@npr.com",
+      "name": "Bill Kurtis",
+      "img": "./assets/images/profile_1.png"
     },
     {
-      id: "abc114",
-      name: "James Bob",
-      phoneNumber: "978-231-1121",
-      img: './assets/images/profile_1.png'
+      "email": "DougBerman@npr.com",
+      "name": "Doug Berman",
+      "img": "./assets/images/profile_1.png"
     },
     {
-      id: "abc115",
-      name: "Jane Bob",
-      phoneNumber: "978-231-1121",
-      img: './assets/images/profile_1.png'
+      "email": "PeterSegal@npr.com",
+      "name": "Peter Segal",
+      "img": "./assets/images/profile_1.png"
     },
   ]
 

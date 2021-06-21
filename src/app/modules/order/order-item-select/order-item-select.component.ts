@@ -30,14 +30,14 @@ export class OrderItemSelectComponent implements OnInit {
       name: "Lesser Salad",
       id: "lakf;ealj",
       description: "I'm a description!",
-      img: "./assets/images/profile.png",
+      img: "./assets/images/profile_1.png",
       price: "12.42"
     },
     {
       name: "Sorta-okay Salad",
       id: "lakf;ealj",
       description: "I'm a description!",
-      img: "./assets/images/profile.png",
+      img: "./assets/images/profile_1.png",
       price: "12.42"
     },
   ]

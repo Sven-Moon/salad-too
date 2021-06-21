@@ -36,8 +36,15 @@ export class LoginModalComponent implements OnInit {
 
   public onSubmit(f: NgForm): void {
     console.log('Submitted!')
+
+
+    let url = 'https://localhost:3000/users/?email='
+    // ------- DEBUG -------
+    console.log('url: ' + url.substring(0, 37))
+
+
     this.store.dispatch(loginAttempt({
-      username: f.value.username,
+      email: f.value.email,
       password: f.value.password
     }))
   }
@@ -46,9 +53,12 @@ export class LoginModalComponent implements OnInit {
     this.modalService.hide()
   }
 
+  signUp() {
+
+  }
+
   tellme(f: NgForm) {
     console.log(f)
-    console.log(f.controls.password.value != f.controls.confirmPassword.value)
   }
 
 

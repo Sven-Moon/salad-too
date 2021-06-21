@@ -3,7 +3,7 @@ import { User } from 'src/app/models/User';
 
 export const loginAttempt = createAction(
   '[Login Modal] User Log In',
-  props<{ username: string, password: string }>()
+  props<{ email: string, password: string }>()
 );
 
 export const loginSuccess = createAction(

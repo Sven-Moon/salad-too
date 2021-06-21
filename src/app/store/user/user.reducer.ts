@@ -10,7 +10,6 @@ export interface State extends User {
 }
 
 export const initialState: State = {
-  "id": "abc100",
   "name": "Guest",
   "phoneNumber": "",
   "email": "",

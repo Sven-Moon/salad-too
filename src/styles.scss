@@ -8,10 +8,13 @@ $bg-white: #f2f9f1; // mint creme
 $primary: hsl(106, 51%, 15%); // forest green traditional
 $primary-bg: #3b7b28; // sap green
 $primary-dark: #0f1f0a; // Phthalo Green
+$primary-disabled: #8bc77f;
 $neutral: #fec0aa; // melon
 $neutral-light: #fff0eb; // seashell
 $success: #3f7231; // fern green
 $success-bg: #75bc62; // mantis
+$success-bg-disabled: #d9ecd4; // nyanza
+$success-text-disabled: #8bc77f; // pistachio
 $shadow: #999;
 
 $maxScreenWidth: 768px;
@@ -141,6 +144,15 @@ button {
 .btn-primary {
   background-color: $primary-bg;
   border-color: $primary;
+}
+
+.btn-go:disabled {
+  background-color: $success-bg-disabled;
+  color: $success-text-disabled;
+}
+
+.btn-primary:disabled {
+  background-color: $primary-disabled;
 }
 
 .modal {

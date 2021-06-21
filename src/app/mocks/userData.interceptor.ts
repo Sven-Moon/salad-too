@@ -1,8 +1,10 @@
-import { HttpRequest, HttpEvent, HttpHandler, HttpInterceptor, HttpResponse } from "@angular/common/http";
+import { HttpRequest, HttpEvent, HttpHandler, HttpInterceptor, HttpResponse, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
+import { Error } from "../models/Error";
 import { userData } from "../models/StaticData";
+import { User } from "../models/User";
 
 @Injectable({ providedIn: 'root' })
 export class MockUserDataInterceptor implements HttpInterceptor {
@@ -10,8 +12,9 @@ export class MockUserDataInterceptor implements HttpInterceptor {
 
   public intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
-    if (req.method === 'GET' && req.url == 'https://localhost:3000/users/') {
-      const orderUserData = this.getUserData()
+    if (req.method === 'GET' && req.url.substring(0, 36) == 'https://localhost:3000/users/?email=') {
+
+      const orderUserData = this.getUserData(req.url.substring(36))
       const response = new HttpResponse({
         body: orderUserData
       })
@@ -21,71 +24,79 @@ export class MockUserDataInterceptor implements HttpInterceptor {
   }
 
 
-  public getUserData(): userData {
+  public getUserData(email: string): any {
     console.log('TOUCHED!')
     let data: userData = {
       "users": [
         {
-          "id": "abc123",
           "name": "Mike Danforth",
           "phoneNumber": "987-654-3210",
           "email": "MikeDanforth@npr.com",
           "contacts": ["abc124", "abc126"],
-          "img": "./assets/images/profile.png"
+          "img": "./assets/images/profile_1.png"
         },
         {
-          "id": "abc124",
           "name": "Doug Berman",
           "phoneNumber": "987-654-3210",
           "email": "DougBerman@npr.com",
-          "contacts": ["abc124"],
-          "img": "./assets/images/profile.png"
+          "contacts": ["MikeDanforth@npr.com, BillKurtis@npr.com"],
+          "img": "./assets/images/profile_1.png"
         },
         {
-          "id": "abc125",
           "name": "Peter Segal",
           "phoneNumber": "987-654-1381",
           "email": "PeterSegal@npr.com",
-          "contacts": ["abc124"],
-          "img": "./assets/images/profile.png"
+          "contacts": ["MikeDanforth@npr.com, PeterSegal@npr.com"],
+          "img": "./assets/images/profile_1.png"
         },
         {
-          "id": "abc126",
           "name": "Bill Kurtis",
           "phoneNumber": "987-654-1942",
           "email": "BillKurtis@npr.com",
-          "contacts": ["abc124"],
-          "img": "./assets/images/profile.png"
+          "contacts": ["marthaStewart@homes.com"],
+          "img": "./assets/images/profile_1.png"
         },
       ],
       "contacts": [
         {
-          "id": "abc126",
+          "email": "BillKurtis@npr.com",
           "name": "Bill Kurtis",
-          "phoneNumber": "987-654-1942",
-          "img": "./assets/images/profile.png"
+          "img": "./assets/images/profile_1.png"
         },
         {
-          "id": "abc124",
+          "email": "DougBerman@npr.com",
           "name": "Doug Berman",
-          "phoneNumber": "987-654-3210",
-          "img": "./assets/images/profile.png"
+          "img": "./assets/images/profile_1.png"
         },
         {
-          "id": "abc125",
+          "email": "PeterSegal@npr.com",
           "name": "Peter Segal",
-          "phoneNumber": "987-654-1381",
-          "img": "./assets/images/profile.png"
+          "img": "./assets/images/profile_1.png"
         },
         {
-          "id": "abc025",
+          "email": "marthaStewart@homes.com",
           "name": "Martha Stewart",
-          "phoneNumber": "",
-          "img": "./assets/images/profile.png"
+          "img": "./assets/images/profile_1.png"
         }
       ],
     }
-    return data
-  } // get data
 
-}
+    let user: User = data.users.find(user =>
+      user.email.toLowerCase() === email.toLowerCase())
+
+
+    if (user) {
+      return user
+    } else {
+      throw new HttpErrorResponse({
+        error: 'No user found',
+        status: 500,
+        statusText: 'Warning'
+      })
+    }
+
+  }
+
+
+
+} // get data

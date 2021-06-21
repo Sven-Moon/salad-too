@@ -15,7 +15,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.loginAttempt),
       concatMap((action) =>
-        this.authService.login(action.username, action.password).pipe(
+        this.authService.login(action.email, action.password).pipe(
           map((user) => AuthActions.loginSuccess({ user })),
           catchError(error => of(AuthActions.loginFailure({ error }))))
       )
