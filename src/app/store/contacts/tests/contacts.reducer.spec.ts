@@ -1,6 +1,6 @@
-import { reducer, initialState } from '../user.reducer';
+import { reducer, initialState } from '../contacts.reducer';
 
-describe('User Reducer', () => {
+describe('Contacts Reducer', () => {
   describe('an unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;

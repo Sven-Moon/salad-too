@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { User } from 'src/app/models/User';
 import * as itemActions from 'src/app/modules/order/state/item/item.actions'
-import { selectUserState } from 'src/app/store/user/user.selectors';
+import { selectUser } from 'src/app/store/auth/auth.selectors';
 
 @Component({
   selector: 'app-order-item-owner',
@@ -19,7 +19,7 @@ export class OrderItemOwnerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user$ = this.store.select(selectUserState)
+    this.user$ = this.store.select(selectUser)
   }
 
   openOwnerPick(): void {

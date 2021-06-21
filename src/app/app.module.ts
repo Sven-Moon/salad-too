@@ -18,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal'
 import { AuthModule } from './modules/auth/auth.module';
 import { FormsModule } from '@angular/forms';
+import * as fromContacts from './store/contacts/contacts.reducer';
+import { ContactsEffects } from './store/contacts/contacts.effects';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { FormsModule } from '@angular/forms';
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreModule.forFeature(fromContacts.contactsFeatureKey, fromContacts.reducer),
+    EffectsModule.forFeature([ContactsEffects]),
   ],
   providers: [
     ...(environment.useMocking ? AppMockInterceptors : [])

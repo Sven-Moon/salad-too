@@ -15,10 +15,8 @@
     <hr style="margin: .5rem; width:100%; color:white">
     <!-- <div class="actions-row"> -->
       <div class="actions">
-        <ng-container *ngIf="!user.signedIn">
-          <button (click)="openAddContact()">New Contact</button>
-        </ng-container>
-        <ng-container *ngIf="!user.signedIn">
+        <button (click)="openAddContact()">New Contact</button>
+        <ng-container *ngIf="!signedIn$">
           <button (click)="openLogin()">Sign In</button>
         </ng-container>
         <button (click)="closeOwnerPick()">Cancel</button>

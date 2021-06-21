@@ -3,8 +3,7 @@ import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs/internal/Observable';
 import { Contacts, User } from 'src/app/models/User';
-import { State } from 'src/app/store/user/user.reducer';
-import { selectUserState } from 'src/app/store/user/user.selectors';
+import { selectIsSignedIn, selectUser } from 'src/app/store/auth/auth.selectors';
 import { LoginModalComponent } from '../../auth/login-modal/login-modal.component';
 import { closeOwnerPick, openAddContact, setItemOwner } from '../state/item/item.actions';
 
@@ -17,11 +16,10 @@ export class OrderItemOwnerPickComponent implements OnInit {
   // --------- MODAL ---------
   bsModalRef: BsModalRef
 
-  user$: Observable<State>
-  // user: {
-  //   id: "abc100",
-  //   name: "Sven"
-  // }
+  user$: Observable<User>
+  // signedIn$: Observable<boolean>
+  signedIn$: boolean
+  contacts$: Observable<Contacts>
 
   contacts: Contacts = [
     {
@@ -47,7 +45,9 @@ export class OrderItemOwnerPickComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user$ = this.store.select(selectUserState)
+    this.user$ = this.store.select(selectUser)
+    this.store.select(selectIsSignedIn).subscribe(signedIn =>
+      this.signedIn$ = signedIn)
   }
 
   openAddContact() {

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap, mergeMap } from 'rxjs/operators';
+import { catchError, map, concatMap, mergeMap, tap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 
 import * as AuthActions from './auth.actions';
 import { AuthService } from 'src/app/services/auth.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 
 
@@ -22,11 +23,18 @@ export class AuthEffects {
     );
   });
 
-
+  hideModal$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginSuccess),
+      tap(() => this.modalService.hide())
+    ),
+    { dispatch: false }
+  )
 
   constructor(
     private actions$: Actions,
-    private authService: AuthService
+    private authService: AuthService,
+    private modalService: BsModalService
   ) { }
 
 }
