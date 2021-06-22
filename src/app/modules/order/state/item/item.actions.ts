@@ -1,9 +1,18 @@
 import { createAction, props } from '@ngrx/store';
 import { Item } from 'src/app/models/Item';
 import { ItemGroup } from 'src/app/models/ItemGroup';
+import { Contact, User } from 'src/app/models/User';
 
 export const setItemOwner = createAction(
-  '[Owner Pick] Set Item Owner', props<{ id: string }>()
+  '[Owner Pick] Set Contact as Item Owner', props<{ contact: Contact }>()
+);
+
+export const setCurrentOwnerAsItemOwner = createAction(
+  '[Type SElect] Set Last (current) Owner as Item Owner', props<{ owner: Contact }>()
+);
+
+export const setUserAsOwner = createAction(
+  '[Owner Pick] Set User as Item Owner', props<{ user: User }>()
 );
 
 export const openOwnerPick = createAction('[Owner Pick] Open Owner Pick');

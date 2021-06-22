@@ -29,7 +29,27 @@ export const reducer = createReducer(
   initialState,
 
   on(ItemActions.setItemOwner, (state, action) => ({
-    ...state, owner: action.id
+    ...state, owner: {
+      email: action.contact.email,
+      img: action.contact.img,
+      name: action.contact.name
+    }
+  })),
+  on(ItemActions.setUserAsOwner, (state, action) => ({
+    ...state,
+    owner: {
+      email: action.user.email,
+      img: action.user.img,
+      name: action.user.name
+    }
+  })),
+  on(ItemActions.setCurrentOwnerAsItemOwner, (state, action) => ({
+    ...state,
+    owner: {
+      email: action.owner.email,
+      img: action.owner.img,
+      name: action.owner.name
+    }
   })),
 
   // Item Owner Select

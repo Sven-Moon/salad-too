@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs/internal/Observable';
-import { Contacts, User } from 'src/app/models/User';
-import { selectIsSignedIn, selectUser } from 'src/app/store/auth/auth.selectors';
+import { Contact, Contacts, User } from 'src/app/models/User';
+import { registerUser } from 'src/app/store/auth/auth.actions';
+import { selectContacts, selectIsSignedIn, selectUser } from 'src/app/store/auth/auth.selectors';
 import { LoginModalComponent } from '../../auth/login-modal/login-modal.component';
-import { closeOwnerPick, openAddContact, setItemOwner } from '../state/item/item.actions';
+import { closeOwnerPick, openAddContact, setItemOwner, setUserAsOwner } from '../state/item/item.actions';
 
 @Component({
   selector: 'app-order-item-owner-pick',
@@ -17,27 +19,8 @@ export class OrderItemOwnerPickComponent implements OnInit {
   bsModalRef: BsModalRef
 
   user$: Observable<User>
-  // signedIn$: Observable<boolean>
-  signedIn$: boolean
+  signedIn$: Observable<boolean>
   contacts$: Observable<Contacts>
-
-  contacts: Contacts = [
-    {
-      "email": "BillKurtis@npr.com",
-      "name": "Bill Kurtis",
-      "img": "./assets/images/profile_1.png"
-    },
-    {
-      "email": "DougBerman@npr.com",
-      "name": "Doug Berman",
-      "img": "./assets/images/profile_1.png"
-    },
-    {
-      "email": "PeterSegal@npr.com",
-      "name": "Peter Segal",
-      "img": "./assets/images/profile_1.png"
-    },
-  ]
 
   constructor(
     private store: Store,
@@ -46,8 +29,9 @@ export class OrderItemOwnerPickComponent implements OnInit {
 
   ngOnInit(): void {
     this.user$ = this.store.select(selectUser)
-    this.store.select(selectIsSignedIn).subscribe(signedIn =>
-      this.signedIn$ = signedIn)
+    this.signedIn$ = this.store.select(selectIsSignedIn)
+    this.contacts$ = this.store.select(selectContacts)
+
   }
 
   openAddContact() {
@@ -58,12 +42,15 @@ export class OrderItemOwnerPickComponent implements OnInit {
     this.store.dispatch(closeOwnerPick())
   }
 
-  showSignInModal() {
-    // this.store.dispatch(showSignInModal())
+  public setUserAsOwner(user: User): void {
+    console.log('Click!')
+    this.store.dispatch(setUserAsOwner({ user }))
+    this.closeOwnerPick()
   }
 
-  public setItemOwner(id: string): void {
-    this.store.dispatch(setItemOwner({ id }))
+  public setItemOwner(contact: Contact): void {
+    this.store.dispatch(setItemOwner({ contact }))
+    this.closeOwnerPick()
   }
 
   public openLogin() {

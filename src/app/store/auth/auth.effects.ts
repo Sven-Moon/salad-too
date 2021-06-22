@@ -31,6 +31,18 @@ export class AuthEffects {
     { dispatch: false }
   )
 
+  registerUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.registerUser),
+      concatMap((action) =>
+        this.authService.registerUser(action.email, action.password, action.username, action.confirmPassword).pipe(
+          map((user) => AuthActions.registerUserSuccess({ user })),
+          catchError(error => of(AuthActions.registerUserFailure({ error })))
+        )
+      )
+    )
+  })
+
   constructor(
     private actions$: Actions,
     private authService: AuthService,

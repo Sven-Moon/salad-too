@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
-import { ItemGroup, ItemGroups } from 'src/app/models/ItemGroup';
-import { setItemOwner, openOwnerPick, openAddContact, closeOwnerPick, closeAddContact, setItemGroup } from '../state/item/item.actions';
-import { State } from '../state/item/item.reducer';
+import { ItemGroups } from 'src/app/models/ItemGroup';
+import { selectUser } from 'src/app/store/auth/auth.selectors';
+import { selectCurrentOwner } from '../state/cart/cart.selectors';
+import { openOwnerPick, openAddContact, closeOwnerPick, closeAddContact, setItemGroup, setUserAsOwner, setCurrentOwnerAsItemOwner } from '../state/item/item.actions';
 import { selectAddContactFlag, selectItemState, selectPickOwnerFlag } from '../state/item/item.selectors';
 import { selectItemGroups } from '../state/staticData/static-data.selectors';
 
@@ -27,6 +28,10 @@ export class OrderTypeSelectComponent implements OnInit {
     this.hidePickContactFlag$ = this.store.select(selectPickOwnerFlag)
     this.hideAddContactFlag$ = this.store.select(selectAddContactFlag)
     this.itemGroups$ = this.store.select(selectItemGroups)
+    this.store.select(selectCurrentOwner).subscribe(owner =>
+      this.store.dispatch(setCurrentOwnerAsItemOwner({ owner }))
+    )
+
   }
 
   openOwnerPick() {

@@ -4,7 +4,7 @@ import { Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { Error } from "../models/Error";
 import { userData } from "../models/StaticData";
-import { User } from "../models/User";
+import { User, Users } from "../models/User";
 
 @Injectable({ providedIn: 'root' })
 export class MockUserDataInterceptor implements HttpInterceptor {
@@ -25,63 +25,82 @@ export class MockUserDataInterceptor implements HttpInterceptor {
 
 
   public getUserData(email: string): any {
-    console.log('TOUCHED!')
-    let data: userData = {
-      "users": [
-        {
-          "name": "Mike Danforth",
-          "phoneNumber": "987-654-3210",
-          "email": "MikeDanforth@npr.com",
-          "contacts": ["abc124", "abc126"],
-          "img": "./assets/images/profile_1.png"
-        },
-        {
-          "name": "Doug Berman",
-          "phoneNumber": "987-654-3210",
-          "email": "DougBerman@npr.com",
-          "contacts": ["MikeDanforth@npr.com, BillKurtis@npr.com"],
-          "img": "./assets/images/profile_1.png"
-        },
-        {
-          "name": "Peter Segal",
-          "phoneNumber": "987-654-1381",
-          "email": "PeterSegal@npr.com",
-          "contacts": ["MikeDanforth@npr.com, PeterSegal@npr.com"],
-          "img": "./assets/images/profile_1.png"
-        },
-        {
-          "name": "Bill Kurtis",
-          "phoneNumber": "987-654-1942",
-          "email": "BillKurtis@npr.com",
-          "contacts": ["marthaStewart@homes.com"],
-          "img": "./assets/images/profile_1.png"
-        },
-      ],
-      "contacts": [
-        {
-          "email": "BillKurtis@npr.com",
-          "name": "Bill Kurtis",
-          "img": "./assets/images/profile_1.png"
-        },
-        {
-          "email": "DougBerman@npr.com",
-          "name": "Doug Berman",
-          "img": "./assets/images/profile_1.png"
-        },
-        {
-          "email": "PeterSegal@npr.com",
-          "name": "Peter Segal",
-          "img": "./assets/images/profile_1.png"
-        },
-        {
-          "email": "marthaStewart@homes.com",
-          "name": "Martha Stewart",
-          "img": "./assets/images/profile_1.png"
-        }
-      ],
-    }
+    let data: Users = [
+      {
+        "name": "Mike Danforth",
+        "phoneNumber": "987-654-3210",
+        "email": "MikeDanforth@npr.com",
+        "contacts": [
+          {
+            name: "Doug",
+            email: null,
+            img: "./assets/images/profile_1.png"
+          },
+          {
+            name: "Peter",
+            email: null,
+            img: "./assets/images/profile_1.png"
+          }
+        ],
+        "img": "./assets/images/profile_1.png"
+      },
+      {
+        "name": "Doug",
+        "phoneNumber": "987-654-3210",
+        "email": "DougBerman@npr.com",
+        "contacts": [
+          {
+            name: "Mike",
+            email: null,
+            img: "./assets/images/profile_1.png"
+          },
+          {
+            name: "Bill",
+            email: null,
+            img: "./assets/images/profile_1.png"
+          }
+        ],
+        "img": "./assets/images/profile_1.png"
+      },
+      {
+        "name": "Peter",
+        "phoneNumber": "987-654-1381",
+        "email": "PeterSegal@npr.com",
+        "contacts": [
+          {
+            name: "Mike",
+            email: null,
+            img: "./assets/images/profile_1.png"
+          },
+          {
+            name: "Bill",
+            email: null,
+            img: "./assets/images/profile_1.png"
+          },
+          {
+            name: "Martha",
+            email: null,
+            img: "./assets/images/profile_1.png"
+          }
+        ],
+        "img": "./assets/images/profile_1.png"
+      },
+      {
+        "name": "Bill",
+        "phoneNumber": "987-654-1942",
+        "email": "BillKurtis@npr.com",
+        "contacts": [
+          {
+            name: "Martha",
+            email: null,
+            img: null
+          }
+        ],
+        "img": "./assets/images/profile_1.png"
+      },
+    ]
 
-    let user: User = data.users.find(user =>
+    let user: User = data.find(user =>
       user.email.toLowerCase() === email.toLowerCase())
 
 

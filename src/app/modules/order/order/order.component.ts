@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { selectUser } from 'src/app/store/auth/auth.selectors';
+import { setUserAsCurrent } from '../state/cart/cart.actions';
 import { loadStaticData } from '../state/staticData/static-data.actions';
 
 @Component({
@@ -14,6 +16,15 @@ export class OrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.store.select(selectUser).subscribe(user => {
+      let currentUser = {
+        name: user.name,
+        img: user.img,
+        email: user.email
+      }
+      this.store.dispatch(setUserAsCurrent({ data: currentUser }))
+    }
+    )
     this.store.dispatch(loadStaticData())
   }
 

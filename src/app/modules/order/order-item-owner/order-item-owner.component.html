@@ -1,7 +1,7 @@
-<div class="wrapper" *ngIf="user$ |async as user">
+<div class="wrapper" *ngIf="owner$ |async as owner">
   <div class="item-msg">This {{itemGroup$ |async }} is for...</div>
   <div class="profile-wrap">
     <img src="./assets/images/profile_1.png" class="profile-img" alt="">
-    <div class="form-control">{{user.name}}</div>
+    <div class="form-control">{{ owner.name }}</div>
   </div>
 </div>

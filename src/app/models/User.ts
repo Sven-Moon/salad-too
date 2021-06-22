@@ -2,7 +2,7 @@ export interface User {
   name: string
   phoneNumber: string
   email: string
-  contacts: string[]
+  contacts: Contacts
   img: string
 }
 

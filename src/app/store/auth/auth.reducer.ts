@@ -1,3 +1,4 @@
+import { state } from '@angular/animations';
 import { Action, createReducer, on } from '@ngrx/store';
 import { User } from 'src/app/models/User';
 import * as AuthActions from './auth.actions';
@@ -48,6 +49,13 @@ export const reducer = createReducer(
     ...state,
     initialState
   })),
-
+  on(AuthActions.setGuestId, (state, action) => ({
+    ...state,
+    user: {
+      ...state.user,
+      email: 'guest' + action.id + '@saladtoo.com',
+      name: 'Guest ' + action.id
+    }
+  }))
 );
 

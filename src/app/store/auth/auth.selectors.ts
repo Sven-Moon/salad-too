@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { User } from 'src/app/models/User';
+import { Contacts, User } from 'src/app/models/User';
 import * as fromAuth from './auth.reducer';
 
 export const selectAuthState = createFeatureSelector<fromAuth.State>(
@@ -20,4 +20,9 @@ export const selectIsSignedIn = createSelector(
       ? false
       : true
   }
+)
+
+export const selectContacts = createSelector(
+  selectUser,
+  (user): Contacts => user.contacts
 )

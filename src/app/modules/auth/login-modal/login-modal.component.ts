@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs/internal/Observable';
-import { loginAttempt } from 'src/app/store/auth/auth.actions'
+import { loginAttempt, registerUser } from 'src/app/store/auth/auth.actions'
 
 @Component({
   selector: 'app-login-modal',
@@ -35,12 +35,9 @@ export class LoginModalComponent implements OnInit {
   }
 
   public onSubmit(f: NgForm): void {
-    console.log('Submitted!')
 
 
     let url = 'https://localhost:3000/users/?email='
-    // ------- DEBUG -------
-    console.log('url: ' + url.substring(0, 37))
 
 
     this.store.dispatch(loginAttempt({
@@ -53,12 +50,14 @@ export class LoginModalComponent implements OnInit {
     this.modalService.hide()
   }
 
-  signUp() {
+  public signUp(f: NgForm) {
 
-  }
-
-  tellme(f: NgForm) {
-    console.log(f)
+    this.store.dispatch(registerUser({
+      username: f.value.username,
+      password: f.value.password,
+      confirmPassword: f.value.confirmPassword,
+      email: f.value.email
+    }))
   }
 
 

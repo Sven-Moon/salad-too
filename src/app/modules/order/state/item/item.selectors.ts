@@ -3,6 +3,7 @@ import { reduce } from 'rxjs/operators';
 import { Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
 import { Item, Items } from 'src/app/models/Item';
 import { DrinkTypes, ItemGroup, ItemGroups } from 'src/app/models/ItemGroup';
+import { Contact } from 'src/app/models/User';
 import { selectDrinkTypes, selectIngredients, selectIngredientTypes, selectItems, selectStaticDataState } from '../staticData/static-data.selectors';
 import * as fromItem from './item.reducer';
 
@@ -92,5 +93,9 @@ export const selectPickedItemProperties = createSelector(
   selectItemId,
   (items: Items, id: string): Item => items.find(item =>
     item.id === id)
+)
 
+export const selectItemOwner = createSelector(
+  selectItemState,
+  (state): Contact => state.owner
 )

@@ -17,7 +17,7 @@ export type Items = Item[]
 
 export interface CartItem extends Item {
   custom: boolean
-  owner: string
+  owner: Contact
   price: string
 }
 export type CartItems = CartItem[]

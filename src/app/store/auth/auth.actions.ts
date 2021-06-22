@@ -37,3 +37,8 @@ export const registerUserFailure = createAction(
 );
 
 export const logOut = createAction('[Header] Log out');
+
+export const setGuestId = createAction(
+  '[App Root] Set Guest ID',
+  props<{ id: string }>()
+)
