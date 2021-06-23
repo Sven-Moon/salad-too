@@ -1,8 +1,10 @@
 <ng-container *ngIf="user$ |async as user">
   <div class="picker-wrap">
-    <div class="profile-wrap" (click)="setUserAsOwner(user)">
-      <img src={{user.img}} class="profile-img" alt="">
-      <div class="form-control contact-tag">{{user.name}} (Me)</div>
+    <div class="contacts">
+      <div class="profile-wrap" (click)="setUserAsOwner(user)">
+        <img src={{user.img}} class="profile-img" alt="">
+        <div class="form-control contact-tag">{{user.name}} (Me)</div>
+      </div>
     </div>
     <div class="contacts">
       <ng-container *ngFor="let contact of contacts$ | async">
