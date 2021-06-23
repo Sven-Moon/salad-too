@@ -21,7 +21,7 @@ $border-wide: 0.5rem;
   justify-content: center;
   width: 100%;
   max-height: 60vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .profile-wrap {
@@ -44,6 +44,10 @@ $border-wide: 0.5rem;
   height: 1.25rem;
   margin-right: 0.5rem;
   min-width: fit-content;
+}
+
+.contact-tag {
+  max-width: 15rem;
 }
 
 .actions {

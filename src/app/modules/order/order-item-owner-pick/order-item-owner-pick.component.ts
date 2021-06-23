@@ -43,7 +43,6 @@ export class OrderItemOwnerPickComponent implements OnInit {
   }
 
   public setUserAsOwner(user: User): void {
-    console.log('Click!')
     this.store.dispatch(setUserAsOwner({ user }))
     this.closeOwnerPick()
   }
