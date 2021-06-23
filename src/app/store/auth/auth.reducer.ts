@@ -56,6 +56,21 @@ export const reducer = createReducer(
       email: 'guest' + action.id + '@saladtoo.com',
       name: 'Guest ' + action.id
     }
-  }))
+  })),
+  on(AuthActions.addContact, (state: State, action) => {
+    let contactsCopy = state.user.contacts.slice(0)
+    contactsCopy.push({
+      name: action.name,
+      email: action.email,
+      img: action.img
+    })
+    return {
+      ...state,
+      user: {
+        ...state.user,
+        contacts: contactsCopy
+      }
+    }
+  }),
 );
 

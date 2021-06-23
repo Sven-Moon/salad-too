@@ -1,5 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
+
+// Boilerplate
 export const loadContacts = createAction(
   '[Contacts] Load Contacts'
 );

@@ -22,6 +22,7 @@ import { OrderItemOwnerAddComponent } from './order-item-owner-add/order-item-ow
 import { OrderItemOwnerPickComponent } from './order-item-owner-pick/order-item-owner-pick.component';
 import * as fromStaticData from './state/staticData/static-data.reducer';
 import { StaticDataEffects } from './state/staticData/static-data.effects';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { StaticDataEffects } from './state/staticData/static-data.effects';
   imports: [
     CommonModule,
     OrderRoutingModule,
+    FormsModule,
     RouterModule,
     //#region Store
     StoreModule.forFeature(fromOrder.orderFeatureKey, fromOrder.reducer),

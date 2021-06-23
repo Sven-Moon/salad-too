@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { addContact } from 'src/app/store/auth/auth.actions';
 import { closeAddContact } from '../state/item/item.actions';
 
 @Component({
@@ -8,6 +10,10 @@ import { closeAddContact } from '../state/item/item.actions';
   styleUrls: ['./order-item-owner-add.component.scss']
 })
 export class OrderItemOwnerAddComponent implements OnInit {
+  form = {
+    name: null,
+    email: null
+  }
 
   constructor(
     private store: Store
@@ -20,9 +26,12 @@ export class OrderItemOwnerAddComponent implements OnInit {
     this.store.dispatch(closeAddContact())
   }
 
-  public addContact() {
-    // TODO: add contact action -> reducer (user)
-    // don't forget to update server (add * if not found =D )
+  public addContact(f: NgForm) {
+    this.store.dispatch(addContact({
+      name: f.value.name,
+      email: f.value.email,
+      img: './assets/images/profile_1.png'
+    }))
   }
 
 }

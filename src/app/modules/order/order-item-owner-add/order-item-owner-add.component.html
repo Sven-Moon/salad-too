@@ -1,14 +1,43 @@
 <div class="adder-wrap">
-  <div class="row">
-    <div class="profile-wrap">
-      <img src='./assets/images/profile_1.png' class="profile-img" alt="">
-      <input class="form-control" placeholder="Name">
+  <form  #f="ngForm" (ngSubmit)="addContact(f)">
+    <div class="row">
+      <div class="form-group flex-col flex-center">
+        <label for="name">Name*</label>
+        <div class="profile-wrap">
+          <img src='./assets/images/profile_1.png' class="profile-img" alt="">
+          <input
+          name="name"
+          type="text"
+          [(ngModel)]="form.name"
+          #name="ngModel"
+          class="form-control"
+          placeholder="Name"
+          required>
+          <div *ngIf="name.errors?.pattern && (f.touched && f.dirty)">
+            Name is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group flex-col flex-center">
+        <label for="email">Email</label>
+        <input
+        name="email"
+        type="text"
+        [(ngModel)]="form.email"
+        #email="ngModel"
+        class="form-control"
+        placeholder="them@saladtoo.com"
+        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+        <div *ngIf="email.errors?.pattern && (f.touched && f.dirty)">
+          Email isn't required, but it should be valid if you enter one.
+        </div>
+      </div>
     </div>
-    <input class="form-control profile-wrap" placeholder="(###)-###-####">
-  </div>
-      <hr>
-  <div class="actions">
-    <button (click)="closeAddContact()">Add Contact</button>
-    <button (click)="closeAddContact()">Cancel</button>
-  </div>
+    <div class="text-center w-100">* = Required</div>
+        <hr>
+    <div class="actions">
+      <button type="submit">Add Contact</button>
+      <button (click)="closeAddContact()">Cancel</button>
+    </div>
+  </form>
 </div>

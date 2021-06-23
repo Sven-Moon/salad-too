@@ -42,3 +42,13 @@ export const setGuestId = createAction(
   '[App Root] Set Guest ID',
   props<{ id: string }>()
 )
+
+export const addContact = createAction(
+  '[Owner Add] Add Contact',
+  props<{
+    name: string,
+    email: string,
+    img: string
+  }>()
+);
+

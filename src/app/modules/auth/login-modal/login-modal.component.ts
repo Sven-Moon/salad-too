@@ -2,7 +2,6 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Observable } from 'rxjs/internal/Observable';
 import { loginAttempt, registerUser } from 'src/app/store/auth/auth.actions'
 
 @Component({
