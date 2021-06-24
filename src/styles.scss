@@ -95,7 +95,7 @@ button {
 }
 
 .scroll-y {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .fade {
@@ -174,8 +174,9 @@ button {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: $maxPopupWidth-sm;
+  // width: 100%;
+  width: max-content;
+  // max-width: $maxPopupWidth-sm;
   padding: 2rem;
   pointer-events: auto;
   background-color: #fff;

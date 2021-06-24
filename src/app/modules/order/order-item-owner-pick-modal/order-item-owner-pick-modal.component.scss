@@ -1,15 +1,11 @@
 @import "/src/styles.scss";
 $border-wide: 0.5rem;
 
-.modal-content {
-  width: auto;
-  max-width: 700px;
-}
-
 .picker-wrap {
   display: flex;
   flex-flow: column;
-  width: 100%;
+  width: 70vw;
+  max-width: 700px;
   height: fit-content;
   // padding: 3vmin;
   z-index: 1;

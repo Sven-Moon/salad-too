@@ -7,6 +7,7 @@ import { Contact, Contacts, User } from 'src/app/models/User';
 import { registerUser } from 'src/app/store/auth/auth.actions';
 import { selectContacts, selectIsSignedIn, selectUser, selectUserEmail } from 'src/app/store/auth/auth.selectors';
 import { LoginModalComponent } from '../../auth/login-modal/login-modal.component';
+import { OrderItemOwnerAddModalComponent } from '../order-item-owner-add-modal/order-item-owner-add-modal.component';
 import { closeOwnerPick, openAddContact, setItemOwner, setUserAsOwner } from '../state/item/item.actions';
 
 @Component({
@@ -31,8 +32,6 @@ export class OrderItemOwnerPickModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.user$ = this.store.select(selectUser)
-    this.user$.subscribe(user =>
-      console.log(user))
     this.signedIn$ = this.store.select(selectIsSignedIn)
     this.contacts$ = this.store.select(selectContacts)
     this.email$ = this.store.select(selectUserEmail)
@@ -40,7 +39,9 @@ export class OrderItemOwnerPickModalComponent implements OnInit {
   }
 
   openAddContact() {
-    this.store.dispatch(openAddContact())
+    // this.store.dispatch(openAddContact())
+    this.bsModalRef = this.modalService.show(OrderItemOwnerAddModalComponent)
+    this.bsModalRef.content.closeBtnName = 'Close'
   }
 
   closeOwnerPick() {
@@ -60,7 +61,7 @@ export class OrderItemOwnerPickModalComponent implements OnInit {
 
   public openLogin() {
     this.bsModalRef = this.modalService.show(LoginModalComponent,
-      // , {initial state}
+      { id: 100 }
     )
     this.bsModalRef.content.closeBtnName = 'Close'
   }

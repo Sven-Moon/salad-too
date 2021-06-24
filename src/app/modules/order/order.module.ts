@@ -18,12 +18,11 @@ import { ItemEffects } from './state/item/item.effects';
 import * as fromCart from './state/cart/cart.reducer';
 import { CartEffects } from './state/cart/cart.effects';
 import { OrderItemOwnerComponent } from './order-item-owner/order-item-owner.component';
-import { OrderItemOwnerAddComponent } from './order-item-owner-add/order-item-owner-add.component';
-import { OrderItemOwnerPickComponent } from './order-item-owner-pick/order-item-owner-pick.component';
 import * as fromStaticData from './state/staticData/static-data.reducer';
 import { StaticDataEffects } from './state/staticData/static-data.effects';
 import { FormsModule } from '@angular/forms';
 import { OrderItemOwnerPickModalComponent } from './order-item-owner-pick-modal/order-item-owner-pick-modal.component';
+import { OrderItemOwnerAddModalComponent } from './order-item-owner-add-modal/order-item-owner-add-modal.component';
 
 
 @NgModule({
@@ -35,9 +34,8 @@ import { OrderItemOwnerPickModalComponent } from './order-item-owner-pick-modal/
     OrderTypeSelectComponent,
     OrderCartComponent,
     OrderItemOwnerComponent,
-    OrderItemOwnerAddComponent,
-    OrderItemOwnerPickComponent,
-    OrderItemOwnerPickModalComponent
+    OrderItemOwnerPickModalComponent,
+    OrderItemOwnerAddModalComponent
   ],
   imports: [
     CommonModule,

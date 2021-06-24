@@ -1,5 +1,6 @@
 import { state } from '@angular/animations';
 import { Action, createReducer, on } from '@ngrx/store';
+import { mutableOn } from 'ngrx-etc';
 import { User } from 'src/app/models/User';
 import * as AuthActions from './auth.actions';
 
@@ -39,7 +40,6 @@ export const reducer = createReducer(
   })),
   on(AuthActions.loginFailure, (state, action) => ({
     ...state,
-    user: null,
     error: action.error
   })),
   on(AuthActions.logOut, (state) => ({
@@ -70,20 +70,28 @@ export const reducer = createReducer(
   })),
 
   // --------ADD CONTACT ------------
-  on(AuthActions.addContact, (state: State, action) => {
-    let contactsCopy = state.user.contacts.slice(0)
-    contactsCopy.push({
+  // on(AuthActions.addContact, (state: State, action) => {
+  //   let contactsCopy = state.user.contacts.slice(0)
+  //   contactsCopy.push({
+  //     name: action.name,
+  //     email: action.email,
+  //     img: action.img
+  //   })
+  //   return {
+  //     ...state,
+  //     user: {
+  //       ...state.user,
+  //       contacts: contactsCopy
+  //     }
+  //   }
+  // }),
+  mutableOn(AuthActions.addContact, (state: State, action) => {
+    state.user.contacts.push({
       name: action.name,
       email: action.email,
       img: action.img
     })
-    return {
-      ...state,
-      user: {
-        ...state.user,
-        contacts: contactsCopy
-      }
-    }
-  }),
-);
+  }
+  )
 
+);

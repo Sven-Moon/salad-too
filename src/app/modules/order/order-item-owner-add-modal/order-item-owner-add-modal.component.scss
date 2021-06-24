@@ -5,14 +5,11 @@ $border-wide: 0.5rem;
   display: flex;
   flex-flow: column;
   justify-content: center;
-  width: 100%;
+  width: 60vw;
   max-width: $maxPopupWidth-sm;
   margin-inline: auto;
   height: fit-content;
-  border: $border-wide solid $neutral-light;
-  border-radius: 0.75rem;
-  padding: 3vmin;
-  background-color: $neutral;
+  // padding: 3vmin;
   z-index: 2;
 }
 

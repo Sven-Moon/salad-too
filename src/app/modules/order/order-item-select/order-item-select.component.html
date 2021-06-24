@@ -1,6 +1,6 @@
 
 <div class="select-wrap scroll-y">
-  <app-order-item-owner class="owner" (click)="openOwnerPick()"></app-order-item-owner>
+  <app-order-item-owner class="owner"></app-order-item-owner>
 
 
 
@@ -27,13 +27,5 @@
   <hr>
   <button class="exit" routerLink="../select-item-type" (click)="back()">Try a Different Category</button>
 
-  <!-- Popups -->
-  <div *ngIf="!(hidePickContactFlag$ |async)" class="popup-cover">
-    <app-order-item-owner-pick class="popup-wrap"></app-order-item-owner-pick>
-  </div>
-
-  <div *ngIf="!(hideAddContactFlag$ |async)" class="popup-cover">
-    <app-order-item-owner-add class="popup-wrap"></app-order-item-owner-add>
-  </div>
 
 </div>

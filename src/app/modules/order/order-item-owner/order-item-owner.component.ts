@@ -32,7 +32,7 @@ export class OrderItemOwnerComponent implements OnInit {
   openOwnerPick(): void {
     // this.store.dispatch(itemActions.openOwnerPick())
     this.bsModalRef = this.modalService.show(OrderItemOwnerPickModalComponent,
-      // , {initial state}
+      // {initial state}
     )
     this.bsModalRef.content.closeBtnName = 'Close'
   }

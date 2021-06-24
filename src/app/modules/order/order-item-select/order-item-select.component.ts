@@ -18,46 +18,22 @@ export class OrderItemSelectComponent implements OnInit {
   itemGroup$: Observable<string>
 
 
-  items = [
-    {
-      name: "Good-better Sandwich",
-      id: "lakf;ealj",
-      description: "You better get with me because I'm a deliciousness that will get all the honeys kids screaming, 'GIMME! GIMME! I WANT! I WANT!' in the STREETS. Get your sporks out and dig in, cause if you don't, somebody else will.",
-      img: "./assets/images/desserts_type.png",
-      price: "12.42"
-    },
-    {
-      name: "Lesser Salad",
-      id: "lakf;ealj",
-      description: "I'm a description!",
-      img: "./assets/images/profile_1.png",
-      price: "12.42"
-    },
-    {
-      name: "Sorta-okay Salad",
-      id: "lakf;ealj",
-      description: "I'm a description!",
-      img: "./assets/images/profile_1.png",
-      price: "12.42"
-    },
-  ]
-
   constructor(
     private store: Store,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.hidePickContactFlag$ = this.store.select(selectPickOwnerFlag)
+    // this.hidePickContactFlag$ = this.store.select(selectPickOwnerFlag)
     this.hideAddContactFlag$ = this.store.select(selectAddContactFlag)
     this.items$ = this.store.select(selectItemsWithPrice)
     this.itemGroup$ = this.store.select(selectItemGroupPicked)
   }
 
 
-  public openOwnerPick() {
-    this.store.dispatch(openOwnerPick())
-  }
+  // public openOwnerPick() {
+  //   this.store.dispatch(openOwnerPick())
+  // }
 
   public openAddContact() {
     this.store.dispatch(openAddContact())

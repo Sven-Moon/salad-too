@@ -23,10 +23,13 @@ export class AuthEffects {
     );
   });
 
-  hideModal$ = createEffect(() =>
+  hideLoginModal$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginSuccess),
-      tap(() => this.modalService.hide())
+      tap(() => {
+        console.log('Success triggered... trying to hide: ')
+        this.modalService.hide(100)
+      })
     ),
     { dispatch: false }
   )
