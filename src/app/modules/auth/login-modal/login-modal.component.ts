@@ -55,8 +55,6 @@ export class LoginModalComponent implements OnInit {
 
     this.store.dispatch(registerUser({
       username: f.value.username,
-      password: f.value.password,
-      confirmPassword: f.value.confirmPassword,
       email: f.value.email
     }))
   }

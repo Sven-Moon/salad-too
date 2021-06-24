@@ -45,14 +45,15 @@ export class AuthService {
     )
   }
 
-  public registerUser(email: string, password: string, username: string, confirmPassword: string): Observable<any> {
-    let registration = {
+  public registerUser(email: string, username: string): Observable<any> {
+    let body = {
       email: email,
-      password: password,
+      phoneNumber: '',
       username: username,
-      confirmPassword: confirmPassword
+      contacts: [],
+      img: ''
     }
-    return this.httpClient.post(this.baseUrl, registration).pipe(
+    return this.httpClient.post(this.baseUrl, body).pipe(
       catchError(this.handleRegisterError)
     )
   }

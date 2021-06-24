@@ -29,13 +29,15 @@ export const reducer = createReducer(
   // --------LOG IN / OUT ------------
   on(AuthActions.loginSuccess, (state, action) => ({
     ...state,
-    user: {
-      name: action.user.name,
-      phoneNumber: action.user.phoneNumber,
-      email: action.user.email,
-      contacts: action.user.contacts,
-      img: action.user.img
-    },
+    user: action.user
+    // {
+    //   name: action.user.name,
+    //   phoneNumber: action.user.phoneNumber,
+    //   email: action.user.email,
+    //   contacts: action.user.contacts,
+    //   img: action.user.img
+    // }
+    ,
     error: null
   })),
   on(AuthActions.loginFailure, (state, action) => ({

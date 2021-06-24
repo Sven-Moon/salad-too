@@ -25,8 +25,6 @@ export const registerUser = createAction(
   '[Login Modal] User Registration',
   props<{
     username: string,
-    password: string,
-    confirmPassword: string,
     email: string
   }>()
 );
