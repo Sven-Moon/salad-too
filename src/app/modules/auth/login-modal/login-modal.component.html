@@ -1,9 +1,9 @@
-<!-- <div class="modal"> -->
+<div class="modal-container">
   <div class="modal-header">
     <div class=modal-title>Log In</div>
   </div>
   <div class="modal-body">
-    <div>MikeDanforth@npr.com abc123A!!</div>
+    <div> abc123A!!</div>
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" passwordsMatch>
       <div class="login-form flex-col flex-center">
         <div class="form-group flex-col flex-center">
@@ -81,7 +81,7 @@
             Sign Up
           </button>
           <button type="button" class="btn btn-cancel"
-          (click)="cancel()">
+          (click)="loginModalRef.hide()">
             Cancel
           </button>
         </div> <!--  actions -->
@@ -97,4 +97,4 @@
 
     </form>
   </div>
-<!-- </div> -->
+</div>

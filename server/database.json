@@ -1,0 +1,76 @@
+{
+  "users": [
+    {
+      "name": "Mike Danforth",
+      "phoneNumber": "987-654-3210",
+      "email": "MikeDanforth@npr.com",
+      "contacts": [
+        {
+          "name": "Doug",
+          "email": "DougBerman@npr.com",
+          "img": "./assets/images/profile_1.png"
+        },
+        {
+          "name": "Peter",
+          "email": "PeterSegal@npr.com",
+          "img": "./assets/images/profile_1.png"
+        }
+      ],
+      "img": "./assets/images/profile_1.png"
+    },
+    {
+      "name": "Doug",
+      "phoneNumber": "987-654-3210",
+      "email": "DougBerman@npr.com",
+      "contacts": [
+        {
+          "name": "Mike",
+          "email": "MikeDanforth@npr.com",
+          "img": "./assets/images/profile_1.png"
+        },
+        {
+          "name": "Bill",
+          "email": "BillKurtis@npr.com",
+          "img": "./assets/images/profile_1.png"
+        }
+      ],
+      "img": "./assets/images/profile_1.png"
+    },
+    {
+      "name": "Peter",
+      "phoneNumber": "987-654-1381",
+      "email": "PeterSegal@npr.com",
+      "contacts": [
+        {
+          "name": "Mike",
+          "email": "MikeDanforth@npr.com",
+          "img": "./assets/images/profile_1.png"
+        },
+        {
+          "name": "Bill",
+          "email": "BillKurtis@npr.com",
+          "img": "./assets/images/profile_1.png"
+        },
+        {
+          "name": "Martha",
+          "email": null,
+          "img": "./assets/images/profile_1.png"
+        }
+      ],
+      "img": "./assets/images/profile_1.png"
+    },
+    {
+      "name": "Bill",
+      "phoneNumber": "987-654-1942",
+      "email": "BillKurtis@npr.com",
+      "contacts": [
+        {
+          "name": "Martha",
+          "email": "martha.stewart@homes.co",
+          "img": "./assets/images/profile_1.png"
+        }
+      ],
+      "img": "./assets/images/profile_1.png"
+    }
+  ]
+}

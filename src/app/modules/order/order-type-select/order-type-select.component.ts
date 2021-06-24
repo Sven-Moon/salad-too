@@ -34,9 +34,9 @@ export class OrderTypeSelectComponent implements OnInit {
 
   }
 
-  openOwnerPick() {
-    this.store.dispatch(openOwnerPick())
-  }
+  // openOwnerPick() {
+  //   this.store.dispatch(openOwnerPick())
+  // }
 
   openAddContact() {
     this.store.dispatch(openAddContact())

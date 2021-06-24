@@ -5,32 +5,37 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs/internal/Observable';
 import { Contact, Contacts, User } from 'src/app/models/User';
 import { registerUser } from 'src/app/store/auth/auth.actions';
-import { selectContacts, selectIsSignedIn, selectUser } from 'src/app/store/auth/auth.selectors';
+import { selectContacts, selectIsSignedIn, selectUser, selectUserEmail } from 'src/app/store/auth/auth.selectors';
 import { LoginModalComponent } from '../../auth/login-modal/login-modal.component';
 import { closeOwnerPick, openAddContact, setItemOwner, setUserAsOwner } from '../state/item/item.actions';
 
 @Component({
-  selector: 'app-order-item-owner-pick',
-  templateUrl: './order-item-owner-pick.component.html',
-  styleUrls: ['./order-item-owner-pick.component.scss']
+  selector: 'app-order-item-owner-pick-modal',
+  templateUrl: './order-item-owner-pick-modal.component.html',
+  styleUrls: ['./order-item-owner-pick-modal.component.scss']
 })
-export class OrderItemOwnerPickComponent implements OnInit {
+export class OrderItemOwnerPickModalComponent implements OnInit {
   // --------- MODAL ---------
   bsModalRef: BsModalRef
 
   user$: Observable<User>
   signedIn$: Observable<boolean>
   contacts$: Observable<Contacts>
+  email$: Observable<string>
 
   constructor(
     private store: Store,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    public pickModalRef: BsModalRef
   ) { }
 
   ngOnInit(): void {
     this.user$ = this.store.select(selectUser)
+    this.user$.subscribe(user =>
+      console.log(user))
     this.signedIn$ = this.store.select(selectIsSignedIn)
     this.contacts$ = this.store.select(selectContacts)
+    this.email$ = this.store.select(selectUserEmail)
 
   }
 
@@ -39,7 +44,8 @@ export class OrderItemOwnerPickComponent implements OnInit {
   }
 
   closeOwnerPick() {
-    this.store.dispatch(closeOwnerPick())
+    // this.store.dispatch(closeOwnerPick())
+    this.pickModalRef.hide()
   }
 
   public setUserAsOwner(user: User): void {
@@ -57,16 +63,6 @@ export class OrderItemOwnerPickComponent implements OnInit {
       // , {initial state}
     )
     this.bsModalRef.content.closeBtnName = 'Close'
-  }
-
-  public onPlay() {
-    this.user$.subscribe(user => {
-      console.log(user)
-    })
-    // this.contacts$.subscribe(contacts => {
-    //   contacts.forEach(contact =>
-    //     console.log(contact.name))
-    // })
   }
 
 }

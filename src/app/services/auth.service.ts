@@ -12,13 +12,20 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
-  baseUrl: string = 'https://localhost:3000/users/'
+  baseUrl: string = 'http://localhost:3000/users/'
   body = {}
 
   public login(email: string, password: string): Observable<any> {
-    return this.httpClient.get(this.baseUrl + '?email=' + email).pipe(
-      catchError(this.handleLoginError)
-    )
+    return this.httpClient.get(this.baseUrl + '?email=' + email)
+      .pipe(
+        switchMap((users) => {
+          let user = users[0]
+          if (user) {
+            return of(user)
+          } else return throwError('Unable to log in')
+        })
+        // catchError(this.handleLoginError)
+      )
   }
 
   private handleLoginError(error: HttpErrorResponse) {

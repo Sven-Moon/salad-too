@@ -24,5 +24,14 @@ export const selectIsSignedIn = createSelector(
 
 export const selectContacts = createSelector(
   selectUser,
-  (user): Contacts => user.contacts
+  (user) => {
+    if (user) {
+      return user.contacts
+    } else { return [] }
+  }
+)
+
+export const selectUserEmail = createSelector(
+  selectUser,
+  (user) => user.email
 )

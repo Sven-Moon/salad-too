@@ -28,14 +28,7 @@ $buttonHeight: 4rem;
 $panel-padding-vert: 0.5rem;
 $panel-padding-side: 1rem;
 
-//debug
-.bord-1 {
-  border: 2px solid blue;
-}
-
-// $minBarHeight: 2rem;
-// $maxBarHeight: 6vh;
-// $barHeight: calc(max(#{$minBarHeight}, #{$maxBarHeight}));
+// bar height
 $barHeight: 2rem;
 $padding: 0.5rem;
 $padding-fc-vert: calc(#{$padding / 2});
@@ -183,6 +176,7 @@ button {
   flex-direction: column;
   width: 100%;
   max-width: $maxPopupWidth-sm;
+  padding: 2rem;
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
@@ -219,7 +213,14 @@ button {
   opacity: 0.5;
 }
 .modal-backdrop.fade {
-  opacity: 0;
+  opacity: 0.5;
+}
+.fade {
+  // opacity: 0;
+  // transition: opacity 0.15s linear;
+}
+.fade.show {
+  opacity: 0.5;
 }
 .modal-backdrop {
   position: fixed;

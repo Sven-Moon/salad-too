@@ -25,9 +25,16 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
 
+  // --------LOG IN / OUT ------------
   on(AuthActions.loginSuccess, (state, action) => ({
     ...state,
-    user: action.user,
+    user: {
+      name: action.user.name,
+      phoneNumber: action.user.phoneNumber,
+      email: action.user.email,
+      contacts: action.user.contacts,
+      img: action.user.img
+    },
     error: null
   })),
   on(AuthActions.loginFailure, (state, action) => ({
@@ -35,6 +42,12 @@ export const reducer = createReducer(
     user: null,
     error: action.error
   })),
+  on(AuthActions.logOut, (state) => ({
+    ...state,
+    initialState
+  })),
+
+  // --------REGISTRATION ------------
   on(AuthActions.registerUserSuccess, (state, action) => ({
     ...state,
     user: action.user,
@@ -45,10 +58,8 @@ export const reducer = createReducer(
     user: null,
     error: action.error
   })),
-  on(AuthActions.logOut, (state) => ({
-    ...state,
-    initialState
-  })),
+
+  // --------GUEST ------------
   on(AuthActions.setGuestId, (state, action) => ({
     ...state,
     user: {
@@ -57,6 +68,8 @@ export const reducer = createReducer(
       name: 'Guest ' + action.id
     }
   })),
+
+  // --------ADD CONTACT ------------
   on(AuthActions.addContact, (state: State, action) => {
     let contactsCopy = state.user.contacts.slice(0)
     contactsCopy.push({

@@ -23,6 +23,7 @@ import { OrderItemOwnerPickComponent } from './order-item-owner-pick/order-item-
 import * as fromStaticData from './state/staticData/static-data.reducer';
 import { StaticDataEffects } from './state/staticData/static-data.effects';
 import { FormsModule } from '@angular/forms';
+import { OrderItemOwnerPickModalComponent } from './order-item-owner-pick-modal/order-item-owner-pick-modal.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { FormsModule } from '@angular/forms';
     OrderCartComponent,
     OrderItemOwnerComponent,
     OrderItemOwnerAddComponent,
-    OrderItemOwnerPickComponent
+    OrderItemOwnerPickComponent,
+    OrderItemOwnerPickModalComponent
   ],
   imports: [
     CommonModule,

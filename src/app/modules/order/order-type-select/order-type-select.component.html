@@ -1,5 +1,5 @@
 <div class="select-wrap">
-  <app-order-item-owner class="owner" (click)="openOwnerPick()"></app-order-item-owner>
+  <app-order-item-owner class="owner"></app-order-item-owner>
   <ng-container *ngFor="let type of itemGroups$ |async">
     <div class="item-type" (click)="setItemGroup(type.id)"
     routerLink="../select-item">
@@ -10,9 +10,9 @@
 
 
   <!-- ---------- POPUPS! --------- -->
-  <div *ngIf="!(hidePickContactFlag$ |async)" class="popup-cover">
+  <!-- <div *ngIf="!(hidePickContactFlag$ |async)" class="popup-cover">
     <app-order-item-owner-pick class="popup-wrap"></app-order-item-owner-pick>
-  </div>
+  </div> -->
 
   <div *ngIf="!(hideAddContactFlag$ |async)" class="popup-cover">
     <app-order-item-owner-add class="popup-wrap"></app-order-item-owner-add>

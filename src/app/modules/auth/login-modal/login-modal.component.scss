@@ -1,5 +1,10 @@
 @import "/src/styles.scss";
 
+.modal-container {
+  max-width: 400px;
+  margin-inline: 2rem;
+}
+
 .login-form {
   display: flex;
   justify-content: center;

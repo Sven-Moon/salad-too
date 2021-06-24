@@ -1,6 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { User } from 'src/app/models/User';
 
+
+// ------------ LOG IN / OUT ------------
 export const loginAttempt = createAction(
   '[Login Modal] User Log In',
   props<{ email: string, password: string }>()
@@ -16,6 +18,9 @@ export const loginFailure = createAction(
   props<{ error: any }>()
 );
 
+export const logOut = createAction('[Header] Log out');
+
+// ------------ REGISTRATION ------------
 export const registerUser = createAction(
   '[Login Modal] User Registration',
   props<{
@@ -36,13 +41,13 @@ export const registerUserFailure = createAction(
   props<{ error: any }>()
 );
 
-export const logOut = createAction('[Header] Log out');
-
+// ------------ INITIAL: GUEST ------------
 export const setGuestId = createAction(
   '[App Root] Set Guest ID',
   props<{ id: string }>()
 )
 
+// ------------ CONTACTS ------------
 export const addContact = createAction(
   '[Owner Add] Add Contact',
   props<{

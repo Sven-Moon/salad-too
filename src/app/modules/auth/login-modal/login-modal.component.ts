@@ -22,7 +22,8 @@ export class LoginModalComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
-    private store: Store
+    private store: Store,
+    public loginModalRef: BsModalRef
   ) { }
 
   ngOnInit(): void {
@@ -34,11 +35,6 @@ export class LoginModalComponent implements OnInit {
   }
 
   public onSubmit(f: NgForm): void {
-
-
-    let url = 'https://localhost:3000/users/?email='
-
-
     this.store.dispatch(loginAttempt({
       email: f.value.email,
       password: f.value.password
