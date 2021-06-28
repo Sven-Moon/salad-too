@@ -47,11 +47,12 @@ export class AuthService {
 
   public registerUser(email: string, username: string): Observable<any> {
     let body = {
+      id: email,
       email: email,
       phoneNumber: '',
-      username: username,
+      name: username,
       contacts: [],
-      img: ''
+      img: './assets/images/profile_1.png'
     }
     return this.httpClient.post(this.baseUrl, body).pipe(
       catchError(this.handleRegisterError)

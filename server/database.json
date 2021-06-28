@@ -4,6 +4,7 @@
       "name": "Mike Danforth",
       "phoneNumber": "987-654-3210",
       "email": "MikeDanforth@npr.com",
+      "id": "MikeDanforth@npr.com",
       "contacts": [
         {
           "name": "Doug",
@@ -22,6 +23,7 @@
       "name": "Doug",
       "phoneNumber": "987-654-3210",
       "email": "DougBerman@npr.com",
+      "id": "DougBerman@npr.com",
       "contacts": [
         {
           "name": "Mike",
@@ -40,6 +42,7 @@
       "name": "Peter",
       "phoneNumber": "987-654-1381",
       "email": "PeterSegal@npr.com",
+      "id": "PeterSegal@npr.com",
       "contacts": [
         {
           "name": "Mike",
@@ -63,6 +66,7 @@
       "name": "Bill",
       "phoneNumber": "987-654-1942",
       "email": "BillKurtis@npr.com",
+      "id": "BillKurtis@npr.com",
       "contacts": [
         {
           "name": "Martha",
@@ -70,6 +74,30 @@
           "img": "./assets/images/profile_1.png"
         }
       ],
+      "img": "./assets/images/profile_1.png"
+    },
+    {
+      "id": "svenpire@gmail.com",
+      "email": "svenpire@gmail.com",
+      "phoneNumber": "",
+      "username": "fdsa",
+      "contacts": [],
+      "img": ""
+    },
+    {
+      "id": "svendago@gmail.com",
+      "email": "svendago@gmail.com",
+      "phoneNumber": "",
+      "name": "asdf",
+      "contacts": [],
+      "img": "./assets/images/profile_1.png"
+    },
+    {
+      "id": "tinkle@wam.com",
+      "email": "tinkle@wam.com",
+      "phoneNumber": "",
+      "name": "tinkle",
+      "contacts": [],
       "img": "./assets/images/profile_1.png"
     }
   ]

@@ -9,5 +9,11 @@
   </div>
   <img src="./assets/images/pay_icon.png" class="pay" alt="">
   <img src="./assets/images/status-none_icon.png" class="status" alt="">
-  <img src="./assets/images/profile_icon.png" class="profile" alt="">
+  <ng-container *ngIf="signedIn$">
+    <img src="./assets/images/profile_icon.png" class="profile" alt="">
+  </ng-container>
+  <ng-container *ngIf="!signedIn$">
+    <img src="./assets/images/profile_icon.png" class="profile" alt="" class="pointer"
+    (click)="openLoginModal()">
+  </ng-container>
 </div>

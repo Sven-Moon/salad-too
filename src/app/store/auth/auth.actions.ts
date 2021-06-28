@@ -30,12 +30,12 @@ export const registerUser = createAction(
 );
 
 export const registerUserSuccess = createAction(
-  '[Login Modal] User Registration',
+  '[Login Modal] User Registration Success',
   props<{ user: User }>()
 );
 
 export const registerUserFailure = createAction(
-  '[Login Modal] User Registration',
+  '[Login Modal] User Registration Failure',
   props<{ error: any }>()
 );
 
