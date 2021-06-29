@@ -40,11 +40,6 @@ export const loadItem = createAction(
   props<{ item: Item }>()
 );
 
-
-
-
-
-
 export const loadItems = createAction(
   '[Item] Load Items'
 );
@@ -58,3 +53,14 @@ export const loadItemsFailure = createAction(
   '[Item] Load Items Failure',
   props<{ error: any }>()
 );
+
+// CUSTOMIZE
+export const filterIngredientType = createAction(
+  '[Customize] Update Picked Ingredient Type',
+  props<{ ingredientType: string }>()
+);
+
+export const toggleIngredient = createAction(
+  '[Customize] Toggle Ingredient',
+  props<{ ingredient: string }>()
+)

@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Item, Items } from 'src/app/models/Item';
-import { clearItemGroup, loadItem, openAddContact, openOwnerPick, setItemId } from '../state/item/item.actions';
-import { selectAddContactFlag, selectItemGroupPicked, selectItemsOfGroup, selectItemsWithPrice, selectPickedItemProperties, selectPickOwnerFlag } from '../state/item/item.selectors';
+import { clearItemGroup, loadItem, openAddContact, setItemId } from '../state/item/item.actions';
+import { selectItemGroupPicked, selectItemsOfGroup, selectItemsWithPrice, selectPickedItem } from '../state/item/item.selectors';
 
 @Component({
   selector: 'app-order-item-select',
@@ -25,15 +25,11 @@ export class OrderItemSelectComponent implements OnInit {
 
   ngOnInit(): void {
     // this.hidePickContactFlag$ = this.store.select(selectPickOwnerFlag)
-    this.hideAddContactFlag$ = this.store.select(selectAddContactFlag)
+    // this.hideAddContactFlag$ = this.store.select(selectAddContactFlag)
     this.items$ = this.store.select(selectItemsWithPrice)
     this.itemGroup$ = this.store.select(selectItemGroupPicked)
   }
 
-
-  // public openOwnerPick() {
-  //   this.store.dispatch(openOwnerPick())
-  // }
 
   public openAddContact() {
     this.store.dispatch(openAddContact())
@@ -45,7 +41,7 @@ export class OrderItemSelectComponent implements OnInit {
 
   public setAsItem(id: string) {
     this.store.dispatch(setItemId({ id }))
-    this.store.select(selectPickedItemProperties).subscribe(
+    this.store.select(selectPickedItem).subscribe(
       item => this.store.dispatch(loadItem({ item }))
     )
 

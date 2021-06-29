@@ -33,7 +33,6 @@ export class LoginModalComponent implements OnInit {
   public openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template, { id: 100 })
     this.loginModalRef.id = 100
-    console.log('modal ref id: ' + this.modalRef.id)
   }
 
   public onSubmit(f: NgForm): void {

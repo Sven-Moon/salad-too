@@ -1,13 +1,13 @@
 import { state } from '@angular/animations';
 import { Action, createReducer, on } from '@ngrx/store';
+import { mutableOn } from 'ngrx-etc';
 import { CartItem, Item } from 'src/app/models/Item';
 import * as ItemActions from './item.actions';
 
 export const itemFeatureKey = 'item';
 
 export interface State extends CartItem {
-  hidePickContactFlag: boolean
-  hideAddContactFlag: boolean
+  pickedIngredientTypeId: string
 }
 
 export const initialState: State = {
@@ -20,8 +20,7 @@ export const initialState: State = {
   price: null,
   custom: null,
   owner: null,
-  hidePickContactFlag: true,
-  hideAddContactFlag: true
+  pickedIngredientTypeId: null
 };
 
 
@@ -51,20 +50,11 @@ export const reducer = createReducer(
       name: action.owner.name
     }
   })),
+  on(ItemActions.filterIngredientType, (state, action) => ({
+    ...state, pickedIngredientTypeId: action.ingredientType
+  })),
 
   // Item Owner Select
-  on(ItemActions.openOwnerPick, (state) => ({
-    ...state, hidePickContactFlag: false
-  })),
-  on(ItemActions.openAddContact, (state) => ({
-    ...state, hideAddContactFlag: false
-  })),
-  on(ItemActions.closeOwnerPick, (state) => ({
-    ...state, hidePickContactFlag: true
-  })),
-  on(ItemActions.closeAddContact, (state) => ({
-    ...state, hideAddContactFlag: true
-  })),
   on(ItemActions.setItemGroup, (state, action) => ({
     ...state, itemGroup: action.itemGroup
   })),
@@ -86,7 +76,8 @@ export const reducer = createReducer(
     custom: null,
     owner: null,
   })),
-
-
+  mutableOn(ItemActions.toggleIngredient, (state, action) => {
+    state.ingredients.push(action.ingredient)
+  })
 );
 

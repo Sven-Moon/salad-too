@@ -1,0 +1,74 @@
+@import "/src/styles.scss";
+@import "../order/order.component.scss";
+
+.customize-wrap {
+  display: flex;
+  flex-flow: column nowrap;
+  overflow-y: auto;
+  justify-content: center;
+}
+
+.owner {
+  position: relative;
+  width: 100%;
+  height: $ownerHeight;
+}
+
+.card-header {
+  font-size: 1.75rem;
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+}
+
+.ingredients {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: $bg-soft;
+  padding: 2vw;
+  overflow-y: auto;
+  max-height: 30vh;
+}
+
+.ingredient {
+  display: flex;
+  flex-flow: row nowrap;
+  border-radius: 0.25rem;
+  border: 1px solid black;
+  margin: 0.2rem 0.3rem;
+  font-size: 1.25rem;
+  padding: 0.2rem 0.4rem;
+  background-color: white;
+}
+
+.ingredient img {
+  height: 2rem;
+  object-fit: contain;
+  margin-right: 1rem;
+}
+
+.types-filter {
+  display: flex;
+  flex-flow: row wrap-reverse;
+  padding: 2vw 0.2rem 0.2rem 2vw;
+  width: fit-content;
+  // align-items: flex-end;
+  align-content: flex-start;
+}
+
+.types-filter img {
+  height: 2.5rem;
+  object-fit: contain;
+  border-radius: 0.2rem;
+  border: 1px solid black;
+  margin: 0.2rem 0.3rem;
+}
+
+.actions {
+  margin: 0 1rem;
+  max-height: 15vh;
+}
+
+.small-text {
+  font-size: 0.5rem;
+}

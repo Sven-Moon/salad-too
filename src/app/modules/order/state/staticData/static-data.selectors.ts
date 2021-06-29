@@ -3,6 +3,7 @@ import { Ingredients, IngredientTypes } from 'src/app/models/Ingredient';
 import { Item, Items } from 'src/app/models/Item';
 import { Desserts, Drinks, DrinkTypes, ItemGroups, Sides } from 'src/app/models/ItemGroup';
 import { StaticData } from 'src/app/models/StaticData';
+import { selectItemState } from '../item/item.selectors';
 import * as fromStaticData from './static-data.reducer';
 
 export const selectStaticDataState = createFeatureSelector<fromStaticData.State>(
@@ -14,9 +15,9 @@ export const selectItemGroups = createSelector(
   (state: StaticData): ItemGroups => state.itemGroups
 )
 
-export const selectItems = createSelector(
+export const selectAllItems = createSelector(
   selectStaticDataState,
-  (state: StaticData): ItemGroups => state.items
+  (state: StaticData): Items => state.items
 )
 
 export const selectDrinks = createSelector(
@@ -53,6 +54,7 @@ export const selectDesserts = createSelector(
 )
 
 export const selectIngredients = createSelector(
+  // All Ingredients
   selectStaticDataState,
   (state: StaticData): Ingredients => state.ingredients
 )
@@ -66,4 +68,6 @@ export const selectDrinkTypes = createSelector(
   selectStaticDataState,
   (state: StaticData): DrinkTypes => state.drinkTypes
 )
+
+
 

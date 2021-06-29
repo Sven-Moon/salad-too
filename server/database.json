@@ -75,30 +75,6 @@
         }
       ],
       "img": "./assets/images/profile_1.png"
-    },
-    {
-      "id": "svenpire@gmail.com",
-      "email": "svenpire@gmail.com",
-      "phoneNumber": "",
-      "username": "fdsa",
-      "contacts": [],
-      "img": ""
-    },
-    {
-      "id": "svendago@gmail.com",
-      "email": "svendago@gmail.com",
-      "phoneNumber": "",
-      "name": "asdf",
-      "contacts": [],
-      "img": "./assets/images/profile_1.png"
-    },
-    {
-      "id": "tinkle@wam.com",
-      "email": "tinkle@wam.com",
-      "phoneNumber": "",
-      "name": "tinkle",
-      "contacts": [],
-      "img": "./assets/images/profile_1.png"
     }
   ]
 }

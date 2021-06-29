@@ -5,6 +5,7 @@ $danger-bg: #bf4c4a; // deep chestnut
 $warning: #a7d49b; // Granny smith apple
 $action: #42553a; // rifle green
 $bg-white: #f2f9f1; // mint creme
+$bg-soft: #f4f7f3; // baby powder
 $primary: hsl(106, 51%, 15%); // forest green traditional
 $primary-bg: #3b7b28; // sap green
 $primary-dark: #0f1f0a; // Phthalo Green
@@ -242,4 +243,9 @@ w-100 {
 
 .pointer {
   cursor: pointer;
+}
+
+.spaced {
+  display: flex;
+  justify-content: space-around;
 }

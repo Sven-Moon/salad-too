@@ -1,25 +1,14 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { reduce } from 'rxjs/operators';
-import { Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
+import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
 import { Item, Items } from 'src/app/models/Item';
 import { DrinkTypes, ItemGroup, ItemGroups } from 'src/app/models/ItemGroup';
 import { Contact } from 'src/app/models/User';
-import { selectDrinkTypes, selectIngredients, selectIngredientTypes, selectItems, selectStaticDataState } from '../staticData/static-data.selectors';
+import { selectDrinkTypes, selectIngredients, selectIngredientTypes, selectAllItems, selectStaticDataState } from '../staticData/static-data.selectors';
 import * as fromItem from './item.reducer';
 
 export const selectItemState = createFeatureSelector<fromItem.State>(
   fromItem.itemFeatureKey
 );
-
-export const selectPickOwnerFlag = createSelector(
-  selectItemState,
-  state => (state.hidePickContactFlag)
-)
-
-export const selectAddContactFlag = createSelector(
-  selectItemState,
-  state => (state.hideAddContactFlag)
-)
 
 export const selectItemGroupPicked = createSelector(
   selectItemState,
@@ -27,11 +16,11 @@ export const selectItemGroupPicked = createSelector(
 )
 
 export const selectItemsOfGroup = createSelector(
-  selectItems,
+  selectAllItems,
   selectItemGroupPicked,
-  (items: Items, group: string): Items => {
+  (allItems: Items, group: string): Items => {
     let itemsOfGroup: Items
-    itemsOfGroup = items.filter(item =>
+    itemsOfGroup = allItems.filter(item =>
       item.itemGroup === group
     )
     return itemsOfGroup
@@ -84,18 +73,64 @@ export const selectItemsWithPrice = createSelector(
 )
 
 export const selectItemId = createSelector(
+  // eg: ham_sourdough
   selectItemState,
   (state): string => state.id
 )
 
-export const selectPickedItemProperties = createSelector(
-  selectItems,
+export const selectPickedItem = createSelector(
+  selectAllItems,
   selectItemId,
-  (items: Items, id: string): Item => items.find(item =>
-    item.id === id)
+  (allItems: Items, id: string): Item => {
+    let foundItem: Item
+    foundItem = allItems.find(item => item.id === id)
+    return foundItem
+  }
 )
 
 export const selectItemOwner = createSelector(
   selectItemState,
   (state): Contact => state.owner
+)
+
+export const selectItemIngredients = createSelector(
+  selectPickedItem,
+  selectIngredients,
+  (item: Item, ingredients: Ingredients): Ingredients => {
+    let ingredientList: Ingredients = []
+    item.ingredients.forEach(id =>
+      ingredientList.push(ingredients.find(ingredient =>
+        ingredient.id === id))
+    )
+    return ingredientList
+  }
+)
+
+export const selectPickedIngredientTypeId = createSelector(
+  selectItemState,
+  (state) => state.pickedIngredientTypeId
+)
+
+export const selectPickedIngredientType = createSelector(
+  selectIngredientTypes,
+  selectPickedIngredientTypeId,
+  (ingredientTypes: IngredientTypes, pickedType: string): IngredientType =>
+    ingredientTypes.find(ingredientType =>
+      ingredientType.id === pickedType
+    )
+)
+
+export const selectFilteredIngredientsByType = createSelector(
+  // Ingredients of Selected type
+  selectIngredients,
+  selectPickedIngredientType,
+  (ingredients: Ingredients, selectedType: IngredientType): Ingredients => {
+    if (selectedType) {
+      let ingredientList: Ingredients = []
+      ingredientList = ingredients.filter(ingredient =>
+        ingredient.type === selectedType.id
+      )
+      return ingredientList
+    } else { return ingredients }
+  }
 )

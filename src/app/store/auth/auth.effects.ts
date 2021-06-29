@@ -43,23 +43,6 @@ export class AuthEffects {
     )
   })
 
-
-  // registerUser$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(AuthActions.registerUser),
-  //     concatMap((action) =>
-  //       this.authService.registerUser(action.email, action.username).pipe(
-  //         tap((user) => {
-  //           // AuthActions.registerUserSuccess({ user }),
-  //           console.log(user)
-  //         }),
-  //         // catchError(error => of(AuthActions.registerUserFailure({ error })))
-  //       )
-  //     )
-  //   )
-  // },
-  //   { dispatch: false })
-
   constructor(
     private actions$: Actions,
     private authService: AuthService,

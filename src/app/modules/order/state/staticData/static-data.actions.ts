@@ -14,3 +14,4 @@ export const loadStaticDataFailure = createAction(
   '[StaticData] Load StaticData Failure',
   props<{ error: any }>()
 );
+

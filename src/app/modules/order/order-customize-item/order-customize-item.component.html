@@ -1,1 +1,45 @@
-<p>order-customize-item works!</p>
+<div class="cusomize-wrap">
+  <app-order-item-owner class="owner"></app-order-item-owner>
+
+  <!-- ========== ITEM INGREDIENTS ========== -->
+  <div class="card">
+    <div class="card-header">Current Ingredients</div>
+    <div class="ingredients">
+      <ng-container *ngFor="let ingredient of ingredients$ |async">
+        <div class="ingredient center-text">
+          <img src={{ingredient.img}} alt="">
+          {{ingredient.name}}
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <!-- ========== SELECTOR ========== -->
+  <div class="card">
+    <div class="card-header">Customize It</div>
+    <div class="types-filter">
+      <ng-container *ngFor="let type of ingredientTypes$ |async">
+        <img src={{type.img}} alt="" (click)=updateFilter(type.id)>
+        </ng-container>
+    </div>
+    <ng-container *ngIf="pickedIngredientType$ |async as ingredientType;else emptyHeader" >
+      <div  class="card-header">
+        {{ingredientType.name}} @ ${{ingredientType.price}} each
+      </div>
+    </ng-container>
+    <ng-template #emptyHeader>
+      <div class="card-header">All Ingredients <span style="font-size: medium;">(click to filter)</span></div>
+    </ng-template>
+    <div class="ingredients">
+      <ng-container *ngFor="let ingredient of filteredIngredients$ |async">
+        <div class="ingredient center-text" (click)="toggleIngredient(ingredient.id)">
+          <img src={{ingredient.img}} alt="">
+          {{ingredient.name}}
+        </div>
+      </ng-container>
+    </div>
+  </div> <!-- selector card -->
+  <div class="actions spaced">
+    <button type="button" (click)="cancelItem()">Cancel Item</button>
+    <button type="button" (click)="addItemToCart()">Add Item to Cart</button>
+  </div>
+</div>
