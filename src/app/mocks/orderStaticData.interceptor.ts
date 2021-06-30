@@ -270,7 +270,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
         {
           "id": "pickles",
           "name": "Pickles",
-          "img": "./assets/images/ingredients/Pickles.png",
+          "img": "./assets/images/ingredients/pickles.png",
           "itemGroup": ["sandwich"],
           "type": "veggies"
         },
@@ -349,14 +349,14 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "name": "Almonds",
           "img": "./assets/images/ingredients/almonds.png",
           "itemGroup": ["salad"],
-          "type": "nuts/fruit"
+          "type": "nuts_fruit"
         },
         {
           "id": "cranberries",
           "name": "Cranberries",
           "img": "./assets/images/ingredients/cranberries.png",
           "itemGroup": ["salad"],
-          "type": "nuts/fruit"
+          "type": "nuts_fruit"
         },
         {
           "id": "vinaigrette",
@@ -417,7 +417,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "img": "./assets/images/ingredients/types/dressings.png"
         },
         {
-          "id": "nuts/fruit",
+          "id": "nuts_fruit",
           "name": "Nuts/Fruit",
           "selectType": "multiple",
           "price": "2.20",

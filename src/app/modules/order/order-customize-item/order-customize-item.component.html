@@ -1,12 +1,11 @@
 <div class="cusomize-wrap">
   <app-order-item-owner class="owner"></app-order-item-owner>
-
   <!-- ========== ITEM INGREDIENTS ========== -->
   <div class="card">
     <div class="card-header">Current Ingredients</div>
     <div class="ingredients">
-      <ng-container *ngFor="let ingredient of ingredients$ |async">
-        <div class="ingredient center-text">
+      <ng-container *ngFor="let ingredient of itemIngredients$ |async">
+        <div class="ingredient {{ingredient.type}}-border center-text">
           <img src={{ingredient.img}} alt="">
           {{ingredient.name}}
         </div>
@@ -17,11 +16,12 @@
   <div class="card">
     <div class="card-header">Customize It</div>
     <div class="types-filter">
+    <!-- ---------- FILTER ---------- -->
       <ng-container *ngFor="let type of ingredientTypes$ |async">
-        <img src={{type.img}} alt="" (click)=updateFilter(type.id)>
+        <img src={{type.img}} alt="" (click)=updateFilter(type.id) class="{{type.id}}-border">
         </ng-container>
     </div>
-    <ng-container *ngIf="pickedIngredientType$ |async as ingredientType;else emptyHeader" >
+    <ng-container *ngIf="typeFilter$ |async as ingredientType;else emptyHeader" >
       <div  class="card-header">
         {{ingredientType.name}} @ ${{ingredientType.price}} each
       </div>
@@ -29,9 +29,13 @@
     <ng-template #emptyHeader>
       <div class="card-header">All Ingredients <span style="font-size: medium;">(click to filter)</span></div>
     </ng-template>
+    <!-- ---------- INGREDIENT LIST ---------- -->
     <div class="ingredients">
       <ng-container *ngFor="let ingredient of filteredIngredients$ |async">
-        <div class="ingredient center-text" (click)="toggleIngredient(ingredient.id)">
+        <div
+        (click)="toggleIngredient(ingredient.id)"
+        [ngClass]="calcClasses(ingredient)"
+        >
           <img src={{ingredient.img}} alt="">
           {{ingredient.name}}
         </div>
@@ -39,7 +43,7 @@
     </div>
   </div> <!-- selector card -->
   <div class="actions spaced">
-    <button type="button" (click)="cancelItem()">Cancel Item</button>
+    <button type="button" (click)="cancelItem()" routerLink="../select-item">Cancel Item</button>
     <button type="button" (click)="addItemToCart()">Add Item to Cart</button>
   </div>
 </div>

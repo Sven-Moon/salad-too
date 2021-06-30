@@ -27,6 +27,7 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
 
+  // =============== Item Owner ===============
   on(ItemActions.setItemOwner, (state, action) => ({
     ...state, owner: {
       email: action.contact.email,
@@ -50,17 +51,15 @@ export const reducer = createReducer(
       name: action.owner.name
     }
   })),
-  on(ItemActions.filterIngredientType, (state, action) => ({
-    ...state, pickedIngredientTypeId: action.ingredientType
-  })),
-
-  // Item Owner Select
+  // =============== Item Select ===============
   on(ItemActions.setItemGroup, (state, action) => ({
     ...state, itemGroup: action.itemGroup
   })),
   on(ItemActions.clearItemGroup, (state) => ({
     ...state, itemGroup: null
   })),
+
+  // =============== Item Type Select ===============
   on(ItemActions.setItemId, (state, action) => ({
     ...state, id: action.id
   })),
@@ -76,8 +75,22 @@ export const reducer = createReducer(
     custom: null,
     owner: null,
   })),
+  // =============== CUSTOMIZE ===============
+
+  on(ItemActions.filterIngredientType, (state, action) => ({
+    ...state, pickedIngredientTypeId: action.ingredientType
+  })),
   mutableOn(ItemActions.toggleIngredient, (state, action) => {
-    state.ingredients.push(action.ingredient)
-  })
+    let index: number = state.ingredients.findIndex(ingredient =>
+      ingredient === action.ingredient)
+    if (state.ingredients && index != -1) {
+      state.ingredients.splice(index)
+    } else {
+      state.ingredients.push(action.ingredient)
+    }
+  }),
+  on(ItemActions.clearItem, (state) => (
+    initialState
+  )),
 );
 

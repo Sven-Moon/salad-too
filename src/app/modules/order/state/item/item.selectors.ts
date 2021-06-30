@@ -82,8 +82,12 @@ export const selectPickedItem = createSelector(
   selectAllItems,
   selectItemId,
   (allItems: Items, id: string): Item => {
-    let foundItem: Item
-    foundItem = allItems.find(item => item.id === id)
+    let foundItem: Item = undefined
+    allItems.forEach(item => {
+      if (item.id === id) {
+        foundItem = item
+      }
+    })
     return foundItem
   }
 )
@@ -94,14 +98,16 @@ export const selectItemOwner = createSelector(
 )
 
 export const selectItemIngredients = createSelector(
-  selectPickedItem,
+  selectItemState,
   selectIngredients,
-  (item: Item, ingredients: Ingredients): Ingredients => {
+  (item, ingredients: Ingredients): Ingredients => {
     let ingredientList: Ingredients = []
-    item.ingredients.forEach(id =>
-      ingredientList.push(ingredients.find(ingredient =>
-        ingredient.id === id))
-    )
+    if (item && item.ingredients) {
+      item.ingredients.forEach(id =>
+        ingredientList.push(ingredients.find(ingredient =>
+          ingredient.id === id))
+      )
+    }
     return ingredientList
   }
 )

@@ -1,9 +1,12 @@
+import { R3TargetBinder } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { isEqualCheck } from '@ngrx/store/src/selector';
 import { Observable } from 'rxjs/internal/Observable';
-import { Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
+import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
 import { Item } from 'src/app/models/Item';
-import { filterIngredientType, toggleIngredient } from '../state/item/item.actions';
+import { addItemToCart, filterIngredientType, toggleIngredient } from '../state/item/item.actions';
 import { selectFilteredIngredientsByType, selectItemId, selectItemIngredients, selectPickedIngredientType } from '../state/item/item.selectors';
 import { selectAllItems, selectIngredients, selectIngredientTypes } from '../state/staticData/static-data.selectors';
 
@@ -13,46 +16,72 @@ import { selectAllItems, selectIngredients, selectIngredientTypes } from '../sta
   styleUrls: ['./order-customize-item.component.scss']
 })
 export class OrderCustomizeItemComponent implements OnInit {
-  ingredients$: Observable<Ingredients>
+  itemIngredients$: Observable<Ingredients>
   ingredientTypes$: Observable<IngredientTypes>
-  pickedIngredientType$: Observable<IngredientType>
+  typeFilter$: Observable<IngredientType>
   filteredIngredients$: Observable<Ingredients>
 
+  //debug
+  index = 0
+
   constructor(
-    private store: Store
+    private store: Store,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.ingredients$ = this.store.select(selectItemIngredients)
+    this.itemIngredients$ = this.store.select(selectItemIngredients)
     this.ingredientTypes$ = this.store.select(selectIngredientTypes)
     this.filteredIngredients$ = this.store.select(selectFilteredIngredientsByType)
-    this.pickedIngredientType$ = this.store.select(selectPickedIngredientType)
+    this.typeFilter$ = this.store.select(selectPickedIngredientType)
 
     // // debug
 
   }
 
-  public updateFilter(ingredientType: string) {
+  public updateFilter(ingredientType: string): void {
     this.store.dispatch(filterIngredientType({ ingredientType }))
-    this.store.select(selectPickedIngredientType).subscribe(type =>
-      console.log('Type:' + type.id)
-    )
-    this.store.select(selectFilteredIngredientsByType).subscribe(ingredients =>
-      ingredients.forEach(ingredient =>
-        console.log('Type:' + ingredient.id))
-    )
   }
 
-  public toggleIngredient(ingredient: string) {
+  public toggleIngredient(ingredient: string): void {
     this.store.dispatch(toggleIngredient({ ingredient }))
   }
 
-  public addItemToCart() {
+  public addItemToCart(): void {
+    this.store.dispatch(addItemToCart())
+    this.router.navigate(['/order/cart'])
+  }
+
+  public cancelItem(): void {
 
   }
 
-  public cancelItem() {
+  calcClasses(ingredient: Ingredient): string {
+
+    let type = ingredient.type + "-border"
+    let classes: string = 'ingredient center-text ';
+    classes = classes.concat(type)
+
+    let isSelected: boolean = false
+    let result = this.itemIngredients$.subscribe(
+      itemIngredients => {
+        // itemIngredients.forEach(ingredient => console.log('Ingredient: ' + ingredient.name))
+        itemIngredients.forEach(
+          itemIngredient => {
+            if (itemIngredient.id === ingredient.id) {
+              isSelected = true
+            }
+          }
+        )
+      }
+    )
+    if (isSelected) {
+      classes = classes.concat(" selected")
+    } else {
+      classes = classes.concat(" " + ingredient.type)
+    }
+
+    return classes
 
   }
-
 }

@@ -37,6 +37,7 @@ export class OrderItemSelectComponent implements OnInit {
 
   public back() {
     this.store.dispatch(clearItemGroup())
+    this.router.navigate(['/order/select-item-type'])
   }
 
   public setAsItem(id: string) {

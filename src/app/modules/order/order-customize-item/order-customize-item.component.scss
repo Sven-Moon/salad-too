@@ -34,7 +34,8 @@
   display: flex;
   flex-flow: row nowrap;
   border-radius: 0.25rem;
-  border: 1px solid black;
+  border-style: solid;
+  border-width: 2px;
   margin: 0.2rem 0.3rem;
   font-size: 1.25rem;
   padding: 0.2rem 0.4rem;
@@ -60,7 +61,8 @@
   height: 2.5rem;
   object-fit: contain;
   border-radius: 0.2rem;
-  border: 1px solid black;
+  border-style: solid;
+  border-width: 2px;
   margin: 0.2rem 0.3rem;
 }
 
@@ -71,4 +73,73 @@
 
 .small-text {
   font-size: 0.5rem;
+}
+
+.selected {
+  background-color: $primary-bg;
+  color: white;
+}
+
+.meats {
+  background-color: rgb(233, 233, 237);
+
+  &-border {
+    border-color: rgb(85, 85, 85);
+  }
+}
+
+.breads {
+  background-color: rgb(224, 214, 202);
+
+  &-border {
+    border-color: rgb(187, 112, 31);
+  }
+}
+
+.cheeses {
+  background-color: rgb(223, 221, 201);
+
+  &-border {
+    border-color: rgb(219, 200, 57);
+  }
+}
+
+.greens {
+  background-color: rgb(197, 211, 189);
+
+  &-border {
+    border-color: rgb(96, 212, 28);
+  }
+}
+
+.veggies {
+  background-color: rgb(223, 233, 223);
+
+  &-border {
+    border-color: rgb(18, 209, 31);
+  }
+}
+
+.condiments {
+  background-color: rgb(200, 214, 228);
+
+  &-border {
+    border-color: rgb(32, 129, 219);
+  }
+}
+
+.nuts_fruit {
+  background-color: rgb(214, 198, 230);
+
+  &-border {
+    border-color: rgb(124, 31, 211);
+  }
+}
+
+.dressings {
+  background-color: rgb(198, 216, 220);
+
+  &-border {
+    border-color: rgb(28, 179, 209);
+  }
 }

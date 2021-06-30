@@ -64,3 +64,9 @@ export const toggleIngredient = createAction(
   '[Customize] Toggle Ingredient',
   props<{ ingredient: string }>()
 )
+
+export const clearItem = createAction('[Item Type Select] Clear Item');
+
+export const addItemToCart = createAction(
+  '[Customize] Add Item To Cart'
+)
