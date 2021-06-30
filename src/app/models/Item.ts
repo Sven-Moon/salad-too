@@ -11,14 +11,15 @@ export interface Item {
   description?: string
   price?: string
   type?: string
+  owner?: Contact
 }
 
 export type Items = Item[]
 
 export interface CartItem extends Item {
-  custom: boolean
-  owner: Contact
+  lastOwner?: Contact
   price: string
+  quantity: string
 }
 export type CartItems = CartItem[]
 

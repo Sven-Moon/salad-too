@@ -1,12 +1,12 @@
 import { state } from '@angular/animations';
 import { Action, createReducer, on } from '@ngrx/store';
 import { mutableOn } from 'ngrx-etc';
-import { CartItem, Item } from 'src/app/models/Item';
+import { Item } from 'src/app/models/Item';
 import * as ItemActions from './item.actions';
 
 export const itemFeatureKey = 'item';
 
-export interface State extends CartItem {
+export interface State extends Item {
   pickedIngredientTypeId: string
 }
 
@@ -18,7 +18,6 @@ export const initialState: State = {
   img: null,
   description: null,
   price: null,
-  custom: null,
   owner: null,
   pickedIngredientTypeId: null
 };

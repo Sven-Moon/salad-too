@@ -5,9 +5,10 @@ import { Store } from '@ngrx/store';
 import { isEqualCheck } from '@ngrx/store/src/selector';
 import { Observable } from 'rxjs/internal/Observable';
 import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
-import { Item } from 'src/app/models/Item';
-import { addItemToCart, filterIngredientType, toggleIngredient } from '../state/item/item.actions';
-import { selectFilteredIngredientsByType, selectItemId, selectItemIngredients, selectPickedIngredientType } from '../state/item/item.selectors';
+import { CartItem, Item } from 'src/app/models/Item';
+import { addItemToCart } from '../state/cart/cart.actions';
+import { clearItem, filterIngredientType, toggleIngredient } from '../state/item/item.actions';
+import { selectCurrentItem, selectFilteredIngredientsByType, selectItemId, selectItemIngredients, selectPickedIngredientType } from '../state/item/item.selectors';
 import { selectAllItems, selectIngredients, selectIngredientTypes } from '../state/staticData/static-data.selectors';
 
 @Component({
@@ -48,7 +49,10 @@ export class OrderCustomizeItemComponent implements OnInit {
   }
 
   public addItemToCart(): void {
-    this.store.dispatch(addItemToCart())
+    this.store.select(selectCurrentItem).subscribe((item: CartItem) =>
+      this.store.dispatch(addItemToCart({ item }))
+    )
+    this.store.dispatch(clearItem())
     this.router.navigate(['/order/cart'])
   }
 

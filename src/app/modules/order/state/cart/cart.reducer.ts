@@ -1,15 +1,18 @@
 import { Action, createReducer, on } from '@ngrx/store';
+import { mutableOn } from 'ngrx-etc';
+import { CartItems } from 'src/app/models/Item';
 import { Contact } from 'src/app/models/User';
 import * as CartActions from './cart.actions';
 
 export const cartFeatureKey = 'cart';
 
 export interface State {
+  items: CartItems
   currentOwner: Contact
-
 }
 
 export const initialState: State = {
+  items: [],
   currentOwner: {
     name: null,
     img: null,
@@ -20,14 +23,16 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-
-  on(CartActions.setUserAsCurrent, (state, action) => ({
+  on(CartActions.updateLastOwner, (state, action) => ({
     ...state, currentOwner: {
       name: action.data.name,
       img: action.data.img,
       email: action.data.email
     }
   })),
+  mutableOn(CartActions.addItemToCart, (state, action) => {
+    state.items.push(action.item)
+  }),
   on(CartActions.loadCarts, state => state),
   on(CartActions.loadCartsSuccess, (state, action) => state),
   on(CartActions.loadCartsFailure, (state, action) => state),

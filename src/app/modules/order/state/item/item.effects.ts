@@ -10,21 +10,21 @@ import * as ItemActions from './item.actions';
 @Injectable()
 export class ItemEffects {
 
-  loadItems$ = createEffect(() => {
-    return this.actions$.pipe( 
+  // loadItems$ = createEffect(() => {
+  //   return this.actions$.pipe(
 
-      ofType(ItemActions.loadItems),
-      concatMap(() =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
-        EMPTY.pipe(
-          map(data => ItemActions.loadItemsSuccess({ data })),
-          catchError(error => of(ItemActions.loadItemsFailure({ error }))))
-      )
-    );
-  });
+  //     ofType(ItemActions.loadItems),
+  //     concatMap(() =>
+  //       /** An EMPTY observable only emits completion. Replace with your own observable API request */
+  //       EMPTY.pipe(
+  //         map(data => ItemActions.loadItemsSuccess({ data })),
+  //         catchError(error => of(ItemActions.loadItemsFailure({ error }))))
+  //     )
+  //   );
+  // });
 
 
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions) { }
 
 }

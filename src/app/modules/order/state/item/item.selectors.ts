@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
-import { Item, Items } from 'src/app/models/Item';
+import { CartItem, Item, Items } from 'src/app/models/Item';
 import { DrinkTypes, ItemGroup, ItemGroups } from 'src/app/models/ItemGroup';
 import { Contact } from 'src/app/models/User';
 import { selectDrinkTypes, selectIngredients, selectIngredientTypes, selectAllItems, selectStaticDataState } from '../staticData/static-data.selectors';
@@ -9,6 +9,24 @@ import * as fromItem from './item.reducer';
 export const selectItemState = createFeatureSelector<fromItem.State>(
   fromItem.itemFeatureKey
 );
+
+export const selectCurrentItem = createSelector(
+  selectItemState,
+  (state): CartItem => {
+    let item: CartItem = {
+      id: state.id,
+      name: state.name,
+      itemGroup: state.itemGroup,
+      img: state.img,
+      ingredients: state.ingredients,
+      price: state.price,
+      type: state.type,
+      owner: state.owner,
+      quantity: "1"
+    }
+    return item
+  }
+)
 
 export const selectItemGroupPicked = createSelector(
   selectItemState,

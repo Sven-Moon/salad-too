@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUser } from 'src/app/store/auth/auth.selectors';
-import { setUserAsCurrent } from '../state/cart/cart.actions';
+import { updateLastOwner } from '../state/cart/cart.actions';
 import { loadStaticData } from '../state/staticData/static-data.actions';
 
 @Component({
@@ -22,7 +22,7 @@ export class OrderComponent implements OnInit {
         img: user.img,
         email: user.email
       }
-      this.store.dispatch(setUserAsCurrent({ data: currentUser }))
+      this.store.dispatch(updateLastOwner({ data: currentUser }))
     }
     )
     this.store.dispatch(loadStaticData())

@@ -40,10 +40,6 @@ export const loadItem = createAction(
   props<{ item: Item }>()
 );
 
-export const loadItems = createAction(
-  '[Item] Load Items'
-);
-
 export const loadItemsSuccess = createAction(
   '[Item] Load Items Success',
   props<{ data: any }>()
@@ -67,6 +63,3 @@ export const toggleIngredient = createAction(
 
 export const clearItem = createAction('[Item Type Select] Clear Item');
 
-export const addItemToCart = createAction(
-  '[Customize] Add Item To Cart'
-)
