@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { ItemGroups } from 'src/app/models/ItemGroup';
 import { selectCurrentOwner } from '../state/cart/cart.selectors';
-import { openAddContact, setItemGroup, setCurrentOwnerAsItemOwner, clearItem } from '../state/item/item.actions';
+import { openAddContact, setItemGroup, setCurrentOwnerAsItemOwner, setItemId, clearItem } from '../state/item/item.actions';
 import { selectItemGroups } from '../state/staticData/static-data.selectors';
 
 @Component({
@@ -22,10 +22,11 @@ export class OrderTypeSelectComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemGroups$ = this.store.select(selectItemGroups)
+    // clear item by setting id to null
+    this.store.dispatch(clearItem())
     this.store.select(selectCurrentOwner).subscribe(owner =>
       this.store.dispatch(setCurrentOwnerAsItemOwner({ owner }))
     )
-    this.store.dispatch(clearItem())
 
   }
 

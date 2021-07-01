@@ -41,10 +41,13 @@ export class OrderItemSelectComponent implements OnInit {
   }
 
   public setAsItem(id: string) {
+    let item: Item
     this.store.dispatch(setItemId({ id }))
-    this.store.select(selectPickedItem).subscribe(
-      item => this.store.dispatch(loadItem({ item }))
+    this.store.select(selectPickedItem).subscribe(pickedItem =>
+      item = pickedItem
     )
+    this.store.dispatch(loadItem({ item }))
+
 
     this.itemGroup$.subscribe(group => {
       if (group === 'salad' || group === 'sandwich') {

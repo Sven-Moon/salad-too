@@ -100,7 +100,7 @@ export const selectPickedItem = createSelector(
   selectAllItems,
   selectItemId,
   (allItems: Items, id: string): Item => {
-    let foundItem: Item = undefined
+    let foundItem: Item = fromItem.initialState
     allItems.forEach(item => {
       if (item.id === id) {
         foundItem = item

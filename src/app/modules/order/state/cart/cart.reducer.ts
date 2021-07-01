@@ -1,6 +1,6 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { mutableOn } from 'ngrx-etc';
-import { CartItems } from 'src/app/models/Item';
+import { CartItem, CartItems } from 'src/app/models/Item';
 import { Contact } from 'src/app/models/User';
 import * as CartActions from './cart.actions';
 
@@ -31,7 +31,7 @@ export const reducer = createReducer(
     }
   })),
   mutableOn(CartActions.addItemToCart, (state, action) => {
-    state.items.push(action.item)
+    state.items.push(action.cartItem)
   }),
   on(CartActions.loadCarts, state => state),
   on(CartActions.loadCartsSuccess, (state, action) => state),

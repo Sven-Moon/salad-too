@@ -62,18 +62,22 @@ export const reducer = createReducer(
   on(ItemActions.setItemId, (state, action) => ({
     ...state, id: action.id
   })),
-  on(ItemActions.loadItem, (state, action) => ({
-    ...state,
-    id: action.item.id,
-    name: action.item.name,
-    itemGroup: action.item.itemGroup,
-    ingredients: action.item.ingredients,
-    img: action.item.img,
-    description: action.item.description,
-    price: action.item.price,
-    custom: null,
-    owner: null,
-  })),
+  on(ItemActions.loadItem, (state, action) => {
+    if (action.item.id === null) {
+      return initialState
+    } else return {
+      ...state,
+      id: action.item.id,
+      name: action.item.name,
+      itemGroup: action.item.itemGroup,
+      ingredients: action.item.ingredients,
+      img: action.item.img,
+      description: action.item.description,
+      price: action.item.price,
+      // custom: null,
+      owner: null,
+    }
+  }),
   // =============== CUSTOMIZE ===============
 
   on(ItemActions.filterIngredientType, (state, action) => ({
@@ -88,8 +92,5 @@ export const reducer = createReducer(
       state.ingredients.push(action.ingredient)
     }
   }),
-  on(ItemActions.clearItem, (state) => (
-    initialState
-  )),
 );
 

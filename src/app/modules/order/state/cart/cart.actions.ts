@@ -4,7 +4,7 @@ import { Contact } from 'src/app/models/User';
 
 export const addItemToCart = createAction(
   '[Customize] Add Item To Cart',
-  props<{ item: CartItem }>()
+  props<{ cartItem: CartItem }>()
 )
 
 export const updateLastOwner = createAction(

@@ -7,7 +7,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
 import { CartItem, Item } from 'src/app/models/Item';
 import { addItemToCart } from '../state/cart/cart.actions';
-import { clearItem, filterIngredientType, toggleIngredient } from '../state/item/item.actions';
+import { clearItem, filterIngredientType, setItemId, toggleIngredient } from '../state/item/item.actions';
+import { initialState } from '../state/item/item.reducer';
 import { selectCurrentItem, selectFilteredIngredientsByType, selectItemId, selectItemIngredients, selectPickedIngredientType } from '../state/item/item.selectors';
 import { selectAllItems, selectIngredients, selectIngredientTypes } from '../state/staticData/static-data.selectors';
 
@@ -49,11 +50,19 @@ export class OrderCustomizeItemComponent implements OnInit {
   }
 
   public addItemToCart(): void {
-    this.store.select(selectCurrentItem).subscribe((item: CartItem) =>
-      this.store.dispatch(addItemToCart({ item }))
+    let cartItem: CartItem
+    this.store.select(selectCurrentItem).subscribe((currentItem: CartItem) =>
+      cartItem = {
+        ...currentItem,
+        quantity: "1"
+      }
     )
-    this.store.dispatch(clearItem())
+    this.store.dispatch(addItemToCart({ cartItem }))
+
+    // clear item by setting id to null
+    this.store.dispatch(setItemId({ id: null }))
     this.router.navigate(['/order/cart'])
+    this.store.dispatch(clearItem())
   }
 
   public cancelItem(): void {
