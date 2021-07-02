@@ -33,7 +33,7 @@
     <div class="ingredients">
       <ng-container *ngFor="let ingredient of filteredIngredients$ |async">
         <div
-        (click)="toggleIngredient(ingredient.id)"
+        (click)="toggleIngredient(ingredient)"
         [ngClass]="calcClasses(ingredient)"
         >
           <img src={{ingredient.img}} alt="">

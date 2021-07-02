@@ -92,5 +92,28 @@ export const reducer = createReducer(
       state.ingredients.push(action.ingredient)
     }
   }),
+  mutableOn(ItemActions.deselectAllIngredientsOfType,
+    // runs when an ingredient type typeSelect = Single
+    // clears the list so the one just selected (to be added after)
+    // will be the only ingredient
+    (state, action) => {
+      let newList: string[] = []
+      // for each item ingredient
+      state.ingredients.forEach(itemIngredient => {
+        let remove: boolean = false
+        // compare to each of the items to remove
+        action.ingredientsToRemove.forEach(removeItem => {
+          // if it's on the list
+          if (removeItem == itemIngredient) {
+            // mark for removal
+            remove = true
+          }
+        })
+        // if not marked for removal, add to list
+        if (!remove) { newList.push(itemIngredient) }
+      })
+      state.ingredients = newList
+    }
+  )
 );
 

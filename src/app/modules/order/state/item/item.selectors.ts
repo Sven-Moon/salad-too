@@ -158,3 +158,53 @@ export const selectFilteredIngredientsByType = createSelector(
     } else { return ingredients }
   }
 )
+
+export const selectSingleSelectIngredientTypes = createSelector(
+  selectIngredientTypes,
+  (types): IngredientTypes => {
+    let singles: IngredientTypes = []
+    types.forEach(type => {
+      if (type.selectType === 'single') {
+        singles.push(type)
+      }
+    })
+    return singles
+  }
+)
+
+// export const selectSingleItemIngredients = createSelector(
+//   selectItemIngredients,
+//   selectSingleSelectIngredientTypes,
+//   (ingredients, singleTypes):string[] => {
+//     let ids: string[] = []
+//     ingredients.forEach(ingredient => {
+//       singleTypes.find(type =>
+//         type.id === ingredient.type
+//       )
+//       ids.push(ingredient.id)
+//     })
+//     return ids
+//   }
+// )
+
+// export const selectSingleSelectIngredients = createSelector(
+//   selectIngredients,
+//   selectSingleSelectIngredientTypes,
+//   (ingredients: Ingredients, singleTypes: IngredientTypes): Ingredients =>
+//     ingredients.filter(ingredient =>
+//       singleTypes.find(type =>
+//         type.id === ingredient.type
+//       )
+//     )
+// )
+
+// export const selectSingleSelectIngredientIds = createSelector(
+//   selectSingleSelectIngredients,
+//   (ingredients: Ingredients) => {
+//     let ids: string[]
+//     ingredients.forEach(
+//       ingredient => ids.push(ingredient.id)
+//     )
+//     return ids
+//   }
+// )

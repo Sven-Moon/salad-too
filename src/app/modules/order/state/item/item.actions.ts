@@ -61,5 +61,12 @@ export const toggleIngredient = createAction(
   props<{ ingredient: string }>()
 )
 
-export const clearItem = createAction('[Item Type Select] Clear Item');
+export const clearItem = createAction(
+  '[Item Type Select] Clear Item'
+);
+
+export const deselectAllIngredientsOfType = createAction(
+  '[Customize] Deselect Ingredients of Type',
+  props<{ ingredientsToRemove: string[] }>()
+);
 
