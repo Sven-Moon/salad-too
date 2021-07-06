@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUser } from 'src/app/store/auth/auth.selectors';
 import { updateLastOwner } from '../state/cart/cart.actions';
+import { selectItemGroupTypes } from '../state/item/item.selectors';
 import { loadStaticData } from '../state/staticData/static-data.actions';
 
 @Component({
@@ -26,6 +27,7 @@ export class OrderComponent implements OnInit {
     }
     )
     this.store.dispatch(loadStaticData())
+
   }
 
 }

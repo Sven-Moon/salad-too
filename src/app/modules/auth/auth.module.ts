@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from '../../store/auth/auth.effects';
 import { FormsModule } from '@angular/forms';
 import { passwordsMatchDirective } from './resources/passwordMatch.directive';
+import { AlertModule } from 'ngx-bootstrap/alert'
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { passwordsMatchDirective } from './resources/passwordMatch.directive';
     passwordsMatchDirective
   ],
   imports: [
+    AlertModule.forRoot(),
     AuthRoutingModule,
     CommonModule,
     FormsModule,

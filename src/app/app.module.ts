@@ -20,6 +20,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { FormsModule } from '@angular/forms';
 import * as fromContacts from './store/contacts/contacts.reducer';
 import { ContactsEffects } from './store/contacts/contacts.effects';
+import { SpinnerEffects } from './store/effects/spinner.effects';
+import { AlertEffects } from './store/effects/alert.effects';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import { ContactsEffects } from './store/contacts/contacts.effects';
     SharedModule,
     StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([SpinnerEffects, AlertEffects]),
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],

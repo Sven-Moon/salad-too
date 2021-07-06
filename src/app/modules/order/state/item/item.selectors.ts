@@ -3,7 +3,7 @@ import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/ap
 import { CartItem, Item, Items } from 'src/app/models/Item';
 import { DrinkTypes, ItemGroup, ItemGroups } from 'src/app/models/ItemGroup';
 import { Contact } from 'src/app/models/User';
-import { selectDrinkTypes, selectIngredients, selectIngredientTypes, selectAllItems, selectStaticDataState } from '../staticData/static-data.selectors';
+import { selectDrinkTypes, selectIngredients, selectIngredientTypes, selectAllItems, selectStaticDataState, selectItemGroups } from '../staticData/static-data.selectors';
 import * as fromItem from './item.reducer';
 
 export const selectItemState = createFeatureSelector<fromItem.State>(
@@ -34,6 +34,7 @@ export const selectItemGroupPicked = createSelector(
 )
 
 export const selectItemsOfGroup = createSelector(
+  // scope: selectItemsWithPrice
   selectAllItems,
   selectItemGroupPicked,
   (allItems: Items, group: string): Items => {
@@ -46,6 +47,7 @@ export const selectItemsOfGroup = createSelector(
 )
 
 export const selectItemsWithPrice = createSelector(
+  // scope: Item-select, selectPickedItem
   selectItemGroupPicked,
   selectItemsOfGroup,
   selectIngredients,
@@ -91,6 +93,7 @@ export const selectItemsWithPrice = createSelector(
 )
 
 export const selectItemId = createSelector(
+  // scope: selectPickedItem
   // eg: ham_sourdough
   selectItemState,
   (state): string => state.id
@@ -144,9 +147,50 @@ export const selectPickedIngredientType = createSelector(
     )
 )
 
+export const selectItemGroupIngredients = createSelector(
+  selectCurrentItem,
+  selectIngredients,
+  (item: Item, allIngredients: Ingredients): Ingredients =>
+    allIngredients.filter((ingredient) =>
+      ingredient.itemGroup.find(group =>
+        group === item.itemGroup)
+    )
+
+)
+
+export const selectItemGroupTypeIds = createSelector(
+  // returns the ingredient types IDs associated with the item group
+  // e.g: sandwich / salad
+  // used to filter the ingredient type filter buttons so
+  // condiment doesn't show up on salad, etc. [Customize]
+  selectItemGroupIngredients,
+  (groupIngredients): string[] => {
+    let typeList: string[] = []
+    // look at each ingredient in the itemGroup
+    groupIngredients.forEach(ingredient => {
+      // if the type isn't in the typeList yet, add it
+      if (!typeList.find(type => type === ingredient.type)) {
+        typeList.push(ingredient.type)
+      }
+    })
+    return typeList
+  }
+)
+
+export const selectItemGroupTypes = createSelector(
+  // returns the ingredient types associated with the item group
+  // e.g: sandwich / salad
+  // used to filter the ingredient type filter buttons so
+  // condiment doesn't show up on salad, etc. [Customize]
+  selectItemGroupTypeIds,
+  selectIngredientTypes,
+  (ids, types) => types.filter(type =>
+    ids.find(id => id === type.id))
+)
+
 export const selectFilteredIngredientsByType = createSelector(
   // Ingredients of Selected type
-  selectIngredients,
+  selectItemGroupIngredients,
   selectPickedIngredientType,
   (ingredients: Ingredients, selectedType: IngredientType): Ingredients => {
     if (selectedType) {
@@ -182,40 +226,3 @@ export const selectItemPrice = createSelector(
     ).reduce((acc, value) => acc + value, 0).toFixed(2)
 
 )
-
-// export const selectSingleItemIngredients = createSelector(
-//   selectItemIngredients,
-//   selectSingleSelectIngredientTypes,
-//   (ingredients, singleTypes):string[] => {
-//     let ids: string[] = []
-//     ingredients.forEach(ingredient => {
-//       singleTypes.find(type =>
-//         type.id === ingredient.type
-//       )
-//       ids.push(ingredient.id)
-//     })
-//     return ids
-//   }
-// )
-
-// export const selectSingleSelectIngredients = createSelector(
-//   selectIngredients,
-//   selectSingleSelectIngredientTypes,
-//   (ingredients: Ingredients, singleTypes: IngredientTypes): Ingredients =>
-//     ingredients.filter(ingredient =>
-//       singleTypes.find(type =>
-//         type.id === ingredient.type
-//       )
-//     )
-// )
-
-// export const selectSingleSelectIngredientIds = createSelector(
-//   selectSingleSelectIngredients,
-//   (ingredients: Ingredients) => {
-//     let ids: string[]
-//     ingredients.forEach(
-//       ingredient => ids.push(ingredient.id)
-//     )
-//     return ids
-//   }
-// )

@@ -78,6 +78,7 @@ export const reducer = createReducer(
       owner: null,
     }
   }),
+  on(ItemActions.clearItem, (state, action) => (initialState)),
   // =============== CUSTOMIZE ===============
 
   on(ItemActions.filterIngredientType, (state, action) => ({

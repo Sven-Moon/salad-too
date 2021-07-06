@@ -236,14 +236,14 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "id": "red_lettuce",
           "name": "Red Lettuce",
           "img": "./assets/images/ingredients/red_lettuce.png",
-          "itemGroup": ["salad", "sandwich"],
+          "itemGroup": ["salad"],
           "type": "greens"
         },
         {
           "id": "green_lettuce",
           "name": "Green Lettuce",
           "img": "./assets/images/ingredients/green_lettuce.png",
-          "itemGroup": ["salad", "sandwich"],
+          "itemGroup": ["salad"],
           "type": "greens"
         },
         {

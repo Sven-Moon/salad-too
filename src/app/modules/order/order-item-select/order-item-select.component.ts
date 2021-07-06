@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Item, Items } from 'src/app/models/Item';
 import { clearItemGroup, loadItem, openAddContact, setItemId } from '../state/item/item.actions';
-import { selectItemGroupPicked, selectItemsOfGroup, selectItemsWithPrice, selectPickedItem } from '../state/item/item.selectors';
+import { selectItemGroupPicked, selectItemsWithPrice, selectPickedItem } from '../state/item/item.selectors';
 
 @Component({
   selector: 'app-order-item-select',
