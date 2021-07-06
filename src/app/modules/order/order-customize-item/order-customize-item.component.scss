@@ -1,11 +1,14 @@
 @import "/src/styles.scss";
 @import "../order/order.component.scss";
 
+$actionsHeight: 10vh;
+
 .customize-wrap {
   display: flex;
   flex-flow: column nowrap;
   overflow-y: auto;
-  justify-content: center;
+  justify-content: flex-start;
+  height: calc(100vh - #{$barHeight});
 }
 
 .owner {
@@ -19,7 +22,34 @@
   border-bottom: 1px solid lightgrey;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
+
+  display: flex;
+  justify-content: space-between;
 }
+
+.price {
+  // font-size: ;
+}
+
+// #region size control for main components
+// *********************************
+.ingredient-panel {
+  display: flex;
+  flex-flow: column nowrap;
+  height: min-content;
+  height: calc(100vh - #{$barHeight} - #{$ownerHeight} - #{$actionsHeight});
+}
+
+.item-ingredients {
+  flex-shrink: 10;
+  flex-grow: 1;
+}
+
+.selector {
+  overflow-y: hidden;
+}
+// *********************************
+// #endregion component size control
 
 .ingredients {
   display: flex;
@@ -27,7 +57,11 @@
   background-color: $bg-soft;
   padding: 2vw;
   overflow-y: auto;
-  max-height: 30vh;
+  margin: 0.5rem 0;
+}
+
+.ingredients-all {
+  max-height: calc(100% - 3.25rem - 2.5rem - 3rem);
 }
 
 .ingredient {
@@ -40,6 +74,7 @@
   font-size: 1.25rem;
   padding: 0.2rem 0.4rem;
   background-color: white;
+  // width: fit-content;
 }
 
 .ingredient img {
@@ -51,19 +86,21 @@
 .types-filter {
   display: flex;
   flex-flow: row wrap-reverse;
-  padding: 2vw 0.2rem 0.2rem 2vw;
-  width: fit-content;
+  padding: 0 0.2rem 0 0.2rem;
+  width: calc(100% - 0.4rem);
   // align-items: flex-end;
   align-content: flex-start;
 }
 
 .types-filter img {
-  height: 2.5rem;
+  width: 12.5%;
+  max-width: 2.5rem;
   object-fit: contain;
   border-radius: 0.2rem;
   border-style: solid;
   border-width: 2px;
   margin: 0.2rem 0.3rem;
+  flex-shrink: 1;
 }
 
 .actions {
@@ -79,6 +116,13 @@
   background-color: $primary-bg;
   color: white;
 }
+
+// ========= BUTTONS =========
+.actions button {
+  font-size: 1.5rem;
+}
+
+// ========= INGREDIENT COLORS =========
 
 .meats {
   background-color: rgb(233, 233, 237);

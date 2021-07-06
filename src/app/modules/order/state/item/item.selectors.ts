@@ -51,7 +51,7 @@ export const selectItemsWithPrice = createSelector(
   selectIngredients,
   selectIngredientTypes,
   selectDrinkTypes,
-  (group: string, groupItems: Items, ingredients: Ingredients, ingredientTypes: IngredientTypes, drinkTypes: DrinkTypes) => {
+  (group: string, groupItems: Items, ingredients: Ingredients, ingredientTypes: IngredientTypes, drinkTypes: DrinkTypes): Items => {
     let itemsWithPrice: Items = []
     if (group === 'salad' || group === 'sandwich') {
       // for each item
@@ -97,7 +97,7 @@ export const selectItemId = createSelector(
 )
 
 export const selectPickedItem = createSelector(
-  selectAllItems,
+  selectItemsWithPrice,
   selectItemId,
   (allItems: Items, id: string): Item => {
     let foundItem: Item = fromItem.initialState
@@ -170,6 +170,17 @@ export const selectSingleSelectIngredientTypes = createSelector(
     })
     return singles
   }
+)
+
+export const selectItemPrice = createSelector(
+  selectItemIngredients,
+  selectIngredientTypes,
+  (ingredients: Ingredients, types: IngredientTypes): string =>
+    // let ingredientPrices: number[] =
+    ingredients.map((ingredient) =>
+      +types.find(type => type.id === ingredient.type).price
+    ).reduce((acc, value) => acc + value, 0).toFixed(2)
+
 )
 
 // export const selectSingleItemIngredients = createSelector(

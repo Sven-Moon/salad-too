@@ -6,10 +6,12 @@ import { isEqualCheck } from '@ngrx/store/src/selector';
 import { Observable } from 'rxjs/internal/Observable';
 import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
 import { CartItem, Item } from 'src/app/models/Item';
+import { types } from 'util';
 import { addItemToCart } from '../state/cart/cart.actions';
-import { clearItem, deselectAllIngredientsOfType, filterIngredientType, setItemId, toggleIngredient } from '../state/item/item.actions';
+import { selectCurrentOwner } from '../state/cart/cart.selectors';
+import { clearItem, deselectAllIngredientsOfType, filterIngredientType, setCurrentOwnerAsItemOwner, setItemId, toggleIngredient } from '../state/item/item.actions';
 import { initialState } from '../state/item/item.reducer';
-import { selectCurrentItem, selectFilteredIngredientsByType, selectItemId, selectItemIngredients, selectPickedIngredientType, selectSingleSelectIngredientTypes } from '../state/item/item.selectors';
+import { selectCurrentItem, selectFilteredIngredientsByType, selectItemId, selectItemIngredients, selectItemPrice, selectPickedIngredientType, selectSingleSelectIngredientTypes } from '../state/item/item.selectors';
 import { selectAllItems, selectIngredients, selectIngredientTypes } from '../state/staticData/static-data.selectors';
 
 @Component({
@@ -23,6 +25,7 @@ export class OrderCustomizeItemComponent implements OnInit {
   typeFilter$: Observable<IngredientType>
   filteredIngredients$: Observable<Ingredients>
   singleSelectIngredientTypes: IngredientTypes
+  price: string
 
   //debug
   index = 0
@@ -40,9 +43,12 @@ export class OrderCustomizeItemComponent implements OnInit {
     this.store.select(selectSingleSelectIngredientTypes).subscribe(types =>
       this.singleSelectIngredientTypes = types
     )
-
-    // // debug
-
+    this.store.select(selectCurrentOwner).subscribe(owner =>
+      this.store.dispatch(setCurrentOwnerAsItemOwner({ owner }))
+    )
+    this.store.select(selectItemPrice).subscribe(price =>
+      this.price = price
+    )
   }
 
   public updateFilter(ingredientType: string): void {
@@ -73,6 +79,21 @@ export class OrderCustomizeItemComponent implements OnInit {
       }))
     }
     this.store.dispatch(toggleIngredient({ ingredient: ingredient.id }))
+    // this.store.dispatch(updatePrice())
+
+    // let myIngredients: Ingredients = []
+    // let myTypes: IngredientTypes = []
+    // this.store.select(selectItemIngredients).subscribe(ingredients =>
+    //   myIngredients = ingredients)
+    // let myPrices: string
+    // this.store.select(selectIngredientTypes).subscribe(types => myTypes = types)
+    // myPrices = myIngredients.map(ingredient =>
+    //   +myTypes.find(type => type.id === ingredient.type
+    //   )
+    // ).reduce((acc, value) => acc + value).toFixed(2)
+    // console.log('Reporting price: ')
+    // console.log(myPrices)
+    console.log(this.price)
   }
 
   public addItemToCart(): void {

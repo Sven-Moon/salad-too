@@ -87,7 +87,7 @@ export const reducer = createReducer(
     let index: number = state.ingredients.findIndex(ingredient =>
       ingredient === action.ingredient)
     if (state.ingredients && index != -1) {
-      state.ingredients.splice(index)
+      state.ingredients.splice(index, 1)
     } else {
       state.ingredients.push(action.ingredient)
     }

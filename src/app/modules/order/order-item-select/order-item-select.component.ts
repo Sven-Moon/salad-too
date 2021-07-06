@@ -24,8 +24,6 @@ export class OrderItemSelectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.hidePickContactFlag$ = this.store.select(selectPickOwnerFlag)
-    // this.hideAddContactFlag$ = this.store.select(selectAddContactFlag)
     this.items$ = this.store.select(selectItemsWithPrice)
     this.itemGroup$ = this.store.select(selectItemGroupPicked)
   }

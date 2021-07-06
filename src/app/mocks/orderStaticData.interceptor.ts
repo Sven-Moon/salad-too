@@ -399,7 +399,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "id": "veggies",
           "name": "Veggies",
           "selectType": "multiple",
-          "price": "1.70",
+          "price": "0.75",
           "img": "./assets/images/ingredients/types/veggies.png"
         },
         {

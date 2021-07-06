@@ -70,3 +70,7 @@ export const deselectAllIngredientsOfType = createAction(
   props<{ ingredientsToRemove: string[] }>()
 );
 
+export const updatePrice = createAction(
+  '[Customize] Update Current Item Price'
+);
+
