@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from 'src/app/app-root/app.component'
 import { HeaderComponent } from './modules/shared/header/header.component';
+import { AlertsComponent } from './modules/shared/alerts/alerts.component';
 import { NavComponent } from './modules/shared/nav/nav.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -22,30 +23,47 @@ import * as fromContacts from './store/contacts/contacts.reducer';
 import { ContactsEffects } from './store/contacts/contacts.effects';
 import { SpinnerEffects } from './store/effects/spinner.effects';
 import { AlertEffects } from './store/effects/alert.effects';
+import { AlertModule } from '@full-fledged/alerts';
+import { RouteEffects } from './store/effects/route.effects';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    AlertsComponent,
     NavComponent
   ],
   imports: [
+    //#region Core Function
     AppRoutingModule,
-    AuthModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    //#endregion core function
+    //#region App Modules
+    AuthModule,
     OrderModule,
-    ModalModule.forRoot(),
     SharedModule,
+    //#endregion app modules
+    // #region Third Party
+    AlertModule.forRoot(
+      { maxMessages: 5, timeout: 5000, positionX: 'right', positionY: 'top' }
+    ),
+    NgxSpinnerModule,
+    ModalModule.forRoot(),
+    // #endregion 3rd party
+    //#region Store
     StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([SpinnerEffects, AlertEffects]),
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreModule.forFeature(fromContacts.contactsFeatureKey, fromContacts.reducer),
-    EffectsModule.forFeature([ContactsEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    //#endregion store
+    EffectsModule.forRoot([SpinnerEffects, AlertEffects, RouteEffects]),
   ],
   providers: [
     ...(environment.useMocking ? AppMockInterceptors : [])

@@ -4,10 +4,10 @@ import { Actions, createEffect } from '@ngrx/effects';
 
 
 @Injectable()
-export class AlertEffects {
+export class RouteEffects {
 
 
 
-  constructor(
-    private actions$: Actions) { }
+  constructor(private actions$: Actions) {}
+
 }

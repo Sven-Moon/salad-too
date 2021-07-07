@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DefaultUserService } from '../services/default-user.service';
 import { setGuestId } from '../store/auth/auth.actions';

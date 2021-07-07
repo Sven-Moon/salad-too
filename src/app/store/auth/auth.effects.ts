@@ -4,8 +4,11 @@ import { catchError, map, concatMap, mergeMap, tap, switchMap } from 'rxjs/opera
 import { Observable, EMPTY, of } from 'rxjs';
 
 import * as AuthActions from './auth.actions';
+import * as SharedActions from 'src/app/modules/shared/state/shared.actions';
 import { AuthService } from 'src/app/services/auth.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { AlertService } from '@full-fledged/alerts';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -26,7 +29,27 @@ export class AuthEffects {
   hideLoginModal$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginSuccess, AuthActions.registerUserSuccess),
-      tap(() => this.modalService.hide(100))
+      tap(() => this.modalService.hide(100)),
+    ),
+    { dispatch: false }
+  )
+
+  alertLoginSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginSuccess),
+      tap(() => {
+        this.alertService.success('You have successfully logged in!')
+      })
+    ),
+    { dispatch: false }
+  )
+
+  alertLoginFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginFailure),
+      tap(() => {
+        this.alertService.danger('We couldn\'t log you in. Feel free to try again.')
+      })
     ),
     { dispatch: false }
   )
@@ -46,7 +69,8 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private alertService: AlertService
   ) { }
 
 }

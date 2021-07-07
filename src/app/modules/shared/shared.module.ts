@@ -8,7 +8,8 @@ import { SharedEffects } from './state/shared.effects';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
     StoreModule.forFeature(fromShared.sharedFeatureKey, fromShared.reducer),

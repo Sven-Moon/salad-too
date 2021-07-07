@@ -5,6 +5,11 @@ export const updateNavPointer = createAction(
   props<{ pointer: string }>()
 )
 
+export const displayAlert = createAction(
+  '[anywhere] Display Alert',
+  props<{ alertType: string, msg: string, timeout: number }>()
+)
+
 export const loadShareds = createAction(
   '[Shared] Load Shareds'
 );

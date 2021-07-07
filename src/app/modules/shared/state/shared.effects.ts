@@ -11,7 +11,7 @@ import * as SharedActions from './shared.actions';
 export class SharedEffects {
 
   loadShareds$ = createEffect(() => {
-    return this.actions$.pipe( 
+    return this.actions$.pipe(
 
       ofType(SharedActions.loadShareds),
       concatMap(() =>
@@ -23,8 +23,15 @@ export class SharedEffects {
     );
   });
 
+  // loginSuccessfulAlert$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //       ofType(authactions.log),
+  //       /** An EMPTY observable only emits completion. Replace with your own observable stream */
+  //       tap(() => EMPTY));
+  // });
 
 
-  constructor(private actions$: Actions) {}
+
+  constructor(private actions$: Actions) { }
 
 }

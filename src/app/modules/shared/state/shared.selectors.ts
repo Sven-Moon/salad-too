@@ -9,3 +9,8 @@ export const selectNavPointer = createSelector(
   selectSharedState,
   (state) => state.navPointer
 )
+
+export const selectAlert = createSelector(
+  selectSharedState,
+  (state) => state.alert
+)
