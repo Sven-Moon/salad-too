@@ -13,13 +13,11 @@ export class SpinnerEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loginAttempt),
-        tap(() => this.spinner.show("mySpinner", {
-          type: "line-scale-party",
-          size: "large",
-          bdColor: "rgba(0, 0, 0, 1)",
-          color: "white",
-          template: "<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />"
-        }))
+        tap(() => {
+          console.log('It\'s happening!')
+        }),
+        tap(() => this.spinner.show()
+        )
       ),
     { dispatch: false }
   )

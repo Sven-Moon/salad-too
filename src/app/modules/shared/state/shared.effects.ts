@@ -23,14 +23,6 @@ export class SharedEffects {
     );
   });
 
-  // loginSuccessfulAlert$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //       ofType(authactions.log),
-  //       /** An EMPTY observable only emits completion. Replace with your own observable stream */
-  //       tap(() => EMPTY));
-  // });
-
-
 
   constructor(private actions$: Actions) { }
 

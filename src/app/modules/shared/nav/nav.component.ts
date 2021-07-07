@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable, of } from 'rxjs';
 import { selectIsSignedIn } from 'src/app/store/auth/auth.selectors';
 import { LoginModalComponent } from '../../auth/login-modal/login-modal.component';
@@ -18,7 +19,8 @@ export class NavComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
