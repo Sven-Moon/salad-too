@@ -44,8 +44,7 @@ export const reducer = createReducer(
     ...state,
     error: action.error
   })),
-  on(AuthActions.logOut, (state) => ({
-    ...state,
+  mutableOn(AuthActions.logout, (state) => ({
     initialState
   })),
 

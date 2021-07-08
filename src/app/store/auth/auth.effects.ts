@@ -9,6 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AlertService } from '@full-fledged/alerts';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Store } from '@ngrx/store';
+import { setLastItemOwnerAsItemOwner, setUserAsOwner } from 'src/app/modules/order/state/item/item.actions';
+import { updateLastOwner } from 'src/app/modules/order/state/cart/cart.actions';
 
 
 
@@ -44,6 +47,46 @@ export class AuthEffects {
     { dispatch: false }
   )
 
+
+
+  setUserAsOwner$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.loginSuccess),
+        mergeMap((action) => [
+          this.store.dispatch(setUserAsOwner({
+            user: action.user
+          })),
+          this.store.dispatch(updateLastOwner({
+            data: {
+              email: action.user.email,
+              img: action.user.img,
+              name: action.user.name
+            }
+          }))
+        ]
+
+        )
+      ),
+    { dispatch: false }
+  );
+
+
+
+  welcomeBack$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.loginSuccess),
+        tap((action) =>
+          this.alertService.success(
+            'Welcome Back ' + action.user.name + ' !'
+          )
+        )
+      ),
+    { dispatch: false }
+  );
+
+
   alertLoginFailure$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginFailure),
@@ -70,7 +113,8 @@ export class AuthEffects {
     private actions$: Actions,
     private authService: AuthService,
     private modalService: BsModalService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private store: Store
   ) { }
 
 }

@@ -6,7 +6,7 @@ export const selectCartState = createFeatureSelector<fromCart.State>(
   fromCart.cartFeatureKey
 );
 
-export const selectCurrentOwner = createSelector(
+export const selectLastItemOwner = createSelector(
   selectCartState,
-  (state): Contact => state.currentOwner
+  (state): Contact => state.lastItemOwner
 )

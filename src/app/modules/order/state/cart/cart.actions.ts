@@ -11,6 +11,11 @@ export const updateLastOwner = createAction(
   '[Order (init)] Set User As Item Owner',
   props<{ data: Contact }>()
 );
+
+export const clearCart = createAction(
+  '[Nav / Pay] Clear Cart'
+);
+
 export const loadCarts = createAction(
   '[Cart] Load Carts'
 );

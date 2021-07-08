@@ -8,12 +8,12 @@ export const cartFeatureKey = 'cart';
 
 export interface State {
   items: CartItems
-  currentOwner: Contact
+  lastItemOwner: Contact
 }
 
 export const initialState: State = {
   items: [],
-  currentOwner: {
+  lastItemOwner: {
     name: null,
     img: null,
     email: null
@@ -24,7 +24,7 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
   on(CartActions.updateLastOwner, (state, action) => ({
-    ...state, currentOwner: {
+    ...state, lastItemOwner: {
       name: action.data.name,
       img: action.data.img,
       email: action.data.email
@@ -33,6 +33,9 @@ export const reducer = createReducer(
   mutableOn(CartActions.addItemToCart, (state, action) => {
     state.items.push(action.cartItem)
   }),
+  mutableOn(CartActions.clearCart, (state) => ({
+    initialState
+  })),
   on(CartActions.loadCarts, state => state),
   on(CartActions.loadCartsSuccess, (state, action) => state),
   on(CartActions.loadCartsFailure, (state, action) => state),

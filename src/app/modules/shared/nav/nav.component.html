@@ -9,11 +9,17 @@
   </div>
   <img src="./assets/images/pay_icon.png" class="pay" alt="">
   <img src="./assets/images/status-none_icon.png" class="status" alt="">
+  <!-- ======== AUTH ======== -->
   <ng-container *ngIf="signedIn$">
-    <img src="./assets/images/profile_icon.png" class="profile" alt="">
+    <img src="./assets/images/profile_icon.png" class="profile" alt="" (click)="displayLogOut()">
   </ng-container>
+  <!-- ------ LOGOUT ------ -->
+  <div class="logout" *ngIf="logoutFlag" (click)="logout()">
+    <img src="./assets/images/logout.png" alt="">
+    Log Out
+  </div>  <!-- ------ logout ------ -->
   <ng-container *ngIf="!signedIn$">
     <img src="./assets/images/profile_icon.png" class="profile" alt="" class="pointer"
     (click)="openLoginModal()">
   </ng-container>
-</div>
+</div><!-- ======== auth ======== -->

@@ -8,6 +8,7 @@ import { registerUser } from 'src/app/store/auth/auth.actions';
 import { selectContacts, selectIsSignedIn, selectUser, selectUserEmail } from 'src/app/store/auth/auth.selectors';
 import { LoginModalComponent } from '../../auth/login-modal/login-modal.component';
 import { OrderItemOwnerAddModalComponent } from '../order-item-owner-add-modal/order-item-owner-add-modal.component';
+import { updateLastOwner } from '../state/cart/cart.actions';
 import { closeOwnerPick, openAddContact, setItemOwner, setUserAsOwner } from '../state/item/item.actions';
 
 @Component({
@@ -51,11 +52,20 @@ export class OrderItemOwnerPickModalComponent implements OnInit {
 
   public setUserAsOwner(user: User): void {
     this.store.dispatch(setUserAsOwner({ user }))
+
+    this.store.dispatch(updateLastOwner({
+      data: {
+        name: user.name,
+        img: user.img,
+        email: user.email
+      }
+    }))
     this.closeOwnerPick()
   }
 
   public setItemOwner(contact: Contact): void {
     this.store.dispatch(setItemOwner({ contact }))
+    this.store.dispatch(updateLastOwner({ data: contact }))
     this.closeOwnerPick()
   }
 

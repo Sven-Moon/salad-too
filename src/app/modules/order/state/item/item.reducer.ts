@@ -42,7 +42,7 @@ export const reducer = createReducer(
       name: action.user.name
     }
   })),
-  on(ItemActions.setCurrentOwnerAsItemOwner, (state, action) => ({
+  on(ItemActions.setLastItemOwnerAsItemOwner, (state, action) => ({
     ...state,
     owner: {
       email: action.owner.email,
@@ -74,8 +74,6 @@ export const reducer = createReducer(
       img: action.item.img,
       description: action.item.description,
       price: action.item.price,
-      // custom: null,
-      owner: null,
     }
   }),
   on(ItemActions.clearItem, (state, action) => (initialState)),

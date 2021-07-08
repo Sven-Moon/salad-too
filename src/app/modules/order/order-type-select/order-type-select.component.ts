@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { ItemGroups } from 'src/app/models/ItemGroup';
-import { selectCurrentOwner } from '../state/cart/cart.selectors';
-import { openAddContact, setItemGroup, setCurrentOwnerAsItemOwner, setItemId, clearItem } from '../state/item/item.actions';
+import { Contact } from 'src/app/models/User';
+import { selectLastItemOwner } from '../state/cart/cart.selectors';
+import { openAddContact, setItemGroup, setLastItemOwnerAsItemOwner, setItemId, clearItem } from '../state/item/item.actions';
 import { selectItemGroups } from '../state/staticData/static-data.selectors';
 
 @Component({
@@ -14,6 +15,7 @@ import { selectItemGroups } from '../state/staticData/static-data.selectors';
 })
 export class OrderTypeSelectComponent implements OnInit {
   itemGroups$: Observable<ItemGroups>
+  owner: Contact
 
   constructor(
     private store: Store,
@@ -24,9 +26,12 @@ export class OrderTypeSelectComponent implements OnInit {
     this.itemGroups$ = this.store.select(selectItemGroups)
     // clear item by setting id to null
     this.store.dispatch(clearItem())
-    this.store.select(selectCurrentOwner).subscribe(owner =>
-      this.store.dispatch(setCurrentOwnerAsItemOwner({ owner }))
+
+    // lastItemOwner initially set to user
+    this.store.select(selectLastItemOwner).subscribe(owner =>
+      this.owner = owner
     )
+    this.store.dispatch(setLastItemOwnerAsItemOwner({ owner: this.owner }))
 
   }
 

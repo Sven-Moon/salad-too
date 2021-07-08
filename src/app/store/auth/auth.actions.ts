@@ -18,7 +18,7 @@ export const loginFailure = createAction(
   props<{ error: any }>()
 );
 
-export const logOut = createAction('[Header] Log out');
+export const logout = createAction('[Header] Log out');
 
 // ------------ REGISTRATION ------------
 export const registerUser = createAction(

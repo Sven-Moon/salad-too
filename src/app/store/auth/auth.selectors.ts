@@ -14,11 +14,14 @@ export const selectUser = createSelector(
 export const selectIsSignedIn = createSelector(
   selectUser,
   (user): boolean => {
-    let email = user.email
-    const match = /^guest\d+@saladtoo.com$/i.test(email)
-    return match
-      ? false
-      : true
+    if (!user) { return false }
+    else {
+      let email = user.email
+      const match = /^guest\d+@saladtoo.com$/i.test(email)
+      return match
+        ? false
+        : true
+    }
   }
 )
 

@@ -7,7 +7,7 @@ export const setItemOwner = createAction(
   '[Owner Pick] Set Contact as Item Owner', props<{ contact: Contact }>()
 );
 
-export const setCurrentOwnerAsItemOwner = createAction(
+export const setLastItemOwnerAsItemOwner = createAction(
   '[Type Select] Set Last (current) Owner as Item Owner', props<{ owner: Contact }>()
 );
 

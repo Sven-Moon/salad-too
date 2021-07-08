@@ -4,9 +4,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
 import { CartItem } from 'src/app/models/Item';
+import { Contact } from 'src/app/models/User';
 import { addItemToCart } from '../state/cart/cart.actions';
-import { selectCurrentOwner } from '../state/cart/cart.selectors';
-import { clearItem, deselectAllIngredientsOfType, filterIngredientType, setCurrentOwnerAsItemOwner, setItemId, toggleIngredient } from '../state/item/item.actions';
+import { selectLastItemOwner } from '../state/cart/cart.selectors';
+import { clearItem, deselectAllIngredientsOfType, filterIngredientType, setLastItemOwnerAsItemOwner, setItemId, toggleIngredient } from '../state/item/item.actions';
 import { selectCurrentItem, selectFilteredIngredientsByType, selectItemGroupTypes, selectItemIngredients, selectItemPrice, selectPickedIngredientType, selectSingleSelectIngredientTypes } from '../state/item/item.selectors';
 import { selectIngredients } from '../state/staticData/static-data.selectors';
 
@@ -22,6 +23,7 @@ export class OrderCustomizeItemComponent implements OnInit {
   filteredIngredients$: Observable<Ingredients>
   singleSelectIngredientTypes: IngredientTypes
   price: string
+  owner: Contact
 
   //debug
   index = 0
@@ -39,9 +41,12 @@ export class OrderCustomizeItemComponent implements OnInit {
     this.store.select(selectSingleSelectIngredientTypes).subscribe(types =>
       this.singleSelectIngredientTypes = types
     )
-    this.store.select(selectCurrentOwner).subscribe(owner =>
-      this.store.dispatch(setCurrentOwnerAsItemOwner({ owner }))
-    )
+    // // start the owner as the last item owner
+    // this.store.select(selectLastItemOwner).subscribe(owner =>
+    //   this.owner = owner
+    // )
+    // this.store.dispatch(setLastItemOwnerAsItemOwner({ owner: this.owner }))
+
     this.store.select(selectItemPrice).subscribe(price =>
       this.price = price
     )
