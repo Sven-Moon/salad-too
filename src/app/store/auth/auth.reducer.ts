@@ -15,7 +15,7 @@ export const initialState: State = {
   user: {
     name: 'Guest 123',
     phoneNumber: null,
-    email: "guest123@saladtoo.com",
+    email: null,
     contacts: [],
     img: "./assets/images/profile_1.png",
   },
@@ -30,13 +30,6 @@ export const reducer = createReducer(
   on(AuthActions.loginSuccess, (state, action) => ({
     ...state,
     user: action.user
-    // {
-    //   name: action.user.name,
-    //   phoneNumber: action.user.phoneNumber,
-    //   email: action.user.email,
-    //   contacts: action.user.contacts,
-    //   img: action.user.img
-    // }
     ,
     error: null
   })),

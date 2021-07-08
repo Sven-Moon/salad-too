@@ -13,6 +13,7 @@ img {
   margin: 0.1rem 0.5rem;
   z-index: 1;
   float: left;
+  cursor: pointer;
 }
 
 .cart {
@@ -57,11 +58,14 @@ img {
   top: 2rem;
   right: 0;
   background-color: $bg-white;
+  z-index: 3;
 
   justify-content: space-between;
   align-items: center;
   text-align: center;
   padding: 0.2rem 0.4rem;
+
+  cursor: pointer;
 }
 
 .logout img {

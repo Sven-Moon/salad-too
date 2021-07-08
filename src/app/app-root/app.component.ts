@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DefaultUserService } from '../services/default-user.service';
 import { setGuestId } from '../store/auth/auth.actions';
-import { selectIsSignedIn } from '../store/auth/auth.selectors';
+import { selectIsSignedIn, selectUser } from '../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.select(selectIsSignedIn).subscribe(signedIn => {
-      if (!signedIn) {
+    this.store.select(selectUser).subscribe(user => {
+      if (!user || !user.email) {
         let id = this.guestService.generateId()
         this.store.dispatch(setGuestId({ id }))
       }
