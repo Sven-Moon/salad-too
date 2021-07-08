@@ -4,24 +4,12 @@ import { ItemGroup } from 'src/app/models/ItemGroup';
 import { Contact, User } from 'src/app/models/User';
 
 export const setItemOwner = createAction(
-  '[Owner Pick] Set Contact as Item Owner', props<{ contact: Contact }>()
+  '[Owner Pick] Set Item Owner', props<{ contact: Contact }>()
 );
 
 export const setLastItemOwnerAsItemOwner = createAction(
   '[Type Select] Set Last (current) Owner as Item Owner', props<{ owner: Contact }>()
 );
-
-export const setUserAsOwner = createAction(
-  '[Owner Pick] Set User as Item Owner', props<{ user: User }>()
-);
-
-export const openOwnerPick = createAction('[Owner Pick] Open Owner Pick');
-
-export const openAddContact = createAction('[Owner Add] Open Add Contact');
-
-export const closeOwnerPick = createAction('[Owner Pick] Close Owner Pick');
-
-export const closeAddContact = createAction('[Owner Add] Close Add Contact');
 
 export const setItemGroup = createAction(
   '[Item Type Select] Set Item Type',

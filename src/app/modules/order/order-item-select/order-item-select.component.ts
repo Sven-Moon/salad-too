@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Item, Items } from 'src/app/models/Item';
-import { clearItemGroup, loadItem, openAddContact, setItemId } from '../state/item/item.actions';
+import { clearItemGroup, loadItem, setItemId } from '../state/item/item.actions';
 import { selectItemGroupPicked, selectItemsWithPrice, selectPickedItem } from '../state/item/item.selectors';
 
 @Component({
@@ -29,9 +29,9 @@ export class OrderItemSelectComponent implements OnInit {
   }
 
 
-  public openAddContact() {
-    this.store.dispatch(openAddContact())
-  }
+  // public openAddContact() {
+  //   this.store.dispatch(openAddContact())
+  // }
 
   public back() {
     this.store.dispatch(clearItemGroup())

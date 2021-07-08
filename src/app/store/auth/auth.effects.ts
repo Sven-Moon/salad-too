@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, concatMap, mergeMap, tap, switchMap } from 'rxjs/operators';
-import { Observable, EMPTY, of } from 'rxjs';
+import { of } from 'rxjs';
 
 import * as AuthActions from './auth.actions';
-import * as SharedActions from 'src/app/modules/shared/state/shared.actions';
 import { AuthService } from 'src/app/services/auth.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AlertService } from '@full-fledged/alerts';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Store } from '@ngrx/store';
-import { setLastItemOwnerAsItemOwner, setUserAsOwner } from 'src/app/modules/order/state/item/item.actions';
-import { updateLastOwner } from 'src/app/modules/order/state/cart/cart.actions';
-
+import { setItemOwner } from 'src/app/modules/order/state/item/item.actions';
 
 
 @Injectable()
@@ -54,19 +50,14 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.loginSuccess),
         mergeMap((action) => [
-          this.store.dispatch(setUserAsOwner({
-            user: action.user
-          })),
-          this.store.dispatch(updateLastOwner({
-            data: {
+          this.store.dispatch(setItemOwner({
+            contact: {
               email: action.user.email,
               img: action.user.img,
               name: action.user.name
             }
           }))
-        ]
-
-        )
+        ])
       ),
     { dispatch: false }
   );

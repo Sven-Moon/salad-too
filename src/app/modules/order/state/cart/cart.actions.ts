@@ -8,7 +8,7 @@ export const addItemToCart = createAction(
 )
 
 export const updateLastOwner = createAction(
-  '[Order (init)] Set User As Item Owner',
+  '[Login / Owner Select] Update Last Owner',
   props<{ data: Contact }>()
 );
 

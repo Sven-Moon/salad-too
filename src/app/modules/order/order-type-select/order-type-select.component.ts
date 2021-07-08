@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { ItemGroups } from 'src/app/models/ItemGroup';
 import { Contact } from 'src/app/models/User';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
-import { openAddContact, setItemGroup, setLastItemOwnerAsItemOwner, setItemId, clearItem } from '../state/item/item.actions';
+import { setItemGroup, setLastItemOwnerAsItemOwner, setItemId, clearItem } from '../state/item/item.actions';
 import { selectItemGroups } from '../state/staticData/static-data.selectors';
 
 @Component({
@@ -33,14 +33,6 @@ export class OrderTypeSelectComponent implements OnInit {
     )
     this.store.dispatch(setLastItemOwnerAsItemOwner({ owner: this.owner }))
 
-  }
-
-  // openOwnerPick() {
-  //   this.store.dispatch(openOwnerPick())
-  // }
-
-  openAddContact() {
-    this.store.dispatch(openAddContact())
   }
 
   public setItemGroup(itemGroup: string): void {

@@ -34,14 +34,6 @@ export const reducer = createReducer(
       name: action.contact.name
     }
   })),
-  on(ItemActions.setUserAsOwner, (state, action) => ({
-    ...state,
-    owner: {
-      email: action.user.email,
-      img: action.user.img,
-      name: action.user.name
-    }
-  })),
   on(ItemActions.setLastItemOwnerAsItemOwner, (state, action) => ({
     ...state,
     owner: {
