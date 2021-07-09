@@ -23,7 +23,8 @@ import { AlertEffects } from './store/effects/alert.effects';
 import { AlertModule } from '@full-fledged/alerts';
 import { RouteEffects } from './store/effects/route.effects';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PayModule } from './modules/pay/pay.module'
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     //#endregion store
     EffectsModule.forRoot([SpinnerEffects, AlertEffects, RouteEffects]),
+    PayModule,
   ],
   providers: [
     ...(environment.useMocking ? AppMockInterceptors : [])

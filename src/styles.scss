@@ -2,8 +2,10 @@
 $danger: #8f3432;
 $danger-light: #cf7977; // new york pink
 $danger-bg: #bf4c4a; // deep chestnut
-$warning: hsl(107, 40%, 72%); // Granny smith apple
-$action: #42553a; // rifle green
+$warning: #f6f930; // Maximum yellow
+$warning-bg: #f8fc88; // Canary
+$warning-dark: #f6f930; // Olive
+$action: #737703; // rifle green
 $bg-white: #f2f9f1; // mint creme
 $bg-soft: #f4f7f3; // baby powder
 $primary: hsl(106, 51%, 15%); // forest green traditional
@@ -125,6 +127,19 @@ button {
   font-size: medium;
 }
 
+.btn-sm {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  min-height: 2rem;
+  padding: 0.125rem 0.3rem;
+  border: 1 solid black;
+  border-radius: 0.2rem;
+  color: white;
+  font-size: small;
+}
+
 .btn-cancel {
   background-color: $danger-bg;
   border-color: $danger;
@@ -138,6 +153,11 @@ button {
 .btn-primary {
   background-color: $primary-bg;
   border-color: $primary;
+}
+
+.btn-warning {
+  background-color: $warning;
+  border-color: $warning-dark;
 }
 
 .btn-go:disabled {
@@ -237,7 +257,7 @@ button {
   text-align: center !important;
 }
 
-w-100 {
+.w-100 {
   width: 100%;
 }
 

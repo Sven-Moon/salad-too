@@ -64,6 +64,22 @@ export const selectIngredientTypes = createSelector(
   (state: StaticData): IngredientTypes => state.ingredientTypes
 )
 
+export const selectIngredientWithPrice = createSelector(
+  selectIngredients,
+  selectIngredientTypes,
+  (ingredients: Ingredients, types: IngredientTypes): Ingredients => {
+    let ingredientsWithPrice: Ingredients = []
+    ingredients.forEach(ingredient =>
+      ingredientsWithPrice.push({
+        ...ingredient,
+        price: types.find(type => type.id === ingredient.type).price
+      })
+    )
+    return ingredientsWithPrice
+  }
+)
+
+
 export const selectDrinkTypes = createSelector(
   selectStaticDataState,
   (state: StaticData): DrinkTypes => state.drinkTypes

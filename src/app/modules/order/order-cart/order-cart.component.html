@@ -1,1 +1,41 @@
-<p>order-cart works!</p>
+<div class="cartWrap">
+  <div class="itemsContainer">
+    <!-- ========== ITEM ========== -->
+    <ng-container *ngFor="let item of cartItems">
+      <div class="card">
+        <div class="header">
+          <div class="itemName">{{item.name}}</div>
+          <div class="itemPrice">${{item.price}}</div>
+        </div>
+        <!-- ========== ITEM ACTIONS ========== -->
+        <div class="itemActions">
+          <button type="button" (click)="editItem()" class="btn-sm btn-warning">Edit</button>
+          <button type="button" (click)="showDetails(item.name, item.ingredients)" class="btn-sm btn-primary">View</button>
+          <button type="button" (click)="duplicateItem()" class="btn-sm btn-go">Duplicate</button>
+          <button type="button" (click)="removeItem()" class="btn-sm btn-cancel">Remove</button>
+        </div> <!-- item actions -->
+        <!-- ========== ITEM DETAILS ========== -->
+        <div class="itemDetails" *ngIf="cartIngredients[item.name].length != 0">
+          <ng-container *ngIf="cartIngredients[item.name] as ingredients">
+            <div class="ingredients">
+              <ng-container *ngFor="let ingredient of ingredients">
+                <div class="ingredient {{ingredient.type}}-border center-text">
+                  <img src={{ingredient.img}} alt="">
+                  {{ingredient.name}} - ${{ingredient.price}}
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div> <!-- item details -->
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn btn-go" routerLink="/order/select-pay">Pay</button>
+    <hr>
+    <button type="button" class="btn btn-cancel" (click)="clearItems()">
+      <div>Clear Items</div>
+      <div class="text-sm">(start over)</div></button>
+  </div>
+</div>

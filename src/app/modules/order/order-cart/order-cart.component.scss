@@ -1,0 +1,180 @@
+@import "/src/styles.scss";
+
+.cartWrap {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  overflow-y: auto;
+}
+
+.itemsContainer {
+}
+
+.header {
+  font-size: 1.5rem;
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 0.25rem;
+  padding: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.itemName {
+  align-self: center;
+}
+
+.itemPrice {
+  border: 1px solid $primary-dark;
+  border-radius: 0.2rem;
+  background-color: $bg-soft;
+  padding: 0.2rem 0.4rem;
+}
+
+.itemActions {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.itemActions button {
+  width: fit-content;
+  padding: 0 1rem;
+}
+
+.itemDetails {
+}
+
+.ingredients {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: $bg-soft;
+  padding: 1vw;
+  overflow-y: auto;
+  margin: 0.5rem 0;
+}
+
+.ingredient {
+  display: flex;
+  flex-flow: row nowrap;
+  border-radius: 0.25rem;
+  border-style: solid;
+  border-width: 2px;
+  margin: 0.2rem 0.3rem;
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+  background-color: white;
+}
+
+.ingredient img {
+  height: 1.5rem;
+  object-fit: contain;
+  margin-right: 1rem;
+}
+
+.actions {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.actions button {
+  width: 90%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+hr {
+  width: 75%;
+  box-shadow: 1px 1px 1px 1px $shadow;
+}
+
+.text-sm {
+  font-size: smaller;
+}
+
+//#region ========= INGREDIENT COLORS =========
+
+.meats {
+  background-color: rgb(233, 233, 237);
+
+  &-border {
+    border-color: rgb(85, 85, 85);
+  }
+}
+
+.breads {
+  background-color: rgb(224, 214, 202);
+
+  &-border {
+    border-color: rgb(187, 112, 31);
+  }
+}
+
+.cheeses {
+  background-color: rgb(223, 221, 201);
+
+  &-border {
+    border-color: rgb(219, 200, 57);
+  }
+}
+
+.greens {
+  background-color: rgb(197, 211, 189);
+
+  &-border {
+    border-color: rgb(96, 212, 28);
+  }
+}
+
+.veggies {
+  background-color: rgb(223, 233, 223);
+
+  &-border {
+    border-color: rgb(18, 209, 31);
+  }
+}
+
+.condiments {
+  background-color: rgb(200, 214, 228);
+
+  &-border {
+    border-color: rgb(32, 129, 219);
+  }
+}
+
+.nuts_fruit {
+  background-color: rgb(214, 198, 230);
+
+  &-border {
+    border-color: rgb(124, 31, 211);
+  }
+}
+
+.dressings {
+  background-color: rgb(198, 216, 220);
+
+  &-border {
+    border-color: rgb(28, 179, 209);
+  }
+}
+// #endregion
+
+//#region ========= Media: LARGE =========
+@media only screen and (min-width: 500px) {
+  .actions {
+    flex-flow: row nowrap;
+    justify-content: space-around;
+  }
+  .actions hr {
+    display: none;
+  }
+  .actions button {
+    width: 45%;
+  }
+}
+//#endregion Media: LARGE

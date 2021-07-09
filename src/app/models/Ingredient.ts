@@ -5,6 +5,7 @@ export interface Ingredient {
   type: string
   img: string
   itemGroup: string[]
+  price?: string
 }
 
 export type Ingredients = Ingredient[]
