@@ -105,6 +105,11 @@ export const reducer = createReducer(
       })
       state.ingredients = newList
     }
-  )
+  ),
+
+  // ======== CART ========
+  mutableOn(ItemActions.editCartItem, (state, action) => ({
+    ...action.item
+  })),
 );
 

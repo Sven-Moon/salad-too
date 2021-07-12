@@ -20,9 +20,10 @@ export const initialState: State = {
   }
 };
 
-
 export const reducer = createReducer(
   initialState,
+
+  // ======== CART ========
   on(CartActions.updateLastOwner, (state, action) => ({
     ...state, lastItemOwner: {
       name: action.data.name,
@@ -33,9 +34,19 @@ export const reducer = createReducer(
   mutableOn(CartActions.addItemToCart, (state, action) => {
     state.items.push(action.cartItem)
   }),
+  // ======== CART ========
   mutableOn(CartActions.clearCart, (state) => ({
     initialState
   })),
+  on(CartActions.removeCartItem, (state, action) => {
+    let newCartItems = state.items.filter(item => item.name !== action.name)
+    return {
+      ...state,
+      items: newCartItems
+    }
+  }),
+
+  // boiler plate
   on(CartActions.loadCarts, state => state),
   on(CartActions.loadCartsSuccess, (state, action) => state),
   on(CartActions.loadCartsFailure, (state, action) => state),

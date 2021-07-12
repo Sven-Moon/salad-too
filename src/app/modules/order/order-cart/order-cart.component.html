@@ -9,10 +9,10 @@
         </div>
         <!-- ========== ITEM ACTIONS ========== -->
         <div class="itemActions">
-          <button type="button" (click)="editItem()" class="btn-sm btn-warning">Edit</button>
+          <button type="button" (click)="editCartItem(item.name)" class="btn-sm btn-warning">Edit</button>
           <button type="button" (click)="showDetails(item.name, item.ingredients)" class="btn-sm btn-primary">View</button>
           <button type="button" (click)="duplicateItem()" class="btn-sm btn-go">Duplicate</button>
-          <button type="button" (click)="removeItem()" class="btn-sm btn-cancel">Remove</button>
+          <button type="button" (click)="removeItem(item.name)" class="btn-sm btn-cancel">Remove</button>
         </div> <!-- item actions -->
         <!-- ========== ITEM DETAILS ========== -->
         <div class="itemDetails" *ngIf="cartIngredients[item.name].length != 0">
@@ -32,10 +32,10 @@
   </div>
 
   <div class="actions">
-    <button type="button" class="btn btn-go" routerLink="/order/select-pay">Pay</button>
+    <button type="button" class="btn btn-go" routerLink="/pay">Pay</button>
     <hr>
-    <button type="button" class="btn btn-cancel" (click)="clearItems()">
-      <div>Clear Items</div>
+    <button type="button" class="btn btn-cancel" (click)="clearCartItems()">
+      <div>Empty My Cart</div>
       <div class="text-sm">(start over)</div></button>
   </div>
 </div>

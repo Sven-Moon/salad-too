@@ -13,7 +13,12 @@ export const updateLastOwner = createAction(
 );
 
 export const clearCart = createAction(
-  '[Nav / Pay] Clear Cart'
+  '[Nav / Pay / Cart] Clear Cart'
+);
+
+export const removeCartItem = createAction(
+  '[Cart] Remove Cart Item',
+  props<{ name: string }>()
 );
 
 export const loadCarts = createAction(

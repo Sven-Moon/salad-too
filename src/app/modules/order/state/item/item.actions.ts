@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Item } from 'src/app/models/Item';
+import { CartItem, Item } from 'src/app/models/Item';
 import { ItemGroup } from 'src/app/models/ItemGroup';
 import { Contact, User } from 'src/app/models/User';
 
@@ -38,7 +38,7 @@ export const loadItemsFailure = createAction(
   props<{ error: any }>()
 );
 
-// CUSTOMIZE
+// ======== CUSTOMIZE ========
 export const filterIngredientType = createAction(
   '[Customize] Update Picked Ingredient Type',
   props<{ ingredientType: string }>()
@@ -62,3 +62,8 @@ export const updatePrice = createAction(
   '[Customize] Update Current Item Price'
 );
 
+// ======== CART ========
+export const editCartItem = createAction(
+  '[Cart] Return Cart Item to Customize',
+  props<{ item: CartItem }>()
+)

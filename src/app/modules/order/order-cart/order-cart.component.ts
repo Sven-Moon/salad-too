@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Ingredient, Ingredients } from 'src/app/models/Ingredient';
-import { CartItems } from 'src/app/models/Item';
+import { CartItem, CartItems } from 'src/app/models/Item';
+import { clearCart, removeCartItem } from '../state/cart/cart.actions';
 import { selectCartItems, selectCartState } from '../state/cart/cart.selectors';
+import { editCartItem } from '../state/item/item.actions';
 import { selectIngredientWithPrice } from '../state/staticData/static-data.selectors';
 
 @Component({
@@ -19,7 +22,8 @@ export class OrderCartComponent implements OnInit {
   cartIngredients: { [key: string]: Ingredients } = {}
 
   constructor(
-    private store: Store
+    private store: Store,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -79,7 +83,12 @@ export class OrderCartComponent implements OnInit {
     )
   }
 
-  public editItem() {
+  public editCartItem(name: string) {
+    let item: CartItem
+    item = this.cartItems.find(item => item.name === name)
+    this.store.dispatch(editCartItem({ item }))
+    this.store.dispatch(removeCartItem({ name }))
+    this.router.navigate(['/order/customize'])
 
   }
 
@@ -106,16 +115,13 @@ export class OrderCartComponent implements OnInit {
 
   }
 
-  public removeItem() {
-
+  public removeItem(name: string) {
+    this.store.dispatch(removeCartItem({ name }))
   }
 
-  public pay() {
-
-  }
-
-  public clearItems() {
-
+  public clearCartItems() {
+    this.store.dispatch(clearCart())
+    this.router.navigate(['/order/launch'])
   }
 
 
