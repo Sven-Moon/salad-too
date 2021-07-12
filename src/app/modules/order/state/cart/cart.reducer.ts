@@ -34,6 +34,9 @@ export const reducer = createReducer(
   mutableOn(CartActions.addItemToCart, (state, action) => {
     state.items.push(action.cartItem)
   }),
+  mutableOn(CartActions.duplicateCartItem, (state, action) => {
+    state.items.push(action.item)
+  }),
   mutableOn(CartActions.clearCart, (state) => ({
     initialState
   })),
@@ -43,6 +46,12 @@ export const reducer = createReducer(
       items: state.items.filter(item => item.name !== action.name)
     }
   )),
+  mutableOn(CartActions.changeCartItemQty, (state, action) => {
+    // item has new quantity
+    state.items.find(item =>
+      item.name === action.item.name
+    ).quantity = action.item.quantity
+  }),
 
   // boiler plate
   on(CartActions.loadCarts, state => state),

@@ -82,7 +82,7 @@ export class OrderCustomizeItemComponent implements OnInit {
     this.store.select(selectCurrentItem).subscribe((currentItem: CartItem) =>
       cartItem = {
         ...currentItem,
-        quantity: "1"
+        quantity: 1
       }
     )
     this.store.dispatch(addItemToCart({ cartItem }))

@@ -22,7 +22,7 @@ export const selectCurrentItem = createSelector(
       price: state.price,
       type: state.type,
       owner: state.owner,
-      quantity: "1"
+      quantity: 1
     }
     return item
   }

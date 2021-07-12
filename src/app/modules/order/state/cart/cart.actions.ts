@@ -16,6 +16,11 @@ export const clearCart = createAction(
   '[Nav / Pay / Cart] Clear Cart'
 );
 
+export const duplicateCartItem = createAction(
+  '[Cart] Duplicate Cart Item',
+  props<{ item: CartItem }>()
+);
+
 export const removeCartItem = createAction(
   '[Cart] Remove Cart Item',
   props<{ name: string }>()
@@ -33,4 +38,9 @@ export const loadCartsSuccess = createAction(
 export const loadCartsFailure = createAction(
   '[Cart] Load Carts Failure',
   props<{ error: any }>()
+);
+
+export const changeCartItemQty = createAction(
+  '[Cart] Change Cart Item Quantity',
+  props<{ item: CartItem }>()
 );

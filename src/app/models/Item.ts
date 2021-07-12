@@ -19,7 +19,7 @@ export type Items = Item[]
 export interface CartItem extends Item {
   lastOwner?: Contact
   price: string
-  quantity: string
+  quantity: number
 }
 export type CartItems = CartItem[]
 

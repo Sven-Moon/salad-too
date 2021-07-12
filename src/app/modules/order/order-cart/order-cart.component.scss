@@ -11,6 +11,35 @@
 .itemsContainer {
 }
 
+.removeWarning {
+  position: absolute;
+  top: 2rem;
+  right: 0;
+  padding: 1rem;
+  margin: 1rem;
+  width: 25%;
+  background-color: #8f3432b9;
+  color: white;
+  border: 1px solid black;
+}
+
+.qtyContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.qtyContainer img {
+  width: 1.5rem;
+  object-fit: scale-down;
+}
+
+.itemInfo {
+  width: 100%;
+}
+
 .header {
   font-size: 1.5rem;
   border-bottom: 1px solid lightgrey;
@@ -19,6 +48,7 @@
   display: flex;
   justify-content: space-between;
   align-content: center;
+  align-items: center;
 }
 
 .itemName {
@@ -34,7 +64,7 @@
 
 .itemActions {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: space-around;
   width: 100%;
 }

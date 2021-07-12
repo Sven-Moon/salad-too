@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Ingredient, Ingredients } from 'src/app/models/Ingredient';
 import { CartItem, CartItems } from 'src/app/models/Item';
-import { clearCart, removeCartItem } from '../state/cart/cart.actions';
+import { changeCartItemQty, clearCart, duplicateCartItem, removeCartItem } from '../state/cart/cart.actions';
 import { selectCartItems, selectCartState } from '../state/cart/cart.selectors';
 import { editCartItem } from '../state/item/item.actions';
 import { selectIngredientWithPrice } from '../state/staticData/static-data.selectors';
@@ -20,6 +20,7 @@ export class OrderCartComponent implements OnInit {
   ingredients: Ingredients
   allIngredients: Ingredients
   cartIngredients: { [key: string]: Ingredients } = {}
+  removeWarningFlag: boolean = false
 
   constructor(
     private store: Store,
@@ -37,49 +38,6 @@ export class OrderCartComponent implements OnInit {
       this.allIngredients = allIngredients
     )
 
-
-    // this.cartItems = [
-    //   {
-    //     id: 'ham_sourdough',
-    //     name: 'Ham on Sourdough',
-    //     itemGroup: 'sandwich',
-    //     img: './assets/images/recipes/ham_sourdough.png',
-    //     ingredients: [
-    //       'ham',
-    //       'sourdough',
-    //       'cheddar'
-    //     ],
-    //     price: '8.20',
-    //     owner: {
-    //       email: 'guest31974538@saladtoo.com',
-    //       img: './assets/images/profile_1.png',
-    //       name: 'Guest 31974538'
-    //     },
-    //     quantity: '1'
-    //   },
-    //   {
-    //     id: 'cobb',
-    //     name: 'Cobb Salad',
-    //     itemGroup: 'salad',
-    //     img: './assets/images/recipes/cobb.png',
-    //     ingredients: [
-    //       'ham',
-    //       'turkey',
-    //       'mixed_greens',
-    //       'tomatoes',
-    //       'cheddar',
-    //       'cucumbers',
-    //       'ranch'
-    //     ],
-    //     price: '14.20',
-    //     owner: {
-    //       email: 'guest31974538@saladtoo.com',
-    //       img: './assets/images/profile_1.png',
-    //       name: 'Guest 31974538'
-    //     },
-    //     quantity: '1'
-    //   }
-    // ]
     this.cartItems.forEach(item =>
       this.cartIngredients[item.name] = []
     )
@@ -115,8 +73,8 @@ export class OrderCartComponent implements OnInit {
 
   }
 
-  public duplicateItem() {
-
+  public duplicateItem(item: CartItem) {
+    this.store.dispatch(duplicateCartItem({ item }))
   }
 
   public removeItem(name: string) {
@@ -128,6 +86,23 @@ export class OrderCartComponent implements OnInit {
     setTimeout(() => {
       this.router.navigate(['/order/launch'])
     }, 750);
+  }
+
+  public increaseCartItemQty(oldItem: CartItem) {
+    let item = { ...oldItem, quantity: oldItem.quantity + 1 }
+    this.store.dispatch(changeCartItemQty({ item }))
+  }
+
+  public decreaseCartItemQty(oldItem: CartItem) {
+    let item = { ...oldItem, quantity: oldItem.quantity - 1 }
+    if (item.quantity == 0) {
+      this.removeWarningFlag = true
+      setTimeout(() => {
+        this.removeWarningFlag = false
+      }, 3000);
+    } else {
+      this.store.dispatch(changeCartItemQty({ item }))
+    }
   }
 
 
