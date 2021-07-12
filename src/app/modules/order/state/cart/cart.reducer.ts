@@ -34,17 +34,15 @@ export const reducer = createReducer(
   mutableOn(CartActions.addItemToCart, (state, action) => {
     state.items.push(action.cartItem)
   }),
-  // ======== CART ========
   mutableOn(CartActions.clearCart, (state) => ({
     initialState
   })),
-  on(CartActions.removeCartItem, (state, action) => {
-    let newCartItems = state.items.filter(item => item.name !== action.name)
-    return {
+  on(CartActions.removeCartItem, (state, action) => (
+    {
       ...state,
-      items: newCartItems
+      items: state.items.filter(item => item.name !== action.name)
     }
-  }),
+  )),
 
   // boiler plate
   on(CartActions.loadCarts, state => state),

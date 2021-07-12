@@ -1,6 +1,6 @@
 <div class="cartWrap">
+  <!-- ========== ITEM ========== -->
   <div class="itemsContainer">
-    <!-- ========== ITEM ========== -->
     <ng-container *ngFor="let item of cartItems">
       <div class="card">
         <div class="header">
@@ -29,6 +29,14 @@
         </div> <!-- item details -->
       </div>
     </ng-container>
+    <button class="addItems btn-sm btn-primary pointer" routerLink="/order/select-item-type">
+      <img src="./assets/images/green_plus.png" alt="">
+      Add Something Else
+    </button>
+  </div>
+  <!-- ========== EMPTY CART ========== -->
+  <div *ngIf="cartItems.length==0" class="emptyCart text-center">
+    Your cart is empty!
   </div>
 
   <div class="actions">

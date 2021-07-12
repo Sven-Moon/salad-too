@@ -97,6 +97,28 @@ hr {
   font-size: smaller;
 }
 
+.emptyCart {
+  width: 100%;
+  font-weight: bold;
+  font-size: 2rem;
+  height: 10%;
+}
+
+.addItems {
+  font-size: 1rem;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  align-self: center;
+  background-color: $success-bg;
+  margin-left: 15%;
+}
+
+.addItems img {
+  width: 2rem;
+  object-fit: scale-down;
+  margin-right: 0.5rem;
+}
+
 //#region ========= INGREDIENT COLORS =========
 
 .meats {

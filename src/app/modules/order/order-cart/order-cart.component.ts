@@ -15,7 +15,7 @@ import { selectIngredientWithPrice } from '../state/staticData/static-data.selec
   styleUrls: ['./order-cart.component.scss']
 })
 export class OrderCartComponent implements OnInit {
-  cartItems$: Observable<CartItems>
+  // cartItems$: Observable<CartItems>
   cartItems: CartItems
   ingredients: Ingredients
   allIngredients: Ingredients
@@ -27,7 +27,9 @@ export class OrderCartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cartItems$ = this.store.select(selectCartItems)
+    this.store.select(selectCartItems).subscribe(items =>
+      this.cartItems = items
+    )
     this.store.select(selectCartState).subscribe(state =>
       this.cartItems = state.items
     )
@@ -36,51 +38,53 @@ export class OrderCartComponent implements OnInit {
     )
 
 
-    this.cartItems = [
-      {
-        id: 'ham_sourdough',
-        name: 'Ham on Sourdough',
-        itemGroup: 'sandwich',
-        img: './assets/images/recipes/ham_sourdough.png',
-        ingredients: [
-          'ham',
-          'sourdough',
-          'cheddar'
-        ],
-        price: '8.20',
-        owner: {
-          email: 'guest31974538@saladtoo.com',
-          img: './assets/images/profile_1.png',
-          name: 'Guest 31974538'
-        },
-        quantity: '1'
-      },
-      {
-        id: 'cobb',
-        name: 'Cobb Salad',
-        itemGroup: 'salad',
-        img: './assets/images/recipes/cobb.png',
-        ingredients: [
-          'ham',
-          'turkey',
-          'mixed_greens',
-          'tomatoes',
-          'cheddar',
-          'cucumbers',
-          'ranch'
-        ],
-        price: '14.20',
-        owner: {
-          email: 'guest31974538@saladtoo.com',
-          img: './assets/images/profile_1.png',
-          name: 'Guest 31974538'
-        },
-        quantity: '1'
-      }
-    ]
+    // this.cartItems = [
+    //   {
+    //     id: 'ham_sourdough',
+    //     name: 'Ham on Sourdough',
+    //     itemGroup: 'sandwich',
+    //     img: './assets/images/recipes/ham_sourdough.png',
+    //     ingredients: [
+    //       'ham',
+    //       'sourdough',
+    //       'cheddar'
+    //     ],
+    //     price: '8.20',
+    //     owner: {
+    //       email: 'guest31974538@saladtoo.com',
+    //       img: './assets/images/profile_1.png',
+    //       name: 'Guest 31974538'
+    //     },
+    //     quantity: '1'
+    //   },
+    //   {
+    //     id: 'cobb',
+    //     name: 'Cobb Salad',
+    //     itemGroup: 'salad',
+    //     img: './assets/images/recipes/cobb.png',
+    //     ingredients: [
+    //       'ham',
+    //       'turkey',
+    //       'mixed_greens',
+    //       'tomatoes',
+    //       'cheddar',
+    //       'cucumbers',
+    //       'ranch'
+    //     ],
+    //     price: '14.20',
+    //     owner: {
+    //       email: 'guest31974538@saladtoo.com',
+    //       img: './assets/images/profile_1.png',
+    //       name: 'Guest 31974538'
+    //     },
+    //     quantity: '1'
+    //   }
+    // ]
     this.cartItems.forEach(item =>
       this.cartIngredients[item.name] = []
     )
+    console.log(this.cartItems)
+    console.log(this.cartItems.length == 0)
   }
 
   public editCartItem(name: string) {
@@ -121,7 +125,9 @@ export class OrderCartComponent implements OnInit {
 
   public clearCartItems() {
     this.store.dispatch(clearCart())
-    this.router.navigate(['/order/launch'])
+    setTimeout(() => {
+      this.router.navigate(['/order/launch'])
+    }, 750);
   }
 
 
