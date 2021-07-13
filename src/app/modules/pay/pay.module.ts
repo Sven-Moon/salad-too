@@ -6,10 +6,13 @@ import { StoreModule } from '@ngrx/store';
 import * as fromPay from './state/pay.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { PayEffects } from './state/pay.effects';
+import { PayComponent } from './pay/pay.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PayComponent
+  ],
   imports: [
     CommonModule,
     PayRoutingModule,

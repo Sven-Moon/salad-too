@@ -17,6 +17,7 @@ export interface Item {
 
 export type Items = Item[]
 
+
 export interface CartItem extends Item {
   lastOwner?: Contact
   price: string
@@ -24,3 +25,13 @@ export interface CartItem extends Item {
 }
 export type CartItems = CartItem[]
 
+
+export interface ItemsByOwner {
+  [key: string]: {
+    owner: Contact
+    items: CartItems,
+    total: number,
+    isSelected: boolean,
+    isPaid: boolean
+  }
+}

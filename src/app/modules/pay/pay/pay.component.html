@@ -1,19 +1,35 @@
 <div class="payWrap">
   <div class="pay-panel">
     <div class="unpaid">
-      <ng-container *ngFor="">
-        <div class="row">
+      <ng-container *ngFor="let owner of itemOwners">
+        <div class="row owner" *ngIf="itemsByOwner[owner.name] as thisOwner">
           <div class="owner">
+            <div class="ownerHeader">
+              <img src={{thisOwner.owner.img}} alt="">
+              {{itemsByOwner[owner.name].owner.name}}
+              <div class="total">{{thisOwner.total}}</div>
+            </div>
+            <div class="itemList" *ngIf="visibleItems[owner.name]">
+              <ng-container *ngFor="let item of thisOwner.items">
+                <div class="item">
+                  <div class="itemName">item.name</div>
+                  <div class="itemQty">item.quantity</div>
+                  <div class="itemPrice">item.price</div>
+                </div>
+              </ng-container>
+            </div>
           </div>
           <button class="toggleItemView"></button>
         </div>
       </ng-container>
     </div>
+    <hr>
     <div class="paid">
 
     </div>
   </div>
   <div class="actions">
-
+    <button type="button">Pay ${{selectedAmount}}</button>
+    <button type="button"></button>
   </div>
 </div>
