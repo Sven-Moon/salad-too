@@ -43,11 +43,11 @@ export class OrderCartComponent implements OnInit {
     )
   }
 
-  public editCartItem(name: string) {
+  public editCartItem(id: string) {
     let item: CartItem
-    item = this.cartItems.find(item => item.name === name)
+    item = this.cartItems.find(item => item.id === id)
     this.store.dispatch(editCartItem({ item }))
-    this.store.dispatch(removeCartItem({ name }))
+    this.store.dispatch(removeCartItem({ id }))
     this.router.navigate(['/order/customize'])
   }
 
@@ -73,14 +73,13 @@ export class OrderCartComponent implements OnInit {
   public duplicateItem(itemToDuplicate: CartItem) {
     let item = {
       ...itemToDuplicate,
-      name: itemToDuplicate.name.concat('*'),
       id: itemToDuplicate.id.concat('*')
     }
     this.store.dispatch(duplicateCartItem({ item }))
   }
 
-  public removeItem(name: string) {
-    this.store.dispatch(removeCartItem({ name }))
+  public removeItem(id: string) {
+    this.store.dispatch(removeCartItem({ id }))
   }
 
   public clearCartItems() {

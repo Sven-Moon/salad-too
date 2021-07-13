@@ -13,6 +13,7 @@ import * as fromCart from '../modules/order/state/cart/cart.reducer';
 import * as fromStaticData from '../modules/order/state/staticData/static-data.reducer';
 import * as fromAuth from './auth/auth.reducer';
 import * as fromContacts from './contacts/contacts.reducer';
+import * as fromPay from '../modules/pay/state/pay.reducer';
 
 
 export interface State {
@@ -23,6 +24,7 @@ export interface State {
   [fromStaticData.staticDataFeatureKey]: fromStaticData.State;
   [fromAuth.authFeatureKey]: fromAuth.State;
   [fromContacts.contactsFeatureKey]: fromContacts.State;
+  [fromPay.payFeatureKey]: fromPay.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -33,6 +35,7 @@ export const reducers: ActionReducerMap<State> = {
   [fromStaticData.staticDataFeatureKey]: fromStaticData.reducer,
   [fromAuth.authFeatureKey]: fromAuth.reducer,
   [fromContacts.contactsFeatureKey]: fromContacts.reducer,
+  [fromPay.payFeatureKey]: fromPay.reducer,
 };
 
 

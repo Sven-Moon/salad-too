@@ -16,3 +16,14 @@ export const selectCartItems = createSelector(
   selectCartState,
   (state): CartItems => state.items
 )
+
+export const selectCartCount = createSelector(
+  selectCartState,
+  (state): number => {
+    let count: number = 0
+    state.items.forEach(item =>
+      count += item.quantity
+    )
+    return count
+  }
+)

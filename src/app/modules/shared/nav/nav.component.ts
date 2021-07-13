@@ -10,6 +10,7 @@ import { logout, setGuestId } from 'src/app/store/auth/auth.actions';
 import { selectIsSignedIn } from 'src/app/store/auth/auth.selectors';
 import { LoginModalComponent } from '../../auth/login-modal/login-modal.component';
 import { clearCart } from '../../order/state/cart/cart.actions';
+import { selectCartCount } from '../../order/state/cart/cart.selectors';
 import { clearItem } from '../../order/state/item/item.actions';
 import { selectNavPointer } from '../state/shared.selectors';
 
@@ -23,6 +24,7 @@ export class NavComponent implements OnInit {
   signedIn$: boolean
   bsModalRef: BsModalRef
   logoutFlag: boolean = false
+  cartCount: number
 
   constructor(
     private store: Store,
@@ -36,6 +38,9 @@ export class NavComponent implements OnInit {
     this.navPointer$ = this.store.select(selectNavPointer)
     this.store.select(selectIsSignedIn).subscribe(signedIn =>
       this.signedIn$ = signedIn
+    )
+    this.store.select(selectCartCount).subscribe(count =>
+      this.cartCount = count
     )
   }
 

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaySuccessComponent } from './pay-success.component';
+import { PayResultComponent } from '../pay-result/pay-result.component';
 
-describe('PaySuccessComponent', () => {
-  let component: PaySuccessComponent;
-  let fixture: ComponentFixture<PaySuccessComponent>;
+describe('PayResultComponent', () => {
+  let component: PayResultComponent;
+  let fixture: ComponentFixture<PayResultComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaySuccessComponent ]
+      declarations: [PayResultComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaySuccessComponent);
+    fixture = TestBed.createComponent(PayResultComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

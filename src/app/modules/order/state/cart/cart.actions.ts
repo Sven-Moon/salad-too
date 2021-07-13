@@ -23,7 +23,7 @@ export const duplicateCartItem = createAction(
 
 export const removeCartItem = createAction(
   '[Cart] Remove Cart Item',
-  props<{ name: string }>()
+  props<{ id: string }>()
 );
 
 export const loadCarts = createAction(

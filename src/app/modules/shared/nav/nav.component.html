@@ -3,8 +3,8 @@
   <img src="./assets/images/menu_icon.png" class="menu" alt="" routerLink="/order">
   <div class="cart">
     <img src="./assets/images/cart_icon.png" alt="">
-    <div class="badge">
-      12
+    <div class="badge" *ngIf="cartCount!=0">
+      {{cartCount}}
     </div>
   </div>
   <img src="./assets/images/pay_icon.png" class="pay" alt="">

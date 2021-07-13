@@ -3,13 +3,13 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
-import { CartItem } from 'src/app/models/Item';
+import { CartItem, Items } from 'src/app/models/Item';
 import { Contact } from 'src/app/models/User';
 import { addItemToCart } from '../state/cart/cart.actions';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
 import { clearItem, deselectAllIngredientsOfType, filterIngredientType, setLastItemOwnerAsItemOwner, setItemId, toggleIngredient } from '../state/item/item.actions';
 import { selectCurrentItem, selectFilteredIngredientsByType, selectItemGroupTypes, selectItemIngredients, selectItemPrice, selectPickedIngredientType, selectSingleSelectIngredientTypes } from '../state/item/item.selectors';
-import { selectIngredients } from '../state/staticData/static-data.selectors';
+import { selectAllItems, selectIngredients } from '../state/staticData/static-data.selectors';
 
 @Component({
   selector: 'app-order-customize-item',
@@ -25,6 +25,7 @@ export class OrderCustomizeItemComponent implements OnInit {
   cartItem: CartItem
   price: string
   owner: Contact
+  allItems: Items
 
   //debug
   index = 0
@@ -54,6 +55,7 @@ export class OrderCustomizeItemComponent implements OnInit {
     this.store.select(selectCurrentItem).subscribe(currentItem =>
       this.cartItem = currentItem
     )
+    this.store.select(selectAllItems).subscribe(items => this.allItems = items)
 
   }
 
@@ -81,10 +83,26 @@ export class OrderCustomizeItemComponent implements OnInit {
   }
 
   public addItemToCart(): void {
+    // create a modifiable item equal to the current item
     let cartItem: CartItem = { ...this.cartItem }
+
+    // ========== Item Owner may have changed ==========
+    // account for possibility that this is a duplicate item
+    let pureId = this.cartItem.id.replace(/\*/, '')
+    // get the name without modification
+    let itemName: string = this.allItems.find(item => item.id == pureId).name
+    // if item doesn't belong to a 'guest' add <contact name>'s before item name
+    if (!this.cartItem.owner.name.startsWith('Guest')) {
+      itemName = cartItem.owner.name.concat('\'s ', itemName)
+    }
+    // otherwise use the unmodified name
+    this.cartItem.name = itemName
+
+    // ========== if this is a new item, set qty = 1  ==========
     if (this.cartItem.quantity == null) {
       cartItem.quantity = 1
     }
+
     this.store.dispatch(addItemToCart({ cartItem }))
 
     // clear item by setting id to null

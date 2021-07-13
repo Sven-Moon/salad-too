@@ -21,10 +21,10 @@
             </div>
             <!-- ========== ITEM ACTIONS ========== -->
             <div class="itemActions">
-              <button type="button" (click)="editCartItem(item.name)" class="btn-sm btn-warning">Edit</button>
+              <button type="button" (click)="editCartItem(item.id)" class="btn-sm btn-warning">Edit</button>
               <button type="button" (click)="showDetails(item.name, item.ingredients)" class="btn-sm btn-primary">View</button>
               <button type="button" (click)="duplicateItem(item)" class="btn-sm btn-go">Duplicate</button>
-              <button type="button" (click)="removeItem(item.name)" class="btn-sm btn-cancel">Remove</button>
+              <button type="button" (click)="removeItem(item.id)" class="btn-sm btn-cancel">Remove</button>
             </div> <!-- item actions -->
           </div>
         </div> <!-- row -->

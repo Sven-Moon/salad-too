@@ -46,7 +46,7 @@ export const reducer = createReducer(
   on(CartActions.removeCartItem, (state, action) => (
     {
       ...state,
-      items: state.items.filter(item => item.name !== action.name)
+      items: state.items.filter(item => item.id !== action.id)
     }
   )),
   mutableOn(CartActions.changeCartItemQty, (state, action) => {
