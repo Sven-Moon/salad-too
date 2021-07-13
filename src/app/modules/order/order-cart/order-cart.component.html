@@ -29,8 +29,8 @@
           </div>
         </div> <!-- row -->
         <!-- ========== ITEM DETAILS ========== -->
-        <div class="itemDetails" *ngIf="cartIngredients[item.name].length != 0">
-          <ng-container *ngIf="cartIngredients[item.name] as ingredients">
+        <div class="itemDetails" *ngIf="cartIngredients[item.name] as ingredients" >
+          <ng-container *ngIf="cartIngredients[item.name].length != 0">
             <div class="ingredients">
               <ng-container *ngFor="let ingredient of ingredients">
                 <div class="ingredient {{ingredient.type}}-border center-text">

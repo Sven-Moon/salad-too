@@ -7,6 +7,7 @@ export const itemFeatureKey = 'item';
 
 export interface State extends Item {
   pickedIngredientTypeId: string
+  quantity?: number
 }
 
 export const initialState: State = {
