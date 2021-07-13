@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Item, Items } from 'src/app/models/Item';
+import { CartItem, Item, Items } from 'src/app/models/Item';
+import { addItemToCart } from '../state/cart/cart.actions';
 import { clearItemGroup, loadItem, setItemId } from '../state/item/item.actions';
 import { selectItemGroupPicked, selectItemsWithPrice, selectPickedItem } from '../state/item/item.selectors';
 
@@ -39,16 +40,20 @@ export class OrderItemSelectComponent implements OnInit {
   }
 
   public setAsItem(id: string) {
-    let item: Item
+    let item: CartItem
+    // set the chosen id in the store
     this.store.dispatch(setItemId({ id }))
+    // set the item properties in the store to the default data from item listing
     this.store.select(selectPickedItem).subscribe(pickedItem =>
       item = pickedItem
     )
-    this.store.dispatch(loadItem({ item }))
 
     if (item.itemGroup === 'salad' || item.itemGroup === 'sandwich') {
+      this.store.dispatch(loadItem({ item }))
       this.router.navigate(['/order/customize'])
     } else {
+      let cartItem = item as CartItem
+      this.store.dispatch(addItemToCart({ cartItem }))
       this.router.navigate(['/order/cart'])
     }
 

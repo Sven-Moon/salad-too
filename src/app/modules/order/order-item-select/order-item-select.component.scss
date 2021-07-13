@@ -43,16 +43,19 @@
 }
 
 .img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   overflow: hidden;
   height: 100%;
   width: 100%;
 }
 
-img {
-  position: absolute;
-  left: 0;
-  top: 0;
+.img-container img {
+  // position: absolute;
+  // left: 0;
+  // top: 0;
   object-fit: fill;
   object-position: center;
   // width: 100%;

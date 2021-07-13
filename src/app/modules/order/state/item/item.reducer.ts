@@ -11,7 +11,7 @@ export interface State extends Item {
 }
 
 export const initialState: State = {
-  itemId: null,
+  id: null,
   name: null,
   itemGroup: null,
   ingredients: [],
@@ -56,14 +56,14 @@ export const reducer = createReducer(
 
   // =============== Item Type Select ===============
   on(ItemActions.setItemId, (state, action) => ({
-    ...state, itemId: action.id
+    ...state, id: action.id
   })),
   on(ItemActions.loadItem, (state, action) => {
-    if (action.item.itemId === null) {
+    if (action.item.id === null) {
       return initialState
     } else return {
       ...state,
-      itemId: action.item.itemId,
+      id: action.item.id,
       name: action.item.name,
       itemGroup: action.item.itemGroup,
       ingredients: action.item.ingredients,

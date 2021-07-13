@@ -74,7 +74,7 @@ export class OrderCartComponent implements OnInit {
     let item = {
       ...itemToDuplicate,
       name: itemToDuplicate.name.concat('*'),
-      itemId: itemToDuplicate.itemId.concat('*')
+      id: itemToDuplicate.id.concat('*')
     }
     this.store.dispatch(duplicateCartItem({ item }))
   }
