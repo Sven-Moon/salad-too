@@ -1,5 +1,4 @@
-import { state } from '@angular/animations';
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { mutableOn } from 'ngrx-etc';
 import { Item } from 'src/app/models/Item';
 import * as ItemActions from './item.actions';
@@ -11,7 +10,7 @@ export interface State extends Item {
 }
 
 export const initialState: State = {
-  id: null,
+  itemId: null,
   name: null,
   itemGroup: null,
   ingredients: [],
@@ -42,6 +41,10 @@ export const reducer = createReducer(
       name: action.owner.name
     }
   })),
+  on(ItemActions.setItemName, (state, action) => ({
+    ...state,
+    name: action.name
+  })),
   // =============== Item Select ===============
   on(ItemActions.setItemGroup, (state, action) => ({
     ...state, itemGroup: action.itemGroup
@@ -52,14 +55,14 @@ export const reducer = createReducer(
 
   // =============== Item Type Select ===============
   on(ItemActions.setItemId, (state, action) => ({
-    ...state, id: action.id
+    ...state, itemId: action.id
   })),
   on(ItemActions.loadItem, (state, action) => {
-    if (action.item.id === null) {
+    if (action.item.itemId === null) {
       return initialState
     } else return {
       ...state,
-      id: action.item.id,
+      itemId: action.item.itemId,
       name: action.item.name,
       itemGroup: action.item.itemGroup,
       ingredients: action.item.ingredients,

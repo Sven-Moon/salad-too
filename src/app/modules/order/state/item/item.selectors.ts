@@ -14,7 +14,7 @@ export const selectCurrentItem = createSelector(
   selectItemState,
   (state): CartItem => {
     let item: CartItem = {
-      id: state.id,
+      itemId: state.itemId,
       name: state.name,
       itemGroup: state.itemGroup,
       img: state.img,
@@ -96,7 +96,7 @@ export const selectItemId = createSelector(
   // scope: selectPickedItem
   // eg: ham_sourdough
   selectItemState,
-  (state): string => state.id
+  (state): string => state.itemId
 )
 
 export const selectPickedItem = createSelector(
@@ -105,7 +105,7 @@ export const selectPickedItem = createSelector(
   (allItems: Items, id: string): Item => {
     let foundItem: Item = fromItem.initialState
     allItems.forEach(item => {
-      if (item.id === id) {
+      if (item.itemId === id) {
         foundItem = item
       }
     })

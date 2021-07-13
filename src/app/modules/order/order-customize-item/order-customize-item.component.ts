@@ -22,6 +22,7 @@ export class OrderCustomizeItemComponent implements OnInit {
   typeFilter$: Observable<IngredientType>
   filteredIngredients$: Observable<Ingredients>
   singleSelectIngredientTypes: IngredientTypes
+  cartItem: CartItem
   price: string
   owner: Contact
 
@@ -50,6 +51,9 @@ export class OrderCustomizeItemComponent implements OnInit {
     this.store.select(selectItemPrice).subscribe(price =>
       this.price = price
     )
+    this.store.select(selectCurrentItem).subscribe(currentItem =>
+      this.cartItem = currentItem
+    )
 
   }
 
@@ -59,7 +63,6 @@ export class OrderCustomizeItemComponent implements OnInit {
 
   public toggleIngredient(ingredient: Ingredient): void {
     // if ingredient type is on the single type list
-    this.singleSelectIngredientTypes.forEach(type => console.log(type.id))
     if (this.singleSelectIngredientTypes.find(type => type.id === ingredient.type)) {
       // nuke all of the ingredients from the item list (ids)
       let ingredientsToRemove: string[] = []
@@ -78,13 +81,10 @@ export class OrderCustomizeItemComponent implements OnInit {
   }
 
   public addItemToCart(): void {
-    let cartItem: CartItem
-    this.store.select(selectCurrentItem).subscribe((currentItem: CartItem) =>
-      cartItem = {
-        ...currentItem,
-        quantity: 1
-      }
-    )
+    let cartItem: CartItem = { ...this.cartItem }
+    if (this.cartItem.quantity == null) {
+      cartItem.quantity = 1
+    }
     this.store.dispatch(addItemToCart({ cartItem }))
 
     // clear item by setting id to null

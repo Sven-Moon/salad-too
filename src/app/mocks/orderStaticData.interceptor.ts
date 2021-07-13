@@ -25,7 +25,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
     let data: StaticData = {
       "items": [
         {
-          "id": "ham_sourdough",
+          "itemId": "ham_sourdough",
           "name": "Ham on Sourdough",
           "ingredients": ["ham", "sourdough", "cheddar"],
           "itemGroup": "sandwich",
@@ -33,7 +33,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "description": "This is some sample text describing a sandwich. You should think about this sandwich when you're hungry. But if you have no way of getting this sandwich, maybe don't."
         },
         {
-          "id": "turkey_sandwich",
+          "itemId": "turkey_sandwich",
           "name": "Turkey on White",
           "ingredients": [
             "turkey",
@@ -47,7 +47,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "description": "This is some sample text describing a sandwich. You should think about this sandwich when you're hungry. But if you have no way of getting this sandwich, maybe don't."
         },
         {
-          "id": "cobb",
+          "itemId": "cobb",
           "name": "Cobb Salad",
           "ingredients": [
             "ham",
@@ -63,7 +63,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "description": "This is some sample text describing a salad. You should think about this sandwich when you're hungry. But if you have no way of getting this sandwich, maybe don't."
         },
         {
-          "id": "atlanta_salad",
+          "itemId": "atlanta_salad",
           "name": "Atlanta Salad",
           "ingredients": [
             "red_lettuce",
@@ -77,105 +77,106 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "description": "This is some sample text describing a salad. You should think about this sandwich when you're hungry. But if you have no way of getting this sandwich, maybe don't."
         },
         {
-          "id": "mac-cheese",
+          "itemId": "mac-cheese",
           "name": "Mac & cheese",
           "price": "3.95",
           "img": "./assets/images/sides.mac-cheese.png",
           "itemGroup": "side"
         },
         {
-          "id": "fries",
+          "itemId": "fries",
           "name": "French Fries",
           "price": "2.75",
           "img": "./assets/images/sides.fries.png",
           "itemGroup": "side"
         },
         {
-          "id": "fruit",
+          "itemId": "fruit",
           "name": "Mixed Fruit",
           "price": "3.95",
           "img": "./assets/images/sides.fruit.png",
           "itemGroup": "side"
         }, ,
         {
-          "id": "sprite",
+          "itemId": "sprite",
           "name": "Sprite",
           "type": "soda",
           "img": "./assets/images/drinks.sprite.png",
           "itemGroup": "drink"
         },
         {
-          "id": "coke",
+          "itemId": "coke",
           "name": "Coke",
           "type": "soda",
           "img": "./assets/images/drinks.coke.png",
           "itemGroup": "drink"
         },
         {
-          "id": "diet-coke",
+          "itemId": "diet-coke",
           "name": "Diet Coke",
           "type": "soda",
           "img": "./assets/images/drinks.diet-coke.png",
           "itemGroup": "drink"
         },
         {
-          "id": "orange-juice",
+          "itemId": "orange-juice",
           "name": "Orange Juice",
           "type": "juice",
           "img": "./assets/images/drinks.orange-juice.png",
           "itemGroup": "drink"
         },
         {
-          "id": "cranberry-juice",
+          "itemId": "cranberry-juice",
           "name": "Cranberry Juice",
           "type": "juice",
           "img": "./assets/images/drinks.cranberry-juice.png",
           "itemGroup": "drink"
         },
         {
-          "id": "latte",
+          "itemId": "latte",
           "name": "Latte",
           "type": "espresso",
           "img": "./assets/images/drinks.latte.png",
           "itemGroup": "drink"
         },
         {
-          "id": "cappuccino",
+          "itemId": "cappuccino",
           "name": "Cappuccino",
           "type": "espresso",
           "img": "./assets/images/drinks.cappuccino.png",
           "itemGroup": "drink"
         },
         {
-          "id": "sparkling",
+          "itemId": "sparkling",
           "name": "Sparkling Water",
           "type": "water",
           "img": "./assets/images/drinks.sparkling.png",
           "itemGroup": "drink"
         },
         {
-          "id": "bottled",
+          "itemId": "bottled",
           "name": "Bottled Water",
           "type": "water",
           "img": "./assets/images/drinks.bottled.png",
           "itemGroup": "drink"
         },
         {
-          "id": "chocolateCake",
+          "itemId": "chocolateCake",
           "name": "Chocolate Cake",
           "img": "./assets/images/desserts/chocolateCake",
           "price": "4.75",
           "itemGroup": "dessert"
         },
         {
-          "id": "bananaPudding",
+          "itemId": "bananaPudding",
           "name": "Banana Pudding",
           "img": "./assets/images/desserts/bananaPudding",
           "price": "3.85",
           "itemGroup": "dessert"
+
         },
         {
-          "id": "cremeBrulee",
+          "itemId": "cremeBrulee",
           "name": "Creme Brulee",
           "img": "./assets/images/desserts/cremeBrulee",
           "price": "5.45",

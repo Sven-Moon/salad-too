@@ -12,8 +12,8 @@ import { selectItemGroupPicked, selectItemsWithPrice, selectPickedItem } from '.
   styleUrls: ['./order-item-select.component.scss']
 })
 export class OrderItemSelectComponent implements OnInit {
-  hidePickContactFlag$: Observable<boolean>
-  hideAddContactFlag$: Observable<boolean>
+  // hidePickContactFlag$: Observable<boolean>
+  // hideAddContactFlag$: Observable<boolean>
   items$: Observable<Items>
   itemGroup$: Observable<string>
 
@@ -46,14 +46,12 @@ export class OrderItemSelectComponent implements OnInit {
     )
     this.store.dispatch(loadItem({ item }))
 
+    if (item.itemGroup === 'salad' || item.itemGroup === 'sandwich') {
+      this.router.navigate(['/order/customize'])
+    } else {
+      this.router.navigate(['/order/cart'])
+    }
 
-    this.itemGroup$.subscribe(group => {
-      if (group === 'salad' || group === 'sandwich') {
-        this.router.navigate(['/order/customize'])
-      } else {
-        this.router.navigate(['/order/cart'])
-      }
-    })
   }
 
 }

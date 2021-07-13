@@ -3,6 +3,8 @@ import { CartItem, Item } from 'src/app/models/Item';
 import { ItemGroup } from 'src/app/models/ItemGroup';
 import { Contact, User } from 'src/app/models/User';
 
+// ======== OWNER ========
+
 export const setItemOwner = createAction(
   '[Owner Pick] Set Item Owner', props<{ contact: Contact }>()
 );
@@ -11,6 +13,12 @@ export const setLastItemOwnerAsItemOwner = createAction(
   '[Type Select] Set Last (current) Owner as Item Owner', props<{ owner: Contact }>()
 );
 
+export const setItemName = createAction(
+  '[Owner Pick] Add Owner Name to Item Name',
+  props<{ name: string }>()
+)
+
+// ======== TYPE-SELECT ========
 export const setItemGroup = createAction(
   '[Item Type Select] Set Item Type',
   props<{ itemGroup: string }>()
@@ -67,3 +75,4 @@ export const editCartItem = createAction(
   '[Cart] Return Cart Item to Customize',
   props<{ item: CartItem }>()
 )
+

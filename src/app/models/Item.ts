@@ -3,7 +3,7 @@ import { ItemGroup } from "./ItemGroup";
 import { Contact } from "./User";
 
 export interface Item {
-  id: string
+  itemId: string
   name: string
   itemGroup: string
   img: string

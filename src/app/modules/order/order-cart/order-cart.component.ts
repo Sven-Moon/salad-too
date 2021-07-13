@@ -41,8 +41,6 @@ export class OrderCartComponent implements OnInit {
     this.cartItems.forEach(item =>
       this.cartIngredients[item.name] = []
     )
-    console.log(this.cartItems)
-    console.log(this.cartItems.length == 0)
   }
 
   public editCartItem(name: string) {
@@ -73,7 +71,11 @@ export class OrderCartComponent implements OnInit {
 
   }
 
-  public duplicateItem(item: CartItem) {
+  public duplicateItem(itemToDuplicate: CartItem) {
+    let item = {
+      ...itemToDuplicate,
+      name: itemToDuplicate.name.concat('*')
+    }
     this.store.dispatch(duplicateCartItem({ item }))
   }
 

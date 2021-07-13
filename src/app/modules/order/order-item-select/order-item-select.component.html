@@ -6,7 +6,7 @@
 
   <div class="container scroll-y">
     <ng-container *ngFor="let item of items$ |async">
-      <div class="card flex-col item" (click)="setAsItem(item.id)">
+      <div class="card flex-col item" (click)="setAsItem(item.itemId)">
         <div class="name-price container flex-row">
           <div class="name center-text">{{item.name}}</div>
           <div class="price form-control">${{item.price}}</div>

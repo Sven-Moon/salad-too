@@ -34,8 +34,11 @@ export const reducer = createReducer(
   mutableOn(CartActions.addItemToCart, (state, action) => {
     state.items.push(action.cartItem)
   }),
-  mutableOn(CartActions.duplicateCartItem, (state, action) => {
-    state.items.push(action.item)
+  on(CartActions.duplicateCartItem, (state, action) => {
+    let newArray: CartItems = []
+    state.items.forEach(item => newArray.push(item))
+    newArray.push(action.item)
+    return { ...state, items: newArray }
   }),
   mutableOn(CartActions.clearCart, (state) => ({
     initialState

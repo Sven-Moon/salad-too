@@ -13,9 +13,6 @@ export class SpinnerEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loginAttempt),
-        tap(() => {
-          console.log('It\'s happening!')
-        }),
         tap(() => this.spinner.show()
         )
       ),
