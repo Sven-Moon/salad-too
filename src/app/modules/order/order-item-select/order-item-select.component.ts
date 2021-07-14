@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CartItem, Item, Items } from 'src/app/models/Item';
+import { Contact } from 'src/app/models/User';
 import { addItemToCart } from '../state/cart/cart.actions';
+import { selectLastItemOwner } from '../state/cart/cart.selectors';
 import { clearItemGroup, loadItem, setItemId } from '../state/item/item.actions';
 import { selectItemGroupPicked, selectItemsWithPrice, selectPickedItem } from '../state/item/item.selectors';
 
@@ -17,6 +19,7 @@ export class OrderItemSelectComponent implements OnInit {
   // hideAddContactFlag$: Observable<boolean>
   items$: Observable<Items>
   itemGroup$: Observable<string>
+  owner: Contact
 
 
   constructor(
@@ -27,6 +30,9 @@ export class OrderItemSelectComponent implements OnInit {
   ngOnInit(): void {
     this.items$ = this.store.select(selectItemsWithPrice)
     this.itemGroup$ = this.store.select(selectItemGroupPicked)
+    this.store.select(selectLastItemOwner).subscribe(owner =>
+      this.owner = owner
+    )
   }
 
 
@@ -53,6 +59,7 @@ export class OrderItemSelectComponent implements OnInit {
       this.router.navigate(['/order/customize'])
     } else {
       let cartItem = item as CartItem
+      cartItem.owner = this.owner
       this.store.dispatch(addItemToCart({ cartItem }))
       this.router.navigate(['/order/cart'])
     }

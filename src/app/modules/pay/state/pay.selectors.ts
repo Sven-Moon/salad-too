@@ -12,7 +12,10 @@ export const selectItemOwners = createSelector(
   selectCartItems,
   (items): Contacts => {
     let owners: Contact[] = []
-    items.forEach(item => owners.push(item.owner))
+    items.forEach(item => {
+      if (!owners.find(owner => owner.email === item.owner.email))
+        owners.push(item.owner)
+    })
     return owners
   }
 )
@@ -21,19 +24,21 @@ export const selectItemOwners = createSelector(
 export const selectItemsByOwner = createSelector(
   selectCartItems,
   (items): ItemsByOwner => {
-    let itemsByOwner: ItemsByOwner
+    let itemsByOwner: ItemsByOwner = {}
     items.forEach(item => {
-      if (!itemsByOwner[item.owner.name]) {
-        itemsByOwner[item.owner.name] = {
+      console.log(item.owner)
+      if (!itemsByOwner[item.owner.email]) {
+        itemsByOwner[item.owner.email] = {
           owner: item.owner,
           items: [],
           total: 0,
           isSelected: false,
-          isPaid: false
+          isPaid: false,
+          viewItems: false
         }
       }
-      itemsByOwner[item.owner.name].items.push(item)
-      itemsByOwner[item.owner.name].total += item.quantity * +item.price
+      itemsByOwner[item.owner.email].items.push(item)
+      itemsByOwner[item.owner.email].total += item.quantity * +item.price
     }
     )
     return itemsByOwner

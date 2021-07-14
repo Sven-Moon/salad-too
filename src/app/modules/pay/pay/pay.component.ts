@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { CartItems, ItemsByOwner } from 'src/app/models/Item';
 import { Contacts } from 'src/app/models/User';
 import { selectItemOwners, selectItemsByOwner } from '../state/pay.selectors';
@@ -12,6 +13,8 @@ import { selectItemOwners, selectItemsByOwner } from '../state/pay.selectors';
 export class PayComponent implements OnInit {
   itemsByOwner: ItemsByOwner
   itemOwners: Contacts
+  itemsByOwner$: Observable<ItemsByOwner>
+  itemOwners$: Observable<Contacts>
   visibleItems: string[]
   selectedAmount: number
 
@@ -20,7 +23,7 @@ export class PayComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // startup
+    // dev info
     // itemsByOwner: {
     //   dave: {}
     //   pete: {}
@@ -33,11 +36,21 @@ export class PayComponent implements OnInit {
     this.store.select(selectItemsByOwner).subscribe(items =>
       this.itemsByOwner = items
     )
+    this.itemOwners$ = this.store.select(selectItemOwners)
+    this.itemsByOwner$ = this.store.select(selectItemsByOwner)
+    console.log("itemOwners: ")
+    console.log(this.itemOwners)
+    console.log("itemsByOwner: ")
+    console.log(this.itemsByOwner)
 
   }
 
-  public viewOwnerItems(name: string) {
-    this.visibleItems.push(name)
+  public viewOwnerItems(id: string): void {
+    this.itemsByOwner[id].viewItems = true
+  }
+
+  public hideOwnerItems(id: string): void {
+    this.itemsByOwner[id].viewItems = false
   }
 
 }

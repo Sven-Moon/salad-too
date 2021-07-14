@@ -43,12 +43,6 @@ export class OrderCustomizeItemComponent implements OnInit {
     this.store.select(selectSingleSelectIngredientTypes).subscribe(types =>
       this.singleSelectIngredientTypes = types
     )
-    // // start the owner as the last item owner
-    // this.store.select(selectLastItemOwner).subscribe(owner =>
-    //   this.owner = owner
-    // )
-    // this.store.dispatch(setLastItemOwnerAsItemOwner({ owner: this.owner }))
-
     this.store.select(selectItemPrice).subscribe(price =>
       this.price = price
     )
@@ -56,7 +50,6 @@ export class OrderCustomizeItemComponent implements OnInit {
       this.cartItem = currentItem
     )
     this.store.select(selectAllItems).subscribe(items => this.allItems = items)
-
   }
 
   public updateFilter(ingredientType: string): void {

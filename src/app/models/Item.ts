@@ -32,6 +32,7 @@ export interface ItemsByOwner {
     items: CartItems,
     total: number,
     isSelected: boolean,
-    isPaid: boolean
+    isPaid: boolean,
+    viewItems: boolean
   }
 }
