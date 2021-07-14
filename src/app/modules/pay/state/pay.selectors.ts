@@ -20,7 +20,6 @@ export const selectItemOwners = createSelector(
   }
 )
 
-
 export const selectItemsByOwner = createSelector(
   selectCartItems,
   (items): ItemsByOwner => {
@@ -42,5 +41,21 @@ export const selectItemsByOwner = createSelector(
     }
     )
     return itemsByOwner
+  }
+)
+
+export const selectUserPayTotal = createSelector(
+  selectItemOwners,
+  selectItemsByOwner,
+  (ids: Contacts, entities: ItemsByOwner): number => {
+    let agTotal: number = 0
+    ids.forEach(id => {
+      if (entities[id.email].isSelected) {
+        console.log('Indiv: ' + entities[id.email].total)
+        agTotal += entities[id.email].total
+        console.log('AgTotal: ' + agTotal)
+      }
+    });
+    return agTotal
   }
 )

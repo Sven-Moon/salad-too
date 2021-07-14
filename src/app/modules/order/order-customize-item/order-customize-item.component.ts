@@ -81,15 +81,13 @@ export class OrderCustomizeItemComponent implements OnInit {
 
     // ========== Item Owner may have changed ==========
     // account for possibility that this is a duplicate item
-    let pureId = this.cartItem.id.replace(/\*/, '')
+    let pureId = cartItem.id.replace(/\*/, '')
     // get the name without modification
     let itemName: string = this.allItems.find(item => item.id == pureId).name
-    // if item doesn't belong to a 'guest' add <contact name>'s before item name
-    if (!this.cartItem.owner.name.startsWith('Guest')) {
-      itemName = cartItem.owner.name.concat('\'s ', itemName)
-    }
+    // add (first name of) <contact name>'s before item name
+    itemName = cartItem.owner.name.split(' ')[0].concat('\'s ', itemName)
     // otherwise use the unmodified name
-    this.cartItem.name = itemName
+    cartItem.name = itemName
 
     // ========== if this is a new item, set qty = 1  ==========
     if (this.cartItem.quantity == null) {

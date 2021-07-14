@@ -43,6 +43,7 @@
   justify-content: space-between;
   padding: $panel-padding-vert $panel-padding-side;
   font-size: calc(#{$typeHeight} - #{$panel-padding-vert});
+  background-color: #fafafa;
 }
 
 .type-img {

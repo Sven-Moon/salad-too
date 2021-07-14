@@ -53,12 +53,9 @@
 }
 
 .img-container img {
-  // position: absolute;
-  // left: 0;
-  // top: 0;
   object-fit: cover;
   object-position: center;
-  // width: 100%;
+  width: 100%;
 }
 .desc-container {
   display: flex;

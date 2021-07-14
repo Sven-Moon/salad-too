@@ -60,6 +60,7 @@ export class OrderItemSelectComponent implements OnInit {
     } else {
       let cartItem = item as CartItem
       cartItem.owner = this.owner
+      cartItem.name = this.owner.name.split(' ')[0].concat("'s ", cartItem.name)
       this.store.dispatch(addItemToCart({ cartItem }))
       this.router.navigate(['/order/cart'])
     }

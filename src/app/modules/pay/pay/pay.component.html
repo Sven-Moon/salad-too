@@ -1,40 +1,72 @@
-<div class="payWrap">
-  <div class="pay-panel">
-    <div class="unpaid">
-      <ng-container *ngFor="let owner of itemOwners$ |async">
-          <div *ngIf="itemsByOwner[owner.email] as thisOwner" class="row owner">
-            <div class="owner">
-              <div class="ownerHeader">
+<div class="h-100 flex-col">
+  <div class="payPanel scroll-y flex-col">
+    <div class="text-center">Unpaid</div>
+      <ng-container *ngFor="let owner of itemOwners">
+        <div *ngIf="itemsByOwner[owner.email] as thisOwner" class="flex-row">
+          <ng-container *ngIf="!thisOwner.isPaid">
+          <div  (click)="togglePaySelect(owner.email)"
+          [ngClass]="calcClassSelected(owner.email)">
+            <div class="ownerHeader flex-row bold">
+              <img src="{{thisOwner.owner.img}}" alt="">
+              <div class="ownerName">{{thisOwner.owner.name}}</div>
+              <div class="total form-control">{{thisOwner.total |currency}}</div>
+            </div>
+            <div class="itemList flex-col" *ngIf="thisOwner.viewItems">
+              <ng-container *ngFor="let item of thisOwner.items">
+                <div class="item flex-row">
+                  <div class="itemName bold">{{pureName(item.name)}}</div>
+                  <div class="itemQty">({{item.quantity}}) x </div>
+                  <div class="itemPrice form-control">{{item.price |currency}}</div>
+                </div>
+              </ng-container>
+            </div>
+          </div> <!-- owner -->
+          <img src="./assets/images/invisible.png" alt=""*ngIf="thisOwner.viewItems"
+          (click)="hideOwnerItems(thisOwner.owner.email)"
+          class="toggleViewItems">
+          <img src="./assets/images/visible.png" alt=""
+          *ngIf="!thisOwner.viewItems"
+          (click)="viewOwnerItems(thisOwner.owner.email)"
+          class="toggleViewItems">
+        </ng-container> <!-- !isPaid -->
+        </div>
+      </ng-container>
+    <!-- unpaid -->
+    <div class="text-center">Paid</div>
+    <!-- =========== PAID =============-->
+      <ng-container *ngFor="let owner of itemOwners">
+        <div *ngIf="itemsByOwner[owner.email] as thisOwner" class="flex-row">
+          <ng-container *ngIf="thisOwner.isPaid">
+            <div class="owner paid">
+              <div class="ownerHeader flex-row bold">
                 <img src="{{thisOwner.owner.img}}" alt="">
-                {{thisOwner.owner.name}}
-                <div class="total">{{thisOwner.total |currency}}</div>
+                <div class="ownerName">{{thisOwner.owner.name}}</div>
+                <div class="total form-control">{{thisOwner.total |currency}}</div>
               </div>
-              <div class="itemList" *ngIf="thisOwner.viewItems">
+              <div class="itemList flex-col" *ngIf="thisOwner.viewItems">
                 <ng-container *ngFor="let item of thisOwner.items">
-                  <div class="item">
-                    <div class="itemName">{{item.name}}</div>
-                    <div class="itemQty">({{item.quantity}})</div>
-                    <div class="itemPrice">{{item.price |currency}}</div>
+                  <div class="item flex-row">
+                    <div class="itemName bold">{{item.name}}</div>
+                    <div class="itemQty">({{item.quantity}}) x </div>
+                    <div class="itemPrice form-control">{{item.price |currency}}</div>
                   </div>
                 </ng-container>
               </div>
-            </div>
-            <button class="showItems" *ngIf="!thisOwner.viewItems" (click)="viewOwnerItems(thisOwner.owner.email)">
-              <img src="./assets/images/visible.png" alt="">
-            </button>
-            <button *ngIf="thisOwner.viewItems"  class="hideItems" (click)="hideOwnerItems(thisOwner.owner.email)">
-              <img src="./assets/images/invisible.png" alt="">
-            </button>
-          </div>
+            </div> <!-- owner -->
+            <img src="./assets/images/invisible.png" alt=""*ngIf="thisOwner.viewItems"
+            (click)="hideOwnerItems(thisOwner.owner.email)"
+            class="toggleViewItems">
+            <img src="./assets/images/visible.png" alt=""
+            *ngIf="!thisOwner.viewItems"
+            (click)="viewOwnerItems(thisOwner.owner.email)"
+            class="toggleViewItems">
+          </ng-container>
+        </div>
       </ng-container>
-    </div>
-    <hr>
-    <div class="paid">
-
-    </div>
+    <!-- </div> -->
   </div>
   <div class="actions">
-    <button type="button">Pay ${{selectedAmount}}</button>
+    <button type="button">Pay {{payTotal |currency}}</button>
     <button type="button" routerLink="/order/cart">Back to Cart</button>
   </div>
 </div>
