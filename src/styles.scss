@@ -34,7 +34,7 @@ $panel-padding-side: 1rem;
 // bar height
 $barHeight: 2rem;
 $padding: 0.5rem;
-$padding-fc-vert: calc(#{$padding / 2});
+$padding-fc-vert: calc(math.div(#{$padding}, 2));
 $padding-fc-hz: $padding;
 
 .form-group {

@@ -11,7 +11,7 @@
               <div class="ownerName">{{thisOwner.owner.name}}</div>
               <div class="total form-control">{{thisOwner.total |currency}}</div>
             </div>
-            <div class="itemList flex-col" *ngIf="thisOwner.viewItems">
+            <div class="itemList flex-col" *ngIf="itemsVisible[owner.email].visible">
               <ng-container *ngFor="let item of thisOwner.items">
                 <div class="item flex-row">
                   <div class="itemName bold">{{pureName(item.name)}}</div>
@@ -21,11 +21,11 @@
               </ng-container>
             </div>
           </div> <!-- owner -->
-          <img src="./assets/images/invisible.png" alt=""*ngIf="thisOwner.viewItems"
+          <img src="./assets/images/invisible.png" alt=""*ngIf="itemsVisible[owner.email].visible"
           (click)="hideOwnerItems(thisOwner.owner.email)"
           class="toggleViewItems">
           <img src="./assets/images/visible.png" alt=""
-          *ngIf="!thisOwner.viewItems"
+          *ngIf="!itemsVisible[owner.email].visible"
           (click)="viewOwnerItems(thisOwner.owner.email)"
           class="toggleViewItems">
         </ng-container> <!-- !isPaid -->
@@ -33,6 +33,7 @@
       </ng-container>
     <!-- unpaid -->
     <div class="text-center">Paid</div>
+
     <!-- =========== PAID =============-->
       <ng-container *ngFor="let owner of itemOwners">
         <div *ngIf="itemsByOwner[owner.email] as thisOwner" class="flex-row">
@@ -43,7 +44,7 @@
                 <div class="ownerName">{{thisOwner.owner.name}}</div>
                 <div class="total form-control">{{thisOwner.total |currency}}</div>
               </div>
-              <div class="itemList flex-col" *ngIf="thisOwner.viewItems">
+              <div class="itemList flex-col" *ngIf="itemsVisible[owner.email].visible">
                 <ng-container *ngFor="let item of thisOwner.items">
                   <div class="item flex-row">
                     <div class="itemName bold">{{item.name}}</div>
@@ -53,11 +54,11 @@
                 </ng-container>
               </div>
             </div> <!-- owner -->
-            <img src="./assets/images/invisible.png" alt=""*ngIf="thisOwner.viewItems"
+            <img src="./assets/images/invisible.png" alt=""*ngIf="itemsVisible[owner.email].visible"
             (click)="hideOwnerItems(thisOwner.owner.email)"
             class="toggleViewItems">
             <img src="./assets/images/visible.png" alt=""
-            *ngIf="!thisOwner.viewItems"
+            *ngIf="!itemsVisible[owner.email].visible"
             (click)="viewOwnerItems(thisOwner.owner.email)"
             class="toggleViewItems">
           </ng-container>

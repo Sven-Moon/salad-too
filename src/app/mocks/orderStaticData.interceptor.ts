@@ -96,7 +96,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "price": "3.95",
           "img": "./assets/images/sides/fruit.png",
           "itemGroup": "side"
-        }, ,
+        },
         {
           "id": "sprite",
           "name": "Sprite",

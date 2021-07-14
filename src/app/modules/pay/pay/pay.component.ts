@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CartItems, ItemsByOwner } from 'src/app/models/Item';
 import { Contacts } from 'src/app/models/User';
+import { updateItemOwners, updateItemsByOwner } from '../state/pay.actions';
 import { selectItemOwners, selectItemsByOwner, selectUserPayTotal } from '../state/pay.selectors';
 
 @Component({
@@ -15,8 +16,8 @@ export class PayComponent implements OnInit {
   itemsByOwner: ItemsByOwner
   itemOwners: Contacts
   itemOwners$: Observable<Contacts>
-  visibleItems: string[]
   payTotal: number = 0
+  itemsVisible: { [id: string]: { visible: boolean } } = {}
 
   constructor(
     private store: Store,
@@ -176,15 +177,21 @@ export class PayComponent implements OnInit {
       if (this.itemsByOwner[owner.email].isSelected)
         this.payTotal += this.itemsByOwner[owner.email].total
     })
-
+    this.store.dispatch(updateItemsByOwner({
+      entities: this.itemsByOwner,
+      ids: this.itemOwners
+    }))
+    this.itemOwners.forEach(owner =>
+      this.itemsVisible[owner.email] = { visible: false }
+    )
   }
 
   public viewOwnerItems(id: string): void {
-    this.itemsByOwner[id].viewItems = true
+    this.itemsVisible[id].visible = true
   }
 
   public hideOwnerItems(id: string): void {
-    this.itemsByOwner[id].viewItems = false
+    this.itemsVisible[id].visible = false
   }
 
   public togglePaySelect(id: string): void {
@@ -195,7 +202,6 @@ export class PayComponent implements OnInit {
       this.payTotal += this.itemsByOwner[id].total
       this.itemsByOwner[id].isSelected = true
     }
-
   }
 
   public calcClassSelected(id: string): string {

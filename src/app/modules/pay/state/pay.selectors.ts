@@ -32,8 +32,7 @@ export const selectItemsByOwner = createSelector(
           items: [],
           total: 0,
           isSelected: false,
-          isPaid: false,
-          viewItems: false
+          isPaid: false
         }
       }
       itemsByOwner[item.owner.email].items.push(item)

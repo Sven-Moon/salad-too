@@ -33,6 +33,5 @@ export interface ItemsByOwner {
     total: number,
     isSelected: boolean,
     isPaid: boolean,
-    viewItems: boolean
   }
 }
