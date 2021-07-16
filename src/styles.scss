@@ -305,3 +305,15 @@ button {
   display: flex;
   justify-content: space-around;
 }
+
+@media only screen and (max-width: 500px) {
+  .modal-content {
+    padding: 1rem;
+  }
+  .modal-body {
+    padding: 0.5rem;
+  }
+  .modal-header {
+    padding: 0.5rem;
+  }
+}

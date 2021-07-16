@@ -37,12 +37,4 @@ export class OrderItemOwnerComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close'
   }
 
-  // closeOwnerPick(): void {
-  //   this.store.dispatch(itemActions.closeOwnerPick())
-  // }
-
-  // closeAddContact() {
-  //   this.store.dispatch(itemActions.closeAddContact())
-  // }
-
 }

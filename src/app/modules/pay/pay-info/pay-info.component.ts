@@ -9,7 +9,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   styleUrls: ['./pay-info.component.scss']
 })
 export class PayInfoComponent implements OnInit {
-  bsModalRef: BsModalRef // what's it do?
   total: number = 0
   ccForm = this.fb.group({
     name: ['', [
@@ -41,20 +40,15 @@ export class PayInfoComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private modalService: BsModalService,
-    private payModalRef: BsModalRef
+    public payModalRef: BsModalRef
   ) { }
 
   ngOnInit(): void {
-    this.total = 5.57
+    this.total = 15.57
   }
 
   public submit() {
     this.payModalRef.hide()
-
   }
 
-  public cancel() {
-    this.payModalRef.hide()
-  }
 }

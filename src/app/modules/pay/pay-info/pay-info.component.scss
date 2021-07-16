@@ -15,6 +15,7 @@
 .totalPanel {
   width: 100%;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .totalLabel {
@@ -34,28 +35,46 @@
 
 .ccForm label {
   font-size: large;
+  width: 100%;
 }
 
 .ccForm input {
   font-size: medium;
   box-sizing: border-box;
   margin-inline: 0;
+  width: 100%;
+}
+
+.form-group {
+  // width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  // align-content: center;
+  justify-content: center;
+}
+
+.exp_cvv {
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .expDate {
-  width: 100%;
-  align-items: center;
   justify-content: center;
-  margin-inline: 0;
   box-sizing: border-box;
+  margin-right: 1rem;
 }
 
 .expDate input {
-  margin-inline: 1rem;
+  // margin-inline: 1rem;
   padding-inline: 1rem;
   width: 4rem;
   border: none;
   background-color: #f2f9f1;
+  box-sizing: border-box;
+}
+
+.cvv {
+  align-self: flex-end;
 }
 
 .cvv input {
@@ -66,5 +85,16 @@
   font-size: small;
 }
 
+.actions {
+  margin-top: 1rem;
+}
 .actions button {
+  min-height: 1rem;
+  min-width: 45%;
+}
+
+@media only screen and (max-width: 500px) {
+  .actions {
+    padding: 0.5rem;
+  }
 }

@@ -10,7 +10,6 @@ import { loginAttempt, registerUser } from 'src/app/store/auth/auth.actions'
   styleUrls: ['./login-modal.component.scss']
 })
 export class LoginModalComponent implements OnInit {
-  modalRef: BsModalRef
   newUser: boolean = false
   form = {
     username: null,
@@ -30,11 +29,6 @@ export class LoginModalComponent implements OnInit {
     this.newUser = false;
   }
 
-  public openModal(template: TemplateRef<any>): void {
-    this.modalRef = this.modalService.show(template, { id: 100 })
-    this.loginModalRef.id = 100
-  }
-
   public onSubmit(f: NgForm): void {
     this.store.dispatch(loginAttempt({
       email: f.value.email,
@@ -42,13 +36,15 @@ export class LoginModalComponent implements OnInit {
     }))
   }
 
-  public cancel(): void {
-    this.modalService.hide()
-  }
+  // public cancel(): void {
+  //   console.log('modalService.hide() used')
+  //   this.modalService.hide()
+  // }
 
-  public closeLoginModal(): void {
-    this.loginModalRef.hide()
-  }
+  // public closeLoginModal(): void {
+  //   console.log('loginModalRef.hide() used')
+  //   this.loginModalRef.hide()
+  // }
 
   public signUp(f: NgForm) {
 

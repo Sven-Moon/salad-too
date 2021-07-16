@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { CartItems, ItemsByOwner } from 'src/app/models/Item';
 import { Payment } from 'src/app/models/Payment';
 import { Contacts } from 'src/app/models/User';
 import { selectCartItems } from '../../order/state/cart/cart.selectors';
+import { PayInfoComponent } from '../pay-info/pay-info.component';
 import { updateIsSelected, updateItemOwners, updateItemsByOwner, updatePayment } from '../state/pay.actions';
 import { selectItemOwners, selectItemOwnersFromCart, selectItemsByOwner, selectItemsByOwnerFromCart, selectPayment, selectUserPayTotal } from '../state/pay.selectors';
 
@@ -21,10 +23,12 @@ export class PayChooseComponent implements OnInit {
   payTotal: number = 0
   itemsVisible: { [id: string]: { visible: boolean } } = {}
   payment: Payment
+  bsModalRef: BsModalRef
 
   constructor(
     private store: Store,
-    private router: Router
+    private router: Router,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
@@ -77,8 +81,6 @@ export class PayChooseComponent implements OnInit {
     let newPayment: Payment
     let selectedOwners: string[] = []
     this.itemOwners.forEach(owner => {
-      console.log('OwnerID: ' + this.itemsByOwner[owner.email].owner.email)
-      console.log('isSelected: ' + this.itemsByOwner[owner.email].isSelected)
       if (this.itemsByOwner[owner.email].isSelected) {
         newTotal += this.itemsByOwner[owner.email].total
         selectedOwners.push(owner.email)
@@ -104,7 +106,9 @@ export class PayChooseComponent implements OnInit {
   }
 
   public paySelectedTotal(): void {
-    this.router.navigate(['info'])
+    console.log('paying...')
+    this.bsModalRef = this.modalService.show(PayInfoComponent)
+    this.bsModalRef.content.closeBtnName = 'Close'
   }
 
   private updateFromCart() {

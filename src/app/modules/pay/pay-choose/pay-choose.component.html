@@ -67,7 +67,7 @@
     <!-- </div> -->
   </div>
   <div class="actions">
-    <button type="button">Pay {{payment.amount|currency}}</button>
+    <button type="button" (click)="paySelectedTotal()">Pay {{payment.amount|currency}}</button>
     <button type="button" routerLink="/order/cart">Back to Cart</button>
   </div>
 </div>
