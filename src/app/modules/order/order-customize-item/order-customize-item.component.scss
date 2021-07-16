@@ -1,8 +1,6 @@
 @import "/src/styles.scss";
 @import "../order/order.component.scss";
 
-$actionsHeight: 10vh;
-
 .customize-wrap {
   display: flex;
   flex-flow: column nowrap;

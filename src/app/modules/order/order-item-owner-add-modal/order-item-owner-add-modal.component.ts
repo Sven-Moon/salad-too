@@ -27,7 +27,6 @@ export class OrderItemOwnerAddModalComponent implements OnInit {
   }
 
   public closeAddContact() {
-    // this.store.dispatch(closeAddContact())
     this.addModalRef.hide()
   }
 

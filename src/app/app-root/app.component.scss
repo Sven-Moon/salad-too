@@ -3,18 +3,23 @@
 .app-wrap {
   top: 0;
   left: 0;
-  width: 100%;
-  min-width: 280px;
+  width: 100vw;
+  height: 100vh;
+  min-width: calc(300px - (2 * #{$hGap}));
   position: fixed;
   display: flex;
   flex-direction: column;
   background-color: #eee;
 }
+
 .main-panel-wrap {
-  // position: relative;
-  width: 100vw;
+  display: flex;
+  flex-flow: column nowrap;
+  width: calc(100% - (2 * #{$hGap}));
+  margin: calc(#{$barHeight} + #{$vGap}) $hGap $vGap;
   max-width: 768px;
-  height: calc(100vh - #{$barHeight});
-  margin-top: $barHeight;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: auto;
   margin-inline: auto;
 }

@@ -1,1 +1,47 @@
-<p>pay-info works!</p>
+<div class="modal-wrap">
+  <div class="div modal-header">
+    <div class="modal-title">
+      Credit Cart Info
+    </div>
+  </div>
+  <div class="modal-body">
+    <!-- ================ TOTAL ================ -->
+    <div class="totalPanel flex-row">
+      <div class="totalLabel">Your Total</div>
+      <div class="total form-control">{{total |currency}}</div>
+    </div>
+    <!-- ================ CC FORM ================ -->
+    <form [formGroup]="ccForm" (ngSubmit)="submit()" class="ccForm">
+      <div class="form-group">
+        <label>Name on card</label>
+        <input type="text" placeholder="Name" class="form-control" formControlName="name">
+      </div>
+      <div class="form-group">
+        <label>Cart Number</label>
+        <input type="text" placeholder="#### #### #### ####" class="form-control" formControlName="ccNum">
+      </div>
+      <div class="form-group">
+        <label>Expiration Date (mm/yy)</label>
+        <div class="flex-row expDate form-control">
+          <input type="text" placeholder="mm" class="" formControlName="expMonth">
+          /
+          <input type="text" placeholder="yy" class="" formControlName="expYear">
+        </div>
+      </div>
+      <div class="form-group cvv">
+        <label>CVV</label>
+        <input type="text" placeholder="" class="form-control" formControlName="cvv">
+      </div>
+    </form> <!-- ---- cc form ---- -->
+
+    <!-- ================ ACTIONS ================ -->
+    <div class="actions">
+      <button type="submit" [disabled]="ccForm.invalid" class="btn btn-go">
+        Pay {{total |currency}}
+      </button>
+      <button type="button" class="btn btn-cancel flex-col text-center">
+      <div>Cancel</div>
+      <div class="text-sm">(go back)</div></button>
+    </div> <!-- ---- actions ---- -->
+  </div> <!-- ---- modal body ---- -->
+</div> <!-- ---- modal wrap ---- -->

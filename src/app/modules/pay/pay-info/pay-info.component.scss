@@ -1,0 +1,70 @@
+@import "/src/styles.scss";
+
+.modal-wrap {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 60vw;
+  max-width: $maxPopupWidth-sm;
+  margin-inline: auto;
+  height: fit-content;
+  // padding: 3vmin;
+  z-index: 2;
+}
+
+.totalPanel {
+  width: 100%;
+  align-items: center;
+}
+
+.totalLabel {
+  font-weight: bold;
+  font-size: large;
+  flex-direction: row-reverse;
+  justify-content: end;
+  margin-right: 1rem;
+  margin-left: auto;
+}
+
+.total {
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+}
+
+.ccForm label {
+  font-size: large;
+}
+
+.ccForm input {
+  font-size: medium;
+  box-sizing: border-box;
+  margin-inline: 0;
+}
+
+.expDate {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-inline: 0;
+  box-sizing: border-box;
+}
+
+.expDate input {
+  margin-inline: 1rem;
+  padding-inline: 1rem;
+  width: 4rem;
+  border: none;
+  background-color: #f2f9f1;
+}
+
+.cvv input {
+  width: 5rem;
+}
+
+.text-sm {
+  font-size: small;
+}
+
+.actions button {
+}

@@ -25,7 +25,6 @@ export const selectItemsByOwner = createSelector(
   (items): ItemsByOwner => {
     let itemsByOwner: ItemsByOwner = {}
     items.forEach(item => {
-      console.log(item.owner)
       if (!itemsByOwner[item.owner.email]) {
         itemsByOwner[item.owner.email] = {
           owner: item.owner,
@@ -50,9 +49,7 @@ export const selectUserPayTotal = createSelector(
     let agTotal: number = 0
     ids.forEach(id => {
       if (entities[id.email].isSelected) {
-        console.log('Indiv: ' + entities[id.email].total)
         agTotal += entities[id.email].total
-        console.log('AgTotal: ' + agTotal)
       }
     });
     return agTotal

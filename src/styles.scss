@@ -24,6 +24,11 @@ $maxScreenWidth: 768px;
 $maxPopupWidth-lg: 700px;
 $maxPopupWidth-sm: 400px;
 
+// main panel
+$hGap: 3vw;
+$vGap: 2vh;
+// $vWindow: calc(100vh - #{$barHeight} - (2 * #{$vGap}));
+
 // item-type
 $ownerHeight: 4rem;
 $typeHeight: 3rem;
@@ -37,6 +42,9 @@ $padding: 0.5rem;
 $padding-fc-vert: calc(math.div(#{$padding}, 2));
 $padding-fc-hz: $padding;
 
+// bottom actions
+$actionsHeight: 6rem;
+
 .form-group {
   margin-bottom: 1rem;
 }
@@ -46,10 +54,10 @@ $padding-fc-hz: $padding;
   width: 100%;
   padding: $padding-fc-vert $padding-fc-hz;
   background-color: $bg-white;
-  margin: 0.2rem 0.3rem;
   justify-content: center;
   align-items: center;
   text-align: center;
+  box-sizing: border-box;
 }
 
 button {
@@ -115,8 +123,24 @@ button {
   min-height: 1.5rem;
 }
 
+.componentWindow {
+  display: flex;
+  flex-flow: column nowrap;
+  height: calc(100vh - #{$actionsHeight} - (2 * #{$vGap}) - #{$barHeight});
+  overflow-y: auto;
+}
+
+.actions {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-content: center;
+  height: $actionsHeight;
+}
+
 .btn {
   display: flex;
+  flex-flow: column nowrap;
   align-items: center;
   text-align: center;
   justify-content: center;

@@ -16,6 +16,11 @@ export const updateItemOwners = createAction(
   props<{ payload: Contacts }>()
 )
 
+export const updateIsSelected = createAction(
+  '[Pay] Update Owner Selected Status',
+  props<{ id: string, selected: boolean }>()
+)
+
 export const attemptPayment = createAction(
   '[Pay] Payment Pays'
 );

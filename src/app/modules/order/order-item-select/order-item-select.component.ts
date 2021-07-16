@@ -15,8 +15,6 @@ import { selectItemGroupPicked, selectItemsWithPrice, selectPickedItem } from '.
   styleUrls: ['./order-item-select.component.scss']
 })
 export class OrderItemSelectComponent implements OnInit {
-  // hidePickContactFlag$: Observable<boolean>
-  // hideAddContactFlag$: Observable<boolean>
   items$: Observable<Items>
   itemGroup$: Observable<string>
   owner: Contact
@@ -34,11 +32,6 @@ export class OrderItemSelectComponent implements OnInit {
       this.owner = owner
     )
   }
-
-
-  // public openAddContact() {
-  //   this.store.dispatch(openAddContact())
-  // }
 
   public back() {
     this.store.dispatch(clearItemGroup())
