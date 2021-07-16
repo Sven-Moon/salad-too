@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       { path: 'choose', component: PayChooseComponent },
       { path: 'info', component: PayInfoComponent },
-      { path: 'fail', component: PayFailComponent },
+      { path: 'failed', component: PayFailComponent },
       { path: 'success', component: PaySuccessComponent },
       { path: '', redirectTo: 'choose', pathMatch: 'full' },
     ]

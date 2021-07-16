@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { ItemsByOwner } from 'src/app/models/Item';
-import { Payment } from 'src/app/models/Payment';
+import { CreditInfo, Payment } from 'src/app/models/Payment';
 import { Contact, Contacts } from 'src/app/models/User';
 
 export const updateItemsByOwner = createAction(
@@ -27,8 +27,14 @@ export const updatePayment = createAction(
   props<{ payment: Payment }>()
 )
 
+export const updateCcInfo = createAction(
+  '[Pay] Update CC INfo',
+  props<{ ccInfo: CreditInfo }>()
+)
+
 export const attemptPayment = createAction(
-  '[Pay] Payment Pays'
+  '[Pay] Attempt Payment',
+  props<{ payment: Payment }>()
 );
 
 export const paymentSuccess = createAction(

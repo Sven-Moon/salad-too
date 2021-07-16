@@ -2,7 +2,7 @@ import { EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
 import { mutableOn } from 'ngrx-etc';
 import { CartItem, ItemsByOwner } from 'src/app/models/Item';
-import { Payment, Payments } from 'src/app/models/Payment';
+import { CreditInfo, Payment, Payments } from 'src/app/models/Payment';
 import { Contacts } from 'src/app/models/User';
 import * as PayActions from './pay.actions';
 
@@ -22,7 +22,13 @@ export const initialState: State = {
     id: null,
     amount: null,
     status: null,
-    ownerSet: []
+    ownerSet: [],
+    ccInfo: {
+      name: "",
+      ccNum: "",
+      exp: "",
+      cvv: ""
+    }
   },
   payments: []
 };
@@ -43,6 +49,10 @@ export const reducer = createReducer(
   mutableOn(PayActions.updatePayment, (state, action) => {
     state.payment = action.payment
   }),
+  mutableOn(PayActions.updateCcInfo, (state, action) => {
+    state.payment.ccInfo = action.ccInfo
+  }),
+  on(PayActions.attemptPayment, (state, action) => state),
   on(PayActions.paymentSuccess, (state, action) => state),
   on(PayActions.paymentFailure, (state, action) => state),
 
