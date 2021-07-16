@@ -1,3 +1,4 @@
+import { state } from '@angular/animations';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CartItem, CartItems, ItemsByOwner } from 'src/app/models/Item';
 import { Contact, Contacts } from 'src/app/models/User';
@@ -8,7 +9,7 @@ export const selectPayState = createFeatureSelector<fromPay.State>(
   fromPay.payFeatureKey
 );
 
-export const selectItemOwners = createSelector(
+export const selectItemOwnersFromCart = createSelector(
   selectCartItems,
   (items): Contacts => {
     let owners: Contact[] = []
@@ -20,7 +21,7 @@ export const selectItemOwners = createSelector(
   }
 )
 
-export const selectItemsByOwner = createSelector(
+export const selectItemsByOwnerFromCart = createSelector(
   selectCartItems,
   (items): ItemsByOwner => {
     let itemsByOwner: ItemsByOwner = {}
@@ -42,6 +43,18 @@ export const selectItemsByOwner = createSelector(
   }
 )
 
+export const selectItemOwners = createSelector(
+  selectPayState,
+  (state): Contacts => state.itemOwners
+)
+
+export const selectItemsByOwner = createSelector(
+  selectPayState,
+  (state): ItemsByOwner => state.itemsByOwner
+)
+
+
+
 export const selectUserPayTotal = createSelector(
   selectItemOwners,
   selectItemsByOwner,
@@ -54,4 +67,9 @@ export const selectUserPayTotal = createSelector(
     });
     return agTotal
   }
+)
+
+export const selectPayment = createSelector(
+  selectPayState,
+  (state) => state.payment
 )

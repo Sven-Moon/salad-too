@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { ItemsByOwner } from 'src/app/models/Item';
+import { Payment } from 'src/app/models/Payment';
 import { Contact, Contacts } from 'src/app/models/User';
 
 export const updateItemsByOwner = createAction(
@@ -19,6 +20,11 @@ export const updateItemOwners = createAction(
 export const updateIsSelected = createAction(
   '[Pay] Update Owner Selected Status',
   props<{ id: string, selected: boolean }>()
+)
+
+export const updatePayment = createAction(
+  '[Pay] Update Payment',
+  props<{ payment: Payment }>()
 )
 
 export const attemptPayment = createAction(
