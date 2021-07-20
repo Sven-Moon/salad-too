@@ -3,9 +3,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { Payment } from 'src/app/models/Payment';
-import { attemptPayment, updateCcInfo } from '../state/pay.actions';
-import { selectPayment } from '../state/pay.selectors';
+import { Payment, Payments } from 'src/app/models/Payment';
+import { attemptPayment, clearPayment, updateCcInfo, updatePayment } from '../state/pay.actions';
+import { selectPayment, selectPayments } from '../state/pay.selectors';
+import { ViewChild, ElementRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-pay-info',
@@ -21,8 +23,8 @@ export class PayInfoComponent implements OnInit {
     ]],
     ccNum: ['1234567890123456', [
       Validators.required,
-      Validators.minLength(16),
-      Validators.maxLength(16)
+      Validators.pattern('^[ 0-9]*$'),
+      Validators.minLength(17)
     ]],
     expMonth: ['12', [
       Validators.required,
@@ -41,6 +43,9 @@ export class PayInfoComponent implements OnInit {
     ]]
   })
   payment: Payment
+  payments: Payments
+
+  @ViewChild('ccNum') ccNumberField: ElementRef
 
   constructor(
     private fb: FormBuilder,
@@ -53,23 +58,71 @@ export class PayInfoComponent implements OnInit {
     this.store.select(selectPayment).subscribe(payment =>
       this.payment = payment
     )
+    this.store.select(selectPayments).subscribe(payment =>
+      this.payments = payment
+    )
   }
 
   public submit() {
+    const { cc } = this.ccForm.controls
+    // create a ccInfo Object
     let ccInfo = {
       name: this.ccForm.controls.name.value,
       ccNum: this.ccForm.controls.ccNum.value,
       exp: this.ccForm.controls.expMonth.value + '/' + this.ccForm.controls.expYear.value,
       cvv: this.ccForm.controls.cvv.value,
     }
-    this.store.dispatch(updateCcInfo({ ccInfo }))
-    this.store.dispatch(attemptPayment({ payment: this.payment }))
-    if (this.payment.status === 'success') {
-      this.router.navigate(['/pay/success'])
-    } else {
-      this.router.navigate(['/pay/failed'])
+    // add info for storage (match with reply from server)
+    let id: string = Math.random().toString().substr(2, 8)
+    // cc4 is last 4 digits of cc#
+    let cc4: string = (this.ccForm.controls.ccNum.value).toString().substr(15, 4)
+    let payment = {
+      ...this.payment,
+      id: id,
+      cc4: cc4,
+      status: "pending"
     }
-    this.payModalRef.hide()
+    // this.store.dispatch(updateCcInfo({ ccInfo }))
+
+    this.store.dispatch(updatePayment({ payment }))
+    this.store.dispatch(attemptPayment({ payment: this.payment, ccInfo }))
+    this.store.dispatch(clearPayment())
+
+    // console.log('I tried before')
+    // this.modalService.hide(120)
+  }
+
+  /* Insert spaces to enhance legibility of credit card numbers */
+  creditCardNumberSpacing() {
+    const input = this.ccNumberField.nativeElement;
+    const { selectionStart } = input;
+    const { ccNum } = this.ccForm.controls;
+
+    let trimmedCardNum = ccNum.value.replace(/\s+/g, '');
+
+    if (trimmedCardNum.length > 16) {
+      trimmedCardNum = trimmedCardNum.substr(0, 16);
+    }
+
+    /* Handle American Express 4-6-5 spacing */
+    const partitions = trimmedCardNum.startsWith('34') || trimmedCardNum.startsWith('37')
+      ? [4, 6, 5]
+      : [4, 4, 4, 4];
+
+    const numbers = [];
+    let position = 0;
+    partitions.forEach(partition => {
+      const part = trimmedCardNum.substr(position, partition);
+      if (part) numbers.push(part);
+      position += partition;
+    })
+
+    ccNum.setValue(numbers.join(' '));
+
+    /* Handle caret position if user edits the number later */
+    if (selectionStart < ccNum.value.length - 1) {
+      input.setSelectionRange(selectionStart, selectionStart, 'none');
+    }
   }
 
 }

@@ -20,15 +20,10 @@ export const initialState: State = {
   itemOwners: [],
   payment: {
     id: null,
-    amount: null,
+    amount: 0,
     status: null,
     ownerSet: [],
-    ccInfo: {
-      name: "",
-      ccNum: "",
-      exp: "",
-      cvv: ""
-    }
+    error: null
   },
   payments: []
 };
@@ -46,15 +41,41 @@ export const reducer = createReducer(
     state.itemsByOwner[action.id].isSelected = action.selected
     // = !state.itemsByOwner[action.id].isSelected
   }),
+  mutableOn(PayActions.createTransactionId, (state, action) => {
+    state.payment.id = action.id
+  }),
   mutableOn(PayActions.updatePayment, (state, action) => {
     state.payment = action.payment
   }),
-  mutableOn(PayActions.updateCcInfo, (state, action) => {
-    state.payment.ccInfo = action.ccInfo
+  mutableOn(PayActions.attemptPayment, (state, action) => {
+    state.payments.push(action.payment)
   }),
-  on(PayActions.attemptPayment, (state, action) => state),
-  on(PayActions.paymentSuccess, (state, action) => state),
-  on(PayActions.paymentFailure, (state, action) => state),
+  mutableOn(PayActions.clearPayment, (state, action) => {
+    state.payment = initialState.payment
+  }),
+  mutableOn(PayActions.paymentSuccess, (state, action) => {
+    state.payments.find(payment =>
+      payment.id === action.data.id).status = action.data.status
+  }),
+  mutableOn(PayActions.paymentFailure, (state, action) => {
+    state.payments.find(payment =>
+      payment.status === 'pending').status = 'error'
+    state.payments.find(payment =>
+      payment.status === 'pending').error = action.error
 
-);
+  }),
 
+
+
+  mutableOn(PayActions.updateItemsByOwnerPayStatus, (state, action) => {
+    state.payments.find(payment =>
+      payment.id === action.id).ownerSet.forEach(owner =>
+        state.itemsByOwner[owner].isPaid = true
+      )
+  }),
+  // gated by status = 'paid)
+  mutableOn(PayActions.updatePaymentsStatus, (state, action) => {
+    state.payments.find(payment =>
+      payment.id === action.id).status = action.status
+  }),
+)

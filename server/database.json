@@ -76,5 +76,23 @@
       ],
       "img": "./assets/images/profile_1.png"
     }
+  ],
+  "payments": [
+    {
+      "id": "45885982",
+      "amount": 4,
+      "name": "Bob",
+      "ccNum": "1234 5678 9012 3456",
+      "exp": "12/34",
+      "cvv": "234"
+    },
+    {
+      "id": "89448161",
+      "amount": 8.2,
+      "name": "Bob",
+      "ccNum": "1234 5678 9012 3456",
+      "exp": "12/34",
+      "cvv": "234"
+    }
   ]
 }

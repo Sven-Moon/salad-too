@@ -106,9 +106,7 @@ export class PayChooseComponent implements OnInit {
   }
 
   public paySelectedTotal(): void {
-    console.log('paying...')
-    this.bsModalRef = this.modalService.show(PayInfoComponent)
-    this.bsModalRef.content.closeBtnName = 'Close'
+    this.bsModalRef = this.modalService.show(PayInfoComponent, { id: 120 })
   }
 
   private updateFromCart() {

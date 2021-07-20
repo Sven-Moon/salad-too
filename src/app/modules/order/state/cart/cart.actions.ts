@@ -44,3 +44,11 @@ export const changeCartItemQty = createAction(
   '[Cart] Change Cart Item Quantity',
   props<{ item: CartItem }>()
 );
+
+
+// --------- PAY -----------
+export const removePaidItemsFromCart = createAction(
+  // ** search by owner removing all associated items
+  '[Payment Success Effect] Remove Paid Items from Cart',
+  props<{ ownerEmails: string[] }>()
+);

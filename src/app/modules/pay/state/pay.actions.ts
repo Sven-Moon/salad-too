@@ -28,21 +28,46 @@ export const updatePayment = createAction(
 )
 
 export const updateCcInfo = createAction(
-  '[Pay] Update CC INfo',
+  '[Pay] Update CC Info',
   props<{ ccInfo: CreditInfo }>()
 )
 
+export const createTransactionId = createAction(
+  '[Pay] Create Transaction ID',
+  props<{ id: string }>()
+);
+
 export const attemptPayment = createAction(
   '[Pay] Attempt Payment',
-  props<{ payment: Payment }>()
+  props<{
+    payment: Payment,
+    ccInfo: CreditInfo
+  }>()
+);
+
+export const clearPayment = createAction(
+  '[Pay] Clear Payment'
 );
 
 export const paymentSuccess = createAction(
-  '[Pay] Payment Pays Success',
-  props<{ data: any }>()
+  '[Pay] Payment Success',
+  props<{ data: Payment }>()
 );
 
 export const paymentFailure = createAction(
-  '[Pay] Payment Pays Failure',
+  '[Pay] Payment Failure',
   props<{ error: any }>()
+);
+
+export const updateItemsByOwnerPayStatus = createAction(
+  '[Payment Success Effect] Update Paid Status of Items',
+  props<{ id: string }>()
+);
+
+export const updatePaymentsStatus = createAction(
+  '[Payment Success Effect] Update Transaction Status',
+  props<{
+    id: string,
+    status: string
+  }>()
 );

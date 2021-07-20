@@ -73,3 +73,8 @@ export const selectPayment = createSelector(
   selectPayState,
   (state) => state.payment
 )
+
+export const selectPayments = createSelector(
+  selectPayState,
+  (state) => state.payments
+)

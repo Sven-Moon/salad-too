@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { mutableOn } from 'ngrx-etc';
-import { CartItem, CartItems } from 'src/app/models/Item';
+import { CartItem, CartItems, Items } from 'src/app/models/Item';
 import { Contact } from 'src/app/models/User';
 import * as CartActions from './cart.actions';
 
@@ -54,6 +54,24 @@ export const reducer = createReducer(
     state.items.find(item =>
       item.name === action.item.name
     ).quantity = action.item.quantity
+  }),
+
+  // --------- PAY ---------
+  on(CartActions.removePaidItemsFromCart, (state, action) => {
+    // filter items with owner matching paid from transaction
+    let newArray: CartItems = []
+    state.items.forEach(item => {
+      action.ownerEmails.forEach(email => {
+        // remove if emails match (or don't add)
+        if (item.owner.email !== email) {
+          newArray.push(item)
+        }
+      })
+    })
+    return {
+      ...state,
+      items: newArray
+    }
   }),
 
   // boiler plate

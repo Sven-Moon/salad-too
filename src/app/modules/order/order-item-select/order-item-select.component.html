@@ -1,31 +1,30 @@
 
 <div class="select-wrap h-100-max">
-  <app-order-item-owner class="owner"></app-order-item-owner>
-
-
-
-  <div class="container scroll-y h-100">
-    <ng-container *ngFor="let item of items$ |async">
-      <div class="card flex-col item" (click)="setAsItem(item.id)">
-        <div class="name-price container flex-row">
-          <div class="name center-text">{{item.name}}</div>
-          <div class="price form-control">${{item.price}}</div>
-        </div>
-        <div class="background">
-          <div class="img-container">
-            <img src="{{item.img}}" alt="">
+  <div class="componentWindow">
+    <app-order-item-owner class="owner"></app-order-item-owner>
+    <div class="container scroll-y h-100">
+      <ng-container *ngFor="let item of items$ |async">
+        <div class="card flex-col item" (click)="setAsItem(item.id)">
+          <div class="name-price container flex-row">
+            <div class="name center-text">{{item.name}}</div>
+            <div class="price form-control">${{item.price}}</div>
+          </div>
+          <div class="background">
+            <div class="img-container">
+              <img src="{{item.img}}" alt="">
+            </div>
+          </div>
+          <div class="desc-container container">
+            <div class="img-window"></div>
+            <div class="description">{{item.description}}</div>
           </div>
         </div>
-        <div class="desc-container container">
-          <div class="img-window"></div>
-          <div class="description">{{item.description}}</div>
-        </div>
-      </div>
-
-    </ng-container>
+      </ng-container>
+    </div>
   </div>
-  <hr>
-  <button class="exit" routerLink="/order/select-item-type" (click)="back()">Try a Different Category</button>
+  <div class="actions">
+    <button class="exit" routerLink="/order/select-item-type" (click)="back()">Try a Different Category</button>
+  </div>
 
 
 </div>

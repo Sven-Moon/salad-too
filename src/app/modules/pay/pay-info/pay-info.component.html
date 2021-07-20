@@ -14,11 +14,11 @@
     <form [formGroup]="ccForm" (ngSubmit)="submit()" class="ccForm">
       <div class="form-group">
         <label>Name on card</label>
-        <input type="text" placeholder="Name" class="form-control" formControlName="name">
+        <input type="text" placeholder="Name" class="form-control" maxlength=20 formControlName="name">
       </div>
       <div class="form-group">
         <label>Card Number</label>
-        <input type="text" placeholder="#### #### #### ####" class="form-control" formControlName="ccNum">
+        <input type="tel" placeholder="#### #### #### ####" class="form-control" formControlName="ccNum" (keyup)="creditCardNumberSpacing()" #ccNum>
       </div>
 
       <div class="exp_cvv flex-row">

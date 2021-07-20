@@ -1,5 +1,5 @@
-<div class="h-100 flex-col">
-  <div class="payPanel scroll-y flex-col">
+<div class="componentWindow">
+  <!-- <div class="payPanel scroll-y flex-col"> -->
     <div class="text-center">Unpaid</div>
       <ng-container *ngFor="let owner of itemOwners">
         <div *ngIf="itemsByOwner[owner.email] as thisOwner" class="flex-row">
@@ -15,7 +15,7 @@
               <ng-container *ngFor="let item of thisOwner.items">
                 <div class="item flex-row">
                   <div class="itemName bold">{{pureName(item.name)}}</div>
-                  <div class="itemQty">({{item.quantity}}) x </div>
+                  <div class="itemQty">{{item.quantity}} @ </div>
                   <div class="itemPrice form-control">{{item.price |currency}}</div>
                 </div>
               </ng-container>
@@ -48,7 +48,7 @@
                 <ng-container *ngFor="let item of thisOwner.items">
                   <div class="item flex-row">
                     <div class="itemName bold">{{item.name}}</div>
-                    <div class="itemQty">({{item.quantity}}) x </div>
+                    <div class="itemQty">{{item.quantity}} @ </div>
                     <div class="itemPrice form-control">{{item.price |currency}}</div>
                   </div>
                 </ng-container>
@@ -65,9 +65,12 @@
         </div>
       </ng-container>
     <!-- </div> -->
-  </div>
-  <div class="actions">
-    <button type="button" (click)="paySelectedTotal()">Pay {{payment.amount|currency}}</button>
-    <button type="button" routerLink="/order/cart">Back to Cart</button>
-  </div>
+  <!-- </div> -->
+</div> <!-- componentWindow -->
+<div class="actions">
+  <button *ngIf="payment.amount!=null" type="button" (click)="paySelectedTotal()">Pay {{payment.amount|currency}}</button>
+  <!-- <button *ngIf="payment.amount==null" type="button" (click)="paySelectedTotal()">Pay $0.00</button> -->
+
+  <button type="button" routerLink="/order/cart">Back to Cart</button>
 </div>
+
