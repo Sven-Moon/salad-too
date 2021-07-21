@@ -70,12 +70,18 @@ export const reducer = createReducer(
   mutableOn(PayActions.updateItemsByOwnerPayStatus, (state, action) => {
     state.payments.find(payment =>
       payment.id === action.id).ownerSet.forEach(owner =>
-        state.itemsByOwner[owner].isPaid = true
+        state.itemsByOwner[owner].payStatus = 'paid'
       )
   }),
   // gated by status = 'paid)
   mutableOn(PayActions.updatePaymentsStatus, (state, action) => {
     state.payments.find(payment =>
       payment.id === action.id).status = action.status
+  }),
+  mutableOn(PayActions.markPayOnPickup, (state, action) => {
+    action.owners.forEach(owner =>
+      state.itemsByOwner[owner].payStatus = 'willPay'
+    )
+
   }),
 )

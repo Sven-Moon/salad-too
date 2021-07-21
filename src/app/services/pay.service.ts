@@ -5,7 +5,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { ccPayment, Payment, Payments } from '../models/Payment';
 import { removePaidItemsFromCart } from '../modules/order/state/cart/cart.actions';
-import { updateItemsByOwnerPayStatus, updatePaymentsStatus } from '../modules/pay/state/pay.actions';
+import { updateIsSelected, updateItemsByOwnerPayStatus, updatePaymentsStatus } from '../modules/pay/state/pay.actions';
 import { selectPayments } from '../modules/pay/state/pay.selectors';
 
 @Injectable({
@@ -89,6 +89,10 @@ export class PayService {
       // remove the items from the cart (they can't be modified now)
       let ownerEmails = matchingPayment.ownerSet
       this.store.dispatch(removePaidItemsFromCart({ ownerEmails }))
+      // deselect the selected owners
+      matchingPayment.ownerSet.forEach(owner =>
+        this.store.dispatch(updateIsSelected({ id: owner, selected: false }))
+      )
     }
   }
 

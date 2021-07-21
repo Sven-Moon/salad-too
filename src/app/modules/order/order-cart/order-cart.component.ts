@@ -4,6 +4,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Ingredient, Ingredients } from 'src/app/models/Ingredient';
 import { CartItem, CartItems } from 'src/app/models/Item';
+import { Contacts } from 'src/app/models/User';
+import { updateItemsByOwner } from '../../pay/state/pay.actions';
+import { selectItemOwnersFromCart, selectItemsByOwnerFromCart } from '../../pay/state/pay.selectors';
 import { changeCartItemQty, clearCart, duplicateCartItem, removeCartItem } from '../state/cart/cart.actions';
 import { selectCartItems, selectCartState } from '../state/cart/cart.selectors';
 import { editCartItem } from '../state/item/item.actions';
@@ -106,5 +109,17 @@ export class OrderCartComponent implements OnInit {
     }
   }
 
+  public forwardToPay() {
+    let ids: Contacts
+    let entities
+    this.store.select(selectItemsByOwnerFromCart).subscribe(items =>
+      entities = items
+    )
+    this.store.select(selectItemOwnersFromCart).subscribe(owners =>
+      ids = owners
+    )
+
+    this.store.dispatch(updateItemsByOwner({ entities, ids }))
+  }
 
 }

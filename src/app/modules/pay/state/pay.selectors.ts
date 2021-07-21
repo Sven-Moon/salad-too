@@ -32,7 +32,7 @@ export const selectItemsByOwnerFromCart = createSelector(
           items: [],
           total: 0,
           isSelected: false,
-          isPaid: false
+          payStatus: 'unpaid'
         }
       }
       itemsByOwner[item.owner.email].items.push(item)

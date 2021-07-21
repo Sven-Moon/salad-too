@@ -57,7 +57,7 @@
   </div>
 
   <div class="actions">
-    <button type="button" class="btn btn-go" routerLink="/pay">Pay</button>
+    <button type="button" class="btn btn-go" routerLink="/pay" (click)="forwardToPay()">Pay</button>
     <button type="button" class="btn btn-cancel" (click)="clearCartItems()">
       <div>Empty My Cart</div>
       <div class="text-sm">(start over)</div></button>

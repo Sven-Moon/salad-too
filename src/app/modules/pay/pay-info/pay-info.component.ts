@@ -4,9 +4,10 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Payment, Payments } from 'src/app/models/Payment';
-import { attemptPayment, clearPayment, updateCcInfo, updatePayment } from '../state/pay.actions';
+import { attemptPayment, clearPayment, markPayOnPickup, updateCcInfo, updateIsSelected, updatePayment } from '../state/pay.actions';
 import { selectPayment, selectPayments } from '../state/pay.selectors';
 import { ViewChild, ElementRef } from '@angular/core';
+import { removePaidItemsFromCart } from '../../order/state/cart/cart.actions';
 
 
 @Component({
@@ -51,7 +52,8 @@ export class PayInfoComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store,
     public payModalRef: BsModalRef,
-    private router: Router
+    private router: Router,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
@@ -123,6 +125,18 @@ export class PayInfoComponent implements OnInit {
     if (selectionStart < ccNum.value.length - 1) {
       input.setSelectionRange(selectionStart, selectionStart, 'none');
     }
+  }
+
+  payOnPickup() {
+    this.store.dispatch(markPayOnPickup({ owners: this.payment.ownerSet }))
+    this.store.dispatch(removePaidItemsFromCart({ ownerEmails: this.payment.ownerSet }))
+    // deselect the selected owners
+    this.payment.ownerSet.forEach(owner =>
+      this.store.dispatch(updateIsSelected({ id: owner, selected: false }))
+    )
+    this.store.dispatch(clearPayment())
+    this.modalService.hide(120)
+
   }
 
 }
