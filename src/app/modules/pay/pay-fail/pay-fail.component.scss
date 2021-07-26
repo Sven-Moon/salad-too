@@ -1,0 +1,12 @@
+@import "/src/styles.scss";
+
+.errorReport {
+  background-color: whitesmoke;
+  padding: 2rem;
+}
+
+.errorMessage {
+  margin: 1rem 0 1rem;
+  color: darkred;
+  background-color: rgb(255, 173, 173);
+}

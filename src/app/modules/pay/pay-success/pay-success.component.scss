@@ -1,1 +1,127 @@
 @import "/src/styles.scss";
+
+.form-control {
+  width: fit-content;
+}
+
+.inlineLink {
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  padding-inline: 0.2rem;
+  background-color: $bg-soft;
+}
+
+.inlineLink img {
+  height: 0.7rem;
+  margin-right: 0.2rem;
+}
+
+hr {
+  width: 75%;
+}
+
+.incompleteAlert {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.metaData {
+  font-family: monospace;
+  margin-bottom: 0.5rem;
+  justify-content: space-between;
+}
+
+.metaData div {
+}
+
+.receipt {
+  background-color: white;
+  // padding: 0.5rem;
+  width: 100%;
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+.receiptContent {
+  $receiptMargin: 1rem;
+  margin: $receiptMargin;
+  width: calc(100% - (2 * $receiptMargin));
+  height: calc(100% - (2 * $receiptMargin));
+}
+
+.lineItems {
+  padding-bottom: 1rem;
+}
+
+.lineItems label {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.lineItem {
+  border-bottom: 1px solid #eee;
+}
+
+.itemPrice {
+  margin-left: auto;
+}
+
+.totalContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  text-align: center;
+  margin-top: 0.3rem;
+}
+
+.totalContainer label {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.paidStatus {
+  font-family: monospace;
+  margin-top: 0.5rem;
+}
+
+.actions {
+  flex-direction: column;
+
+  &-row {
+    display: flex;
+    flex-direction: row;
+    font-size: large;
+    height: 45%;
+  }
+}
+
+.around {
+  justify-content: space-around;
+}
+
+.actions button {
+  font-size: medium;
+  padding-top: unset;
+  padding-bottom: unset;
+  min-height: 2rem;
+  width: 35%;
+  min-width: 7rem;
+  height: 100%;
+}
+
+.row1 button {
+  background-color: $primary;
+}
+
+.row2 button {
+  background-color: $primary-dark;
+}
+
+// @media only screen and (min-width: 500px) {
+//   row1 button {
+//     width: 80%
+//   }
+
+// }

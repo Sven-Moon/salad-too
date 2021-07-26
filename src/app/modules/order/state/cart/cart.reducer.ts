@@ -41,7 +41,7 @@ export const reducer = createReducer(
     return { ...state, items: newArray }
   }),
   mutableOn(CartActions.clearCart, (state) => ({
-    initialState
+    ...initialState
   })),
   on(CartActions.removeCartItem, (state, action) => (
     {

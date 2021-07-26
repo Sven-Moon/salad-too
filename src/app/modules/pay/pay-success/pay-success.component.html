@@ -1,2 +1,109 @@
-<div class="componentWindow">poof</div>
-<div class="actions"></div>
+<div class="componentWindow">
+  <div class="message card">
+    <h2 class="text-center">Success!</h2>
+    <div class="text-center">
+      Go to
+      <div routerLink="/order/status" class="inlineLink">
+        order status
+      </div> to see how your order is doing
+    </div>
+    <hr>
+    <div class="incompleteAlert text-center">
+      <b>NOTE:</b><br>
+      We'll start making your part of the order right away. Make sure any unpaid items are paid for as soon as possible to prevent delay on the complete order.
+    </div>
+  </div> <!--------- message --------->
+  <!-- ========= RECEIPT ========= -->
+  <div class="receipt">
+    <div class="receiptContent">
+      <div class="metaData flex-row">
+        <div class="flex-col">
+          <label for="">Transaction ID:</label>
+          <div class="transactionID">
+            12345678
+          </div>
+        </div>
+        <div class="flex-col">
+          <label for="">Order ID:</label>
+          <div>orderId</div>
+        </div>
+        <div class="dateTime">
+          Aug 14, 2009
+        </div>
+      </div>
+      <div class="lineItems">
+        <!-- <ng-container *ngFor=""> -->
+          <div class="flex-row lineItem">
+            <label for="">Item Name</label>
+            <div class="itemPrice">Item Price</div>
+          </div>
+          <div class="flex-row lineItem">
+            <label for="">Item Name</label>
+            <div class="itemPrice">Item Price</div>
+          </div>
+          <div class="flex-row lineItem">
+            <label for="">Item Name</label>
+            <div class="itemPrice">Item Price</div>
+          </div>
+          <div class="flex-row lineItem">
+            <label for="">Item Name</label>
+            <div class="itemPrice">Item Price</div>
+          </div>
+          <div class="flex-row lineItem">
+            <label for="">Item Name</label>
+            <div class="itemPrice">Item Price</div>
+          </div>
+          <div class="flex-row lineItem">
+            <label for="">Item Name</label>
+            <div class="itemPrice">Item Price</div>
+          </div>
+          <div class="flex-row lineItem">
+            <label for="">Item Name</label>
+            <div class="itemPrice">Item Price</div>
+          </div>
+          <div class="flex-row lineItem">
+            <label for="">Item Name</label>
+            <div class="itemPrice">Item Price</div>
+          </div>
+          <div class="flex-row lineItem">
+            <label for="">Item Name</label>
+            <div class="itemPrice">Item Price</div>
+          </div>
+          <div class="flex-row lineItem">
+            <label for="">Item Name</label>
+            <div class="itemPrice">Item Price</div>
+          </div>
+          <div class="flex-row lineItem">
+            <label for="">Item Name</label>
+            <div class="itemPrice">Item Price</div>
+          </div>
+          <div class="flex-row lineItem">
+            <label for="">Item Name</label>
+            <div class="itemPrice">Item Price</div>
+          </div>
+        <!-- </ng-container> -->
+      </div>
+      <div class="totalContainer flex-row">
+        <label for="total">Your Total:</label>
+          <div class="form-control total">
+            $000.00
+          </div>
+      </div>
+      <div class="paidStatus">
+        <div>Payment Method: Credit card</div>
+        <div>Card Number: **** **** **** 1234</div>
+        <div>Approved</div>
+      </div>
+    </div>
+  </div>  <!------------ receipt ------------>
+</div> <!------------ component window ------------>
+<div class="actions">
+  <div class="actions-row row1 around">
+    <button type="button" class="btn">Pay for More</button>
+    <button type="button" class="btn">Email Receipt</button>
+  </div>
+  <div class="actions-row row2 around">
+    <button type="button" class="btn">Status</button>
+    <button type="button" class="btn">Home</button>
+  </div>
+</div>

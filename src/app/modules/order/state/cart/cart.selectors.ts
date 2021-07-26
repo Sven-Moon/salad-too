@@ -21,9 +21,11 @@ export const selectCartCount = createSelector(
   selectCartState,
   (state): number => {
     let count: number = 0
-    state.items.forEach(item =>
-      count += item.quantity
-    )
+    if (state.items) {
+      state.items.forEach(item =>
+        count += item.quantity
+      )
+    }
     return count
   }
 )
