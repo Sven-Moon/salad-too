@@ -8,6 +8,7 @@ import { attemptPayment, clearPayment, markPayOnPickup, updateCcInfo, updateIsSe
 import { selectPayment, selectPayments } from '../state/pay.selectors';
 import { ViewChild, ElementRef } from '@angular/core';
 import { removePaidItemsFromCart } from '../../order/state/cart/cart.actions';
+import { selectCartTotal } from '../../order/state/cart/cart.selectors';
 
 
 @Component({
@@ -52,16 +53,12 @@ export class PayInfoComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store,
     public payModalRef: BsModalRef,
-    private router: Router,
     private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
-    this.store.select(selectPayment).subscribe(payment =>
-      this.payment = payment
-    )
-    this.store.select(selectPayments).subscribe(payment =>
-      this.payments = payment
+    this.store.select(selectCartTotal).subscribe(total =>
+      this.total = total
     )
   }
 
@@ -79,19 +76,14 @@ export class PayInfoComponent implements OnInit {
     // cc4 is last 4 digits of cc#
     let cc4: string = (this.ccForm.controls.ccNum.value).toString().substr(15, 4)
     let payment = {
-      ...this.payment,
       id: id,
+      amount: this.total,
       cc4: cc4,
       status: "pending"
     }
-    // this.store.dispatch(updateCcInfo({ ccInfo }))
-
     this.store.dispatch(updatePayment({ payment }))
-    this.store.dispatch(attemptPayment({ payment: this.payment, ccInfo }))
+    this.store.dispatch(attemptPayment({ payment, ccInfo }))
     this.store.dispatch(clearPayment())
-
-    // console.log('I tried before')
-    // this.modalService.hide(120)
   }
 
   /* Insert spaces to enhance legibility of credit card numbers */
@@ -125,18 +117,6 @@ export class PayInfoComponent implements OnInit {
     if (selectionStart < ccNum.value.length - 1) {
       input.setSelectionRange(selectionStart, selectionStart, 'none');
     }
-  }
-
-  payOnPickup() {
-    this.store.dispatch(markPayOnPickup({ owners: this.payment.ownerSet }))
-    this.store.dispatch(removePaidItemsFromCart({ ownerEmails: this.payment.ownerSet }))
-    // deselect the selected owners
-    this.payment.ownerSet.forEach(owner =>
-      this.store.dispatch(updateIsSelected({ id: owner, selected: false }))
-    )
-    this.store.dispatch(clearPayment())
-    this.modalService.hide(120)
-
   }
 
 }

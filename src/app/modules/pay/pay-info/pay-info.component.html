@@ -8,7 +8,7 @@
     <!-- ================ TOTAL ================ -->
     <div class="totalPanel flex-row">
       <div class="totalLabel">Your Total</div>
-      <div class="total form-control">{{payment.amount|currency}}</div>
+      <div class="total form-control">{{total|currency}}</div>
     </div>
     <!-- ================ CC FORM ================ -->
     <form [formGroup]="ccForm" (ngSubmit)="submit()" class="ccForm">
@@ -46,15 +46,12 @@
     <!-- ================ ACTIONS ================ -->
     <div class="actions modalActions">
       <button type="submit" [disabled]="ccForm.invalid" class="btn btn-go">
-        Pay {{payment.amount |currency}}
+        Pay {{total |currency}}
       </button>
       <button type="button" class="btn btn-cancel" (click)="payModalRef.hide()">
       Cancel
     </button>
   </div> <!-- ---- actions ---- -->
-  <div class="actions modalActions">
-    <button type="button" (click)="payOnPickup()" class="btn btn-primary pickup">Pay on Pickup</button>
-  </div>
   </form> <!-- ---- cc form ---- -->
   </div> <!-- ---- modal body ---- -->
 </div> <!-- ---- modal wrap ---- -->

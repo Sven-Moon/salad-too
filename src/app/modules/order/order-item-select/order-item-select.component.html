@@ -2,7 +2,7 @@
 <div class="select-wrap h-100-max">
   <div class="componentWindow">
     <app-order-item-owner class="owner"></app-order-item-owner>
-    <div class="container scroll-y h-100">
+    <div class="scroll-y h-100">
       <ng-container *ngFor="let item of items$ |async">
         <div class="card flex-col item" (click)="setAsItem(item.id)">
           <div class="name-price container flex-row">

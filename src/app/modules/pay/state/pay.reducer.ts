@@ -9,20 +9,15 @@ import * as PayActions from './pay.actions';
 export const payFeatureKey = 'pay';
 
 export interface State {
-  itemsByOwner: ItemsByOwner,
-  itemOwners: Contacts,
   payment: Payment,
   payments: Payments
 }
 
 export const initialState: State = {
-  itemsByOwner: {},
-  itemOwners: [],
   payment: {
     id: null,
     amount: 0,
     status: null,
-    ownerSet: [],
     error: null
   },
   payments: []
@@ -36,11 +31,6 @@ export const reducer = createReducer(
     // note ids is a CONTACT: id is contact.email
     ...state, itemsByOwner: action.entities, itemOwners: action.ids
   })),
-  mutableOn(PayActions.updateIsSelected, (state, action) => {
-    // note ids is a CONTACT: id is contact.email
-    state.itemsByOwner[action.id].isSelected = action.selected
-    // = !state.itemsByOwner[action.id].isSelected
-  }),
   mutableOn(PayActions.createTransactionId, (state, action) => {
     state.payment.id = action.id
   }),
@@ -64,24 +54,9 @@ export const reducer = createReducer(
       payment.status === 'pending').error = action.error
 
   }),
-
-
-
-  mutableOn(PayActions.updateItemsByOwnerPayStatus, (state, action) => {
-    state.payments.find(payment =>
-      payment.id === action.id).ownerSet.forEach(owner =>
-        state.itemsByOwner[owner].payStatus = 'paid'
-      )
-  }),
   // gated by status = 'paid)
   mutableOn(PayActions.updatePaymentsStatus, (state, action) => {
     state.payments.find(payment =>
       payment.id === action.id).status = action.status
-  }),
-  mutableOn(PayActions.markPayOnPickup, (state, action) => {
-    action.owners.forEach(owner =>
-      state.itemsByOwner[owner].payStatus = 'willPay'
-    )
-
   }),
 )

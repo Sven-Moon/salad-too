@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CartItems } from 'src/app/models/Item';
-import { Contact } from 'src/app/models/User';
+import { CartItems, ItemsByOwner } from 'src/app/models/Item';
+import { Contact, Contacts } from 'src/app/models/User';
 import * as fromCart from './cart.reducer';
 
 export const selectCartState = createFeatureSelector<fromCart.State>(
@@ -27,5 +27,53 @@ export const selectCartCount = createSelector(
       )
     }
     return count
+  }
+)
+
+export const selectItemOwners = createSelector(
+  selectCartItems,
+  (items): Contacts => {
+    let owners: Contact[] = []
+    items.forEach(item => {
+      if (!owners.find(owner => owner.email === item.owner.email))
+        owners.push(item.owner)
+    })
+    return owners
+  }
+)
+
+export const selectItemsByOwner = createSelector(
+  selectCartItems,
+  (items): ItemsByOwner => {
+    let itemsByOwner: ItemsByOwner = {}
+    items.forEach(item => {
+      if (!itemsByOwner[item.owner.email]) {
+        itemsByOwner[item.owner.email] = {
+          owner: item.owner,
+          items: [],
+          total: 0,
+          isSelected: false,
+          payStatus: 'unpaid'
+        }
+      }
+      itemsByOwner[item.owner.email].items.push(item)
+      itemsByOwner[item.owner.email].total += item.quantity * +item.price
+    }
+    )
+    return itemsByOwner
+  }
+)
+
+export const selectCartTotal = createSelector(
+  selectItemOwners,
+  selectItemsByOwner,
+  (owners, items): number => {
+    let cartTotal: number = 0
+    if (owners) {
+      owners.forEach(owner =>
+        cartTotal += items[owner.email].total
+      )
+    }
+    return cartTotal
   }
 )

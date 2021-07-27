@@ -63,9 +63,11 @@ $modalActionsHt: 3rem;
 }
 
 .card {
-  width: calc(100% - (2 * (1rem w+ 0.5rem)));
-  box-shadow: 2px 2px 2px 1px $shadow;
-  margin: 0.5rem 1rem;
+  $shadow-x-offset: 2px;
+  $shadow-blur: 1px;
+  width: calc(100% - #{$shadow-x-offset} - #{$shadow-blur});
+  box-shadow: 2px $shadow-x-offset 2px $shadow-blur $shadow;
+  margin: 0.5rem 0;
   padding: 0.5rem;
   background-color: white;
   box-sizing: border-box;

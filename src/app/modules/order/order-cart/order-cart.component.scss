@@ -8,6 +8,51 @@
   overflow-y: auto;
 }
 
+.owner {
+  $ownerPadding: 0.5rem;
+  display: flex;
+  padding: $ownerPadding;
+  width: calc(100% - (2 * #{$ownerPadding}));
+  border-radius: 0.5rem;
+  background-color: rgb(174, 174, 255);
+  margin-bottom: 0.5rem;
+}
+
+.owner img {
+  height: 2rem;
+  margin-right: 1rem;
+}
+
+.ownerInfo {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.triangle {
+  margin-right: 0.5rem;
+}
+
+.triangle img {
+  width: 1.5rem;
+  cursor: auto;
+  object-fit: scale-down;
+}
+
+.ownerName {
+  font-size: 2rem;
+}
+
+.ownerSubtotal {
+  font-size: 1.75rem;
+  margin-left: auto;
+  order: 2;
+}
+
+.form-control {
+  width: fit-content;
+}
+
 .itemsContainer {
 }
 
@@ -28,12 +73,14 @@
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
+  justify-items: center;
   font-size: 2rem;
 }
 
 .qtyContainer img {
   width: 1.5rem;
   object-fit: scale-down;
+  margin-inline: auto;
 }
 
 .itemInfo {

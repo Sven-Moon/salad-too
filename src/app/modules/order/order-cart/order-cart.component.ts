@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { Ingredient, Ingredients } from 'src/app/models/Ingredient';
-import { CartItem, CartItems } from 'src/app/models/Item';
+import { CartItem, CartItems, ItemsByOwner } from 'src/app/models/Item';
 import { Contacts } from 'src/app/models/User';
-import { updateItemsByOwner } from '../../pay/state/pay.actions';
-import { selectItemOwnersFromCart, selectItemsByOwnerFromCart } from '../../pay/state/pay.selectors';
+import { PayInfoComponent } from '../../pay/pay-info/pay-info.component';
 import { changeCartItemQty, clearCart, duplicateCartItem, removeCartItem } from '../state/cart/cart.actions';
-import { selectCartItems, selectCartState } from '../state/cart/cart.selectors';
+import { selectCartItems, selectCartState, selectCartTotal, selectItemOwners, selectItemsByOwner } from '../state/cart/cart.selectors';
 import { editCartItem } from '../state/item/item.actions';
 import { selectIngredientWithPrice } from '../state/staticData/static-data.selectors';
 
@@ -24,26 +24,55 @@ export class OrderCartComponent implements OnInit {
   allIngredients: Ingredients
   cartIngredients: { [key: string]: Ingredients } = {}
   removeWarningFlag: boolean = false
+  itemsByOwner: ItemsByOwner
+  itemOwners: Contacts
+  itemsVisible: { [id: string]: { visible: boolean } } = {}
+  cartTotal$: Observable<number>
+  bsModalRef: BsModalRef
 
   constructor(
     private store: Store,
-    private router: Router
+    private router: Router,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
     this.store.select(selectCartItems).subscribe(items =>
       this.cartItems = items
     )
-    this.store.select(selectCartState).subscribe(state =>
-      this.cartItems = state.items
-    )
+    // used to look up item ingredients lists
     this.store.select(selectIngredientWithPrice).subscribe(allIngredients =>
       this.allIngredients = allIngredients
     )
-
+    // each item starts with empty ingredients listing
+    // as View is toggled, this will be populated (then cleared)
     this.cartItems.forEach(item =>
       this.cartIngredients[item.name] = []
     )
+    // used to organize the items by owner
+    this.store.select(selectItemsByOwner).subscribe(items =>
+      this.itemsByOwner = items
+    )
+    // this.itemOwners$ = this.store.select(selectItemOwners)
+    this.store.select(selectItemOwners).subscribe(owners =>
+      this.itemOwners = owners
+    )
+    this.itemOwners.forEach(owner =>
+      this.itemsVisible[owner.email] = { visible: false }
+    )
+    this.cartTotal$ = this.store.select(selectCartTotal)
+  }
+
+  public viewOwnerItems(id: string): void {
+    console.log(this.itemsVisible)
+    this.itemsVisible[id].visible = true
+    console.log(this.itemsVisible)
+  }
+
+  public hideOwnerItems(id: string): void {
+    console.log(this.itemsVisible)
+    this.itemsVisible[id].visible = false
+    console.log(this.itemsVisible)
   }
 
   public editCartItem(id: string) {
@@ -109,17 +138,8 @@ export class OrderCartComponent implements OnInit {
     }
   }
 
-  public forwardToPay() {
-    let ids: Contacts
-    let entities
-    this.store.select(selectItemsByOwnerFromCart).subscribe(items =>
-      entities = items
-    )
-    this.store.select(selectItemOwnersFromCart).subscribe(owners =>
-      ids = owners
-    )
-
-    this.store.dispatch(updateItemsByOwner({ entities, ids }))
+  public pay(): void {
+    this.bsModalRef = this.modalService.show(PayInfoComponent, { id: 120 })
   }
 
 }

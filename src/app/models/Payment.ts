@@ -3,7 +3,6 @@ export interface Payment {
   amount: number,
   status: string,
   error?: null
-  ownerSet?: string[]
   cc4?: string
 }
 

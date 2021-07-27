@@ -5,12 +5,12 @@ import { Contact } from "./User";
 export interface Item {
   id: string
   name: string
-  itemGroup: string
+  itemGroup: string // salad, sandwitch, etc.
   img: string
   ingredients?: string[]
   description?: string
   price?: string
-  type?: string
+  type?: string // itemGroup subtype: eg juice (kind of drink)
   owner?: Contact,
   quantity?: number
 }
