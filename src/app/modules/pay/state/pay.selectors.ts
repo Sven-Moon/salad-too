@@ -1,6 +1,7 @@
 import { state } from '@angular/animations';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CartItem, CartItems, ItemsByOwner } from 'src/app/models/Item';
+import { Payment, Payments } from 'src/app/models/Payment';
 import { Contact, Contacts } from 'src/app/models/User';
 import { selectCartItems } from '../../order/state/cart/cart.selectors';
 import * as fromPay from './pay.reducer';
@@ -71,10 +72,11 @@ export const selectUserPayTotal = createSelector(
 
 export const selectPayment = createSelector(
   selectPayState,
-  (state) => state.payment
+  (state): Payment => state.payment
 )
 
 export const selectPayments = createSelector(
   selectPayState,
-  (state) => state.payments
+  (state): Payments => state.payments
 )
+

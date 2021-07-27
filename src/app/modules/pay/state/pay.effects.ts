@@ -6,11 +6,12 @@ import { Observable, EMPTY, of } from 'rxjs';
 import * as PayActions from './pay.actions';
 import * as CartActions from 'src/app/modules/order/state/cart/cart.actions'
 import { PayService } from 'src/app/services/pay.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Payment } from 'src/app/models/Payment';
 import { Store } from '@ngrx/store';
+import { Route } from '@angular/compiler/src/core';
 
 
 
@@ -63,7 +64,8 @@ export class PayEffects {
       ofType(PayActions.paymentSuccess),
       tap((action) => {
         if (action.data.status === 'approved') {
-          this.router.navigate(['/pay/success'])
+          // this.router.navigate(['/pay/success/', { id: action.data.id }])
+          this.router.navigate(['/pay/success/', { id: action.data.id }])
         } else {
           this.router.navigate(['/pay/failed'])
         }

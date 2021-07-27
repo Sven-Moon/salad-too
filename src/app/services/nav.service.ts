@@ -19,22 +19,31 @@ export class NavService {
     switch (url) {
       case '/cart-launch':
         positionValue = 5
+        break
       case '/cart-customize-item':
         positionValue = 5
+        break
       case '/cart-item-select':
         positionValue = 5
+        break
       case '/cart-type-select':
         positionValue = 5
+        break
       case '/cart-launch':
         positionValue = 5
+        break
       case '/cart-view':
         positionValue = 4
+        break
       case '/pay':
         positionValue = 3
+        break
       case '/order-status':
         positionValue = 2
+        break
       case '/profile':
         positionValue = 1
+        break
       default: 5
     }
     // positionValue = s a string as X%
