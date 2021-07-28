@@ -4,10 +4,9 @@
 .wrapper {
   display: flex;
   justify-content: space-around;
-  padding: $padding 1rem;
-  height: calc(#{$ownerHeight} - (#{$padding} * 2));
+  height: calc(#{$ownerHeight});
+  // height: calc(#{$ownerHeight} - (#{$padding} * 2));
   width: calc(100% - (2 * 1rem));
-  margin: 0.25rem 0;
 }
 
 .item-msg {

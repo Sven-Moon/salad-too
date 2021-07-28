@@ -1,12 +1,12 @@
-import { Items } from "./Item";
+import { CartItems, Items } from "./Item";
 import { OrderStatus } from "./OrderStatus";
 
 export interface Order {
   id: string
-  items: Items
+  items: CartItems
   total: string
-  amountPaid: string
   status: OrderStatus
   user: string
-  transactions: string[]
+  received: string
+  completed: string
 }

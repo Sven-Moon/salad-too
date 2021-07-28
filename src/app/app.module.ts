@@ -24,7 +24,9 @@ import { AlertModule } from '@full-fledged/alerts';
 import { RouteEffects } from './store/effects/route.effects';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PayModule } from './modules/pay/pay.module'
+import { PayModule } from './modules/pay/pay.module';
+import { OrdersModule } from './modules/orders/orders.module';
+import { OwnerModule } from './modules/owner/owner.module'
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { PayModule } from './modules/pay/pay.module'
     //#endregion store
     EffectsModule.forRoot([SpinnerEffects, AlertEffects, RouteEffects]),
     PayModule,
+    OrdersModule,
+    OwnerModule,
   ],
   providers: [
     ...(environment.useMocking ? AppMockInterceptors : [])
