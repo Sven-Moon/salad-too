@@ -3,13 +3,34 @@
 .header-wrap {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   height: $barHeight;
   position: absolute;
   top: 0;
   left: 0;
   background-color: $success-bg;
+}
+
+.logoPadding {
+  display: flex;
+  flex-grow: 1;
+  background-color: $danger-dark;
+  width: initial;
+}
+
+.header {
+  display: flex;
+  max-width: 768px;
+  min-width: 300px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.navPadding {
+  display: flex;
+  flex-grow: 1;
+  background-color: $success-dark;
 }
 
 .logo {
@@ -25,5 +46,4 @@
   display: flex;
   flex-flow: row nowrap;
   margin: 0 3vw;
-  padding: 0;
 }
