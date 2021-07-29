@@ -1,4 +1,5 @@
 @import "src/styles.scss";
+@import "../order-item-owner/order-item-owner.component.scss";
 $border-wide: 0.5rem;
 
 .adder-wrap {
@@ -9,7 +10,6 @@ $border-wide: 0.5rem;
   max-width: $maxPopupWidth-sm;
   margin-inline: auto;
   height: fit-content;
-  // padding: 3vmin;
   z-index: 2;
 }
 

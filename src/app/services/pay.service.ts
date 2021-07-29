@@ -61,12 +61,17 @@ export class PayService {
       orderId: info.id,
       transactionId: transactionId,
       amount: info.amount,
-      status: this.randSuccess(),
+      status: this.successByCcNum(info.ccNum),
       cc4: info.ccNum.slice(15),
       dateTime: dateTime
     }
   }
 
+  private successByCcNum(ccNum: string): string {
+    return ccNum === '1234 5678 9012 3451'
+      ? 'declined'
+      : 'approved'
+  }
 
   private randSuccess(): string {
     let success: boolean = Math.random() % 2 < .95

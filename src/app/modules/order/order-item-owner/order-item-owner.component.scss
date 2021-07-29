@@ -36,3 +36,10 @@
 .form-control {
   margin-right: 0.5rem;
 }
+
+.form-control {
+  height: calc(1.25rem + 2 * 0.25rem);
+  margin-right: 0.5rem;
+  min-width: fit-content;
+  padding-inline: 1rem;
+}

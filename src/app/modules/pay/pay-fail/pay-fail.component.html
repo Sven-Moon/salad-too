@@ -1,5 +1,5 @@
 <div class="componentWindow">
-  <div class="message card text-center">
+  <div class="message card text-center bold">
     Oops!
     We tried but there was an error with your payment.
   </div>
@@ -10,10 +10,6 @@
   </div>
 </div> <!------------ component window ------------>
 <div class="actions">
-  <button type="button">Try Again</button>
-  <button type="button">Remove My Items</button>
-</div>
-<div class="actions">
-  <button type="button">Cart</button>
-  <button type="button">Pay Select</button>
+  <button type="button" (click)="tryAgain()">Try Again</button>
+  <button type="button" (click)="cancel()" >Cancel Order</button>
 </div>
