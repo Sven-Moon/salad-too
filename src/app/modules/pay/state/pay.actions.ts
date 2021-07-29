@@ -18,15 +18,15 @@ export const updateItemOwners = createAction(
   props<{ payload: Contacts }>()
 )
 
-export const updateIsSelected = createAction(
-  '[Pay Choose] Update Owner Selected Status',
-  props<{ id: string, selected: boolean }>()
-)
+// export const updateIsSelected = createAction(
+//   '[Pay Choose] Update Owner Selected Status',
+//   props<{ id: string, selected: boolean }>()
+// )
 
-export const updatePayment = createAction(
-  '[Pay Choose] Update Payment',
-  props<{ payment: Payment }>()
-)
+// export const updatePayment = createAction(
+//   '[Pay Choose] Update Payment',
+//   props<{ payment: Payment }>()
+// )
 
 
 // ============ Pay Info ============
@@ -52,11 +52,6 @@ export const clearPayment = createAction(
   '[Pay] Clear Payment'
 );
 
-export const markPayOnPickup = createAction(
-  '[Pay Info] Update Paid Status of Items',
-  props<{ owners: string[] }>()
-);
-
 export const paymentSuccess = createAction(
   '[Pay] Payment Success',
   props<{ data: Payment }>()
@@ -72,11 +67,15 @@ export const updateItemsByOwnerPayStatus = createAction(
   props<{ id: string }>()
 );
 
-export const updatePaymentsStatus = createAction(
+export const updatePaymentStatus = createAction(
   '[Payment Success Effect] Update Transaction Status',
   props<{
-    id: string,
     status: string
   }>()
+);
+
+export const updateTransactionNumber = createAction(
+  '[Pay Success (Effect)] Update Transaction Number',
+  props<{ id: string }>()
 );
 

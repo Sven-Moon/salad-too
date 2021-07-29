@@ -3,31 +3,30 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
+import { CartItems } from '../models/Item';
+import { Order, OrderStatus } from '../models/Order';
 import { ccPayment, Payment, Payments } from '../models/Payment';
 import { clearCart, removePaidItemsFromCart } from '../modules/order/state/cart/cart.actions';
-import { updateIsSelected, updateItemsByOwnerPayStatus, updatePaymentsStatus } from '../modules/pay/state/pay.actions';
-import { selectPayments } from '../modules/pay/state/pay.selectors';
+import { selectCartItems } from '../modules/order/state/cart/cart.selectors';
+import { addPayment, updateLastTransaction, updateOrderStatus, updateSelectedOrderId } from '../modules/orders/state/orders.actions';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PayService {
-  payments: Payments
 
 
   constructor(
     private httpClient: HttpClient,
     private store: Store
   ) {
-    this.store.select(selectPayments).subscribe(existingPayments =>
-      this.payments = existingPayments
-    )
   }
 
   baseUrl: string = 'http://localhost:3000/payments'
   body = {}
 
-  public pay(ccPayment: ccPayment,): Observable<any> {
+  public pay(ccPayment: ccPayment): Observable<any> {
     return this.httpClient.post(this.baseUrl, ccPayment)
       .pipe(
         switchMap(() => {
@@ -56,10 +55,13 @@ export class PayService {
   }
 
   private buildReplyObj(info: ccPayment): Payment {
+    let transactionId = Math.random().toFixed(8).slice(2)
     return {
-      id: info.id,
+      orderId: info.id,
+      transactionId: transactionId,
       amount: info.amount,
       status: this.randSuccess(),
+      cc4: info.ccNum.slice(15)
     }
   }
 
@@ -72,17 +74,24 @@ export class PayService {
   }
 
   public processReply(data: Payment): void {
-    // queue up the matching payment
-    let matchingPayment: Payment = this.payments.find(payment =>
-      payment.id === data.id
-    )
-    // update the recorded payment transaction status in store:pay
-    this.store.dispatch(updatePaymentsStatus({
-      id: data.id,
-      status: data.status
-    }))
+    // ***************************************
+    // called from effect on payment success
+    // (1) add transaction to transaction list & update status
+    // (2) clear the cart
+    // (x) Navigate to success page to display receipt (handled by effect)
+
+    let matchingOrder: Order
+    this.store.dispatch(updateSelectedOrderId({ id: data.orderId }))
+    this.store.dispatch(updateLastTransaction({ transaction: data }))
+    this.store.dispatch(addPayment({ payment: data }))
+
     // if the status came back paid,
     if (data.status === 'approved') {
+      let cartItems: CartItems
+      this.store.select(selectCartItems).subscribe(items =>
+        cartItems = items
+      )
+      this.store.dispatch(updateOrderStatus({ orderId: data.orderId }))
       this.store.dispatch(clearCart())
     }
   }

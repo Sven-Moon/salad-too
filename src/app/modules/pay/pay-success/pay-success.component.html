@@ -20,78 +20,34 @@
         <div class="flex-col">
           <label for="">Transaction ID:</label>
           <div class="transactionID">
-            12345678
+            {{receipt.transaction.transactionId}}
           </div>
         </div>
         <div class="flex-col">
           <label for="">Order ID:</label>
-          <div>orderId</div>
+          <div>{{receipt.order.id}}</div>
         </div>
         <div class="dateTime">
           Aug 14, 2009
         </div>
       </div>
       <div class="lineItems">
-        <!-- <ng-container *ngFor=""> -->
+        <ng-container *ngFor="let item of receipt.order.items">
           <div class="flex-row lineItem">
-            <label for="">Item Name</label>
-            <div class="itemPrice">Item Price</div>
+            <label for="">{{item.name}}</label>
+            <div class="itemPrice">{{item.price}}</div>
           </div>
-          <div class="flex-row lineItem">
-            <label for="">Item Name</label>
-            <div class="itemPrice">Item Price</div>
-          </div>
-          <div class="flex-row lineItem">
-            <label for="">Item Name</label>
-            <div class="itemPrice">Item Price</div>
-          </div>
-          <div class="flex-row lineItem">
-            <label for="">Item Name</label>
-            <div class="itemPrice">Item Price</div>
-          </div>
-          <div class="flex-row lineItem">
-            <label for="">Item Name</label>
-            <div class="itemPrice">Item Price</div>
-          </div>
-          <div class="flex-row lineItem">
-            <label for="">Item Name</label>
-            <div class="itemPrice">Item Price</div>
-          </div>
-          <div class="flex-row lineItem">
-            <label for="">Item Name</label>
-            <div class="itemPrice">Item Price</div>
-          </div>
-          <div class="flex-row lineItem">
-            <label for="">Item Name</label>
-            <div class="itemPrice">Item Price</div>
-          </div>
-          <div class="flex-row lineItem">
-            <label for="">Item Name</label>
-            <div class="itemPrice">Item Price</div>
-          </div>
-          <div class="flex-row lineItem">
-            <label for="">Item Name</label>
-            <div class="itemPrice">Item Price</div>
-          </div>
-          <div class="flex-row lineItem">
-            <label for="">Item Name</label>
-            <div class="itemPrice">Item Price</div>
-          </div>
-          <div class="flex-row lineItem">
-            <label for="">Item Name</label>
-            <div class="itemPrice">Item Price</div>
-          </div>
-        <!-- </ng-container> -->
+        </ng-container>
       </div>
       <div class="totalContainer flex-row">
         <label for="total">Your Total:</label>
           <div class="form-control total">
-            $000.00
+            {{receipt.order.total}}
           </div>
       </div>
       <div class="paidStatus">
         <div>Payment Method: Credit card</div>
-        <div>Card Number: **** **** **** 1234</div>
+        <div>Card Number: **** **** **** {{receipt.transaction.cc4}}</div>
         <div>Approved</div>
       </div>
     </div>

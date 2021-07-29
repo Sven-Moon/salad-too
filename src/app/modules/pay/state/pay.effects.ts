@@ -23,9 +23,8 @@ export class PayEffects {
 
       ofType(PayActions.attemptPayment),
       mergeMap((action) =>
-        /** An EMPTY observable only emits completion. Replace with your own observable API request */
         this.payService$.pay({
-          id: action.payment.id,
+          id: action.payment.orderId,
           amount: action.payment.amount,
           name: action.ccInfo.name,
           ccNum: action.ccInfo.ccNum,
@@ -65,7 +64,7 @@ export class PayEffects {
       tap((action) => {
         if (action.data.status === 'approved') {
           // this.router.navigate(['/pay/success/', { id: action.data.id }])
-          this.router.navigate(['/pay/success/', { id: action.data.id }])
+          this.router.navigate(['/pay/success/', { id: action.data.transactionId }])
         } else {
           this.router.navigate(['/pay/failed'])
         }

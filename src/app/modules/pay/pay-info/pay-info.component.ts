@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Payment, Payments } from 'src/app/models/Payment';
-import { attemptPayment, clearPayment, markPayOnPickup, updateCcInfo, updateIsSelected, updatePayment } from '../state/pay.actions';
-import { selectPayment, selectPayments } from '../state/pay.selectors';
+import { attemptPayment, clearPayment } from '../state/pay.actions';
 import { ViewChild, ElementRef } from '@angular/core';
-import { removePaidItemsFromCart } from '../../order/state/cart/cart.actions';
-import { selectCartTotal } from '../../order/state/cart/cart.selectors';
+import { selectCartItems, selectCartTotal } from '../../order/state/cart/cart.selectors';
+import { Order } from 'src/app/models/Order';
+import { CartItems } from 'src/app/models/Item';
+import { createOrder } from '../../orders/state/orders.actions';
 
 
 @Component({
@@ -72,18 +72,34 @@ export class PayInfoComponent implements OnInit {
       cvv: this.ccForm.controls.cvv.value,
     }
     // add info for storage (match with reply from server)
-    let id: string = Math.random().toString().substr(2, 8)
+    let orderId: string = Math.random().toString().substr(2, 8)
     // cc4 is last 4 digits of cc#
     let cc4: string = (this.ccForm.controls.ccNum.value).toString().substr(15, 4)
     let payment = {
-      id: id,
+      orderId: orderId,
       amount: this.total,
       cc4: cc4,
       status: "pending"
     }
-    this.store.dispatch(updatePayment({ payment }))
+    let cartItems: CartItems
+    this.store.select(selectCartItems).subscribe(items =>
+      cartItems = items
+    )
+
+    let order: Order = {
+      id: orderId,
+      items: cartItems,
+      total: '$' + this.total.toFixed(2),
+      status: "Pending Payment",
+      payments: [],
+      received: null,
+      completed: null
+    }
+
+    this.store.dispatch(createOrder({ order }))
+    // this.store.dispatch(updatePayment({ payment }))
     this.store.dispatch(attemptPayment({ payment, ccInfo }))
-    this.store.dispatch(clearPayment())
+    // this.store.dispatch(clearPayment())
   }
 
   /* Insert spaces to enhance legibility of credit card numbers */

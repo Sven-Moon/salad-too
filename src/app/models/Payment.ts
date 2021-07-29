@@ -1,7 +1,8 @@
 export interface Payment {
-  id: string,
-  amount: number,
-  status: string,
+  orderId: string
+  transactionId?: string
+  amount: number
+  status: string
   error?: null
   cc4?: string
 }

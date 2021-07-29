@@ -45,6 +45,9 @@ import { OwnerModule } from './modules/owner/owner.module'
     //#region ============= App Modules
     AuthModule,
     OrderModule,
+    OrdersModule,
+    OwnerModule,
+    PayModule,
     SharedModule,
     //#endregion app modules
     //#region ============= Third Party
@@ -63,9 +66,6 @@ import { OwnerModule } from './modules/owner/owner.module'
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     //#endregion store
     EffectsModule.forRoot([SpinnerEffects, AlertEffects, RouteEffects]),
-    PayModule,
-    OrdersModule,
-    OwnerModule,
   ],
   providers: [
     ...(environment.useMocking ? AppMockInterceptors : [])
