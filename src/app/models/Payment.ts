@@ -5,6 +5,7 @@ export interface Payment {
   status: string
   error?: null
   cc4?: string
+  dateTime?: number
 }
 
 export type Payments = Payment[]

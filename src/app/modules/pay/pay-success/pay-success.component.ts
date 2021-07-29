@@ -23,5 +23,34 @@ export class PaySuccessComponent implements OnInit {
     )
     console.log(this.receipt.transaction)
   }
+  public print(): void {
+    window.print()
 
+    //TODO: [SAL2-201] make a separate receipt page for printing
+
+    // *****
+    // To keep styling -- appendChild didn't work at all
+    // *****
+    // var file = WindowPrt.document.createElement("link");
+    // file.setAttribute("rel", "stylesheet");
+    // file.setAttribute("type", "text/css");
+    // file.setAttribute("href", './styles.css');
+    // WindowPrt.document.head.appendChild(file);
+
+    // *****
+    // compiler won't allow attachment of scss files & a
+    // substituted css file  does not seem to 'register' as a styles
+    // document within the header (though it does attach)
+    // *****
+    // const printContent = document.getElementById('receipt')
+    // const WindowPrt = window.open('', '',
+    //   'left=0,top=0,width=500,height=700,toolbar=0,scrollbars=0,status=0'
+    // )
+    // WindowPrt.document.write('<link rel="stylesheet" type="text/css" src="./styles.css">');
+    // WindowPrt.document.write(printContent.innerHTML)
+    // WindowPrt.document.close()
+    // WindowPrt.focus()
+    // WindowPrt.print()
+    // WindowPrt.close()
+  }
 }

@@ -56,12 +56,14 @@ export class PayService {
 
   private buildReplyObj(info: ccPayment): Payment {
     let transactionId = Math.random().toFixed(8).slice(2)
+    let dateTime = Date.now()
     return {
       orderId: info.id,
       transactionId: transactionId,
       amount: info.amount,
       status: this.randSuccess(),
-      cc4: info.ccNum.slice(15)
+      cc4: info.ccNum.slice(15),
+      dateTime: dateTime
     }
   }
 

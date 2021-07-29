@@ -14,7 +14,7 @@
     </div>
   </div> <!--------- message --------->
   <!-- ========= RECEIPT ========= -->
-  <div class="receipt">
+  <div class="receipt" id="receipt">
     <div class="receiptContent">
       <div class="metaData flex-row">
         <div class="flex-col">
@@ -28,7 +28,7 @@
           <div>{{receipt.order.id}}</div>
         </div>
         <div class="dateTime">
-          Aug 14, 2009
+          {{receipt.transaction.dateTime |date:'medium'}}
         </div>
       </div>
       <div class="lineItems">
@@ -55,11 +55,11 @@
 </div> <!------------ component window ------------>
 <div class="actions">
   <div class="actions-row row1 around">
-    <button type="button" class="btn">Pay for More</button>
+    <button type="button" class="btn" (click)="print()">Print Receipt</button>
     <button type="button" class="btn">Email Receipt</button>
   </div>
   <div class="actions-row row2 around">
-    <button type="button" class="btn">Status</button>
-    <button type="button" class="btn">Home</button>
+    <button type="button" class="btn" routerLink="/orders">Status</button>
+    <button type="button" class="btn" routerLink="/order/launch">Home</button>
   </div>
 </div>
