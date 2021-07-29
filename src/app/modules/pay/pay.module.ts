@@ -12,6 +12,7 @@ import { PaySuccessComponent } from './pay-success/pay-success.component';
 import { PayFailComponent } from './pay-fail/pay-fail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { PayEmailReceiptComponent } from './pay-email-receipt/pay-email-receipt.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { RouterModule } from '@angular/router';
     PayComponent,
     PayInfoComponent,
     PayFailComponent,
-    PaySuccessComponent
+    PaySuccessComponent,
+    PayEmailReceiptComponent
   ],
   imports: [
     CommonModule,

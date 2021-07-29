@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { selectReceipt } from '../../orders/state/orders.selectors';
+import { PayEmailReceiptComponent } from '../pay-email-receipt/pay-email-receipt.component';
 
 @Component({
   selector: 'app-pay-success',
@@ -11,10 +13,12 @@ import { selectReceipt } from '../../orders/state/orders.selectors';
 export class PaySuccessComponent implements OnInit {
   transactionNumber: string
   receipt: any
+  bsRef: BsModalRef
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store
+    private store: Store,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
@@ -23,6 +27,14 @@ export class PaySuccessComponent implements OnInit {
     )
     console.log(this.receipt.transaction)
   }
+
+  /**
+   * emails Receipt to user email address (or says it does, anyway)
+   */
+  public emailReceipt() {
+    this.bsRef = this.modalService.show(PayEmailReceiptComponent, { id: 130 })
+  }
+
   public print(): void {
     window.print()
 

@@ -1,0 +1,15 @@
+<div class="modal-wrap">
+  <div class="div modal-header">
+    <div class="modal-title">
+      Email Receipt
+    </div>
+  </div>
+  <div class="modal-body">
+    <!-- ================ TOTAL ================ -->
+    <div class="flex-col text-center">
+      <h3>Receipt mailed to: </h3>
+      <div class="email">{{email}}</div>
+      <button (click)="emailReceiptModalRef.hide()" >Close</button>
+    </div>
+  </div> <!-- ---- modal body ---- -->
+</div> <!-- ---- modal wrap ---- -->

@@ -1,0 +1,45 @@
+@import "/src/styles.scss";
+@import "../../order/order-type-select/order-type-select.component.scss";
+
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  height: calc(#{$ownerHeight});
+  // height: calc(#{$ownerHeight} - (#{$padding} * 2));
+  width: calc(100% - (2 * 1rem));
+}
+
+.item-msg {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.profile-wrap {
+  display: flex;
+  flex-flow: row nowrap;
+  border-radius: 0.5rem;
+  background-color: $primary;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-img {
+  object-fit: scale-down;
+  height: calc(100% - #{$padding} / 2);
+}
+
+.form-control {
+  margin-right: 0.5rem;
+}
+
+.form-control {
+  height: calc(1.25rem + 2 * 0.25rem);
+  margin-right: 0.5rem;
+  min-width: fit-content;
+  padding-inline: 1rem;
+}
