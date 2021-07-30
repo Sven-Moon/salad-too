@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Order } from 'src/app/models/Order';
+import { Order, OrderStatus } from 'src/app/models/Order';
 import { Payment } from 'src/app/models/Payment';
 
 
@@ -26,7 +26,7 @@ export const updateOrder = createAction(
 
 export const updateOrderStatus = createAction(
   '[Pay Service] Update Order Status',
-  props<{ orderId: string }>()
+  props<{ orderId: string, status: OrderStatus }>()
 );
 
 export const addPayment = createAction(
@@ -38,5 +38,7 @@ export const loadOrders = createAction(
   '[Order API] Load Orders'
 );
 
-
-
+export const updateOrderReceived = createAction(
+  '[Pay Success Service] Update Order Received',
+  props<{ data: Payment }>()
+);

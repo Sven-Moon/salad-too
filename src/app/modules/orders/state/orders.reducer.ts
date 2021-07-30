@@ -1,7 +1,7 @@
 import { state } from '@angular/animations';
 import { Action, createReducer, on } from '@ngrx/store';
 import { mutableOn } from 'ngrx-etc';
-import { Orders } from 'src/app/models/Order';
+import { Orders, OrderStatus } from 'src/app/models/Order';
 import { Payment } from 'src/app/models/Payment';
 import * as OrdersActions from './orders.actions';
 
@@ -40,7 +40,11 @@ export const reducer = createReducer(
   }),
   mutableOn(OrdersActions.updateOrderStatus, (state, action) => {
     state.orders.find(order =>
-      order.id === action.orderId).status = 'Paid'
+      order.id === action.orderId).status = action.status
+  }),
+  mutableOn(OrdersActions.updateOrderReceived, (state, action) => {
+    state.orders.find(order =>
+      order.id === action.data.orderId).received = action.data.dateTime
   }),
   on(OrdersActions.loadOrders, state => state),
 );

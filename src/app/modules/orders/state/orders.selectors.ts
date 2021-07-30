@@ -12,6 +12,20 @@ export const selectOrders = createSelector(
   (state): Orders => state.orders
 )
 
+export const selectOpenOrders = createSelector(
+  selectOrders,
+  (orders: Orders): Orders => orders.filter(order =>
+    order.status !== 'Delivered'
+  )
+)
+
+export const selectClosedOrders = createSelector(
+  selectOrders,
+  (orders: Orders): Orders => orders.filter(order =>
+    order.status === 'Delivered'
+  )
+)
+
 export const selectSelectedOrderId = createSelector(
   selectOrdersState,
   (state): string => state.selectedOrderId

@@ -8,8 +8,8 @@ export interface Order {
   status: OrderStatus
   payments?: Payments
   user?: string
-  received?: string
-  completed?: string
+  received?: number
+  completed?: number
 }
 
 export type Orders = Order[]

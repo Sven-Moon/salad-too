@@ -64,15 +64,11 @@ export class OrderCartComponent implements OnInit {
   }
 
   public viewOwnerItems(id: string): void {
-    console.log(this.itemsVisible)
     this.itemsVisible[id].visible = true
-    console.log(this.itemsVisible)
   }
 
   public hideOwnerItems(id: string): void {
-    console.log(this.itemsVisible)
     this.itemsVisible[id].visible = false
-    console.log(this.itemsVisible)
   }
 
   public editCartItem(id: string) {
@@ -99,7 +95,6 @@ export class OrderCartComponent implements OnInit {
         )
       )
     }
-
   }
 
   public duplicateItem(itemToDuplicate: CartItem) {

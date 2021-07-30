@@ -8,7 +8,8 @@ import { Order, OrderStatus } from '../models/Order';
 import { ccPayment, Payment, Payments } from '../models/Payment';
 import { clearCart, removePaidItemsFromCart } from '../modules/order/state/cart/cart.actions';
 import { selectCartItems } from '../modules/order/state/cart/cart.selectors';
-import { addPayment, updateLastTransaction, updateOrderStatus, updateSelectedOrderId } from '../modules/orders/state/orders.actions';
+import { addPayment, updateLastTransaction, updateOrderReceived, updateOrderStatus, updateSelectedOrderId } from '../modules/orders/state/orders.actions';
+import { OrdersService } from './orders.service';
 
 
 @Injectable({
@@ -19,7 +20,8 @@ export class PayService {
 
   constructor(
     private httpClient: HttpClient,
-    private store: Store
+    private store: Store,
+    private orderService: OrdersService
   ) {
   }
 
@@ -98,12 +100,12 @@ export class PayService {
       this.store.select(selectCartItems).subscribe(items =>
         cartItems = items
       )
-      this.store.dispatch(updateOrderStatus({ orderId: data.orderId }))
+      this.store.dispatch(updateOrderStatus({
+        orderId: data.orderId, status: 'Paid'
+      }))
+      this.store.dispatch(updateOrderReceived({ data: data }))
       this.store.dispatch(clearCart())
+      // this.orderService.advanceStatus(data.orderId)
     }
   }
-
-
-
-
 }

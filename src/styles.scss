@@ -1,25 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
-$danger: #8f3432;
-$danger-dark: #921311;
-$danger-light: #cf7977; // new york pink
-$danger-bg: #bf4c4a; // deep chestnut
+$danger: #8f3432; // burnt umber
+$danger-text: #6a2725; // Perisian Plum
+$danger-dark: #3c1615; // Dark Sienna
+$danger-light: #cf7a77; // new york pink
+$danger-bg: #bf4e4a; // deep chestnut
 $warning: #f6f930; // Maximum yellow
 $warning-bg: #f8fc88; // Canary
-$warning-dark: #f6f930; // Olive
+$warning-text: #898b04; // Olive
+$warning-dark: #4e4f02; // Army Green
 $action: #737703; // rifle green
 $bg-white: #f2f9f1; // mint creme
 $bg-soft: #f4f7f3; // baby powder
-$primary: hsl(106, 51%, 15%); // forest green traditional
-$primary-bg: rgb(59, 123, 40); // sap green
+// Primary  Coolers: Column 5
+$primary: #346c23; //  Pakistan green
+$primary-text: #254d19; // Lincoln green
+$primary-bg: #7dcd65; // Mantis
 $primary-dark: rgb(15, 31, 10); // Phthalo Green
 $primary-disabled: #8bc77f;
 $neutral: #fec0aa; // melon
 $neutral-light: #fff0eb; // seashell
+// Success Coolers: Column 2
 $success: #3f7231; // fern green
-$success-dark: #1b7203; // fern green
+$success-text: #27471f; // forest green traditional
+$success-dark: #101c0c; // dark jungle green
 $success-bg: #75bc62; // mantis
 $success-bg-disabled: #d9ecd4; // nyanza
 $success-text-disabled: #8bc77f; // pistachio
+$secondary: #666;
+$secondary-text: #666;
+$secondary-light: #bbb;
+$secondary-bg: #999;
+$secondary-dark: #444;
 $shadow: #999;
 
 $maxScreenWidth: 768px;

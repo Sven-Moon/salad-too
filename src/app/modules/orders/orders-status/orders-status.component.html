@@ -1,1 +1,37 @@
-<p>orders-status works!</p>
+<div class="statusWindow flex-col">
+  <div class="header">Current Orders</div>
+  <ng-container *ngFor="let order of openOrders">
+    <div class="card flex-col">
+      <div class="info1 flex-row pointer" (click)="toggleItemsVisible(order.id)" >
+        <div class="date">{{order.received |date: "mediumDate"}}</div>
+        <div [ngClass]="calcStatusClass(order.status)">{{order.status}}</div>
+      </div>
+      <div class="info2 flex-row pointer" (click)="toggleItemsVisible(order.id)">
+        <div class="orderId">Order: {{order.id}}</div>
+        <div class="time">{{order.received |date: "mediumTime"}}</div>
+      </div>
+      <div class="itemsContainer flex-col" *ngIf="visible[order.id].itemsVisible">
+        <hr>
+        <ng-container *ngFor="let item of order.items">
+          <div class="item flex-col">
+            <div class="flex-row w-100 itemName pointer" (click)="toggleIngredientsVisible(order.id, item.id)">
+              {{item.name}}
+              <div class="qty" *ngIf="item.quantity!=1"> ({{item.quantity}})</div>
+            </div>
+            <ng-container *ngIf="item.ingredients && visible[order.id].items[item.id].ingredientsVisible">
+              <div class="ingredientsContainer">
+                <ng-container *ngFor="let ingredient of item.ingredients">
+                  <div class="ingredient">
+                    <ul>
+                      <li>{{ingredient}}</li>
+                    </ul>
+                  </div>
+                </ng-container>  <!-- --- ingredient --- -->
+              </div>  <!-- --- ingredient container --- -->
+            </ng-container>  <!-- --- ingredient If --- -->
+          </div>  <!-- --- item --- -->
+        </ng-container> <!-- --- item --- -->
+      </div>  <!-- --- item container --- -->
+    </div> <!-- --- card --- -->
+  </ng-container>
+</div>

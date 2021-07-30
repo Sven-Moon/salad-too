@@ -25,7 +25,6 @@ export class PaySuccessComponent implements OnInit {
     this.store.select(selectReceipt).subscribe(receipt =>
       this.receipt = receipt
     )
-    console.log(this.receipt.transaction)
   }
 
   /**
