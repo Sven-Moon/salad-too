@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PayModule } from './modules/pay/pay.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { OwnerModule } from './modules/owner/owner.module'
+import { PagesModule } from './modules/pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { OwnerModule } from './modules/owner/owner.module'
     OrderModule,
     OrdersModule,
     OwnerModule,
+    PagesModule,
     PayModule,
     SharedModule,
     //#endregion app modules

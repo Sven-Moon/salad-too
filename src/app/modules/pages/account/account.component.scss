@@ -1,0 +1,103 @@
+@import "/src/styles.scss";
+$editButtonWidth: 2rem;
+
+.tag {
+  height: 6rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-img {
+  object-fit: scale-down;
+  height: calc(100%);
+}
+
+.editCard {
+}
+
+.edit {
+  width: $editButtonWidth;
+  object-fit: scale-down;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.nameContainer {
+  margin-left: 0.5rem;
+  width: calc(100% - (0.5rem + 6rem));
+  height: 5rem;
+}
+
+.infoContainer {
+  width: calc(100% - (0.5rem));
+  height: 5rem;
+}
+
+.info {
+  display: flex;
+  width: calc(100% - #{$editButtonWidth});
+  font-size: 1rem;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.form-control {
+  margin-right: 0.5rem;
+}
+
+.profile-wrap {
+  display: flex;
+  flex-flow: row nowrap;
+  border-radius: 0.5rem;
+  background-color: $primary;
+  border: 1px solid $primary-dark;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.contactsContainer {
+  $contactsPadding: 0.5rem;
+  display: flex;
+  padding: $contactsPadding;
+  background-color: #ccc;
+  border: 1px solid $secondary-bg;
+  margin-top: 0.5rem;
+  flex-flow: row wrap;
+  border-radius: 0.3rem;
+  position: relative;
+  height: fit-content;
+  min-height: calc(1rem + (2 * #{$contactsPadding}));
+}
+
+.addContact {
+  display: flex;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: white;
+  background-color: $secondary-text;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid black;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-img {
+  object-fit: scale-down;
+  height: 2rem;
+  margin: 0.5rem;
+}
+
+@media only screen and (min-width: 500px) {
+  .info {
+    font-size: 2rem;
+  }
+}

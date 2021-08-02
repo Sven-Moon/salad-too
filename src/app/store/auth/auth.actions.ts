@@ -55,3 +55,8 @@ export const addContact = createAction(
   }>()
 );
 
+export const editUserName = createAction(
+  '[Account] Edit User Name',
+  props<{ name: string }>()
+);
+
