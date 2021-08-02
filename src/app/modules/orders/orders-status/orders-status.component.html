@@ -8,7 +8,7 @@
       </div>
       <div class="info2 flex-row pointer" (click)="toggleItemsVisible(order.id)">
         <div class="orderId">Order: {{order.id}}</div>
-        <div class="time">{{order.received |date: "mediumTime"}}</div>
+        <div class="time text-center">{{order.received |date: "mediumTime"}}</div>
       </div>
       <div class="itemsContainer flex-col" *ngIf="visible[order.id].itemsVisible">
         <hr>

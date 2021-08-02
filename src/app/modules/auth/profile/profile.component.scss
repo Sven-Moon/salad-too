@@ -1,0 +1,40 @@
+@import "/src/styles.scss";
+
+.tag {
+  height: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-img {
+  object-fit: scale-down;
+  height: calc(100%);
+}
+
+.editCard {
+}
+
+.edit {
+  order: 2;
+  justify-content: flex-end;
+  width: 2rem;
+  object-fit: scale-down;
+}
+
+.name {
+  margin-left: 0.5rem;
+  width: calc(100% - (0.5rem - 3rem));
+}
+
+.form-control {
+  margin-right: 0.5rem;
+}
+
+.profile-wrap {
+  display: flex;
+  flex-flow: row nowrap;
+  border-radius: 0.5rem;
+  background-color: $primary;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+}

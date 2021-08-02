@@ -45,17 +45,17 @@ export class OrdersStatusComponent implements OnInit {
 
     // set the visible object orders & items all to false
     this.openOrders.forEach(order => {
+      this.visible[order.id] = {
+        itemsVisible: false,
+        items: {}
+      }
       order.items.forEach(item =>
-        this.visible[order.id] = {
-          itemsVisible: false,
-          items: {
-            [item.id]: {
-              ingredientsVisible: false
-            }
-          }
+        this.visible[order.id].items[item.id] = {
+          ingredientsVisible: false
         }
       )
     })
+
   }
 
   /**

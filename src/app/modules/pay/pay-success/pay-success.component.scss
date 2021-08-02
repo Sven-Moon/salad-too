@@ -68,6 +68,14 @@ hr {
 
 .itemPrice {
   margin-left: auto;
+  font-size: 0.8rem;
+  align-items: flex-end;
+}
+
+.itemSubtotal {
+  font-weight: bold;
+  margin-left: 1em;
+  font-size: 1rem;
 }
 
 .totalContainer {

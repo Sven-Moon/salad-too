@@ -1,0 +1,25 @@
+<div class="profileWindow flex-col">
+  <ng-container *ngFor="user">
+    <div class="tag flex-row">
+      <img src="./assets/images/profile_1.png" alt="" class="profile-img">
+      <div class="name flex-col card editCard text-center">
+        {{user.name}}
+        <div class="edit"><img src="./assets/images/edit.png" alt=""></div>
+      </div>
+    </div>
+    <div class="email card editCard text-center">{{user.email}}
+      <div class="edit"><img src="./assets/images/edit.png" alt=""></div>
+    </div>
+    <div class="phoneNumber card editCard text-center">{{user.phoneNumber}}
+      <div class="edit"><img src="./assets/images/edit.png" alt=""></div>
+    </div>
+  </ng-container>
+</div>
+<div class="contactsWindow">
+  <ng-container *ngFor="let contact of contacts$ |async">
+    <div class="profile-wrap">
+      <img src="./assets/images/profile_1.png" class="profile-img" alt="">
+      <div class="form-control">{{ contact.name }}</div>
+    </div>
+  </ng-container>
+</div>

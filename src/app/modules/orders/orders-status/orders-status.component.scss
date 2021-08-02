@@ -68,6 +68,7 @@ hr {
 
 .itemsContainer {
   background-color: white;
+  height: fit-content;
 }
 
 .item {
@@ -80,6 +81,7 @@ hr {
   border-radius: 0.3rem;
   padding: 0.2rem;
   font-weight: 400;
+  width: calc(100% - (2 * 0.5rem));
 }
 
 .ingredientsContainer {

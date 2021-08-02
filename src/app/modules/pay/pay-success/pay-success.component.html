@@ -35,8 +35,11 @@
       <div class="lineItems">
         <ng-container *ngFor="let item of receipt.order.items">
           <div class="flex-row lineItem">
-            <label for="">{{item.name}}</label>
-            <div class="itemPrice">{{item.price}}</div>
+           {{item.name}}
+            <div class="itemPrice flex-row">
+              {{item.quantity}} @ {{item.price |currency}}
+              <div class="itemSubtotal"> {{item.quantity * item.price |currency}}</div>
+            </div>
           </div>
         </ng-container>
       </div>
