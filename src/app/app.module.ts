@@ -49,7 +49,7 @@ import { AccountEffects } from './store/account/account.effects';
     AuthModule,
     OrderModule,
     OrdersModule,
-    OwnerModule,
+    // OwnerModule,
     PagesModule,
     PayModule,
     SharedModule,

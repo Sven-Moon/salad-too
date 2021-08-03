@@ -1,6 +1,7 @@
 <div class="select-wrap">
   <div class="componentWindow">
-    <app-order-item-owner class="owner"></app-order-item-owner>
+    <router-outlet></router-outlet>
+    <!-- <app-order-item-owner class="owner"></app-order-item-owner> -->
     <ng-container *ngFor="let type of itemGroups$ |async">
       <div class="item-type" (click)="setItemGroup(type.id)"
       routerLink="/order/select-item">

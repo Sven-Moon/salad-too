@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromOwner from './state/owner.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { OwnerEffects } from './state/owner.effects';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { OwnerEffects } from './state/owner.effects';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     OwnerRoutingModule,
     StoreModule.forFeature(fromOwner.ownerFeatureKey, fromOwner.reducer),
     EffectsModule.forFeature([OwnerEffects])
