@@ -60,3 +60,23 @@ export const editUserName = createAction(
   props<{ name: string }>()
 );
 
+
+// ------------ ACCOUNT ------------
+export const updateUserName = createAction(
+  '[Account Name Edit Modal] Update User Name',
+  props<{
+    email: string,
+    password: string,
+    newUsername: string
+  }>()
+)
+
+export const updateUserNameSuccess = createAction(
+  '[Account Name Edit Modal] Update User Name Success',
+  props<{ id: string, name: string }>()
+)
+
+export const updateUserNameFailure = createAction(
+  '[Account Name Edit Modal] Update User Name Failure',
+  props<{ error: any }>()
+)

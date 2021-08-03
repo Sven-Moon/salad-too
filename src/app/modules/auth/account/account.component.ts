@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { Contacts, User } from 'src/app/models/User';
-import { editUserName } from 'src/app/store/auth/auth.actions';
+import { updateUserName } from 'src/app/store/auth/auth.actions';
 import { selectContacts, selectUser } from 'src/app/store/auth/auth.selectors';
 import { OwnerAddComponent } from '../../owner/owner-add/owner-add.component';
 
@@ -15,7 +16,21 @@ import { OwnerAddComponent } from '../../owner/owner-add/owner-add.component';
 export class AccountComponent implements OnInit {
   contacts$: Observable<Contacts>
   user: User
-  bsModalRef: BsModalRef
+  modalRef: BsModalRef
+  editNameForm = {
+    password: null,
+    newUsername: false,
+  }
+  editEmailForm = {
+    email: null,
+    password: null,
+    newEmail: false,
+  }
+  editPhoneForm = {
+    email: null,
+    password: null,
+    newPhoneNumber: false,
+  }
 
   constructor(
     private store: Store,
@@ -29,12 +44,20 @@ export class AccountComponent implements OnInit {
     )
   }
 
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
   public openEditUserName(): void {
     // this.bsModalRef = this.modalService.show(, { id: 210 })
   }
 
-  public editName(name: string): void {
-    this.store.dispatch(editUserName({ name }))
+  public editUserName(f: NgForm): void {
+    this.store.dispatch(updateUserName({
+      email: this.user.email,
+      password: f.value.password,
+      newUsername: f.value.newUsername
+    }))
   }
 
   public openEditUserPassword(): void {
@@ -58,11 +81,8 @@ export class AccountComponent implements OnInit {
   }
 
   public editPhone(name: string): void {
-    this.store.dispatch(editUserName({ name }))
+    // this.store.dispatch(editUserName({ name }))
   }
 
-  public openAddContact() {
-    this.bsModalRef = this.modalService.show(OwnerAddComponent, { id: 210 })
-  }
 
 }

@@ -96,6 +96,30 @@ $editButtonWidth: 2rem;
   margin: 0.5rem;
 }
 
+//#region ========== MODAL ==========
+.modal-container {
+  max-width: 400px;
+  margin-inline: 2rem;
+}
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  width: 100%;
+}
+
+.form-control {
+  height: 1rem;
+  width: 15rem;
+}
+
+.actions {
+  justify-content: space-around;
+  justify-items: stretch;
+}
+//#endregion ---- modal ----
+
 @media only screen and (min-width: 500px) {
   .info {
     font-size: 2rem;

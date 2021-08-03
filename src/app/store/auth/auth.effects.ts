@@ -9,6 +9,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { AlertService } from '@full-fledged/alerts';
 import { Store } from '@ngrx/store';
 import { setItemOwner } from 'src/app/modules/order/state/item/item.actions';
+import { AuthAPIService } from 'src/app/services/auth-api.service';
 
 
 @Injectable()
@@ -18,7 +19,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.loginAttempt),
       concatMap((action) =>
-        this.authService.login(action.email, action.password).pipe(
+        this.authAPIService.login(action.email, action.password).pipe(
           map((user) => AuthActions.loginSuccess({ user })),
           catchError(error => of(AuthActions.loginFailure({ error }))))
       )
@@ -43,8 +44,6 @@ export class AuthEffects {
     { dispatch: false }
   )
 
-
-
   setUserAsOwner$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -62,8 +61,6 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-
-
   welcomeBack$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -76,7 +73,6 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
-
 
   alertLoginFailure$ = createEffect(() =>
     this.actions$.pipe(
@@ -92,7 +88,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.registerUser),
       switchMap((action) =>
-        this.authService.registerUser(action.email, action.username).pipe(
+        this.authAPIService.registerUser(action.email, action.username).pipe(
           map((user) => AuthActions.registerUserSuccess({ user })),
           catchError(error => of(AuthActions.registerUserFailure({ error })))
         )
@@ -100,9 +96,45 @@ export class AuthEffects {
     )
   })
 
+  editUserName$ = createEffect(() => {
+    return this.actions$.pipe(
+
+      ofType(AuthActions.updateUserName),
+      concatMap((action) =>
+        this.authAPIService.updateUserName({
+          email: action.email,
+          password: action.password,
+          newUsername: action.newUsername
+        }).pipe(
+          map(data => AuthActions.updateUserNameSuccess({ id: data.id, name: data.name, })),
+          catchError(error => of(AuthActions.updateUserNameFailure({ error })))
+        )
+      )
+    );
+  });
+
+  alertUsernameUpdated$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.updateUserNameSuccess),
+        tap((action) => this.authService.updateUserNameSuccess(action.name))
+      ),
+    { dispatch: false }
+  );
+
+  alertAccountEditFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.updateUserNameFailure),
+        tap(() => this.authService.failedAccountEdit())
+      ),
+    { dispatch: false }
+  );
+
   constructor(
     private actions$: Actions,
     private authService: AuthService,
+    private authAPIService: AuthAPIService,
     private modalService: BsModalService,
     private alertService: AlertService,
     private store: Store

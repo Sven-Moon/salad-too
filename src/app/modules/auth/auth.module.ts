@@ -10,10 +10,12 @@ import { AuthEffects } from '../../store/auth/auth.effects';
 import { FormsModule } from '@angular/forms';
 import { passwordsMatchDirective } from './resources/passwordMatch.directive';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { AccountComponent } from './account/account.component';
 
 
 @NgModule({
   declarations: [
+    AccountComponent,
     LoginModalComponent,
     passwordsMatchDirective
   ],

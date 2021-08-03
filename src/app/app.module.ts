@@ -17,7 +17,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal'
 import { AuthModule } from './modules/auth/auth.module';
 import { FormsModule } from '@angular/forms';
-import * as fromContacts from './store/contacts/contacts.reducer';
 import { SpinnerEffects } from './store/effects/spinner.effects';
 import { AlertEffects } from './store/effects/alert.effects';
 import { AlertModule } from '@full-fledged/alerts';
@@ -26,10 +25,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PayModule } from './modules/pay/pay.module';
 import { OrdersModule } from './modules/orders/orders.module';
-import { OwnerModule } from './modules/owner/owner.module'
-import { PagesModule } from './modules/pages/pages.module';
-import * as fromAccount from './store/account/account.reducer';
-import { AccountEffects } from './store/account/account.effects';
 
 @NgModule({
   declarations: [
@@ -50,7 +45,6 @@ import { AccountEffects } from './store/account/account.effects';
     OrderModule,
     OrdersModule,
     // OwnerModule,
-    PagesModule,
     PayModule,
     SharedModule,
     //#endregion app modules
@@ -70,8 +64,6 @@ import { AccountEffects } from './store/account/account.effects';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     //#endregion store
     EffectsModule.forRoot([SpinnerEffects, AlertEffects, RouteEffects]),
-    StoreModule.forFeature(fromAccount.accountFeatureKey, fromAccount.reducer),
-    EffectsModule.forFeature([AccountEffects]),
   ],
   providers: [
     ...(environment.useMocking ? AppMockInterceptors : [])

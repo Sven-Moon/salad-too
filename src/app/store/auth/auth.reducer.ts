@@ -85,7 +85,17 @@ export const reducer = createReducer(
       email: action.email,
       img: action.img
     })
-  }
-  )
+  }),
+  on(AuthActions.updateUserName, (state, action) => {
+    if (state.user.email === action.email) {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          name: action.newUsername
+        }
+      }
+    } else return { ...state }
+  })
 
 );
