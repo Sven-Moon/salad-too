@@ -13,6 +13,7 @@ export interface State {
 
 export const initialState: State = {
   user: {
+    id: "guest123@saladtoo.com",
     name: 'Guest 123',
     phoneNumber: null,
     email: null,
@@ -87,7 +88,7 @@ export const reducer = createReducer(
     })
   }),
   on(AuthActions.updateUserName, (state, action) => {
-    if (state.user.email === action.email) {
+    if (state.user.email === action.id) {
       return {
         ...state,
         user: {

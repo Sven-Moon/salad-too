@@ -45,8 +45,8 @@ export class AuthAPIService {
 
   public registerUser(email: string, username: string): Observable<any> {
     let body = {
-      id: email,
-      email: email,
+      id: email.toLowerCase(),
+      email: email.toLowerCase(),
       phoneNumber: '',
       name: username,
       contacts: [],
@@ -74,9 +74,7 @@ export class AuthAPIService {
     )
   }
 
-  public updateUserName(data: { email: string, password: string, newUsername: string }): Observable<any> {
-    let findUser: string = 'email=' + data.email
-    // + '&password=' + data.password
+  public updateUserName(data: { id: string, password: string, newUsername: string }): Observable<any> {
     this.body = { name: data.newUsername }
     let httpOptions = {
       headers: new HttpHeaders({
@@ -86,7 +84,7 @@ export class AuthAPIService {
     }
 
     return this.httpClient.patch(
-      this.baseUrl + "/" + data.email, this.body
+      this.baseUrl + "/" + data.id, this.body
     ).pipe(
       switchMap((userReply) => {
         let user = userReply

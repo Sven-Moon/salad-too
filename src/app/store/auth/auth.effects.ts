@@ -102,7 +102,7 @@ export class AuthEffects {
       ofType(AuthActions.updateUserName),
       concatMap((action) =>
         this.authAPIService.updateUserName({
-          email: action.email,
+          id: action.id,
           password: action.password,
           newUsername: action.newUsername
         }).pipe(

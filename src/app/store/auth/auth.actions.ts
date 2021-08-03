@@ -65,7 +65,7 @@ export const editUserName = createAction(
 export const updateUserName = createAction(
   '[Account Name Edit Modal] Update User Name',
   props<{
-    email: string,
+    id: string,
     password: string,
     newUsername: string
   }>()

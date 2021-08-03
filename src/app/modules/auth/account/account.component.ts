@@ -54,7 +54,7 @@ export class AccountComponent implements OnInit {
 
   public editUserName(f: NgForm): void {
     this.store.dispatch(updateUserName({
-      email: this.user.email,
+      id: this.user.email,
       password: f.value.password,
       newUsername: f.value.newUsername
     }))

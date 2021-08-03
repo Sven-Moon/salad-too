@@ -27,6 +27,7 @@ export class MockUserDataInterceptor implements HttpInterceptor {
   public getUserData(email: string): any {
     let data: Users = [
       {
+        "id": "mikedanforth@npr.com",
         "name": "Mike Danforth",
         "phoneNumber": "987-654-3210",
         "email": "MikeDanforth@npr.com",
@@ -45,6 +46,8 @@ export class MockUserDataInterceptor implements HttpInterceptor {
         "img": "./assets/images/profile_1.png"
       },
       {
+
+        "id": "dougberman@npr.com",
         "name": "Doug",
         "phoneNumber": "987-654-3210",
         "email": "DougBerman@npr.com",
@@ -63,6 +66,8 @@ export class MockUserDataInterceptor implements HttpInterceptor {
         "img": "./assets/images/profile_1.png"
       },
       {
+
+        "id": "petersegal@npr.com",
         "name": "Peter",
         "phoneNumber": "987-654-1381",
         "email": "PeterSegal@npr.com",
@@ -86,6 +91,8 @@ export class MockUserDataInterceptor implements HttpInterceptor {
         "img": "./assets/images/profile_1.png"
       },
       {
+
+        "id": "billburtis@npr.com",
         "name": "Bill",
         "phoneNumber": "987-654-1942",
         "email": "BillKurtis@npr.com",
