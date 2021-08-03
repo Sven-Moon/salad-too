@@ -4,6 +4,7 @@ export interface User {
   email: string
   contacts: Contacts
   img: string
+  password?: string
 }
 
 export type Users = User[]

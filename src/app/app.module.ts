@@ -28,6 +28,8 @@ import { PayModule } from './modules/pay/pay.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { OwnerModule } from './modules/owner/owner.module'
 import { PagesModule } from './modules/pages/pages.module';
+import * as fromAccount from './store/account/account.reducer';
+import { AccountEffects } from './store/account/account.effects';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { PagesModule } from './modules/pages/pages.module';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     //#endregion store
     EffectsModule.forRoot([SpinnerEffects, AlertEffects, RouteEffects]),
+    StoreModule.forFeature(fromAccount.accountFeatureKey, fromAccount.reducer),
+    EffectsModule.forFeature([AccountEffects]),
   ],
   providers: [
     ...(environment.useMocking ? AppMockInterceptors : [])

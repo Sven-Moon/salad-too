@@ -37,6 +37,30 @@ export class AccountComponent implements OnInit {
     this.store.dispatch(editUserName({ name }))
   }
 
+  public openEditUserPassword(): void {
+    // this.bsModalRef = this.modalService.show(, { id: 210 })
+  }
+
+  public editPassword(name: string): void {
+    // this.store.dispatch(editUserPassword({ name }))
+  }
+
+  public openEditUserEmail(): void {
+    // this.bsModalRef = this.modalService.show(, { id: 210 })
+  }
+
+  public editEmail(name: string): void {
+    // this.store.dispatch(editUserEmail({ name }))
+  }
+
+  public openEditUserPhone(): void {
+    // this.bsModalRef = this.modalService.show(, { id: 210 })
+  }
+
+  public editPhone(name: string): void {
+    this.store.dispatch(editUserName({ name }))
+  }
+
   public openAddContact() {
     this.bsModalRef = this.modalService.show(OwnerAddComponent, { id: 210 })
   }

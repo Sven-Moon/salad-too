@@ -11,7 +11,8 @@
   <img src="./assets/images/status-none_icon.png" class="status" alt="">
   <!-- ======== AUTH ======== -->
   <ng-container *ngIf="signedIn$">
-    <img src="./assets/images/profile_icon.png" class="profile" alt="" (click)="displayLogOut()">
+    <!-- <img src="./assets/images/profile_icon.png" class="profile" alt="" (click)="displayLogOut()"> -->
+    <img src="./assets/images/profile_icon.png" class="profile" alt="" routerLink="/account">
   </ng-container>
   <!-- ------ LOGOUT ------ -->
   <div class="logout" *ngIf="logoutFlag" (click)="logout()">
