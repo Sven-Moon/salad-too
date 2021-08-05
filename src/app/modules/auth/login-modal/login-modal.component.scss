@@ -13,11 +13,12 @@
 }
 
 .form-control {
-  height: 1rem;
+  height: 1.5rem;
   width: 15rem;
 }
 
 .actions {
   justify-content: space-around;
   justify-items: stretch;
+  height: fit-content;
 }
