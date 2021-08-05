@@ -6,6 +6,7 @@
     <div> abc123A!!</div>
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" passwordsMatch>
       <div class="login-form flex-col flex-center">
+        <!--======== Email ========-->
         <div class="form-group flex-col flex-center">
           <label for="email">Email Address</label>
           <input
@@ -22,6 +23,8 @@
             A valid email is required.
           </div>
         </div> <!--  Email -->
+
+        <!--========  Password ========-->
         <div class="form-group flex-col flex-center">
           <label for="password">Password</label>
           <input type="password"
@@ -50,7 +53,9 @@
               </div>
             </div>
           </div>
-        </div> <!--  Password -->
+        </div> <!-- Password -->
+
+        <!--======== Confirm Password ========-->
         <div class="form-group flex-col flex-center"
         *ngIf="form.newUser">
           <label for="confirmPassword">Confirm Password</label>
@@ -63,7 +68,8 @@
           #confirmPassword="ngModel"
           [ngModelOptions]="{ updateOn: 'change' }">
         </div> <!--  Confirm PW -->
-        <!-- User Name -->
+
+        <!--======== Username ========-->
         <div *ngIf="form.newUser" class="form-group flex-col flex-center">
           <label for="username">User Name</label>
           <input type="text" name="username" id=""
@@ -72,7 +78,11 @@
           minlength="3">
           <div *ngIf="username.errors?.minlength && (password.touched || password.dirty)">Username must be at least 3 characters in length.</div>
         </div> <!--  Username -->
+
         <div *ngIf="f.errors?.passwordsMatch && (f.controls.confirmPassword.touched || f.controls.confirmPassword.dirty)">No Matchy</div>
+
+
+        <!--======== Actions ========-->
         <div class="actions container flex-row">
           <button type="submit" class="btn btn-go" *ngIf="!form.newUser"
           [disabled]="!f.valid">

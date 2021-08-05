@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { Contacts, User } from 'src/app/models/User';
-import { updateUserName } from 'src/app/store/auth/auth.actions';
+import { updateEmail, updatePassword, updatePhone, updateUserName } from 'src/app/store/auth/auth.actions';
 import { selectContacts, selectUser } from 'src/app/store/auth/auth.selectors';
 import { OwnerAddComponent } from '../../owner/owner-add/owner-add.component';
 
@@ -19,17 +19,22 @@ export class AccountComponent implements OnInit {
   modalRef: BsModalRef
   editNameForm = {
     password: null,
-    newUsername: false,
+    newUsername: null,
+  }
+  editPasswordForm = {
+    password: null,
+    newPassword: null,
+    confirmPassword: null,
   }
   editEmailForm = {
     email: null,
     password: null,
-    newEmail: false,
+    newEmail: null,
   }
   editPhoneForm = {
     email: null,
     password: null,
-    newPhoneNumber: false,
+    newPhoneNumber: null,
   }
 
   constructor(
@@ -54,34 +59,36 @@ export class AccountComponent implements OnInit {
 
   public editUserName(f: NgForm): void {
     this.store.dispatch(updateUserName({
-      id: this.user.email,
+      id: this.user.id,
       password: f.value.password,
       newUsername: f.value.newUsername
     }))
   }
 
-  public openEditUserPassword(): void {
-    // this.bsModalRef = this.modalService.show(, { id: 210 })
+
+  public editPassword(f: NgForm): void {
+    this.store.dispatch(updatePassword({
+      id: this.user.id,
+      password: f.value.password,
+      newPassword: f.value.newPassword
+    }))
   }
 
-  public editPassword(name: string): void {
-    // this.store.dispatch(editUserPassword({ name }))
+
+  public editEmail(f: NgForm): void {
+    this.store.dispatch(updateEmail({
+      id: this.user.id,
+      password: f.value.password,
+      newEmail: f.value.newEmail
+    }))
   }
 
-  public openEditUserEmail(): void {
-    // this.bsModalRef = this.modalService.show(, { id: 210 })
-  }
-
-  public editEmail(name: string): void {
-    // this.store.dispatch(editUserEmail({ name }))
-  }
-
-  public openEditUserPhone(): void {
-    // this.bsModalRef = this.modalService.show(, { id: 210 })
-  }
-
-  public editPhone(name: string): void {
-    // this.store.dispatch(editUserName({ name }))
+  public editPhone(f: NgForm): void {
+    this.store.dispatch(updatePhone({
+      id: this.user.id,
+      password: f.value.password,
+      newPhone: f.value.newPhoneNumber
+    }))
   }
 
 

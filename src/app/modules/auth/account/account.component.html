@@ -45,20 +45,88 @@
       <form #f="ngForm">
         <div class="login-form flex-col flex-center">
 
+          <!-- ======= New Username ======= -->
+          <div class="form-group flex-col flex-center">
+            <label for="newUsername">New User Name</label>
+            <input type="text" name="newUsername" id=""
+            class="form-control" required
+            placeholder="Name" [(ngModel)]="editNameForm.newUsername "#newUsername="ngModel"
+            minlength="3">
+            <div *ngIf="newUsername.errors?.minlength && (password.dirty)">Username must be at least 3 characters in length.</div>
+          </div> <!-- New Username -->
+
           <!-- ======= Password ======= -->
           <div class="form-group flex-col flex-center">
             <label for="password">Password</label>
             <input type="password"
-              name="password" id=""
+              name="password"
               class="form-control"
-              id="password"
+              id="editNamePassword"
               required
               placeholder="Password"
               [(ngModel)]="editNameForm.password"
               #password="ngModel"
+              [ngModelOptions]="{ updateOn: 'change' }">
+          </div> <!--  password -->
+
+          <!-- ======= ACTIONS ======= -->
+          <div class="actions container flex-row">
+            <button type="button" class="btn btn-go"
+            (click)="editUserName(f)"
+            [disabled]="!f.valid">
+            Change Name
+            </button>
+            <button type="button" class="btn btn-cancel"
+            (click)="modalRef.hide()">
+              Cancel
+            </button>
+          </div> <!--  actions -->
+
+        </div> <!-- content column -->
+      </form>
+    </div> <!-- modal body-->
+  </div> <!-- modal container-->
+
+</ng-template>
+
+<ng-template #editPassword>
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class=modal-title>Change Password</div>
+    </div>
+    <div class="modal-body">
+      <div> abc123A!!</div>
+      <form #f="ngForm">
+        <div class="login-form flex-col flex-center">
+
+          <!-- ======= Old Password ======= -->
+          <div class="form-group flex-col flex-center">
+            <label for="password">Current Password</label>
+            <input type="password"
+              name="password"
+              class="form-control"
+              id="oldPassword"
+              required
+              placeholder="Current Password"
+              [(ngModel)]="editPasswordForm.password"
+              #password="ngModel"
+              [ngModelOptions]="{ updateOn: 'change' }">
+          </div>
+
+          <!-- ======= New Password ======= -->
+          <div class="form-group flex-col flex-center">
+            <label for="password">New Password</label>
+            <input type="password"
+              name="newPassword"
+              class="form-control"
+              id="newPassword"
+              required
+              placeholder="New Password"
+              [(ngModel)]="editPasswordForm.newPassword"
+              #newPassword="ngModel"
               pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
               [ngModelOptions]="{ updateOn: 'change' }">
-            <div *ngIf="password.errors?.pattern && (password.touched)">Password must contain a minimum of
+            <div *ngIf="newPassword.errors?.pattern && (newPassword.touched)">Password must contain a minimum of
               <div class="flex-row">
                 <div class="col-6">
                   <ul>
@@ -76,15 +144,135 @@
             </div>
           </div> <!--  password -->
 
-          <!-- ======= New Username ======= -->
+        <!--======== Confirm Password ========-->
+        <div class="form-group flex-col flex-center">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+          type="password"
+          name="confirmPassword"
+          id="confirmPassword"
+          class="form-control"
+          [(ngModel)]="editPasswordForm.confirmPassword"
+          #confirmPassword="ngModel"
+          [ngModelOptions]="{ updateOn: 'change' }">
+        </div> <!--  Confirm PW -->
+
+          <!-- ======= ACTIONS ======= -->
+          <div class="actions container flex-row">
+            <button type="button" class="btn btn-go"
+            (click)="editUserName(f)"
+            [disabled]="!f.valid">
+            Change Name
+            </button>
+            <button type="button" class="btn btn-cancel"
+            (click)="modalRef.hide()">
+              Cancel
+            </button>
+          </div> <!--  actions -->
+
+        </div> <!-- content column -->
+      </form>
+    </div> <!-- modal body-->
+  </div> <!-- modal container-->
+
+</ng-template>
+
+<ng-template #editEmail>
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class=modal-title>Change Email Address</div>
+    </div>
+    <div class="modal-body">
+      <div> abc123A!!</div>
+      <form #f="ngForm">
+        <div class="login-form flex-col flex-center">
+
+          <!-- ======= New Email ======= -->
           <div class="form-group flex-col flex-center">
-            <label for="newUsername">New User Name</label>
-            <input type="text" name="newUsername" id=""
+            <label for="email">Email Address</label>
+            <input
+            type="text"
+            name="email"
+            id="email"
+            class="form-control"
+            [(ngModel)]="editEmailForm.email"
+            #email="ngModel"
+            placeholder="me@example.com"
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+            required>
+            <div *ngIf="email.errors?.pattern && (f.touched)">
+              A valid email is required.
+            </div>
+          </div> <!--  Email --> <!-- New Username -->
+
+          <!-- ======= Password ======= -->
+          <div class="form-group flex-col flex-center">
+            <label for="password">Password</label>
+            <input type="password"
+              name="password"
+              class="form-control"
+              id="password"
+              required
+              placeholder="Password"
+              [(ngModel)]="editEmailForm.password"
+              #editEmailPassword="ngModel"
+              [ngModelOptions]="{ updateOn: 'change' }">
+          </div> <!--  password -->
+
+          <!-- ======= ACTIONS ======= -->
+          <div class="actions container flex-row">
+            <button type="button" class="btn btn-go"
+            (click)="editUserName(f)"
+            [disabled]="!f.valid">
+            Change Name
+            </button>
+            <button type="button" class="btn btn-cancel"
+            (click)="modalRef.hide()">
+              Cancel
+            </button>
+          </div> <!--  actions -->
+
+        </div> <!-- content column -->
+      </form>
+    </div> <!-- modal body-->
+  </div> <!-- modal container-->
+
+</ng-template>
+
+<ng-template #editPhone>
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class=modal-title>Change User Phone Number</div>
+    </div>
+    <div class="modal-body">
+      <div> abc123A!!</div>
+      <form #f="ngForm">
+        <div class="login-form flex-col flex-center">
+
+          <!-- ======= New Phone Number ======= -->
+          <div class="form-group flex-col flex-center">
+            <label for="newPhoneNumber">New Phone Number</label>
+            <input type="text" name="newPhoneNumber" id=""
             class="form-control" required
-            placeholder="Name" [(ngModel)]="editNameForm.newUsername "#newUsername="ngModel"
-            minlength="3">
-            <div *ngIf="newUsername.errors?.minlength && (password.touched || password.dirty)">Username must be at least 3 characters in length.</div>
-          </div> <!-- New Username -->
+            placeholder="000 000 0000" [(ngModel)]="editPhoneForm.newPhoneNumber "#newUsername="ngModel"
+            pattern="^d{10}$"
+            #newPhoneNumber="ngModel">
+            <div *ngIf="newPhoneNumber.errors?.pattern && (newPhoneNumber.touched)">Phone number must be at least 10 characters in length, only digits (no spaces).</div>
+          </div> <!-- New phone number -->
+
+          <!-- ======= Password ======= -->
+          <div class="form-group flex-col flex-center">
+            <label for="password">Password</label>
+            <input type="password"
+              name="password" id=""
+              class="form-control"
+              id="password"
+              required
+              placeholder="Password"
+              [(ngModel)]="editNameForm.password"
+              #password="ngModel"
+              [ngModelOptions]="{ updateOn: 'change' }">
+          </div> <!--  password -->
 
           <!-- ======= ACTIONS ======= -->
           <div class="actions container flex-row">

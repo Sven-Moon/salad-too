@@ -62,6 +62,7 @@ export const editUserName = createAction(
 
 
 // ------------ ACCOUNT ------------
+// #region USERNAME -----------------------------
 export const updateUserName = createAction(
   '[Account Name Edit Modal] Update User Name',
   props<{
@@ -78,5 +79,68 @@ export const updateUserNameSuccess = createAction(
 
 export const updateUserNameFailure = createAction(
   '[Account Name Edit Modal] Update User Name Failure',
+  props<{ error: any }>()
+)
+//#endregion username
+
+// #region PASSWORD -----------------------------
+export const updatePassword = createAction(
+  '[Account Password Edit Modal] Update Password',
+  props<{
+    id: string,
+    password: string,
+    newPassword: string
+  }>()
+)
+
+export const updatePasswordSuccess = createAction(
+  '[Account Password Edit Modal] Update Password Success',
+  props<{ id: string, name: string }>()
+)
+
+export const updatePasswordFailure = createAction(
+  '[Account Password Edit Modal] Update Password Failure',
+  props<{ error: any }>()
+)
+//#endregion username
+
+// #region EMAIL -----------------------------
+export const updateEmail = createAction(
+  '[Account Email Edit Modal] Update Email',
+  props<{
+    id: string,
+    password: string,
+    newEmail: string
+  }>()
+)
+
+export const updateEmailSuccess = createAction(
+  '[Account Email Edit Modal] Update Email Success',
+  props<{ id: string, email: string }>()
+)
+
+export const updateEmailFailure = createAction(
+  '[Account Email Edit Modal] Update Email Failure',
+  props<{ error: any }>()
+)
+// #endregion email
+
+// #region PHONE -----------------------------
+export const updatePhone = createAction(
+  '[Account Phone Edit Modal] Update Phone',
+  props<{
+    id: string,
+    password: string,
+    newPhone: string
+  }>()
+)
+
+export const updatePhoneSuccess = createAction(
+  '[Account Phone Edit Modal] Update Phone Success',
+  props<{ id: string, phoneNumber: string }>()
+)
+
+export const updatePhoneFailure = createAction(
+  '[Account Phone Edit Modal] Update Phone Failure',
   props<{ error: any }>()
 )
