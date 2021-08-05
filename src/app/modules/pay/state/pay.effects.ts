@@ -49,10 +49,8 @@ export class PayEffects {
     this.actions$.pipe(
       ofType(PayActions.paymentSuccess, PayActions.paymentFailure),
       tap(() => {
-        setTimeout(() => {
-          this.spinner.hide()
-          this.modalService.hide(120)
-        }, 500)
+        this.spinner.hide()
+        this.modalService.hide(120)
       }),
     ),
     { dispatch: false }

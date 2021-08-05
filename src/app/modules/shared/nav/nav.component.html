@@ -12,13 +12,18 @@
   <!-- ======== AUTH ======== -->
   <ng-container *ngIf="signedIn$">
     <!-- <img src="./assets/images/profile_icon.png" class="profile" alt="" (click)="displayLogOut()"> -->
-    <img src="./assets/images/profile_icon.png" class="profile" alt="" routerLink="/account">
+    <div class="dropdown">
+      <img src="./assets/images/profile_icon.png" class="profile" alt="account dropdown">
+      <div class="dropdownContent">
+        <div class="pointer" routerLink="/account">My Account</div>
+        <div class="logout" (click)="logout()">
+          <img src="./assets/images/logout.png" alt="">
+          Log Out
+        </div>  <!-- ------ logout ------ -->
+      </div>
+    </div>
   </ng-container>
   <!-- ------ LOGOUT ------ -->
-  <div class="logout" *ngIf="logoutFlag" (click)="logout()">
-    <img src="./assets/images/logout.png" alt="">
-    Log Out
-  </div>  <!-- ------ logout ------ -->
   <ng-container *ngIf="!signedIn$">
     <img src="./assets/images/profile_icon.png" class="profile" alt="" class="pointer"
     (click)="openLoginModal()">

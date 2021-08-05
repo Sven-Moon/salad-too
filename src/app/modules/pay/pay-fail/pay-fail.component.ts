@@ -33,9 +33,9 @@ export class PayFailComponent implements OnInit {
     this.router.navigate(['/order/cart'])
     setTimeout(() => {
       this.store.dispatch(clearCart())
-    }, 750);
-    setTimeout(() => {
-      this.router.navigate(['order/launch'])
+      setTimeout(() => {
+        this.router.navigate(['order/launch'])
+      }, 750);
     }, 750);
   }
 

@@ -23,11 +23,7 @@ export class SpinnerEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loginFailure, AuthActions.loginSuccess),
-        tap(() => {
-          setTimeout(() => {
-            this.spinner.hide()
-          }, 2000);
-        })
+        tap(() => this.spinner.hide())
       ),
     { dispatch: false }
   )

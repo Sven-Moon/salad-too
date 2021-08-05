@@ -52,18 +52,9 @@ img {
 }
 
 .logout {
-  display: flex;
-  border: 1px solid black;
-  position: absolute;
-  top: 2rem;
-  right: 0;
-  background-color: $bg-white;
-  z-index: 3;
-
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  padding: 0.2rem 0.4rem;
 
   cursor: pointer;
 }
@@ -72,4 +63,38 @@ img {
   width: 1rem;
   object-fit: contain;
   margin: 0 0.5rem 0 0;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  top: $barHeight;
+  right: 0;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdownContent > div {
+  display: flex;
+  justify-content: left;
+  text-align: center;
+  align-items: center;
+  height: 2.5rem;
+  width: 7rem;
+  border-bottom: $secondary-light;
+  padding-left: 2rem;
+}
+
+.dropdownContent > div:hover {
+  background-color: $secondary-light;
+}
+
+.dropdown:hover .dropdownContent {
+  display: block;
 }

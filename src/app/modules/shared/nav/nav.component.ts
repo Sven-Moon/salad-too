@@ -23,7 +23,6 @@ export class NavComponent implements OnInit {
   navPointer$: Observable<string> = of('0%')
   signedIn$: boolean
   bsModalRef: BsModalRef
-  logoutFlag: boolean = false
   cartCount: number
 
   constructor(
@@ -49,19 +48,11 @@ export class NavComponent implements OnInit {
     this.bsModalRef.content.closeBtnName = 'Close'
   }
 
-  public displayLogOut() {
-    this.logoutFlag = !this.logoutFlag
-    setTimeout(() => {
-      this.logoutFlag = false
-    }, 5000)
-  }
-
   public logout() {
     let id = this.guestService.generateId()
     // this.store.dispatch(logout({id}))
     this.store.dispatch(setGuestId({ id }))
 
-    this.logoutFlag = false
     this.store.dispatch(clearItem())
     this.store.dispatch(clearCart())
     this.route.navigate(['/order/launch'])

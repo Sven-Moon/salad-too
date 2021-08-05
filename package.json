@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "server": "json-server --watch ./server/database.json",
+    "server": "json-server --watch -d 1000 ./server/database.json",
     "dev": "concurrently \"npm run server\" \"npm run start\""
   },
   "private": true,

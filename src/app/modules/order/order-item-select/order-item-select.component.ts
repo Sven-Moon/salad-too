@@ -6,7 +6,7 @@ import { CartItem, Item, Items } from 'src/app/models/Item';
 import { Contact } from 'src/app/models/User';
 import { addItemToCart } from '../state/cart/cart.actions';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
-import { clearItemGroup, loadItem, setItemId } from '../state/item/item.actions';
+import { clearItem, clearItemGroup, loadItem, setItemId } from '../state/item/item.actions';
 import { selectItemGroupPicked, selectItemsWithPrice, selectPickedItem } from '../state/item/item.selectors';
 
 @Component({
@@ -55,6 +55,7 @@ export class OrderItemSelectComponent implements OnInit {
       cartItem.owner = this.owner
       cartItem.name = this.owner.name.split(' ')[0].concat("'s ", cartItem.name)
       this.store.dispatch(addItemToCart({ cartItem }))
+      this.store.dispatch(clearItem())
       this.router.navigate(['/order/cart'])
     }
 
