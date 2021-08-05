@@ -36,16 +36,6 @@ export class LoginModalComponent implements OnInit {
     }))
   }
 
-  // public cancel(): void {
-  //   console.log('modalService.hide() used')
-  //   this.modalService.hide()
-  // }
-
-  // public closeLoginModal(): void {
-  //   console.log('loginModalRef.hide() used')
-  //   this.loginModalRef.hide()
-  // }
-
   public signUp(f: NgForm) {
 
     this.store.dispatch(registerUser({

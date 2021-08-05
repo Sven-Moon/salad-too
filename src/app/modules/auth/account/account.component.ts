@@ -49,12 +49,9 @@ export class AccountComponent implements OnInit {
     )
   }
 
+  // Opens all modals, only allowing 1 open at a time
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
-  }
-
-  public openEditUserName(): void {
-    // this.bsModalRef = this.modalService.show(, { id: 210 })
   }
 
   public editUserName(f: NgForm): void {
@@ -65,8 +62,7 @@ export class AccountComponent implements OnInit {
     }))
   }
 
-
-  public editPassword(f: NgForm): void {
+  public editUserPassword(f: NgForm): void {
     this.store.dispatch(updatePassword({
       id: this.user.id,
       password: f.value.password,
@@ -74,8 +70,7 @@ export class AccountComponent implements OnInit {
     }))
   }
 
-
-  public editEmail(f: NgForm): void {
+  public editUserEmail(f: NgForm): void {
     this.store.dispatch(updateEmail({
       id: this.user.id,
       password: f.value.password,
@@ -83,7 +78,7 @@ export class AccountComponent implements OnInit {
     }))
   }
 
-  public editPhone(f: NgForm): void {
+  public editUserPhone(f: NgForm): void {
     this.store.dispatch(updatePhone({
       id: this.user.id,
       password: f.value.password,

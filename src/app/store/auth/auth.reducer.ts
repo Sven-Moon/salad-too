@@ -97,6 +97,24 @@ export const reducer = createReducer(
         }
       }
     } else return { ...state }
-  })
+  }),
+  on(AuthActions.updateEmailSuccess, (state, action) => ({
+    ...state,
+    user: {
+      ...state.user,
+      email: action.email
+    }
+  })),
+  on(AuthActions.updatePhoneSuccess, (state, action) => {
+    if (state.user.email === action.id) {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          phoneNumber: action.phoneNumber
+        }
+      }
+    } else return { ...state }
+  }),
 
 );

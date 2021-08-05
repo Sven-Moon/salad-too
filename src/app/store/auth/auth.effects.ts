@@ -101,7 +101,7 @@ export class AuthEffects {
 
       ofType(AuthActions.updateUserName),
       concatMap((action) =>
-        this.authAPIService.updateUserName({
+        this.authAPIService.updateUsername({
           id: action.id,
           password: action.password,
           newUsername: action.newUsername
@@ -113,6 +113,77 @@ export class AuthEffects {
     );
   });
 
+  editPassword$ = createEffect(() => {
+    return this.actions$.pipe(
+
+      ofType(AuthActions.updatePassword),
+      concatMap((action) =>
+        this.authAPIService.updatePassword({
+          id: action.id,
+          password: action.password,
+          newPassword: action.newPassword
+        }).pipe(
+          map(data => AuthActions.updatePasswordSuccess()),
+          catchError(error => of(AuthActions.updatePasswordFailure({ error })))
+        )
+      )
+    );
+  });
+
+  editEmail$ = createEffect(() => {
+    return this.actions$.pipe(
+
+      ofType(AuthActions.updateEmail),
+      concatMap((action) =>
+        this.authAPIService.updateEmail({
+          id: action.id,
+          password: action.password,
+          newEmail: action.newEmail
+        }).pipe(
+          map(data => AuthActions.updateEmailSuccess({
+            id: data.id,
+            email: data.email,
+          })),
+          catchError(error => of(AuthActions.updateEmailFailure({ error })))
+        )
+      )
+    );
+  });
+
+  editPhoneNumber$ = createEffect(() => {
+    return this.actions$.pipe(
+
+      ofType(AuthActions.updatePhone),
+      concatMap((action) =>
+        this.authAPIService.updatePhoneNumber({
+          id: action.id,
+          password: action.password,
+          newPhoneNumber: action.newPhone
+        }).pipe(
+          map(data => AuthActions.updatePhoneSuccess({ id: data.id, phoneNumber: data.phoneNumber, })),
+          catchError(error => of(AuthActions.updatePhoneFailure({ error })))
+        )
+      )
+    );
+  });
+
+  //#region EDIT ACCOUNT FAILURE -----------------------------
+  alertAccountEditFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          AuthActions.updateUserNameFailure,
+          AuthActions.updatePasswordFailure,
+          AuthActions.updateEmailFailure,
+          AuthActions.updatePhoneFailure),
+        tap(() => this.authService.failedAccountEdit())
+      ),
+    { dispatch: false }
+  );
+  //end#region EDIT ACCOUNT FAILURE -----------------------------
+
+  //#region EDIT ACCOUNT SUCCESS -----------------------------
+
   alertUsernameUpdated$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -122,14 +193,33 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  alertAccountEditFailure$ = createEffect(
+  alertPasswordUpdated$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(AuthActions.updateUserNameFailure),
-        tap(() => this.authService.failedAccountEdit())
+        ofType(AuthActions.updatePasswordSuccess),
+        tap(() => this.authService.updatePasswordSuccess())
       ),
     { dispatch: false }
   );
+
+  alertEmailUpdated$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.updateEmailSuccess),
+        tap((action) => this.authService.updateEmailSuccess(action.email))
+      ),
+    { dispatch: false }
+  );
+
+  alertPhoneNumberUpdated$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.updatePhoneSuccess),
+        tap((action) => this.authService.updatePhoneNumberSuccess(action.phoneNumber))
+      ),
+    { dispatch: false }
+  );
+  //#endregion EDIT ACCOUNT SUCCESS -----------------------------
 
   constructor(
     private actions$: Actions,

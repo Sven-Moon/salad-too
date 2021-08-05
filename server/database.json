@@ -1,8 +1,8 @@
 {
   "users": [
     {
-      "name": "Mike Danfifth",
-      "phoneNumber": "987-654-3210",
+      "name": "Mike Danforth",
+      "phoneNumber": "6782371111",
       "email": "MikeDanforth@npr.com",
       "id": "MikeDanforth@npr.com",
       "contacts": [
@@ -17,7 +17,8 @@
           "img": "./assets/images/profile_1.png"
         }
       ],
-      "img": "./assets/images/profile_1.png"
+      "img": "./assets/images/profile_1.png",
+      "password": "abc123A!!"
     },
     {
       "name": "Doug",
@@ -77,5 +78,14 @@
       "img": "./assets/images/profile_1.png"
     }
   ],
-  "payments": []
+  "payments": [
+    {
+      "id": "92978303",
+      "amount": 11.45,
+      "name": "Bob",
+      "ccNum": "1234 5678 9012 3456",
+      "exp": "12/34",
+      "cvv": "234"
+    }
+  ]
 }

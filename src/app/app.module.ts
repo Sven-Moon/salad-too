@@ -25,6 +25,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PayModule } from './modules/pay/pay.module';
 import { OrdersModule } from './modules/orders/orders.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { OrdersModule } from './modules/orders/orders.module';
     AlertModule.forRoot(
       { maxMessages: 5, timeout: 5000, positionX: 'right', positionY: 'top' }
     ),
+    NgxMaskModule.forRoot(),
     NgxSpinnerModule,
     ModalModule.forRoot(),
     // #endregion 3rd party

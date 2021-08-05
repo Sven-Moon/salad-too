@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { passwordsMatchDirective } from './resources/passwordMatch.directive';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { AccountComponent } from './account/account.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { AccountComponent } from './account/account.component';
     AuthRoutingModule,
     CommonModule,
     FormsModule,
+    NgxMaskModule,
     StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducer),
     EffectsModule.forFeature([AuthEffects])
   ]

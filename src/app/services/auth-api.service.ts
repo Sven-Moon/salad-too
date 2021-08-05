@@ -14,7 +14,11 @@ export class AuthAPIService {
   body = {}
 
   public login(email: string, password: string): Observable<any> {
-    return this.httpClient.get(this.baseUrl + '?email=' + email)
+    return this.httpClient.get(this.baseUrl
+      + '?email=' + email
+      + '&password=' + password
+      // + '&phoneNumber=987-654-3210'
+    )
       .pipe(
         switchMap((users) => {
           let user = users[0]
@@ -74,7 +78,115 @@ export class AuthAPIService {
     )
   }
 
-  public updateUserName(data: { id: string, password: string, newUsername: string }): Observable<any> {
+
+  private handleEditError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // Client side or network error occurred.
+      console.error('An error occurred: ', error.error)
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what's wrong.
+      console.error(
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+      )
+    }
+    // Return an observable with a user facing error message
+    return throwError(
+      'Bad things: User could not be found'
+    )
+  }
+
+  public updateUsername(data: { id: string, password: string, newUsername: string }): Observable<any> {
+    this.body = { name: data.newUsername }
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: 'my-auth-token'
+      })
+    }
+
+    return this.httpClient.patch(
+      this.baseUrl + "/" + data.id, this.body
+    ).pipe(
+      switchMap((userReply) => {
+        let user = userReply
+        console.log(user)
+        if (user) {
+          return of(user)
+        } else return throwError('Can\'t find user')
+      })
+    )
+  }
+
+  public updatePassword(data: { id: string, password: string, newPassword: string }): Observable<any> {
+    this.body = { password: data.newPassword }
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: 'my-auth-token'
+      })
+    }
+
+    return this.httpClient.patch(
+      this.baseUrl + "/" + data.id, this.body
+    ).pipe(
+      switchMap((userReply) => {
+        let user = userReply
+        console.log(user)
+        if (user) {
+          return of(user)
+        } else return throwError('Can\'t find user')
+      }),
+      catchError(this.handleEditError)
+    )
+  }
+
+  public updateEmail(data: { id: string, password: string, newEmail: string }): Observable<any> {
+    console.log(data.newEmail)
+    this.body = { email: data.newEmail }
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: 'my-auth-token'
+      })
+    }
+
+    return this.httpClient.patch(
+      this.baseUrl + "/" + "data.id", this.body
+    ).pipe(
+      switchMap((userReply) => {
+        let user = userReply
+        console.log(user)
+        if (user) {
+          return of(user)
+        } else return throwError('Can\'t find user')
+      })
+    )
+  }
+
+  public updatePhoneNumber(data: { id: string, password: string, newPhoneNumber: string }): Observable<any> {
+    this.body = { phoneNumber: data.newPhoneNumber }
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: 'my-auth-token'
+      })
+    }
+
+    return this.httpClient.patch(
+      this.baseUrl + "/" + data.id, this.body
+    ).pipe(
+      switchMap((userReply) => {
+        let user = userReply
+        console.log(user)
+        if (user) {
+          return of(user)
+        } else return throwError('Can\'t find user')
+      })
+    )
+  }
+
+  public updateContacts(data: { id: string, password: string, newUsername: string }): Observable<any> {
     this.body = { name: data.newUsername }
     let httpOptions = {
       headers: new HttpHeaders({

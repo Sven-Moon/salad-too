@@ -22,15 +22,11 @@ export class OrdersService {
   // 2-4 utilize a faked store
   // -- deliver an object to the store
   public advanceStatus(orderId: string) {
-    console.log('Advanced status called');
     setTimeout(() => {
-      console.log('Making')
       this.store.dispatch(updateOrderStatus({ orderId, status: 'Making' }))
       setTimeout(() => {
-        console.log('Ready')
         this.store.dispatch(updateOrderStatus({ orderId, status: 'Ready' }))
         setTimeout(() => {
-          console.log('Delivered')
           this.store.dispatch(updateOrderStatus({ orderId, status: 'Delivered' }))
         }, 5000);
       }, 5000);

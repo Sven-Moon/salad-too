@@ -45,7 +45,7 @@ export const setGuestId = createAction(
   props<{ id: string }>()
 )
 
-// ------------ CONTACTS ------------
+//#region CONTACTS ------------
 export const addContact = createAction(
   '[Owner Add] Add Contact',
   props<{
@@ -59,6 +59,7 @@ export const editUserName = createAction(
   '[Account] Edit User Name',
   props<{ name: string }>()
 );
+//#endregion CONTACTS ------------
 
 
 // ------------ ACCOUNT ------------
@@ -95,7 +96,8 @@ export const updatePassword = createAction(
 
 export const updatePasswordSuccess = createAction(
   '[Account Password Edit Modal] Update Password Success',
-  props<{ id: string, name: string }>()
+  // password is not locally stored
+  // props<{ id: string, password: string }>()
 )
 
 export const updatePasswordFailure = createAction(

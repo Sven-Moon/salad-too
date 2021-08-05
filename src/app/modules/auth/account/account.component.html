@@ -10,17 +10,17 @@
     <h2>Password</h2>
     <div class="infoContainer flex-row card">
       <div class="info">**********</div>
-      <div class="edit"><img src="./assets/images/edit.png" class="edit" alt=""></div>
+      <div class="edit"><img src="./assets/images/edit.png" class="edit" alt="" (click)="openModal(editPassword)"></div>
     </div>
     <h2>Email</h2>
     <div class="infoContainer flex-row card">
       <div class="info">{{user.email}}</div>
-      <div class="edit"><img src="./assets/images/edit.png" class="edit" alt=""></div>
+      <div class="edit"><img src="./assets/images/edit.png" class="edit" alt="" (click)="openModal(editEmail)"></div>
     </div>
     <h2>Phone Number</h2>
     <div class="infoContainer flex-row card">
-      <div class="info">{{user.phoneNumber}}</div>
-      <div class="edit"><img src="./assets/images/edit.png" class="edit" alt=""></div>
+      <div class="info" mask="000 000 0000">{{user.phoneNumber}}</div>
+      <div class="edit"><img src="./assets/images/edit.png" class="edit" alt="" (click)="openModal(editPhone)"></div>
     </div>
   </ng-container>
 </div>
@@ -86,8 +86,7 @@
       </form>
     </div> <!-- modal body-->
   </div> <!-- modal container-->
-
-</ng-template>
+</ng-template> <!-- edit name modal -->
 
 <ng-template #editPassword>
   <div class="modal-container">
@@ -96,7 +95,7 @@
     </div>
     <div class="modal-body">
       <div> abc123A!!</div>
-      <form #f="ngForm">
+      <form #f="ngForm" passwordsMatch>
         <div class="login-form flex-col flex-center">
 
           <!-- ======= Old Password ======= -->
@@ -155,14 +154,17 @@
           [(ngModel)]="editPasswordForm.confirmPassword"
           #confirmPassword="ngModel"
           [ngModelOptions]="{ updateOn: 'change' }">
+
+          <!-- ---- check passwords match ---- -->
+          <div *ngIf="f.errors?.passwordsMatch && (f.controls.confirmPassword.touched || f.controls.confirmPassword.dirty)">No Matchy</div>
         </div> <!--  Confirm PW -->
 
           <!-- ======= ACTIONS ======= -->
           <div class="actions container flex-row">
             <button type="button" class="btn btn-go"
-            (click)="editUserName(f)"
+            (click)="editUserPassword(f)"
             [disabled]="!f.valid">
-            Change Name
+            Change Password
             </button>
             <button type="button" class="btn btn-cancel"
             (click)="modalRef.hide()">
@@ -175,7 +177,7 @@
     </div> <!-- modal body-->
   </div> <!-- modal container-->
 
-</ng-template>
+</ng-template> <!-- edit password modal -->
 
 <ng-template #editEmail>
   <div class="modal-container">
@@ -189,18 +191,18 @@
 
           <!-- ======= New Email ======= -->
           <div class="form-group flex-col flex-center">
-            <label for="email">Email Address</label>
+            <label for="newEmail">Email Address</label>
             <input
             type="text"
-            name="email"
-            id="email"
+            name="newEmail"
+            id="newEmail"
             class="form-control"
-            [(ngModel)]="editEmailForm.email"
-            #email="ngModel"
+            [(ngModel)]="editEmailForm.newEmail"
+            #newEmail="ngModel"
             placeholder="me@example.com"
             pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
             required>
-            <div *ngIf="email.errors?.pattern && (f.touched)">
+            <div *ngIf="newEmail.errors?.pattern && (f.touched)">
               A valid email is required.
             </div>
           </div> <!--  Email --> <!-- New Username -->
@@ -222,9 +224,9 @@
           <!-- ======= ACTIONS ======= -->
           <div class="actions container flex-row">
             <button type="button" class="btn btn-go"
-            (click)="editUserName(f)"
+            (click)="editUserEmail(f)"
             [disabled]="!f.valid">
-            Change Name
+            Change Email
             </button>
             <button type="button" class="btn btn-cancel"
             (click)="modalRef.hide()">
@@ -236,8 +238,7 @@
       </form>
     </div> <!-- modal body-->
   </div> <!-- modal container-->
-
-</ng-template>
+</ng-template> <!-- edit email modal -->
 
 <ng-template #editPhone>
   <div class="modal-container">
@@ -252,12 +253,14 @@
           <!-- ======= New Phone Number ======= -->
           <div class="form-group flex-col flex-center">
             <label for="newPhoneNumber">New Phone Number</label>
-            <input type="text" name="newPhoneNumber" id=""
+            <input type="test" name="newPhoneNumber"
             class="form-control" required
+            maxlength="12"
+            mask="000 000 0000"
             placeholder="000 000 0000" [(ngModel)]="editPhoneForm.newPhoneNumber "#newUsername="ngModel"
-            pattern="^d{10}$"
+            pattern="^\d{10}$"
             #newPhoneNumber="ngModel">
-            <div *ngIf="newPhoneNumber.errors?.pattern && (newPhoneNumber.touched)">Phone number must be at least 10 characters in length, only digits (no spaces).</div>
+            <div *ngIf="newPhoneNumber.errors?.pattern && (newPhoneNumber.touched)">Phone number must be 10 characters in length, only digits (no spaces).</div>
           </div> <!-- New phone number -->
 
           <!-- ======= Password ======= -->
@@ -277,9 +280,9 @@
           <!-- ======= ACTIONS ======= -->
           <div class="actions container flex-row">
             <button type="button" class="btn btn-go"
-            (click)="editUserName(f)"
+            (click)="editUserPhone(f)"
             [disabled]="!f.valid">
-            Change Name
+            Change Phone Number
             </button>
             <button type="button" class="btn btn-cancel"
             (click)="modalRef.hide()">
@@ -292,4 +295,4 @@
     </div> <!-- modal body-->
   </div> <!-- modal container-->
 
-</ng-template>
+</ng-template> <!-- edit phone number modal -->
