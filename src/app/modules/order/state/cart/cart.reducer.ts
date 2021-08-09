@@ -73,6 +73,10 @@ export const reducer = createReducer(
       items: newArray
     }
   }),
+  mutableOn(CartActions.updateCartItemOwner, (state, action) => {
+    state.items.find(item => item.id === action.itemId).owner = action.owner
+    state.items.find(item => item.id === action.itemId).name = action.itemName
+  }),
 
   // boiler plate
   on(CartActions.loadCarts, state => state),

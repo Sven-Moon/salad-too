@@ -29,9 +29,9 @@ export const reducer = createReducer(
   // =============== Item Owner ===============
   on(ItemActions.setItemOwner, (state, action) => ({
     ...state, owner: {
-      email: action.contact.email,
-      img: action.contact.img,
-      name: action.contact.name
+      email: action.owner.email,
+      img: action.owner.img,
+      name: action.owner.name
     }
   })),
   on(ItemActions.setLastItemOwnerAsItemOwner, (state, action) => ({

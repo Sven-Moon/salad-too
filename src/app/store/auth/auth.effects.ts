@@ -10,6 +10,7 @@ import { AlertService } from '@full-fledged/alerts';
 import { Store } from '@ngrx/store';
 import { setItemOwner } from 'src/app/modules/order/state/item/item.actions';
 import { AuthAPIService } from 'src/app/services/auth-api.service';
+import { OrderService } from 'src/app/services/order.service';
 
 
 @Injectable()
@@ -34,32 +35,44 @@ export class AuthEffects {
     { dispatch: false }
   )
 
-  alertLoginSuccess$ = createEffect(() =>
+
+  loginSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginSuccess),
-      tap(() => {
-        this.alertService.success('You have successfully logged in!')
-      })
+      tap((action) => this.orderService.processLoginSuccess(action.user))
     ),
     { dispatch: false }
   )
 
-  setUserAsOwner$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.loginSuccess),
-        mergeMap((action) => [
-          this.store.dispatch(setItemOwner({
-            contact: {
-              email: action.user.email,
-              img: action.user.img,
-              name: action.user.name
-            }
-          }))
-        ])
-      ),
-    { dispatch: false }
-  );
+  // alertLoginSuccess$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(AuthActions.loginSuccess),
+  //     tap(() => {
+  //       this.alertService.success('You have successfully logged in!')
+  //     })
+  //   ),
+  //   { dispatch: false }
+  // )
+
+  // setUserAsOwner$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(AuthActions.loginSuccess),
+  //       mergeMap((action) => [
+  //         this.orderService.setUserAsLastOwner(action.user),
+  //         this.orderService.convertGuestItems()
+
+  //         // this.store.dispatch(setItemOwner({
+  //         //   contact: {
+  //         //     email: action.user.email,
+  //         //     img: action.user.img,
+  //         //     name: action.user.name
+  //         //   }
+  //         // }))
+  //       ])
+  //     ),
+  //   { dispatch: false }
+  // );
 
   welcomeBack$ = createEffect(
     () =>
@@ -227,7 +240,8 @@ export class AuthEffects {
     private authAPIService: AuthAPIService,
     private modalService: BsModalService,
     private alertService: AlertService,
-    private store: Store
+    private store: Store,
+    private orderService: OrderService
   ) { }
 
 }

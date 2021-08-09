@@ -55,7 +55,7 @@ export class OwnerPickComponent implements OnInit {
   }
 
   public setItemOwner(contact: Contact): void {
-    this.store.dispatch(setItemOwner({ contact }))
+    this.store.dispatch(setItemOwner({ owner: contact }))
     this.closeOwnerPick()
     // if an item has already been selected, change the name
     // to include the (new) owner's name

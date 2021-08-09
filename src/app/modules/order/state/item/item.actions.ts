@@ -6,7 +6,7 @@ import { Contact, User } from 'src/app/models/User';
 // ======== OWNER ========
 
 export const setItemOwner = createAction(
-  '[Owner Pick] Set Item Owner', props<{ contact: Contact }>()
+  '[Owner Pick] Set Item Owner', props<{ owner: Contact }>()
 );
 
 export const setLastItemOwnerAsItemOwner = createAction(
