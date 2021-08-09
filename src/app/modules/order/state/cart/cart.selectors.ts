@@ -77,3 +77,10 @@ export const selectCartTotal = createSelector(
     return cartTotal
   }
 )
+
+export const selectCartItemsIds = createSelector(
+  selectCartItems,
+  (items: CartItems): string[] => {
+    return items.map(item => item.id)
+  }
+);

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
 import { CartItem, Items } from 'src/app/models/Item';
 import { Contact } from 'src/app/models/User';
+import { OrderService } from 'src/app/services/order.service';
 import { addItemToCart } from '../state/cart/cart.actions';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
 import { clearItem, deselectAllIngredientsOfType, filterIngredientType, setLastItemOwnerAsItemOwner, setItemId, toggleIngredient } from '../state/item/item.actions';
@@ -23,16 +24,13 @@ export class OrderCustomizeItemComponent implements OnInit {
   filteredIngredients$: Observable<Ingredients>
   singleSelectIngredientTypes: IngredientTypes
   cartItem: CartItem
-  price: string
-  owner: Contact
+  price: string // of current ingredient
   allItems: Items
-
-  //debug
-  index = 0
 
   constructor(
     private store: Store,
-    private router: Router
+    private router: Router,
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
@@ -79,15 +77,10 @@ export class OrderCustomizeItemComponent implements OnInit {
     // create a modifiable item equal to the current item
     let cartItem: CartItem = { ...this.cartItem }
 
-    // ========== Item Owner may have changed ==========
-    // account for possibility that this is a duplicate item
-    let pureId = cartItem.id.replace(/\*/, '')
-    // get the name without modification
-    let itemName: string = this.allItems.find(item => item.id == pureId).name
-    // add (first name of) <contact name>'s before item name
-    itemName = cartItem.owner.name.split(' ')[0].concat('\'s ', itemName)
-    // otherwise use the unmodified name
-    cartItem.name = itemName
+    cartItem.name = this.orderService.getOwnedItemName(cartItem)
+    cartItem.id = this.orderService.generateItemId(cartItem.id)
+    console.log('id: ' + cartItem.id);
+
 
     // ========== if this is a new item, set qty = 1  ==========
     if (this.cartItem.quantity == null) {

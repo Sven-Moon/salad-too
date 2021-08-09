@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CartItem, Item, Items } from 'src/app/models/Item';
 import { Contact } from 'src/app/models/User';
+import { OrderService } from 'src/app/services/order.service';
 import { addItemToCart } from '../state/cart/cart.actions';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
 import { clearItem, clearItemGroup, loadItem, setItemId } from '../state/item/item.actions';
@@ -22,7 +23,8 @@ export class OrderItemSelectComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private router: Router
+    private router: Router,
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
@@ -53,7 +55,8 @@ export class OrderItemSelectComponent implements OnInit {
     } else {
       let cartItem = item as CartItem
       cartItem.owner = this.owner
-      cartItem.name = this.owner.name.split(' ')[0].concat("'s ", cartItem.name)
+      cartItem.name = this.orderService.getOwnedItemName(cartItem)
+      cartItem.id = this.orderService.generateItemId(cartItem.id)
       this.store.dispatch(addItemToCart({ cartItem }))
       this.store.dispatch(clearItem())
       this.router.navigate(['/order/cart'])

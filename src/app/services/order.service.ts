@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CartItem, CartItems, Items } from '../models/Item';
-import { User } from '../models/User';
+import { Contact, User } from '../models/User';
 import { updateCartItemOwner, updateLastOwner } from '../modules/order/state/cart/cart.actions';
-import { selectCartItems } from '../modules/order/state/cart/cart.selectors';
+import { selectCartItems, selectCartItemsIds, selectLastItemOwner } from '../modules/order/state/cart/cart.selectors';
 import { setItemOwner } from '../modules/order/state/item/item.actions';
 import { selectAllItems } from '../modules/order/state/staticData/static-data.selectors';
 import { AlertService } from '@full-fledged/alerts';
@@ -66,17 +66,20 @@ export class OrderService {
   public convertGuestItems(cartItems: CartItems, user: User) {
     // ****
     // method used on login & item owner change
-    // depends on lastItemOwner to be executed upstream
+    // depends on updateLastItemOwner to be executed upstream
     if (cartItems.length !== 0) {
 
+      let owner: Contact
+      this.store.select(selectLastItemOwner)
+
       cartItems.forEach(item => {
-        let itemName: string = this.getOwnedItemName(item, user)
+        let itemName: string = this.getOwnedItemName(item)
         let itemId = item.id
 
         this.store.dispatch(updateCartItemOwner({
           itemId,
           itemName,
-          owner: user
+          owner: owner
         }))
       });
     }
@@ -88,13 +91,11 @@ export class OrderService {
         this.router.navigate(['/order/cart']);
       });
     }
-
-
   }
   //#endregion processLoginSuccess
 
-  public getOwnedItemName(item: CartItem, user: User): string {
-    // **** Adds user name to the item to show ownership ******
+  public getOwnedItemName(item: CartItem): string {
+    // **** Adds owner name to the item to show ownership ******
     // modifies items after they have been added to the cart
     // accounts for duplicate items, which art suffixed with 1+ '*'
 
@@ -108,9 +109,30 @@ export class OrderService {
     // get the name without modification
     let itemName: string = allItems.find(item => item.id == pureId).name
     // add (first name of) <contact name>'s before item name
-    itemName = user.name.split(' ')[0].concat('\'s ', itemName)
+    itemName = item.owner.name.split(' ')[0].concat('\'s ', itemName)
 
     return itemName
+  }
+
+  public generateItemId(itemId: string): string {
+    let uniqueId: string
+    let itemIds: string[]
+    let counter: number = 1
+    let unique: boolean = false
+    this.store.select(selectCartItemsIds).subscribe(ids =>
+      itemIds = ids
+    )
+
+    uniqueId = itemId
+
+    while (!unique) {
+      uniqueId = itemId.concat("_", counter.toString())
+      if (itemIds.includes(uniqueId)) {
+        counter++
+      } else { unique = true }
+    }
+    return uniqueId
+
   }
 
 }
