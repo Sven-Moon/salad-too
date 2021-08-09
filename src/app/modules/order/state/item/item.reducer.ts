@@ -26,7 +26,7 @@ export const initialState: State = {
 export const reducer = createReducer(
   initialState,
 
-  // =============== Item Owner ===============
+  //#region =============== Item Owner ===============
   on(ItemActions.setItemOwner, (state, action) => ({
     ...state, owner: {
       email: action.owner.email,
@@ -53,8 +53,9 @@ export const reducer = createReducer(
   on(ItemActions.clearItemGroup, (state) => ({
     ...state, itemGroup: null
   })),
+  //#endregion item owner
 
-  // =============== Item Type Select ===============
+  //#region =============== Item Type Select ===============
   on(ItemActions.setItemId, (state, action) => ({
     ...state, id: action.id
   })),
@@ -73,8 +74,8 @@ export const reducer = createReducer(
     }
   }),
   on(ItemActions.clearItem, (state, action) => (initialState)),
-  // =============== CUSTOMIZE ===============
-
+  //#endregion item type select
+  //#region =============== CUSTOMIZE ===============
   on(ItemActions.filterIngredientType, (state, action) => ({
     ...state, pickedIngredientTypeId: action.ingredientType
   })),
@@ -110,6 +111,7 @@ export const reducer = createReducer(
       state.ingredients = newList
     }
   ),
+  //#endregion customize
 
   // ======== CART ========
   mutableOn(ItemActions.editCartItem, (state, action) => ({

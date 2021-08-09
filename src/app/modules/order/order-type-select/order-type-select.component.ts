@@ -18,8 +18,7 @@ export class OrderTypeSelectComponent implements OnInit {
   owner: Contact
 
   constructor(
-    private store: Store,
-    private router: Router
+    private store: Store
   ) { }
 
   ngOnInit(): void {

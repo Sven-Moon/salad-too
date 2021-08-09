@@ -44,36 +44,6 @@ export class AuthEffects {
     { dispatch: false }
   )
 
-  // alertLoginSuccess$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(AuthActions.loginSuccess),
-  //     tap(() => {
-  //       this.alertService.success('You have successfully logged in!')
-  //     })
-  //   ),
-  //   { dispatch: false }
-  // )
-
-  // setUserAsOwner$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(AuthActions.loginSuccess),
-  //       mergeMap((action) => [
-  //         this.orderService.setUserAsLastOwner(action.user),
-  //         this.orderService.convertGuestItems()
-
-  //         // this.store.dispatch(setItemOwner({
-  //         //   contact: {
-  //         //     email: action.user.email,
-  //         //     img: action.user.img,
-  //         //     name: action.user.name
-  //         //   }
-  //         // }))
-  //       ])
-  //     ),
-  //   { dispatch: false }
-  // );
-
   welcomeBack$ = createEffect(
     () =>
       this.actions$.pipe(

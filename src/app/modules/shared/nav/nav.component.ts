@@ -5,11 +5,12 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable, of } from 'rxjs';
 import { timeout } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
 import { DefaultUserService } from 'src/app/services/default-user.service';
 import { logout, setGuestId } from 'src/app/store/auth/auth.actions';
-import { selectIsSignedIn } from 'src/app/store/auth/auth.selectors';
+import { selectIsSignedIn, selectUser } from 'src/app/store/auth/auth.selectors';
 import { LoginModalComponent } from '../../auth/login-modal/login-modal.component';
-import { clearCart } from '../../order/state/cart/cart.actions';
+import { clearCart, updateLastOwner } from '../../order/state/cart/cart.actions';
 import { selectCartCount } from '../../order/state/cart/cart.selectors';
 import { clearItem } from '../../order/state/item/item.actions';
 import { selectNavPointer } from '../state/shared.selectors';
@@ -30,7 +31,8 @@ export class NavComponent implements OnInit {
     private modalService: BsModalService,
     private spinner: NgxSpinnerService,
     private route: Router,
-    private guestService: DefaultUserService
+    private guestService: DefaultUserService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -49,13 +51,7 @@ export class NavComponent implements OnInit {
   }
 
   public logout() {
-    let id = this.guestService.generateId()
-    // this.store.dispatch(logout({id}))
-    this.store.dispatch(setGuestId({ id }))
-
-    this.store.dispatch(clearItem())
-    this.store.dispatch(clearCart())
-    this.route.navigate(['/order/launch'])
+    this.authService.logout()
   }
 }
 
