@@ -110,7 +110,6 @@ export class AuthAPIService {
     ).pipe(
       switchMap((userReply) => {
         let user = userReply
-        console.log(user)
         if (user) {
           return of(user)
         } else return throwError('Can\'t find user')
@@ -132,7 +131,6 @@ export class AuthAPIService {
     ).pipe(
       switchMap((userReply) => {
         let user = userReply
-        console.log(user)
         if (user) {
           return of(user)
         } else return throwError('Can\'t find user')
@@ -142,7 +140,6 @@ export class AuthAPIService {
   }
 
   public updateEmail(data: { id: string, password: string, newEmail: string }): Observable<any> {
-    console.log(data.newEmail)
     this.body = { email: data.newEmail }
     let httpOptions = {
       headers: new HttpHeaders({
@@ -156,7 +153,6 @@ export class AuthAPIService {
     ).pipe(
       switchMap((userReply) => {
         let user = userReply
-        console.log(user)
         if (user) {
           return of(user)
         } else return throwError('Can\'t find user')
@@ -178,7 +174,6 @@ export class AuthAPIService {
     ).pipe(
       switchMap((userReply) => {
         let user = userReply
-        console.log(user)
         if (user) {
           return of(user)
         } else return throwError('Can\'t find user')
@@ -200,7 +195,6 @@ export class AuthAPIService {
     ).pipe(
       switchMap((userReply) => {
         let user = userReply
-        console.log(user)
         if (user) {
           return of(user)
         } else return throwError('Can\'t find user')

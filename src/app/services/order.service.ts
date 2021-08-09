@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CartItem, CartItems, Items } from '../models/Item';
-import { Order, Orders } from '../models/Order';
-import { Contact, User } from '../models/User';
+import { User } from '../models/User';
 import { updateCartItemOwner, updateLastOwner } from '../modules/order/state/cart/cart.actions';
-import { selectCartItems, selectLastItemOwner } from '../modules/order/state/cart/cart.selectors';
-import { setItemOwner, setLastItemOwnerAsItemOwner } from '../modules/order/state/item/item.actions';
+import { selectCartItems } from '../modules/order/state/cart/cart.selectors';
+import { setItemOwner } from '../modules/order/state/item/item.actions';
 import { selectAllItems } from '../modules/order/state/staticData/static-data.selectors';
 import { AlertService } from '@full-fledged/alerts';
 import { selectItemId } from '../modules/order/state/item/item.selectors';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -19,9 +18,9 @@ export class OrderService {
 
   constructor(
     private alertService: AlertService,
-    private store: Store
-  ) {
-  }
+    private store: Store,
+    private router: Router
+  ) { }
 
   public processLoginSuccess(user: User) {
     // *********
@@ -81,6 +80,16 @@ export class OrderService {
         }))
       });
     }
+    // if the user is currently in the cart, the page must be reloaded
+    // because the user list must be reloaded (on init)
+
+    if (this.router.url === '/order/cart') {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/order/cart']);
+      });
+    }
+
+
   }
   //#endregion processLoginSuccess
 

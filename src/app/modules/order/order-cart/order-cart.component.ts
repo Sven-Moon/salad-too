@@ -61,6 +61,8 @@ export class OrderCartComponent implements OnInit {
       this.itemsVisible[owner.email] = { visible: false }
     )
     this.cartTotal$ = this.store.select(selectCartTotal)
+
+
   }
 
   public viewOwnerItems(id: string): void {
