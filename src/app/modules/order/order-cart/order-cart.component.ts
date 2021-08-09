@@ -58,7 +58,7 @@ export class OrderCartComponent implements OnInit {
       this.itemOwners = owners
     )
     this.itemOwners.forEach(owner =>
-      this.itemsVisible[owner.email] = { visible: false }
+      this.itemsVisible[owner.email] = { visible: true }
     )
     this.cartTotal$ = this.store.select(selectCartTotal)
 

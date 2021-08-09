@@ -115,15 +115,13 @@ export class OrderService {
   }
 
   public generateItemId(itemId: string): string {
-    let uniqueId: string
+    let uniqueId: string = itemId
     let itemIds: string[]
     let counter: number = 1
     let unique: boolean = false
     this.store.select(selectCartItemsIds).subscribe(ids =>
       itemIds = ids
     )
-
-    uniqueId = itemId
 
     while (!unique) {
       uniqueId = itemId.concat("_", counter.toString())
