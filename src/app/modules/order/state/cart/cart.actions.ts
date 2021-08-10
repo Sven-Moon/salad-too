@@ -47,11 +47,7 @@ export const changeCartItemQty = createAction(
 
 export const updateCartItemOwner = createAction(
   '[Login Successful (Effect)] Update Cart Item Owner',
-  props<{
-    itemId: string
-    owner: Contact,
-    itemName: string
-  }>()
+  props<{ item }>()
 )
 
 

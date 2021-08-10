@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CartItem, CartItems, Item, Items } from '../models/Item';
+import { CartItems, Item, Items } from '../models/Item';
 import { Contact, User } from '../models/User';
 import { updateCartItemOwner, updateLastOwner } from '../modules/order/state/cart/cart.actions';
 import { selectCartItems, selectCartItemsIds, selectLastItemOwner } from '../modules/order/state/cart/cart.selectors';
@@ -9,6 +9,7 @@ import { selectAllItems } from '../modules/order/state/staticData/static-data.se
 import { AlertService } from '@full-fledged/alerts';
 import { selectItemId } from '../modules/order/state/item/item.selectors';
 import { Router } from '@angular/router';
+import { Order } from '../models/Order';
 
 
 @Injectable({
@@ -23,15 +24,15 @@ export class OrderService {
   ) { }
 
   public processLoginSuccess(user: User) {
-    // *********
-    // processes all post login success items:
-    // 1) alerts of success
-    // 2) sets the user as the "lastOwner", which sets the next
-    //    item to the last owner (also convenient to use in following task)[]
-    // 3) converts guest items to User items
-    // 3.1) if item in customization, adds User as owner property
-    // 3.2) converts all items in cart (owner property & name)
-    //
+    /**
+     * processes all post login success items:
+     * 1) alert of success
+     * 2) set the user as the "lastOwner", which sets the next
+     * item to the last owner
+     * 3) convert guest items to User items
+     * 3.1) if item in customization, add User as owner property
+     * 3.2) convert all items in cart (owner property & name)
+    */
     let itemId: string
     this.store.select(selectItemId).subscribe(id =>
       itemId = id
@@ -40,6 +41,8 @@ export class OrderService {
     this.store.select(selectCartItems).subscribe(items =>
       cartItems = items
     )
+    let owner: Contact
+
     // 1)
     this.alertService.success('You have successfully logged in!')
     // 2)
@@ -57,30 +60,26 @@ export class OrderService {
     }))
   }
 
-  private setItemOwner(itemId: string, user: User) {
+  private setItemOwner(itemId: string, owner: Contact) {
     if (itemId) {
-      this.store.dispatch(setItemOwner({ owner: user }))
+      this.store.dispatch(setItemOwner({ owner }))
     }
   }
 
-  public convertGuestItems(cartItems: CartItems, user: User) {
-    // ****
-    // method used on login & item owner change
-    // depends on updateLastItemOwner to be executed upstream
+  public convertGuestItems(cartItems: CartItems, owner: Contact) {
+    /**
+    method used on login & item owner change
+    depends on updateLastItemOwner to be executed upstream
+    */
     if (cartItems.length !== 0) {
-
-      let owner: Contact
-      this.store.select(selectLastItemOwner)
-
       cartItems.forEach(item => {
-        let itemName: string = this.getOwnedItemName(item)
-        let itemId = item.id
-
-        this.store.dispatch(updateCartItemOwner({
-          itemId,
-          itemName,
+        let itemName: string = this.getOwnedItemName(item, owner.name)
+        let updatedItem = {
+          ...item,
+          name: itemName,
           owner: owner
-        }))
+        }
+        this.store.dispatch(updateCartItemOwner({ item: updatedItem }))
       });
     }
     // if the user is currently in the cart, the page must be reloaded
@@ -94,7 +93,7 @@ export class OrderService {
   }
   //#endregion processLoginSuccess
 
-  public getOwnedItemName(item: Item): string {
+  public getOwnedItemName(item: Item, ownerName: string): string {
     // **** Adds owner name to the item to show ownership ******
     // modifies items after they have been added to the cart
     // accounts for duplicate items, which art suffixed with 1+ '*'
@@ -109,7 +108,7 @@ export class OrderService {
     // get the name without modification
     let itemName: string = allItems.find(item => item.id == pureId).name
     // add (first name of) <contact name>'s before item name
-    itemName = item.owner.name.split(' ')[0].concat('\'s ', itemName)
+    itemName = ownerName.split(' ')[0].concat('\'s ', itemName)
 
     return itemName
   }
@@ -131,6 +130,20 @@ export class OrderService {
     }
     return uniqueId
 
+  }
+
+  public sortOrderByItemName(order: Order): Order {
+    let sortedItems: CartItems = [order.items[0]]
+    let sortedOrder: Order
+    order.items.forEach(item =>
+      sortedItems.forEach(newItem => {
+        if (item.name > newItem.name) {
+          sortedItems.splice(sortedItems.indexOf(newItem) + 1, 0, item)
+        }
+      })
+    )
+    sortedOrder = { ...order, items: sortedItems }
+    return sortedOrder
   }
 
 }

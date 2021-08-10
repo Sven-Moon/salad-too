@@ -55,7 +55,7 @@ export class OrderItemSelectComponent implements OnInit {
     } else {
       let cartItem = item as CartItem
       cartItem.owner = this.owner
-      cartItem.name = this.orderService.getOwnedItemName(cartItem)
+      cartItem.name = this.orderService.getOwnedItemName(cartItem, cartItem.owner.name)
       cartItem.id = this.orderService.generateItemId(cartItem.id)
       this.store.dispatch(addItemToCart({ cartItem }))
       this.store.dispatch(clearItem())

@@ -63,7 +63,7 @@ export class OwnerPickComponent implements OnInit {
      *  to include the (new) owner's name
      * new name is (first part of) <contact name>'s + Item name */
     if (this.currentItem && this.currentItem.id) {
-      let name = this.orderService.getOwnedItemName(this.currentItem)
+      let name = this.orderService.getOwnedItemName(this.currentItem, contact.name)
       this.store.dispatch(setItemName({ name }))
     }
   }

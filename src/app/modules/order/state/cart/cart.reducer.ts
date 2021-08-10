@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { mutableOn } from 'ngrx-etc';
-import { CartItem, CartItems, Items } from 'src/app/models/Item';
+import { CartItems } from 'src/app/models/Item';
 import { Contact } from 'src/app/models/User';
 import * as CartActions from './cart.actions';
 
@@ -73,9 +73,17 @@ export const reducer = createReducer(
       items: newArray
     }
   }),
-  mutableOn(CartActions.updateCartItemOwner, (state, action) => {
-    state.items.find(item => item.id === action.itemId).owner = action.owner
-    state.items.find(item => item.id === action.itemId).name = action.itemName
+  on(CartActions.updateCartItemOwner, (state, action) => {
+    let newItems: CartItems = []
+    state.items.forEach(item => {
+      if (item.id !== action.item.id) {
+        newItems.push(item)
+      } else {
+        newItems.push(action.item)
+      }
+    })
+
+    return { ...state, items: newItems }
   }),
 
   // boiler plate

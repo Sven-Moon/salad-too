@@ -9,6 +9,7 @@ import { selectCartItems, selectCartTotal } from '../../order/state/cart/cart.se
 import { Order } from 'src/app/models/Order';
 import { CartItems } from 'src/app/models/Item';
 import { createOrder } from '../../orders/state/orders.actions';
+import { OrderService } from 'src/app/services/order.service';
 
 
 @Component({
@@ -53,7 +54,7 @@ export class PayInfoComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store,
     public payModalRef: BsModalRef,
-    private modalService: BsModalService
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
@@ -86,7 +87,7 @@ export class PayInfoComponent implements OnInit {
       cartItems = items
     )
 
-    let order: Order = {
+    let unsortedOrder: Order = {
       id: orderId,
       items: cartItems,
       total: '$' + this.total.toFixed(2),
@@ -95,6 +96,8 @@ export class PayInfoComponent implements OnInit {
       received: null,
       completed: null
     }
+
+    let order = this.orderService.sortOrderByItemName(unsortedOrder)
 
     this.store.dispatch(createOrder({ order }))
     // this.store.dispatch(updatePayment({ payment }))
