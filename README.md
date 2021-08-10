@@ -1,27 +1,50 @@
 # SaladToo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.7.
+** In Progress **
 
-## Development server
+This project was is actually a re-hash of the salad-plus project. I wanted to see how much I could improve the project starting from scratch & also to see how much more efficiently I could complete the project. Overall I'm pleasantly surprised by the results. Things were much easier, and consequently faster, this time around, and I was able to implement massive improvements and greater functionality in only a portion of the same time. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Features
+- authorization allowing for order history
+- selection of customizable & non-customizable items with clear as-you-go pricing
+- select one or many ingredients of type
+- good looking modals
+- spinner to let the user know "we're working on it"
+- payment with self-formatting fields
+- responsive design
 
-## Code scaffolding
+### Backend Features
+- NGRX store, routing
+- both template & reactive forms
+- json-server & interceptors for data
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## What I Learned
+### Styling
+- how to effectively turn a site plan into an html page
+- use of box-sizing: border-box! (ugh, things were hard before that)
+- (in progress: animations)
 
-## Build
+### Backend / State
+- I really upped the game on NGRX selector use, making the code more clearly speak for itself
+- intermediate routing (use of parameters, snapshots, routing config)
+- sass variables & import of style sheets
+- use of post, patch operations on a server
+- effects to handle async operations (alerts, spinner, routes)
+- use of RXJS became a little less confusing: it's clearer when to use mergeMap vs concatMap vs tap... etc.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### IDE 
+- use of snippets in VS Code!
+- custom folder images
+- removing the collapse/expand arrows
 
-## Running unit tests
+### Project Structure & Working Meta
+- basic elements of authorization
+- consistent & meaningful commit structure
+- Jira epic/task project structure improvements
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Third Party Libraries
+- ngx-spinner
+- ngx-alerts
+- concurrently
+- ngx-mask
+- ngx-bootstrap
