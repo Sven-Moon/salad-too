@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Ingredient, Ingredients } from 'src/app/models/Ingredient';
 import { CartItem, CartItems, ItemsByOwner } from 'src/app/models/Item';
 import { Contacts } from 'src/app/models/User';
+import { OrderService } from 'src/app/services/order.service';
 import { PayInfoComponent } from '../../pay/pay-info/pay-info.component';
 import { changeCartItemQty, clearCart, duplicateCartItem, removeCartItem } from '../state/cart/cart.actions';
 import { selectCartItems, selectCartState, selectCartTotal, selectItemOwners, selectItemsByOwner } from '../state/cart/cart.selectors';
@@ -33,7 +34,8 @@ export class OrderCartComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
@@ -102,7 +104,7 @@ export class OrderCartComponent implements OnInit {
   public duplicateItem(itemToDuplicate: CartItem) {
     let item = {
       ...itemToDuplicate,
-      id: itemToDuplicate.id.concat('*')
+      id: this.orderService.generateItemId(itemToDuplicate.id)
     }
     this.store.dispatch(duplicateCartItem({ item }))
   }

@@ -49,6 +49,7 @@ export class OrdersStatusComponent implements OnInit {
         itemsVisible: false,
         items: {}
       }
+      // set item ingredients to collapsed
       order.items.forEach(item =>
         this.visible[order.id].items[item.id] = {
           ingredientsVisible: false

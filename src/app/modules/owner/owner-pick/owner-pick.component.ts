@@ -10,6 +10,7 @@ import { OwnerAddComponent } from '../owner-add/owner-add.component';
 import { setItemName, setItemOwner } from '../../order/state/item/item.actions'
 import { selectCurrentItem } from '../../order/state/item/item.selectors';
 import { selectAllItems } from '../../order/state/staticData/static-data.selectors';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-owner-pick',
@@ -30,7 +31,8 @@ export class OwnerPickComponent implements OnInit {
   constructor(
     private store: Store,
     private modalService: BsModalService,
-    public pickModalRef: BsModalRef
+    public pickModalRef: BsModalRef,
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
@@ -57,18 +59,11 @@ export class OwnerPickComponent implements OnInit {
   public setItemOwner(contact: Contact): void {
     this.store.dispatch(setItemOwner({ owner: contact }))
     this.closeOwnerPick()
-    // if an item has already been selected, change the name
-    // to include the (new) owner's name
-    // new name is (first part of) <contact name>'s + Item name
-
-    // this may be replacing a name, so get the name from the un-ownered name
-    // consider that the id may have had * appended to it on duplication
-    if (this.currentItem.id) {
-      let pureId = this.currentItem.id.replace(/\*/, '')
-      let pureName = this.allItems.find(item => item.id == pureId).name
-      let name: string = this.currentItem.owner.name.concat('\'s ', pureName)
-
-      // let name = contact.name.split(' ')[0].concat('\'s ', this.currentItem.name)
+    /**if an item has already been selected, change the name
+     *  to include the (new) owner's name
+     * new name is (first part of) <contact name>'s + Item name */
+    if (this.currentItem && this.currentItem.id) {
+      let name = this.orderService.getOwnedItemName(this.currentItem)
       this.store.dispatch(setItemName({ name }))
     }
   }

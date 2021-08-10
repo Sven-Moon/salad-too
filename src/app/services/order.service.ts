@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CartItem, CartItems, Items } from '../models/Item';
+import { CartItem, CartItems, Item, Items } from '../models/Item';
 import { Contact, User } from '../models/User';
 import { updateCartItemOwner, updateLastOwner } from '../modules/order/state/cart/cart.actions';
 import { selectCartItems, selectCartItemsIds, selectLastItemOwner } from '../modules/order/state/cart/cart.selectors';
@@ -94,7 +94,7 @@ export class OrderService {
   }
   //#endregion processLoginSuccess
 
-  public getOwnedItemName(item: CartItem): string {
+  public getOwnedItemName(item: Item): string {
     // **** Adds owner name to the item to show ownership ******
     // modifies items after they have been added to the cart
     // accounts for duplicate items, which art suffixed with 1+ '*'
@@ -105,7 +105,7 @@ export class OrderService {
 
     // ========== Item Owner may have changed ==========
     // account for possibility that this is a duplicate item
-    let pureId = item.id.replace(/\*/, '')
+    let pureId = item.id.split('__')[0]
     // get the name without modification
     let itemName: string = allItems.find(item => item.id == pureId).name
     // add (first name of) <contact name>'s before item name
@@ -124,7 +124,7 @@ export class OrderService {
     )
 
     while (!unique) {
-      uniqueId = itemId.concat("_", counter.toString())
+      uniqueId = itemId.concat("__", counter.toString())
       if (itemIds.includes(uniqueId)) {
         counter++
       } else { unique = true }

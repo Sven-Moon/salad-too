@@ -105,7 +105,7 @@ export class PayService {
       }))
       this.store.dispatch(updateOrderReceived({ data: data }))
       this.store.dispatch(clearCart())
-      // this.orderService.advanceStatus(data.orderId)
+      this.orderService.advanceStatus(data.orderId)
     }
   }
 }

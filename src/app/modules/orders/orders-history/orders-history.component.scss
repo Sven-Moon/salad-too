@@ -1,0 +1,124 @@
+@import "/src/styles.scss";
+
+.statusWindow {
+  justify-content: center;
+  width: 100%;
+  background-color: $success;
+  border-radius: 0.3rem;
+  border: 1px solid black;
+  color: white;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+.card {
+  color: black;
+  margin-top: 0;
+}
+
+.header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  justify-content: center;
+  text-align: center;
+}
+
+.orderId {
+  font-size: 1.25rem;
+}
+
+.info1 {
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.info2 {
+  justify-content: center;
+}
+
+.date {
+  text-align: center;
+}
+
+.time {
+  margin-left: 2rem;
+  text-align: center;
+}
+
+hr {
+  width: 75%;
+}
+
+.statusContainer {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  color: black;
+  justify-content: center;
+}
+
+.status {
+  border: 1px solid black;
+  border-radius: 0.4rem;
+  margin-left: 2rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.itemsContainer {
+  background-color: white;
+  height: fit-content;
+}
+
+.item {
+  margin-bottom: 0.2rem;
+}
+
+.itemName {
+  background-color: $primary-dark;
+  color: white;
+  border-radius: 0.3rem;
+  padding: 0.2rem;
+  font-weight: 400;
+  width: calc(100% - (2 * 0.5rem));
+}
+
+.ingredientsContainer {
+  padding: 0 0.25rem 0.1rem;
+  background-color: whitesmoke;
+}
+
+.ingredient {
+  display: inline-block;
+  font-size: 1rem;
+  height: 1.25rem;
+}
+
+.ingredient ul {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  padding-left: 1.5rem;
+}
+
+// STATUS CLASSES
+.paid {
+  background-color: $warning-bg;
+  color: $warning-text;
+  border-color: $warning-dark;
+}
+.making {
+  background-color: $primary-bg;
+  color: $primary-text;
+  border-color: $primary-dark;
+}
+.ready {
+  background-color: $success-bg;
+  color: $success-text;
+  border-color: $success-dark;
+}
+.delivered {
+  background-color: $secondary-bg;
+  color: $secondary-text;
+  border-color: $secondary-dark;
+}

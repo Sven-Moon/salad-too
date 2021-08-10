@@ -9,7 +9,8 @@ const routes: Routes = [
     path: 'orders', component: OrderComponent,
     children: [
       { path: 'status', component: OrdersStatusComponent },
-      { path: 'history', component: OrdersHistoryComponent }
+      { path: 'history', component: OrdersHistoryComponent },
+      { path: '', redirectTo: 'history', pathMatch: 'full' },
     ]
   }
 ];
