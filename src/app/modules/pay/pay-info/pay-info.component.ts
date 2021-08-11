@@ -97,6 +97,7 @@ export class PayInfoComponent implements OnInit {
       completed: null
     }
 
+
     let order = this.orderService.sortOrderByItemName(unsortedOrder)
 
     this.store.dispatch(createOrder({ order }))

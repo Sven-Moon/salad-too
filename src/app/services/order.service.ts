@@ -132,17 +132,20 @@ export class OrderService {
 
   }
 
-  public sortOrderByItemName(order: Order): Order {
-    let sortedItems: CartItems = [order.items[0]]
+  public sortOrderByItemName(unsortedOrder: Order): Order {
+    let unsortedItems: CartItems = Object.assign([], unsortedOrder.items)
+    // unsortedOrder.items.forEach(item => unsortedItems.push(item))
+    let sortedItems = unsortedItems.sort(function (a, b) {
+      return a.name > b.name
+        ? 1
+        : a.name < b.name
+          ? -1
+          : 0
+    })
+
     let sortedOrder: Order
-    order.items.forEach(item =>
-      sortedItems.forEach(newItem => {
-        if (item.name > newItem.name) {
-          sortedItems.splice(sortedItems.indexOf(newItem) + 1, 0, item)
-        }
-      })
-    )
-    sortedOrder = { ...order, items: sortedItems }
+
+    sortedOrder = { ...unsortedOrder, items: sortedItems }
     return sortedOrder
   }
 

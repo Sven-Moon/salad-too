@@ -79,7 +79,6 @@ export class OrderCustomizeItemComponent implements OnInit {
 
     cartItem.name = this.orderService.getOwnedItemName(cartItem, cartItem.owner.name)
     cartItem.id = this.orderService.generateItemId(cartItem.id)
-    console.log('id: ' + cartItem.id);
 
 
     // ========== if this is a new item, set qty = 1  ==========
