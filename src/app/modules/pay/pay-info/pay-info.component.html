@@ -11,7 +11,7 @@
       <div class="total form-control">{{total|currency}}</div>
     </div>
     <!-- ================ CC FORM ================ -->
-    <form [formGroup]="ccForm" (ngSubmit)="submit()" class="ccForm">
+    <form [formGroup]="ccForm" class="ccForm">
       <div class="form-group">
         <label>Name on card</label>
         <input type="text" placeholder="Name" class="form-control" maxlength=20 formControlName="name">
@@ -41,17 +41,15 @@
         </div>
       </div>
 
-
-
-    <!-- ================ ACTIONS ================ -->
-    <div class="actions modalActions">
-      <button type="submit" [disabled]="ccForm.invalid" class="btn btn-go">
-        Pay {{total |currency}}
-      </button>
-      <button type="button" class="btn btn-cancel" (click)="payModalRef.hide()">
+    </form> <!-- ---- cc form ---- -->
+  </div> <!-- ---- modal body ---- -->
+  <!-- ================ ACTIONS ================ -->
+  <div class="actions modalActions">
+    <button type="submit" [disabled]="ccForm.invalid" class="btn-go" (click)="submit()">
+      Pay {{total |currency}}
+    </button>
+    <button type="button" class="btn-cancel" (click)="payModalRef.hide()">
       Cancel
     </button>
   </div> <!-- ---- actions ---- -->
-  </form> <!-- ---- cc form ---- -->
-  </div> <!-- ---- modal body ---- -->
 </div> <!-- ---- modal wrap ---- -->

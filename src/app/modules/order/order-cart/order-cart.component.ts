@@ -141,4 +141,16 @@ export class OrderCartComponent implements OnInit {
     this.bsModalRef = this.modalService.show(PayInfoComponent, { id: 120 })
   }
 
+  public collapseAll(): void {
+    Object.keys(this.itemsVisible).forEach((key) => {
+      this.itemsVisible[key] = { visible: false }
+    })
+  }
+
+  public expandAll(): void {
+    Object.keys(this.itemsVisible).forEach((key) => {
+      this.itemsVisible[key] = { visible: true }
+    })
+  }
+
 }

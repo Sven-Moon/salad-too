@@ -88,10 +88,10 @@
           [disabled]="!f.valid">
           Log In
           </button>
-          <button type="button" class="btn btn-primary" *ngIf="form.newUser"  (click)="signUp(f)" [disabled]="!f.valid">
+          <button type="button" class="btn-primary" *ngIf="form.newUser"  (click)="signUp(f)" [disabled]="!f.valid">
             Sign Up
           </button>
-          <button type="button" class="btn btn-cancel"
+          <button type="button" class="btn-cancel"
           (click)="loginModalRef.hide()">
             Cancel
           </button>

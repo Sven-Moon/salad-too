@@ -86,19 +86,6 @@ img {
   object-fit: contain;
 }
 
-.buttons {
-  display: flex;
-  padding: 1rem;
-  margin-top: 15px;
-  width: 96%;
-  min-width: 300px;
-  height: 15vh;
-  min-height: 6rem;
-  max-height: 100px;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 2rem;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  margin: 3vh auto;
+button {
+  z-index: 5;
 }

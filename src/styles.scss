@@ -4,28 +4,38 @@ $danger-text: #6a2725; // Perisian Plum
 $danger-dark: #3c1615; // Dark Sienna
 $danger-light: #cf7a77; // new york pink
 $danger-bg: #bf4e4a; // deep chestnut
-$warning: #f6f930; // Maximum yellow
-$warning-bg: #f8fc88; // Canary
-$warning-text: #898b04; // Olive
-$warning-dark: #4e4f02; // Army Green
+
+$warning: #d6920a; // harvest gold
+$warning-bg: #f6b83c; // miximum yellow red
+$warning-text: #614205; // UPS brown
+$warning-dark: #271b02; // bistre
+$warning-bg-disabled: #f7c864; // max yellow red 2
+$warning-text-disabled: #c2880a; //  dark goldenrod
+
 $action: #737703; // rifle green
 $bg-white: #f2f9f1; // mint creme
 $bg-soft: #f4f7f3; // baby powder
 // Primary  Coolers: Column 5
-$primary: #346c23; //  Pakistan green
-$primary-text: #254d19; // Lincoln green
-$primary-bg: #7dcd65; // Mantis
-$primary-dark: rgb(15, 31, 10); // Phthalo Green
-$primary-disabled: #8bc77f;
+
+$primary: #233a43; //  Teal Blue
+$primary-text: #1b2d37; // dark gunmetal
+$primary-bg: #477890; // Gunmetal
+$primary-dark: #0e171b; // Rich Black Forga 29
+$primary-light: #e4edf2; // Alice Blue
+$primary-bg-disabled: #a1c1ce; // Dark Sky blue
+$primary-text-disabled: #548ba0; //  Blue Munsell
+
 $neutral: #fec0aa; // melon
 $neutral-light: #fff0eb; // seashell
 // Success Coolers: Column 2
-$success: #3f7231; // fern green
-$success-text: #27471f; // forest green traditional
+$success: #496e61; // Hookers green
+$success-text: #293d38; // Kombu green
 $success-dark: #101c0c; // dark jungle green
-$success-bg: #75bc62; // mantis
-$success-bg-disabled: #d9ecd4; // nyanza
-$success-text-disabled: #8bc77f; // pistachio
+$success-light: #dae7e2; // mint cream
+$success-bg: #6b9e8a; // polished pine
+$success-bg-disabled: #9dbeb4; // opal?
+$success-text-disabled: #629386; // wintergreen dream
+
 $secondary: #666;
 $secondary-text: #666;
 $secondary-light: #bbb;
@@ -135,39 +145,90 @@ $modalActionsHt: 3rem;
 .componentWindow {
   display: flex;
   flex-flow: column nowrap;
-  height: calc(100vh - #{$actionsHeight} - (2 * #{$vGap}) - #{$barHeight});
+  height: calc(
+    100vh - #{$actionsHeight} - (2 * #{$vGap}) - #{$barHeight} - 1rem
+  );
   overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+button {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  font-size: 2rem;
+  padding-inline: 1rem;
+  width: 100%;
+  height: 45%;
+  margin-bottom: 2.5%;
+  font-weight: bold;
+  cursor: pointer;
+
+  border: 3px solid black;
+  border-radius: 0.3rem;
+  color: white;
+  background-color: $primary-bg;
+  font-size: medium;
 }
 
 .actions {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: space-between;
   align-content: center;
+  align-items: center;
   height: $actionsHeight;
 }
 
-button {
-  min-height: 3rem;
-  border-radius: 0.5rem;
-  font-size: 2rem;
-  padding-inline: 5%;
-  margin: 0.2rem;
-  font-weight: bold;
-  cursor: pointer;
+.expandable-v {
+  height: fit-content;
 }
 
-.btn {
+.actions-col {
+  flex-direction: column;
+}
+
+.actions-2row {
   display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  padding: 0.375rem 1rem;
-  border: 1px solid black;
-  border-radius: 0.3rem;
+  flex-direction: row;
+  height: 45%;
+  width: 100%;
+}
+
+.actions-2row button {
+  font-size: 1.5rem;
+  padding-top: unset;
+  padding-bottom: unset;
+  min-width: 7rem;
+  height: 100%;
+  margin: 0;
+}
+
+.topActions {
+  width: 100%;
+  height: 2.5rem;
+  margin-bottom: 0.5rem;
+  justify-content: space-around;
+}
+
+.topActions button {
+  width: fit-content;
+  height: 100%;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: $primary;
   color: white;
-  font-size: medium;
+}
+
+button:disabled {
+  background-color: $primary-bg-disabled;
+  color: $primary-text-disabled;
+  border-color: $secondary-light;
 }
 
 .btn-sm {
@@ -185,22 +246,10 @@ button {
 
 .btn-cancel {
   background-color: $danger-bg;
-  border-color: $danger;
 }
 
 .btn-go {
   background-color: $success-bg;
-  border-color: $success;
-}
-
-.btn-primary {
-  background-color: $primary-bg;
-  border-color: $primary;
-}
-
-.btn-warning {
-  background-color: $warning;
-  border-color: $warning-dark;
 }
 
 .btn-go:disabled {
@@ -208,8 +257,22 @@ button {
   color: $success-text-disabled;
 }
 
+.btn-primary {
+  background-color: $primary-bg;
+}
+
 .btn-primary:disabled {
-  background-color: $primary-disabled;
+  background-color: $primary-bg-disabled;
+  color: $primary-text-disabled;
+}
+
+.btn-warning {
+  background-color: $warning;
+}
+
+.btn-warning:disabled {
+  background-color: $warning-bg-disabled;
+  color: $warning-text-disabled;
 }
 
 .modal {
@@ -234,13 +297,11 @@ button {
 }
 
 .modal-content {
-  // modal-dialog
   position: relative;
   display: flex;
   flex-direction: column;
-  // width: 100%;
   width: max-content;
-  // max-width: $maxPopupWidth-sm;
+  height: max-content;
   padding: 2rem;
   pointer-events: auto;
   background-color: #fff;
@@ -292,6 +353,13 @@ button {
   height: 100vh;
   background-color: #000;
 }
+
+.profile-img {
+  object-fit: scale-down;
+  height: 2rem;
+  margin-inline: 0.5rem;
+}
+
 .text-center {
   text-align: center !important;
 }
@@ -310,6 +378,10 @@ button {
   &-max {
     max-height: 100%;
   }
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
 }
 
 .pointer {

@@ -57,13 +57,13 @@
     </div>
   </div>  <!------------ receipt ------------>
 </div> <!------------ component window ------------>
-<div class="actions">
-  <div class="actions-row row1 around">
+<div class="actions actions-col">
+  <div class="actions-2row around">
     <button type="button" class="btn" (click)="print()">Print Receipt</button>
     <button type="button" class="btn" (click)="emailReceipt()" >Email Receipt</button>
   </div>
-  <div class="actions-row row2 around">
-    <button type="button" class="btn" routerLink="/orders">Status</button>
-    <button type="button" class="btn" routerLink="/order/launch">Home</button>
+  <div class="actions-2row around">
+    <button type="button" class="btn" routerLink="/orders/status">Order Status</button>
+    <button type="button" class="btn" routerLink="/order/launch">Order Home</button>
   </div>
 </div>

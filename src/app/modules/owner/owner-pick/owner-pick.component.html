@@ -21,12 +21,12 @@
         </ng-container>
       </div>
       <hr style="margin: .5rem; width:100%; color:white">
-        <div class="actions">
-          <button (click)="openAddContact()">New Contact</button>
+        <div class="actions expandable-v">
+          <button (click)="openAddContact()" class="btn-go">+ New Contact</button>
           <ng-container *ngIf="!(signedIn$ |async)">
-            <button (click)="openLogin()">Sign In/Up</button>
+            <button (click)="openLogin()">Sign In / Up</button>
           </ng-container>
-          <button (click)="pickModalRef.hide()">Cancel</button>
+          <button (click)="pickModalRef.hide()" class="btn-cancel">Cancel</button>
         </div>
     </div>
   </div>

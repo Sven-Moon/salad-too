@@ -43,6 +43,7 @@
   box-sizing: border-box;
   margin-inline: 0;
   width: 100%;
+  text-align: center;
 }
 
 .form-group {
@@ -87,7 +88,7 @@
 
 .modalActions {
   margin-top: 1rem;
-  height: $modalActionsHt;
+  height: fit-content;
 }
 .modalActions button {
   min-height: 1rem;

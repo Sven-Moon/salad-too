@@ -96,17 +96,6 @@ hr {
   margin-top: 0.5rem;
 }
 
-.actions {
-  flex-direction: column;
-
-  &-row {
-    display: flex;
-    flex-direction: row;
-    font-size: large;
-    height: 45%;
-  }
-}
-
 .around {
   justify-content: space-around;
 }
@@ -116,19 +105,19 @@ hr {
   padding-top: unset;
   padding-bottom: unset;
   min-height: 2rem;
-  width: 35%;
+  width: 45%;
   min-width: 7rem;
   height: 100%;
   margin: 0;
 }
 
-.row1 button {
-  background-color: $primary;
-}
+// .row1 button {
+//   background-color: $primary;
+// }
 
-.row2 button {
-  background-color: $primary-dark;
-}
+// .row2 button {
+//   background-color: $primary-dark;
+// }
 
 // @media only screen and (min-width: 500px) {
 //   row1 button {

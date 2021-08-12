@@ -32,12 +32,16 @@ export class PayInfoComponent implements OnInit {
     expMonth: ['12', [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(2)
+      Validators.maxLength(2),
+      Validators.max(12),
+      Validators.min(1),
     ]],
     expYear: ['34', [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(2)
+      Validators.maxLength(2),
+      Validators.max(99),
+      Validators.min(1),
     ]],
     cvv: ['234', [
       Validators.required,
@@ -64,7 +68,6 @@ export class PayInfoComponent implements OnInit {
   }
 
   public submit() {
-    const { cc } = this.ccForm.controls
     // create a ccInfo Object
     let ccInfo = {
       name: this.ccForm.controls.name.value,
@@ -96,7 +99,6 @@ export class PayInfoComponent implements OnInit {
       received: null,
       completed: null
     }
-
 
     let order = this.orderService.sortOrderByItemName(unsortedOrder)
 
