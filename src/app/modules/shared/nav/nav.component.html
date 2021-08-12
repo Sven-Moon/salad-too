@@ -2,13 +2,17 @@
   <div class="active-menu" style="--active-position: {{navPointer$ |async}}"></div>
   <img src="./assets/images/nav/menu_icon.png" class="menu" alt="" routerLink="/order">
 
+  <!-- ======= CART ======= -->
   <div class="cart">
     <img src="./assets/images/nav/cart_icon.png" alt="" routerLink="/order/cart">
     <div class="badge" *ngIf="cartCount!=0">
       {{cartCount}}
     </div>
   </div>
-  <img src="./assets/images/nav/status-none_icon.png" class="status" alt="" routerLink="/orders/status">
+
+  <!-- ======= CART ======= -->
+  <img src="./assets/images/nav/{{openOrderStatus |async}}_icon.png" class="status" alt="" routerLink="/orders/status">
+  <!-- <img src="./assets/images/nav/status-none_icon.png" class="status" alt="" routerLink="/orders/status" *ngIf="!openOrderStatus"> -->
   <img src="./assets/images/nav/history_icon.png" class="status" alt="" routerLink="/orders/history">
   <!-- ======== AUTH ======== -->
   <ng-container *ngIf="signedIn$">

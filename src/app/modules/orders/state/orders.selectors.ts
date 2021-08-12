@@ -52,3 +52,14 @@ export const selectReceipt = createSelector(
     }
   }
 )
+
+export const selectOpenOrdersStatus = createSelector(
+  selectOpenOrders,
+  (state: Orders) => {
+    if (state.length != 0) {
+      return state[0].status
+    } else {
+      return 'status-none'
+    }
+  }
+);

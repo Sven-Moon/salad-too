@@ -44,7 +44,7 @@ export class NavService {
       default: 5
     }
     // positionValue = s a string as X%
-    let pointer = (100 - +positionValue * 20).toString() + '%'
+    let pointer = (102 - +positionValue * 20).toString() + '%'
     this.store.dispatch(updateNavPointer({ pointer }))
   }
 }

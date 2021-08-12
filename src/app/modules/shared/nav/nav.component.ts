@@ -7,12 +7,14 @@ import { Observable, of } from 'rxjs';
 import { timeout } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { DefaultUserService } from 'src/app/services/default-user.service';
+import { NavService } from 'src/app/services/nav.service';
 import { logout, setGuestId } from 'src/app/store/auth/auth.actions';
 import { selectIsSignedIn, selectUser } from 'src/app/store/auth/auth.selectors';
 import { LoginModalComponent } from '../../auth/login-modal/login-modal.component';
 import { clearCart, updateLastOwner } from '../../order/state/cart/cart.actions';
 import { selectCartCount } from '../../order/state/cart/cart.selectors';
 import { clearItem } from '../../order/state/item/item.actions';
+import { selectOpenOrdersStatus } from '../../orders/state/orders.selectors';
 import { selectNavPointer } from '../state/shared.selectors';
 
 @Component({
@@ -25,13 +27,12 @@ export class NavComponent implements OnInit {
   signedIn$: boolean
   bsModalRef: BsModalRef
   cartCount: number
+  openOrderStatus: Observable<string>
 
   constructor(
     private store: Store,
     private modalService: BsModalService,
-    private route: Router,
-    private guestService: DefaultUserService,
-    private authService: AuthService
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +43,7 @@ export class NavComponent implements OnInit {
     this.store.select(selectCartCount).subscribe(count =>
       this.cartCount = count
     )
+    this.openOrderStatus = this.store.select(selectOpenOrdersStatus)
   }
 
   public openLoginModal() {
