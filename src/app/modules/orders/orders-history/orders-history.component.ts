@@ -2,20 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Ingredients } from 'src/app/models/Ingredient';
 import { Order, Orders } from 'src/app/models/Order';
+import { Visible } from 'src/app/models/Visible';
 import { NavService } from 'src/app/services/nav.service';
 import { selectIngredientWithPrice } from '../../order/state/staticData/static-data.selectors';
 import { selectClosedOrders, selectOpenOrders, selectOrders } from '../state/orders.selectors';
 
-interface Visible {
-  [id: string]: {
-    itemsVisible: boolean,
-    items: {
-      [itemId: string]: {
-        ingredientsVisible: boolean
-      }
-    },
-  }
-}
 
 @Component({
   selector: 'app-orders-history',

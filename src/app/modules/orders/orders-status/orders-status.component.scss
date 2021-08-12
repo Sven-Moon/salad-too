@@ -24,6 +24,19 @@
   text-align: center;
 }
 
+.noOrders {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15rem;
+  width: 100%;
+  background-color: $warning-light;
+  color: black;
+  margin-top: 1rem;
+  border: 5px double $warning-dark;
+  box-sizing: border-box;
+}
+
 .orderId {
   font-size: 1.25rem;
 }

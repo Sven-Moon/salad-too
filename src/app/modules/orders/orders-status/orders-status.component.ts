@@ -5,17 +5,7 @@ import { Order, Orders } from 'src/app/models/Order';
 import { NavService } from 'src/app/services/nav.service';
 import { selectIngredientWithPrice } from '../../order/state/staticData/static-data.selectors';
 import { selectClosedOrders, selectOpenOrders, selectOrders } from '../state/orders.selectors';
-
-interface Visible {
-  [id: string]: {
-    itemsVisible: boolean,
-    items: {
-      [itemId: string]: {
-        ingredientsVisible: boolean
-      }
-    },
-  }
-}
+import { Visible } from 'src/app/models/Visible'
 
 @Component({
   selector: 'app-orders-status',
@@ -24,7 +14,6 @@ interface Visible {
 })
 export class OrdersStatusComponent implements OnInit {
   openOrders: Orders
-  closedOrders: Orders
   allIngredients: Ingredients
   visible: Visible = {}
 
@@ -37,9 +26,6 @@ export class OrdersStatusComponent implements OnInit {
     this.navService.updateNavPosition()
     this.store.select(selectOpenOrders).subscribe(openOrders =>
       this.openOrders = openOrders
-    )
-    this.store.select(selectClosedOrders).subscribe(closedOrders =>
-      this.closedOrders = closedOrders
     )
     // used to look up item ingredients lists
     this.store.select(selectIngredientWithPrice).subscribe(allIngredients =>
