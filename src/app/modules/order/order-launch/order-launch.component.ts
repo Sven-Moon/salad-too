@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-order-launch',
@@ -8,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class OrderLaunchComponent implements OnInit {
 
   constructor(
+    private navService: NavService,
   ) { }
 
   ngOnInit(): void {
+    this.navService.updateNavPosition()
   }
 
 }

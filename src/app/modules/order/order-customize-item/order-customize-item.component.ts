@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
 import { CartItem, Items } from 'src/app/models/Item';
 import { Contact } from 'src/app/models/User';
+import { NavService } from 'src/app/services/nav.service';
 import { OrderService } from 'src/app/services/order.service';
 import { addItemToCart } from '../state/cart/cart.actions';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
@@ -30,10 +31,12 @@ export class OrderCustomizeItemComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private navService: NavService,
   ) { }
 
   ngOnInit(): void {
+    this.navService.updateNavPosition()
     this.itemIngredients$ = this.store.select(selectItemIngredients)
     this.ingredientTypes$ = this.store.select(selectItemGroupTypes)
     this.filteredIngredients$ = this.store.select(selectFilteredIngredientsByType)

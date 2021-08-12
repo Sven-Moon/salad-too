@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { ItemGroups } from 'src/app/models/ItemGroup';
 import { Contact } from 'src/app/models/User';
+import { NavService } from 'src/app/services/nav.service';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
 import { setItemGroup, setLastItemOwnerAsItemOwner, setItemId, clearItem } from '../state/item/item.actions';
 import { selectItemGroups } from '../state/staticData/static-data.selectors';
@@ -18,10 +19,12 @@ export class OrderTypeSelectComponent implements OnInit {
   owner: Contact
 
   constructor(
-    private store: Store
+    private store: Store,
+    private navService: NavService
   ) { }
 
   ngOnInit(): void {
+    this.navService.updateNavPosition()
     this.itemGroups$ = this.store.select(selectItemGroups)
     // clear item by setting id to null
     this.store.dispatch(clearItem())

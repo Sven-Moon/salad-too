@@ -17,31 +17,28 @@ export class NavService {
     let url = this.router.url
     let positionValue: number = 0;
     switch (url) {
-      case '/cart-launch':
+      case '/order/customize':
         positionValue = 5
         break
-      case '/cart-customize-item':
+      case '/order/select-item':
         positionValue = 5
         break
-      case '/cart-item-select':
+      case '/order/select-item-type':
         positionValue = 5
         break
-      case '/cart-type-select':
+      case '/order/launch':
         positionValue = 5
         break
-      case '/cart-launch':
-        positionValue = 5
-        break
-      case '/cart-view':
+      case '/order/cart':
         positionValue = 4
         break
-      case '/pay':
+      case '/orders/status':
         positionValue = 3
         break
-      case '/order-status':
+      case '/orders/history':
         positionValue = 2
         break
-      case '/profile':
+      case '/account':
         positionValue = 1
         break
       default: 5

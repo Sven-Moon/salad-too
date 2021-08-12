@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Ingredients } from 'src/app/models/Ingredient';
 import { Order, Orders } from 'src/app/models/Order';
+import { NavService } from 'src/app/services/nav.service';
 import { selectIngredientWithPrice } from '../../order/state/staticData/static-data.selectors';
 import { selectClosedOrders, selectOpenOrders, selectOrders } from '../state/orders.selectors';
 
@@ -28,10 +29,12 @@ export class OrdersStatusComponent implements OnInit {
   visible: Visible = {}
 
   constructor(
-    private store: Store
+    private store: Store,
+    private navService: NavService
   ) { }
 
   ngOnInit(): void {
+    this.navService.updateNavPosition()
     this.store.select(selectOpenOrders).subscribe(openOrders =>
       this.openOrders = openOrders
     )

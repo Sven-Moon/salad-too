@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { Contacts, User } from 'src/app/models/User';
+import { NavService } from 'src/app/services/nav.service';
 import { updateEmail, updatePassword, updatePhone, updateUserName } from 'src/app/store/auth/auth.actions';
 import { selectContacts, selectUser } from 'src/app/store/auth/auth.selectors';
-import { OwnerAddComponent } from '../../owner/owner-add/owner-add.component';
 
 @Component({
   selector: 'app-account',
@@ -39,10 +39,12 @@ export class AccountComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private navService: NavService
   ) { }
 
   ngOnInit(): void {
+    this.navService.updateNavPosition()
     this.contacts$ = this.store.select(selectContacts)
     this.store.select(selectUser).subscribe(user =>
       this.user = user

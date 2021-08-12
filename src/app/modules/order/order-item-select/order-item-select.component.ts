@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CartItem, Item, Items } from 'src/app/models/Item';
 import { Contact } from 'src/app/models/User';
+import { NavService } from 'src/app/services/nav.service';
 import { OrderService } from 'src/app/services/order.service';
 import { addItemToCart } from '../state/cart/cart.actions';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
@@ -24,10 +25,12 @@ export class OrderItemSelectComponent implements OnInit {
   constructor(
     private store: Store,
     private router: Router,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private navService: NavService,
   ) { }
 
   ngOnInit(): void {
+    this.navService.updateNavPosition()
     this.items$ = this.store.select(selectItemsWithPrice)
     this.itemGroup$ = this.store.select(selectItemGroupPicked)
     this.store.select(selectLastItemOwner).subscribe(owner =>

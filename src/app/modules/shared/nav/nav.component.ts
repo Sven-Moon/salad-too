@@ -29,7 +29,6 @@ export class NavComponent implements OnInit {
   constructor(
     private store: Store,
     private modalService: BsModalService,
-    private spinner: NgxSpinnerService,
     private route: Router,
     private guestService: DefaultUserService,
     private authService: AuthService

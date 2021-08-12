@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Ingredient, Ingredients } from 'src/app/models/Ingredient';
 import { CartItem, CartItems, ItemsByOwner } from 'src/app/models/Item';
 import { Contacts } from 'src/app/models/User';
+import { NavService } from 'src/app/services/nav.service';
 import { OrderService } from 'src/app/services/order.service';
 import { PayInfoComponent } from '../../pay/pay-info/pay-info.component';
 import { changeCartItemQty, clearCart, duplicateCartItem, removeCartItem } from '../state/cart/cart.actions';
@@ -35,10 +36,12 @@ export class OrderCartComponent implements OnInit {
     private store: Store,
     private router: Router,
     private modalService: BsModalService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private navService: NavService,
   ) { }
 
   ngOnInit(): void {
+    this.navService.updateNavPosition()
     this.store.select(selectCartItems).subscribe(items =>
       this.cartItems = items
     )

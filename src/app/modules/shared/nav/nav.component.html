@@ -1,13 +1,13 @@
 <div class="nav-wrap">
   <div class="active-menu" style="--active-position: {{navPointer$ |async}}"></div>
   <img src="./assets/images/nav/menu_icon.png" class="menu" alt="" routerLink="/order">
+
   <div class="cart">
     <img src="./assets/images/nav/cart_icon.png" alt="" routerLink="/order/cart">
     <div class="badge" *ngIf="cartCount!=0">
       {{cartCount}}
     </div>
   </div>
-  <img src="./assets/images/nav/pay_icon.png" class="pay" alt="" routerLink="/pay/choose">
   <img src="./assets/images/nav/status-none_icon.png" class="status" alt="" routerLink="/orders/status">
   <img src="./assets/images/nav/history_icon.png" class="status" alt="" routerLink="/orders/history">
   <!-- ======== AUTH ======== -->
