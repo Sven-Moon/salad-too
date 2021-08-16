@@ -395,6 +395,7 @@ button:disabled {
 }
 
 @media only screen and (max-width: 500px) {
+  // ------ MODAL ------
   .modal-content {
     padding: 1rem;
   }
@@ -405,3 +406,17 @@ button:disabled {
     padding: 0.5rem;
   }
 }
+//#region ========= Media: LARGE =========
+@media only screen and (min-width: 500px) {
+  .actions {
+    flex-flow: row nowrap;
+    justify-content: space-around;
+  }
+  .actions hr {
+    display: none;
+  }
+  .actions button {
+    width: 45%;
+  }
+}
+//#endregion Media: LARGE

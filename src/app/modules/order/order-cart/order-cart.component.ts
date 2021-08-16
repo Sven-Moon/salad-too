@@ -13,18 +13,39 @@ import { changeCartItemQty, clearCart, duplicateCartItem, removeCartItem } from 
 import { selectCartItems, selectCartState, selectCartTotal, selectItemOwners, selectItemsByOwner } from '../state/cart/cart.selectors';
 import { editCartItem } from '../state/item/item.actions';
 import { selectIngredientWithPrice } from '../state/staticData/static-data.selectors';
+import { trigger, style, state, animate, transition } from '@angular/animations';
+import { Visible } from 'src/app/models/Visible';
 
 @Component({
   selector: 'app-order-cart',
   templateUrl: './order-cart.component.html',
-  styleUrls: ['./order-cart.component.scss']
+  styleUrls: ['./order-cart.component.scss'],
+  animations: [
+    trigger('toggleIngredientView', [
+      state('closed', style({
+        height: '0px',
+        padding: '0px'
+      })),
+      state('open', style({
+
+      })),
+      transition('closed => open, open => closed', [
+        animate('.3s')
+      ])
+    ])
+  ]
 })
 export class OrderCartComponent implements OnInit {
   // cartItems$: Observable<CartItems>
   cartItems: CartItems
   ingredients: Ingredients
   allIngredients: Ingredients
-  cartIngredients: { [key: string]: Ingredients } = {}
+  cartIngredients: {
+    [key: string]: {
+      visible: boolean,
+      ingredients: Ingredients
+    }
+  } = {}
   removeWarningFlag: boolean = false
   itemsByOwner: ItemsByOwner
   itemOwners: Contacts
@@ -49,11 +70,25 @@ export class OrderCartComponent implements OnInit {
     this.store.select(selectIngredientWithPrice).subscribe(allIngredients =>
       this.allIngredients = allIngredients
     )
-    // each item starts with empty ingredients listing
-    // as View is toggled, this will be populated (then cleared)
-    this.cartItems.forEach(item =>
-      this.cartIngredients[item.name] = []
-    )
+    // create an items object with the full ingredient and visibility setting
+    this.cartItems.forEach(item => {
+      // create an ingredient object based on ingredient strings
+      let itemIngredients: Ingredients = []
+      if (item.ingredients) {
+        item.ingredients.forEach(itemIngredient =>
+          itemIngredients.push(
+            this.allIngredients.find(
+              (ingredient: Ingredient) => ingredient.id === itemIngredient
+            )
+          )
+        )
+        // set each item visibility to false and assign ingredient object array
+        this.cartIngredients[item.name] = {
+          visible: false,
+          ingredients: itemIngredients
+        }
+      }
+    })
     // used to organize the items by owner
     this.store.select(selectItemsByOwner).subscribe(items =>
       this.itemsByOwner = items
@@ -66,8 +101,6 @@ export class OrderCartComponent implements OnInit {
       this.itemsVisible[owner.email] = { visible: true }
     )
     this.cartTotal$ = this.store.select(selectCartTotal)
-
-
   }
 
   public viewOwnerItems(id: string): void {
@@ -86,22 +119,10 @@ export class OrderCartComponent implements OnInit {
     this.router.navigate(['/order/customize'])
   }
 
-  public showDetails(name: string, ingredients: string[]) {
-    // if the item already exits, it's currently showing its ingredients
-    if (this.cartIngredients[name].length != 0) {
-      this.cartIngredients[name] = []
-    } else {// for each ingredient in the list
-      // this.ids.push(name)
-      ingredients.forEach((itemIngredient: string) =>
-        // return an Ingredient as an object inserted to a list under
-        // the item ID
-        this.cartIngredients[name].push(
-          this.allIngredients.find((ingredient: Ingredient) =>
-            ingredient.id === itemIngredient
-          )
-        )
-      )
-    }
+  public showDetails(name: string) {
+    // toggle the visibility flag for the passed item
+    this.cartIngredients[name].visible = !this.cartIngredients[name].visible
+
   }
 
   public duplicateItem(itemToDuplicate: CartItem) {
