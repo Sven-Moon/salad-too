@@ -17,6 +17,23 @@
   height: 100%;
 }
 
+.banner {
+  // border: 4px solid $primary-bg;
+  // border-radius: 0.5rem;
+  width: 100vw;
+  color: $primary-bg;
+  background-color: #548aa020;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
 .sandwich1 {
   position: absolute;
   top: 50%;
