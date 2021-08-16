@@ -7,7 +7,7 @@ import { Visible } from 'src/app/models/Visible';
 import { NavService } from 'src/app/services/nav.service';
 import { selectIngredientWithPrice } from '../../order/state/staticData/static-data.selectors';
 import { toggleOrderFavorite } from '../state/orders.actions';
-import { selectClosedOrders, selectOpenOrders, selectOrders } from '../state/orders.selectors';
+import { selectClosedOrders, selectFavoriteOrders, selectOpenOrders, selectOrders } from '../state/orders.selectors';
 
 
 @Component({
@@ -30,6 +30,7 @@ import { selectClosedOrders, selectOpenOrders, selectOrders } from '../state/ord
 })
 export class OrdersHistoryComponent implements OnInit {
   closedOrders: Orders
+  favoriteOrders: Orders
   allIngredients: Ingredients
   visible: Visible = {}
 
@@ -43,6 +44,9 @@ export class OrdersHistoryComponent implements OnInit {
     // closed orders: those in 'delivered status (reverse chronological)
     this.store.select(selectClosedOrders).subscribe(closedOrders =>
       this.closedOrders = closedOrders.slice().reverse()
+    )
+    this.store.select(selectFavoriteOrders).subscribe(favorites =>
+      this.favoriteOrders = favorites
     )
     // used to look up item ingredients lists
     this.store.select(selectIngredientWithPrice).subscribe(allIngredients =>

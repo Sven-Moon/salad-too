@@ -11,6 +11,15 @@
   box-sizing: border-box;
 }
 
+.favorites {
+  background-color: $success;
+  margin-bottom: 1rem;
+}
+
+.allHistory {
+  background-color: $primary;
+}
+
 .card {
   color: black;
   margin-top: 0;
@@ -24,17 +33,26 @@
   text-align: center;
 }
 
-.noOrders {
+.emptyMessage {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 15rem;
   width: 100%;
   background-color: $warning-light;
   color: black;
   margin-top: 1rem;
   border: 5px double $warning-dark;
   box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.noFavs {
+  height: 5rem;
+  font-style: italic;
+}
+
+.noOrders {
+  height: 15rem;
 }
 
 .favorite {

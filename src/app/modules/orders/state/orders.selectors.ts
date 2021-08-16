@@ -63,3 +63,8 @@ export const selectOpenOrdersStatus = createSelector(
     }
   }
 );
+
+export const selectFavoriteOrders = createSelector(
+  selectClosedOrders,
+  (state: Orders) => state.filter(order => order.favorite === true)
+);

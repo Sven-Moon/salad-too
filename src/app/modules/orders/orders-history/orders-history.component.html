@@ -1,4 +1,55 @@
-<div class="statusWindow flex-col">
+<!-- ======== FAVORITE ORDERS ======== -->
+<ng-container *ngIf="closedOrders.length != 0">
+  <div class="statusWindow favorites flex-col">
+    <div class="header">Favorite Orders</div>
+    <!-- ========= CARD ========= -->
+    <ng-container *ngFor="let order of favoriteOrders">
+      <div class="card flex-col">
+        <!-- ------- ORDER HEADER ------- -->
+        <div class="info1 flex-row pointer" (click)="toggleItemsVisible(order.id)" >
+          <div class="date">{{order.received |date: "mediumDate"}}</div>
+          <div class="favorite">
+            <img src="./assets/images/unfavorited.png" alt="" *ngIf="!order.favorite" (click)="toggleFavorite(order.id)">
+            <img src="./assets/images/favorited.png" alt="" *ngIf="order.favorite" (click)="toggleFavorite(order.id)">
+          </div>
+          <div [ngClass]="calcStatusClass(order.status)">{{order.status}}</div>
+        </div>  <!-- ------- Order Header ------- -->
+        <div class="info2 flex-row pointer" (click)="toggleItemsVisible(order.id)">
+          <div class="orderId">Order: {{order.id}}</div>
+          <div class="time text-center">{{order.received |date: "mediumTime"}}</div>
+        </div>
+        <!-- ========= ITEMS ========= -->
+        <div class="itemsContainer flex-col" [@toggleIngredientView]="(closedOrders && visible[order.id].itemsVisible) ? 'open' : 'closed' ">
+          <hr>
+          <ng-container *ngFor="let item of order.items">
+            <div class="item flex-col">
+              <div class="flex-row w-100 itemName pointer" (click)="toggleIngredientsVisible(order.id, item.id)">
+                {{item.name}}
+                <div class="qty" *ngIf="item.quantity!=1"> ({{item.quantity}})</div>
+              </div>
+              <!-- ========= INGREDIENT CONTAINER ========= -->
+              <div [@toggleIngredientView]="(item.ingredients && visible[order.id].items[item.id].ingredientsVisible) ? 'open' : 'closed'" class="ingredientsContainer">
+                <ng-container *ngFor="let ingredient of item.ingredients">
+                  <div class="ingredient">
+                    <ul>
+                      <li>{{ingredient}}</li>
+                    </ul>
+                  </div>
+                </ng-container>  <!-- --- ingredient --- -->
+              </div>  <!-- --- ingredient container --- -->
+            </div>  <!-- --- item --- -->
+          </ng-container> <!-- --- item --- -->
+        </div>  <!-- --- item container --- -->
+      </div> <!-- --- card --- -->
+    </ng-container>
+    <div class="emptyMessage noFavs" *ngIf="favoriteOrders.length==0">
+      <h2>You haven't picked any favorites yet!</h2>
+    </div>
+  </div>
+</ng-container>
+<!-- favorite orders-->
+<!-- ======== ALL ORDERS ======== -->
+<div class="statusWindow allHistory flex-col">
   <div class="header">Order History</div>
   <!-- ========= CARD ========= -->
   <ng-container *ngFor="let order of closedOrders">
@@ -40,7 +91,8 @@
       </div>  <!-- --- item container --- -->
     </div> <!-- --- card --- -->
   </ng-container>
+  <div class="emptyMessage noOrders" *ngIf="closedOrders.length==0">
+    <h2>You have no order history!</h2>
+  </div>
 </div>
-<div class="noOrders" *ngIf="closedOrders.length==0">
-  <h2>You have no order history!</h2>
-</div>
+ <!-- all orders -->
