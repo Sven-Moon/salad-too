@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -20,10 +21,35 @@ import { selectNavPointer } from '../state/shared.selectors';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  styleUrls: ['./nav.component.scss'],
+  animations: [
+    trigger('menuHighlight', [
+      state('order', style({
+        left: '-18%'
+      })),
+      state('order', style({
+        left: '2%'
+      })),
+      state('cart', style({
+        left: '22%'
+      })),
+      state('status', style({
+        left: '42%'
+      })),
+      state('history', style({
+        left: '62%'
+      })),
+      state('account', style({
+        left: '82%'
+      })),
+      transition('* => *', [
+        animate('.3s ease')
+      ])
+    ])
+  ]
 })
 export class NavComponent implements OnInit {
-  navPointer$: Observable<string> = of('0%')
+  navPointer: string
   signedIn$: boolean
   bsModalRef: BsModalRef
   cartCount: number
@@ -36,7 +62,9 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.navPointer$ = this.store.select(selectNavPointer)
+    this.store.select(selectNavPointer).subscribe(pointer =>
+      this.navPointer = pointer
+    )
     this.store.select(selectIsSignedIn).subscribe(signedIn =>
       this.signedIn$ = signedIn
     )
@@ -46,12 +74,12 @@ export class NavComponent implements OnInit {
     this.openOrderStatus = this.store.select(selectOpenOrdersStatus)
   }
 
-  public openLoginModal() {
+  public openLoginModal(): void {
     this.bsModalRef = this.modalService.show(LoginModalComponent, { id: 100 })
     this.bsModalRef.content.closeBtnName = 'Close'
   }
 
-  public logout() {
+  public logout(): void {
     this.authService.logout()
   }
 }

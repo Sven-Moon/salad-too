@@ -1,7 +1,9 @@
 <div class="statusWindow flex-col">
   <div class="header">Order History</div>
+  <!-- ========= CARD ========= -->
   <ng-container *ngFor="let order of closedOrders">
     <div class="card flex-col">
+      <!-- ------- ORDER HEADER ------- -->
       <div class="info1 flex-row pointer" (click)="toggleItemsVisible(order.id)" >
         <div class="date">{{order.received |date: "mediumDate"}}</div>
         <div class="favorite">
@@ -9,12 +11,13 @@
           <img src="./assets/images/favorited.png" alt="" *ngIf="order.favorite" (click)="toggleFavorite(order.id)">
         </div>
         <div [ngClass]="calcStatusClass(order.status)">{{order.status}}</div>
-      </div>
+      </div>  <!-- ------- Order Header ------- -->
       <div class="info2 flex-row pointer" (click)="toggleItemsVisible(order.id)">
         <div class="orderId">Order: {{order.id}}</div>
         <div class="time text-center">{{order.received |date: "mediumTime"}}</div>
       </div>
-      <div class="itemsContainer flex-col" *ngIf="closedOrders && visible[order.id].itemsVisible">
+      <!-- ========= ITEMS ========= -->
+      <div class="itemsContainer flex-col" [@toggleIngredientView]="(closedOrders && visible[order.id].itemsVisible) ? 'open' : 'closed' ">
         <hr>
         <ng-container *ngFor="let item of order.items">
           <div class="item flex-col">
@@ -22,17 +25,16 @@
               {{item.name}}
               <div class="qty" *ngIf="item.quantity!=1"> ({{item.quantity}})</div>
             </div>
-            <ng-container *ngIf="item.ingredients && visible[order.id].items[item.id].ingredientsVisible">
-              <div class="ingredientsContainer">
-                <ng-container *ngFor="let ingredient of item.ingredients">
-                  <div class="ingredient">
-                    <ul>
-                      <li>{{ingredient}}</li>
-                    </ul>
-                  </div>
-                </ng-container>  <!-- --- ingredient --- -->
-              </div>  <!-- --- ingredient container --- -->
-            </ng-container>  <!-- --- ingredient If --- -->
+            <!-- ========= INGREDIENT CONTAINER ========= -->
+            <div [@toggleIngredientView]="(item.ingredients && visible[order.id].items[item.id].ingredientsVisible) ? 'open' : 'closed'" class="ingredientsContainer">
+              <ng-container *ngFor="let ingredient of item.ingredients">
+                <div class="ingredient">
+                  <ul>
+                    <li>{{ingredient}}</li>
+                  </ul>
+                </div>
+              </ng-container>  <!-- --- ingredient --- -->
+            </div>  <!-- --- ingredient container --- -->
           </div>  <!-- --- item --- -->
         </ng-container> <!-- --- item --- -->
       </div>  <!-- --- item container --- -->

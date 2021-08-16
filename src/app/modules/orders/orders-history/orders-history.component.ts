@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Ingredients } from 'src/app/models/Ingredient';
@@ -12,7 +13,20 @@ import { selectClosedOrders, selectOpenOrders, selectOrders } from '../state/ord
 @Component({
   selector: 'app-orders-history',
   templateUrl: './orders-history.component.html',
-  styleUrls: ['./orders-history.component.scss']
+  styleUrls: ['./orders-history.component.scss'],
+  animations: [
+    trigger('toggleIngredientView', [
+      state('open', style({
+        height: 0,
+        'padding-top': 0,
+        'padding-bottom': 0
+      })),
+      state('closed', style({})),
+      transition('closed => open, open => closed', [
+        animate('.3s')
+      ])
+    ])
+  ]
 })
 export class OrdersHistoryComponent implements OnInit {
   closedOrders: Orders

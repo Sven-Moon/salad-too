@@ -15,36 +15,36 @@ export class NavService {
 
   public updateNavPosition(): void {
     let url = this.router.url
-    let positionValue: number = 0;
+    let pointer: string = '';
     switch (url) {
       case '/order/customize':
-        positionValue = 5
+        pointer = 'order'
         break
       case '/order/select-item':
-        positionValue = 5
+        pointer = 'order'
         break
       case '/order/select-item-type':
-        positionValue = 5
+        pointer = 'order'
         break
       case '/order/launch':
-        positionValue = 5
+        pointer = 'order'
         break
       case '/order/cart':
-        positionValue = 4
+        pointer = 'cart'
         break
       case '/orders/status':
-        positionValue = 3
+        pointer = 'status'
         break
       case '/orders/history':
-        positionValue = 2
+        pointer = 'history'
         break
       case '/account':
-        positionValue = 1
+        pointer = 'account'
         break
-      default: 5
+      default: 'order'
     }
-    // positionValue = s a string as X%
-    let pointer = (102 - +positionValue * 20).toString() + '%'
+    //  pointer = s a string as X%
+    // let pointer = (102 - + pointer * 20).toString() + '%'
     this.store.dispatch(updateNavPointer({ pointer }))
   }
 }

@@ -1,5 +1,5 @@
 <div class="nav-wrap">
-  <div class="active-menu" style="--active-position: {{navPointer$ |async}}"></div>
+  <div class="active-menu" [@menuHighlight]="navPointer"></div>
   <img src="./assets/images/nav/menu_icon.png" class="menu" alt="" routerLink="/order">
 
   <!-- ======= CART ======= -->

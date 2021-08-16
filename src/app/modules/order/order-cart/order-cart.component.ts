@@ -24,7 +24,8 @@ import { Visible } from 'src/app/models/Visible';
     trigger('toggleIngredientView', [
       state('closed', style({
         height: '0px',
-        padding: '0px'
+        'padding-top': '0px',
+        'padding-bottom': '0px'
       })),
       state('open', style({
 
