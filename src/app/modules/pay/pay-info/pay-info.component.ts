@@ -97,11 +97,15 @@ export class PayInfoComponent implements OnInit {
       status: "Pending Payment",
       payments: [],
       received: null,
-      completed: null
+      completed: null,
+      favorite: false
     }
 
     let order = this.orderService.sortOrderByItemName(unsortedOrder)
-
+    /** order is submitted 'pending payment
+     * payment updates are sent to the server (then updated here)
+     * ... but this fo-app updates the payments
+     */
     this.store.dispatch(createOrder({ order }))
     // this.store.dispatch(updatePayment({ payment }))
     this.store.dispatch(attemptPayment({ payment, ccInfo }))

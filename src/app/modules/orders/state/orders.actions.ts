@@ -42,3 +42,9 @@ export const updateOrderReceived = createAction(
   '[Pay Success Service] Update Order Received',
   props<{ data: Payment }>()
 );
+
+export const toggleOrderFavorite = createAction(
+  '[Orders History] Toggle order favorite',
+  props<{ id: string }>()
+)
+

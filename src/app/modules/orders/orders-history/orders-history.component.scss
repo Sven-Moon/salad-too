@@ -37,6 +37,14 @@
   box-sizing: border-box;
 }
 
+.favorite {
+  z-index: 1;
+}
+
+.favorite img {
+  height: 1.25rem;
+}
+
 .orderId {
   font-size: 1.25rem;
 }

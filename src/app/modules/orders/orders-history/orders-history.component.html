@@ -4,13 +4,17 @@
     <div class="card flex-col">
       <div class="info1 flex-row pointer" (click)="toggleItemsVisible(order.id)" >
         <div class="date">{{order.received |date: "mediumDate"}}</div>
+        <div class="favorite">
+          <img src="./assets/images/unfavorited.png" alt="" *ngIf="!order.favorite" (click)="toggleFavorite(order.id)">
+          <img src="./assets/images/favorited.png" alt="" *ngIf="order.favorite" (click)="toggleFavorite(order.id)">
+        </div>
         <div [ngClass]="calcStatusClass(order.status)">{{order.status}}</div>
       </div>
       <div class="info2 flex-row pointer" (click)="toggleItemsVisible(order.id)">
         <div class="orderId">Order: {{order.id}}</div>
         <div class="time text-center">{{order.received |date: "mediumTime"}}</div>
       </div>
-      <div class="itemsContainer flex-col" *ngIf="visible[order.id].itemsVisible">
+      <div class="itemsContainer flex-col" *ngIf="closedOrders && visible[order.id].itemsVisible">
         <hr>
         <ng-container *ngFor="let item of order.items">
           <div class="item flex-col">

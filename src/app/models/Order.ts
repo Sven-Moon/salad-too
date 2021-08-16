@@ -10,6 +10,7 @@ export interface Order {
   user?: string
   received?: number
   completed?: number
+  favorite?: boolean
 }
 
 export type Orders = Order[]

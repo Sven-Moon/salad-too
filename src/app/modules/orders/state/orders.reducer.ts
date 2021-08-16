@@ -47,5 +47,18 @@ export const reducer = createReducer(
       order.id === action.data.orderId).received = action.data.dateTime
   }),
   on(OrdersActions.loadOrders, state => state),
+  // on(OrdersActions.toggleOrderFavorite, (state,action) => {
+  //   let newOrders: Orders = {...state.orders}
+  //   let newOrder = {...state.orders.find(
+  //     order => order.id === action.id
+  //   )}
+  //   newOrder.favorite = !newOrder.favorite
+  //   newOrders = newOrders.find(order => order.id === action.id)[]
+  //   return { ... state, orders: newOrders}
+  // }),
+  mutableOn(OrdersActions.toggleOrderFavorite, (state, action) => {
+    state.orders.find(order => order.id === action.id).favorite
+      = !state.orders.find(order => order.id === action.id).favorite
+  })
 );
 

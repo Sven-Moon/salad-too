@@ -5,6 +5,7 @@ import { Order, Orders } from 'src/app/models/Order';
 import { Visible } from 'src/app/models/Visible';
 import { NavService } from 'src/app/services/nav.service';
 import { selectIngredientWithPrice } from '../../order/state/staticData/static-data.selectors';
+import { toggleOrderFavorite } from '../state/orders.actions';
 import { selectClosedOrders, selectOpenOrders, selectOrders } from '../state/orders.selectors';
 
 
@@ -25,6 +26,7 @@ export class OrdersHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.navService.updateNavPosition()
+    // closed orders: those in 'delivered status (reverse chronological)
     this.store.select(selectClosedOrders).subscribe(closedOrders =>
       this.closedOrders = closedOrders.slice().reverse()
     )
@@ -81,5 +83,8 @@ export class OrdersHistoryComponent implements OnInit {
       = !this.visible[id].items[itemId].ingredientsVisible
   }
 
+  public toggleFavorite(id: string) {
+    this.store.dispatch(toggleOrderFavorite({ id }))
+  }
 
 }
