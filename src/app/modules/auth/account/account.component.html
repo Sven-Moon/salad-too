@@ -19,7 +19,7 @@
     </div>
     <h2>Phone Number</h2>
     <div class="infoContainer flex-row card">
-      <div class="info" mask="000 000 0000">{{user.phoneNumber}}</div>
+      <div class="info">{{user.phoneNumber | mask: '(000) 000-0000'}}</div>
       <div class="edit"><img src="https://i.ibb.co/fd0kLdN/edit.png" class="edit" alt="" (click)="openModal(editPhone)"></div>
     </div>
   </ng-container>
@@ -255,9 +255,9 @@
             <label for="newPhoneNumber">New Phone Number</label>
             <input type="text" name="newPhoneNumber"
             class="form-control" required
-            maxlength="12"
-            mask="000 000 0000"
-            placeholder="000 000 0000" [(ngModel)]="editPhoneForm.newPhoneNumber "#newUsername="ngModel"
+            maxlength="14"
+            mask="(000) 000-0000"
+            placeholder="(000) 000-0000" [(ngModel)]="editPhoneForm.newPhoneNumber "#newUsername="ngModel"
             pattern="^\d{10}$"
             #newPhoneNumber="ngModel">
             <div *ngIf="newPhoneNumber.errors?.pattern && (newPhoneNumber.touched)">Phone number must be 10 characters in length, only digits (no spaces).</div>
