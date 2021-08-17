@@ -1,4 +1,6 @@
 @import "/src/styles.scss";
+@import "/src/app/modules/owner/owner/owner.component.scss";
+
 $editButtonWidth: 2rem;
 
 .tag {
@@ -92,7 +94,7 @@ $editButtonWidth: 2rem;
 
 .contact-img {
   object-fit: scale-down;
-  height: 2rem;
+  height: 1.25rem;
   margin: 0.5rem;
 }
 
@@ -110,8 +112,10 @@ $editButtonWidth: 2rem;
 }
 
 .form-control {
-  height: 1rem;
+  height: 1.25rem;
+  font-size: 1rem;
   width: 15rem;
+  margin-right: 0;
 }
 
 .actions {

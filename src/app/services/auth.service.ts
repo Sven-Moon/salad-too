@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AlertService } from '@full-fledged/alerts';
 import { Store } from '@ngrx/store';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { User } from '../models/User';
+import { Contact, User } from '../models/User';
 import { clearCart, updateLastOwner } from '../modules/order/state/cart/cart.actions';
 import { clearItem } from '../modules/order/state/item/item.actions';
 import { setGuestId } from '../store/auth/auth.actions';
@@ -90,12 +90,22 @@ export class AuthService {
   public updatePhoneNumberSuccess(phone: string) {
     this.alertService.success(
       "Phone Number updated to: ("
-      + phone.slice(0, 2) + ")"
-      + phone.slice(3, 5) + "-"
-      + phone.slice(6, 9)
+      + phone.slice(0, 3) + ")"
+      + phone.slice(3, 6) + "-"
+      + phone.slice(6, 10)
     ),
       this.modalService.hide()
   }
   //#endregion phone number ---------------
+
+  //#region ADD CONTACT ------------------------
+  public addNewContact(contact: Contact) {
+    this.alertService.success(
+      "New Contact Added: \n" + contact.name
+      + "\n(" + contact.email + ")"
+    ),
+      this.modalService.hide()
+  }
+  //#endregion add contact ---------------
 
 }

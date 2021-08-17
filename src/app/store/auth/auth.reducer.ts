@@ -63,23 +63,6 @@ export const reducer = createReducer(
       name: 'Guest ' + action.id
     }
   })),
-
-  // --------ADD CONTACT ------------
-  // on(AuthActions.addContact, (state: State, action) => {
-  //   let contactsCopy = state.user.contacts.slice(0)
-  //   contactsCopy.push({
-  //     name: action.name,
-  //     email: action.email,
-  //     img: action.img
-  //   })
-  //   return {
-  //     ...state,
-  //     user: {
-  //       ...state.user,
-  //       contacts: contactsCopy
-  //     }
-  //   }
-  // }),
   mutableOn(AuthActions.addContact, (state: State, action) => {
     state.user.contacts.push({
       name: action.name,
@@ -115,6 +98,9 @@ export const reducer = createReducer(
         }
       }
     } else return { ...state }
+  }),
+  mutableOn(AuthActions.addNewContactSuccess, (state, action) => {
+    state.user.contacts = action.contacts
   }),
 
 );

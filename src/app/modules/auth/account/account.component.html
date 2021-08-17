@@ -26,7 +26,7 @@
 </div>
 <h2>Contacts</h2>
 <div class="contactsContainer">
-  <div class="addContact" (click)="openModal(editName)" >+</div>
+  <div class="addContact pointer" (click)="openModal(addContact)" >+</div>
   <ng-container *ngFor="let contact of contacts$ |async">
     <div class="profile-wrap">
       <img src="./assets/images/profile_1.png" class="contact-img" alt="">
@@ -205,7 +205,7 @@
             <div *ngIf="newEmail.errors?.pattern && (f.touched)">
               A valid email is required.
             </div>
-          </div> <!--  Email --> <!-- New Username -->
+          </div> <!--  Email -->
 
           <!-- ======= Password ======= -->
           <div class="form-group flex-col flex-center">
@@ -253,7 +253,7 @@
           <!-- ======= New Phone Number ======= -->
           <div class="form-group flex-col flex-center">
             <label for="newPhoneNumber">New Phone Number</label>
-            <input type="test" name="newPhoneNumber"
+            <input type="text" name="newPhoneNumber"
             class="form-control" required
             maxlength="12"
             mask="000 000 0000"
@@ -296,3 +296,66 @@
   </div> <!-- modal container-->
 
 </ng-template> <!-- edit phone number modal -->
+
+<ng-template #addContact>
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class=modal-title>Add Contact</div>
+    </div>
+    <div class="modal-body">
+      <form #f="ngForm">
+        <div class="login-form flex-col flex-center">
+
+          <!-- ======= Name ======= -->
+          <div class="form-group flex-col flex-center">
+            <label for="name">Name</label>
+            <input type="text" name="name"
+            class="form-control"
+            required
+            placeholder="my buddy"
+            minLength="1"
+            [(ngModel)]="addContactForm.contactName "#contactName="ngModel"
+            #newContactName="ngModel">
+            <div *ngIf="newContactName.errors?.pattern && (newContactName.dirty)">Name must be at least 1 character in length.</div>
+          </div> <!-- contact -->
+
+          <!-- ======= Email ======= -->
+          <div class="form-group flex-col flex-center">
+            <label for="password">Password</label>
+            <input
+              type="text"
+              name="contactEmail"
+              class="form-control"
+              id="contactEmail"
+              required
+              placeholder="mybuddy@email.com"
+              [(ngModel)]="addContactForm.contactEmail"
+              #contactEmail="ngModel"
+              [ngModelOptions]="{ updateOn: 'change' }"
+              placeholder="me@example.com"
+              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+              required>
+            <div *ngIf="contactEmail.errors?.pattern && (f.dirty)">
+              A valid email is required.
+            </div>
+          </div> <!--  password -->
+
+          <!-- ======= ACTIONS ======= -->
+          <div class="actions container flex-row">
+            <button type="button" class="btn-go"
+            (click)="addNewContact(f)"
+            [disabled]="!f.valid">
+            Add Contact
+            </button>
+            <button type="button" class="btn btn-cancel"
+            (click)="modalRef.hide()">
+              Cancel
+            </button>
+          </div> <!--  actions -->
+
+        </div> <!-- content column -->
+      </form>
+    </div> <!-- modal body-->
+  </div> <!-- modal container-->
+
+</ng-template> <!-- add contact modal -->

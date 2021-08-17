@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from 'src/app/models/User';
+import { Contact, Contacts, User } from 'src/app/models/User';
 
 
 // ------------ LOG IN / OUT ------------
@@ -146,3 +146,25 @@ export const updatePhoneFailure = createAction(
   '[Account Phone Edit Modal] Update Phone Failure',
   props<{ error: any }>()
 )
+// #endregion phone
+
+// #region NEW CONTACT -----------------------------
+export const addNewContact = createAction(
+  '[Account Add Contact Modal] Add Contact',
+  props<{
+    id: string,
+    contacts: Contacts
+  }>()
+)
+
+export const addNewContactSuccess = createAction(
+  '[Account Add Contact Modal] Add Contact Success',
+  props<{ id: string, contacts: Contacts }>()
+)
+
+export const addNewContactFailure = createAction(
+  '[Account Add Contact Modal] Add Contact Failure',
+  props<{ error: any }>()
+)
+
+// #endregion new contact

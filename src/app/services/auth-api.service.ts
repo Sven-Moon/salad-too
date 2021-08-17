@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
+import { Contact, Contacts } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -162,6 +163,30 @@ export class AuthAPIService {
 
   public updatePhoneNumber(data: { id: string, password: string, newPhoneNumber: string }): Observable<any> {
     this.body = { phoneNumber: data.newPhoneNumber }
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: 'my-auth-token'
+      })
+    }
+
+    return this.httpClient.patch(
+      this.baseUrl + "/" + data.id, this.body
+    ).pipe(
+      switchMap((userReply) => {
+        let user = userReply
+        if (user) {
+          return of(user)
+        } else return throwError('Can\'t find user')
+      })
+    )
+  }
+
+  public addNewContact(data: { id: string, contacts: Contacts }): Observable<any> {
+    this.body = {
+      id: data.id,
+      contacts: data.contacts
+    }
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

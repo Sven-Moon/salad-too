@@ -150,6 +150,25 @@ export class AuthEffects {
     );
   });
 
+  addNewContact$ = createEffect(() => {
+    return this.actions$.pipe(
+
+      ofType(AuthActions.addNewContact),
+      concatMap((action) =>
+        this.authAPIService.addNewContact({
+          id: action.id,
+          contacts: action.contacts
+        }).pipe(
+          map(data => AuthActions.addNewContactSuccess({
+            id: data.id,
+            contacts: data.contacts
+          })),
+          catchError(error => of(AuthActions.addNewContactFailure({ error })))
+        )
+      )
+    );
+  });
+
   //#region EDIT ACCOUNT FAILURE -----------------------------
   alertAccountEditFailure$ = createEffect(
     () =>
@@ -158,12 +177,15 @@ export class AuthEffects {
           AuthActions.updateUserNameFailure,
           AuthActions.updatePasswordFailure,
           AuthActions.updateEmailFailure,
-          AuthActions.updatePhoneFailure),
+          AuthActions.updatePhoneFailure,
+          AuthActions.addContact),
         tap(() => this.authService.failedAccountEdit())
       ),
     { dispatch: false }
   );
   //end#region EDIT ACCOUNT FAILURE -----------------------------
+
+
 
   //#region EDIT ACCOUNT SUCCESS -----------------------------
 
@@ -199,6 +221,15 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.updatePhoneSuccess),
         tap((action) => this.authService.updatePhoneNumberSuccess(action.phoneNumber))
+      ),
+    { dispatch: false }
+  );
+
+  alertContactsUpdated$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.addNewContactSuccess),
+        tap((action) => this.authService.addNewContact(action.contacts[action.contacts.length - 1]))
       ),
     { dispatch: false }
   );

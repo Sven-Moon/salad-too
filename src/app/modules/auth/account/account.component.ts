@@ -3,9 +3,9 @@ import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { Contacts, User } from 'src/app/models/User';
+import { Contact, Contacts, User } from 'src/app/models/User';
 import { NavService } from 'src/app/services/nav.service';
-import { updateEmail, updatePassword, updatePhone, updateUserName } from 'src/app/store/auth/auth.actions';
+import { addContact, addNewContact, updateEmail, updatePassword, updatePhone, updateUserName } from 'src/app/store/auth/auth.actions';
 import { selectContacts, selectUser } from 'src/app/store/auth/auth.selectors';
 
 @Component({
@@ -35,6 +35,10 @@ export class AccountComponent implements OnInit {
     email: null,
     password: null,
     newPhoneNumber: null,
+  }
+  addContactForm = {
+    contactName: null,
+    contactEmail: null
   }
 
   constructor(
@@ -85,6 +89,25 @@ export class AccountComponent implements OnInit {
       id: this.user.id,
       password: f.value.password,
       newPhone: f.value.newPhoneNumber
+    }))
+  }
+
+  public addNewContact(f: NgForm) {
+    // create new contacts list from current & add new contact
+    let newContact: Contact = {
+      name: f.value.name,
+      email: f.value.contactEmail,
+      img: './assets/images/profile_1.png'
+    }
+    let contacts: Contacts
+    this.store.select(selectContacts).subscribe(currentContacts =>
+      contacts = [...currentContacts]
+    )
+    contacts.push(newContact)
+    // addNewContacts calls API to update server
+    this.store.dispatch(addNewContact({
+      id: this.user.id,
+      contacts: contacts
     }))
   }
 
