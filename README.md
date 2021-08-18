@@ -10,7 +10,7 @@ This project was is actually a re-hash of the salad-plus project. I wanted to se
 - select one or many ingredients of type
 - good looking modals
 - spinner to let the user know "we're working on it"
-- payment with self-formatting fields
+- payment with mask-formatted fields
 - responsive design
 
 ### Backend Features
@@ -23,6 +23,7 @@ This project was is actually a re-hash of the salad-plus project. I wanted to se
 - how to effectively turn a site plan into an html page
 - use of box-sizing: border-box! (ugh, things were hard before that)
 - (in progress: animations)
+- animations: smooth open/close, moving menu highlight
 
 ### Backend / State
 - I really upped the game on NGRX selector use, making the code more clearly speak for itself
