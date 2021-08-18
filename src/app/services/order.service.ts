@@ -61,9 +61,7 @@ export class OrderService {
   }
 
   private setItemOwner(itemId: string, owner: Contact) {
-    if (itemId) {
-      this.store.dispatch(setItemOwner({ owner }))
-    }
+    this.store.dispatch(setItemOwner({ owner }))
   }
 
   public convertGuestItems(cartItems: CartItems, owner: Contact) {

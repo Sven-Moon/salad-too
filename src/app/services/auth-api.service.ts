@@ -57,9 +57,10 @@ export class AuthAPIService {
       contacts: [],
       img: './assets/images/profile_1.png'
     }
-    return this.httpClient.post(this.baseUrl, body).pipe(
-      catchError(this.handleRegisterError)
-    )
+    return this.httpClient.post(this.baseUrl, body)
+    // .pipe(
+    //   catchError(this.handleRegisterError)
+    // )
   }
 
   private handleRegisterError(error: HttpErrorResponse) {
@@ -73,10 +74,16 @@ export class AuthAPIService {
         `Backend returned code ${error.status}, ` + `body was: ${error.error}`
       )
     }
+    let errorMsg = error.message
     // Return an observable with a user facing error message
-    return throwError(
-      'Bad things: User could not be registered'
-    )
+    if (errorMsg.includes('duplicate id')) {
+      return throwError('Apparently you already live here because we already have that email address on file.'
+      )
+    } else {
+      return throwError(
+        'Bad things: User could not be registered'
+      )
+    }
   }
 
 

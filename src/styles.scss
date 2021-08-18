@@ -293,13 +293,6 @@ button:not(:disabled) {
   cursor: pointer;
 }
 
-[type="reset"],
-[type="submit"],
-button,
-html [type="button"] {
-  -webkit-appearance: button;
-}
-
 .dropdown-toggle {
   white-space: nowrap;
 }
@@ -315,10 +308,6 @@ html [type="button"] {
   border-left: 0.3em solid transparent;
 }
 
-select option:hover {
-  background-color: lightgray;
-}
-
 button,
 select {
   text-transform: none;
@@ -327,13 +316,6 @@ select {
 button,
 input {
   overflow: visible;
-}
-
-.btn:not(:disabled):not(.disabled) {
-  cursor: pointer;
-}
-
-.caret {
 }
 
 .dropdown-menu {

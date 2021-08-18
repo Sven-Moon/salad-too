@@ -30,7 +30,6 @@ export class OwnerComponent implements OnInit {
   }
 
   openOwnerPick(): void {
-    // this.store.dispatch(itemActions.openOwnerPick())
     this.bsModalRef = this.modalService.show(OwnerPickComponent,
       // {initial state}
     )

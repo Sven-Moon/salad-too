@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { AlertService } from '@full-fledged/alerts';
 import { Store } from '@ngrx/store';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { of } from 'rxjs';
 import { Contact, User } from '../models/User';
 import { clearCart, updateLastOwner } from '../modules/order/state/cart/cart.actions';
 import { clearItem } from '../modules/order/state/item/item.actions';
-import { setGuestId } from '../store/auth/auth.actions';
+import { registerUserSuccess, setGuestId } from '../store/auth/auth.actions';
 import { selectUser } from '../store/auth/auth.selectors';
+import { OrderService } from './order.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +21,26 @@ export class AuthService {
     private alertService: AlertService,
     private modalService: BsModalService,
     private route: Router,
-    private store: Store
+    private store: Store,
+    private orderService: OrderService
   ) { }
+
+  public processRegisteredUser(user: User): void {
+    // set as user in store
+    this.store.dispatch(registerUserSuccess({ user }))
+    // alert user is registered
+    this.alertService.success(
+      `Congrats, ${user.name}, you are now a member of our hunger satisfaction site!`
+    )
+    // go through login process
+    this.orderService.processLoginSuccess(user)
+  }
+
+  //#region --------- FAILED
+  public failedLogin(): void {
+    this.modalService.hide()
+    this.alertService.danger('We couldn\'t log you in. Feel free to try again.')
+  }
 
   public failedAccountEdit() {
     this.alertService.danger(
@@ -28,6 +48,14 @@ export class AuthService {
     )
     this.modalService.hide()
   }
+  public failedUserRegister(data) {
+    this.modalService.hide()
+    this.alertService.danger(`We couldn\'t register you. Feel free to try again. \n
+      Check out this brutal error message we got: \n
+      error.message: ${data.error.message}
+      `)
+  }
+  //#endregion ------ failed
 
   public logout() {
     // *****************

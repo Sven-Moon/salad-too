@@ -51,7 +51,7 @@ import { NgxMaskModule } from 'ngx-mask';
     //#endregion app modules
     //#region ============= Third Party
     AlertModule.forRoot(
-      { maxMessages: 5, timeout: 5000, positionX: 'right', positionY: 'top' }
+      { maxMessages: 5, timeout: 5000, positionX: 'left', positionY: 'top' }
     ),
     NgxMaskModule.forRoot(),
     NgxSpinnerModule,

@@ -16,6 +16,7 @@ import { OrderService } from 'src/app/services/order.service';
 @Injectable()
 export class AuthEffects {
 
+  //#region ------------ LOGIN
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.loginAttempt),
@@ -61,12 +62,14 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.loginFailure),
       tap(() => {
-        this.alertService.danger('We couldn\'t log you in. Feel free to try again.')
+        this.authService.failedLogin()
       })
     ),
     { dispatch: false }
   )
+  //#endregion ------------ login
 
+  //#region ------------ REGISTER USER
   registerUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.registerUser),
@@ -79,6 +82,24 @@ export class AuthEffects {
     )
   })
 
+  registerUserSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.registerUserSuccess),
+      tap((data) => { this.authService.processRegisteredUser(data.user) })
+    ),
+    { dispatch: false }
+  )
+
+  registerUserFailed$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.registerUserFailure),
+      tap((data) => { this.authService.failedUserRegister(data) })
+    ),
+    { dispatch: false }
+  )
+  //#endregion ------------ REGISTER USER
+
+  //#region ------------ EDIT ACCOUNT
   editUserName$ = createEffect(() => {
     return this.actions$.pipe(
 
@@ -168,8 +189,9 @@ export class AuthEffects {
       )
     );
   });
+  //#endregion ------------ ACCOUNT USER
 
-  //#region EDIT ACCOUNT FAILURE -----------------------------
+  //#region ------------- EDIT ACCOUNT FAILURE
   alertAccountEditFailure$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -183,11 +205,9 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
-  //end#region EDIT ACCOUNT FAILURE -----------------------------
+  //#endregion ---------- EDIT ACCOUNT FAILURE
 
-
-
-  //#region EDIT ACCOUNT SUCCESS -----------------------------
+  //#region ------------- EDIT ACCOUNT SUCCESS
 
   alertUsernameUpdated$ = createEffect(
     () =>
@@ -233,7 +253,7 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
-  //#endregion EDIT ACCOUNT SUCCESS -----------------------------
+  //#endregion ----------------- EDIT ACCOUNT SUCCESS
 
   constructor(
     private actions$: Actions,

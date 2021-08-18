@@ -47,8 +47,7 @@
               <div class="itemInfo">
                 <div class="header">
                   <div class="itemName">
-
-
+                    <!-- ------ Owner Select ------ -->
                     <select class="ownerSelect"
                     (change)="changeOwner(item, $event)">
                       <option [ngValue]="item.owner.name" hidden selected>
@@ -61,7 +60,7 @@
                         </option>
                       </ng-container>
                     </select>'s {{item.name}}
-
+                    <!-- ------ Owner Select ------ -->
                   </div>
                   <div class="itemPrice">${{item.price}}</div>
                 </div>
