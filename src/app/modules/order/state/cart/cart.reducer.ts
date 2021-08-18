@@ -74,6 +74,8 @@ export const reducer = createReducer(
     }
   }),
   on(CartActions.updateCartItemOwner, (state, action) => {
+    // receives item with changed owner
+    // inserts the updated item in place of prior
     let newItems: CartItems = []
     state.items.forEach(item => {
       if (item.id !== action.item.id) {

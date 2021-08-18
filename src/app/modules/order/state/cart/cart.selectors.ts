@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CartItems, ItemsByOwner } from 'src/app/models/Item';
 import { Contact, Contacts } from 'src/app/models/User';
+import { selectContacts, selectUser } from 'src/app/store/auth/auth.selectors';
 import * as fromCart from './cart.reducer';
 
 export const selectCartState = createFeatureSelector<fromCart.State>(
@@ -82,5 +83,15 @@ export const selectCartItemsIds = createSelector(
   selectCartItems,
   (items: CartItems): string[] => {
     return items.map(item => item.id)
+  }
+);
+
+export const selectPossibleItemOwners = createSelector(
+  selectContacts,
+  selectUser,
+  (contacts: Contacts, user: Contact): Contacts => {
+    let allOwners: Contacts = [user]
+    contacts.forEach(contact => allOwners.push(contact))
+    return allOwners
   }
 );

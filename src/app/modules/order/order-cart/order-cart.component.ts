@@ -5,16 +5,17 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { Ingredient, Ingredients } from 'src/app/models/Ingredient';
 import { CartItem, CartItems, ItemsByOwner } from 'src/app/models/Item';
-import { Contacts } from 'src/app/models/User';
+import { Contact, Contacts } from 'src/app/models/User';
 import { NavService } from 'src/app/services/nav.service';
 import { OrderService } from 'src/app/services/order.service';
 import { PayInfoComponent } from '../../pay/pay-info/pay-info.component';
-import { changeCartItemQty, clearCart, duplicateCartItem, removeCartItem } from '../state/cart/cart.actions';
-import { selectCartItems, selectCartState, selectCartTotal, selectItemOwners, selectItemsByOwner } from '../state/cart/cart.selectors';
+import { changeCartItemQty, clearCart, duplicateCartItem, removeCartItem, updateCartItemOwner } from '../state/cart/cart.actions';
+import { selectCartItems, selectCartState, selectCartTotal, selectItemOwners, selectItemsByOwner, selectPossibleItemOwners } from '../state/cart/cart.selectors';
 import { editCartItem } from '../state/item/item.actions';
 import { selectIngredientWithPrice } from '../state/staticData/static-data.selectors';
 import { trigger, style, state, animate, transition } from '@angular/animations';
-import { Visible } from 'src/app/models/Visible';
+import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+import { selectContacts, selectUser } from 'src/app/store/auth/auth.selectors';
 
 @Component({
   selector: 'app-order-cart',
@@ -34,7 +35,13 @@ import { Visible } from 'src/app/models/Visible';
         animate('.3s')
       ])
     ])
-  ]
+  ],
+  providers: [{
+    provide: BsDropdownConfig, useValue: {
+      isAnimated: true,
+      autoClose: true
+    }
+  }]
 })
 export class OrderCartComponent implements OnInit {
   // cartItems$: Observable<CartItems>
@@ -53,6 +60,7 @@ export class OrderCartComponent implements OnInit {
   itemsVisible: { [id: string]: { visible: boolean } } = {}
   cartTotal$: Observable<number>
   bsModalRef: BsModalRef
+  allOwners$: Observable<Contacts>
 
   constructor(
     private store: Store,
@@ -94,7 +102,6 @@ export class OrderCartComponent implements OnInit {
     this.store.select(selectItemsByOwner).subscribe(items =>
       this.itemsByOwner = items
     )
-    // this.itemOwners$ = this.store.select(selectItemOwners)
     this.store.select(selectItemOwners).subscribe(owners =>
       this.itemOwners = owners
     )
@@ -102,6 +109,9 @@ export class OrderCartComponent implements OnInit {
       this.itemsVisible[owner.email] = { visible: true }
     )
     this.cartTotal$ = this.store.select(selectCartTotal)
+    // contacts & user are used for owner select dropdowns
+    this.allOwners$ = this.store.select(selectPossibleItemOwners)
+
   }
 
   public viewOwnerItems(id: string): void {
@@ -176,6 +186,31 @@ export class OrderCartComponent implements OnInit {
     Object.keys(this.itemsVisible).forEach((key) => {
       this.itemsVisible[key] = { visible: true }
     })
+  }
+
+  public shortName(name: string): string {
+    return name.split(' ')[0]
+  }
+
+  // public changeOwner(oldItem: CartItem, owner: Contact): void {
+  public changeOwner(oldItem: CartItem, e: any): void {
+    // console.log('e: ');
+    // console.log(e);
+    // console.log('owner.name: ' + owner.name);
+    let owner: Contact
+    let contactEmail = e.target.selectedOptions[0].value
+    console.log('targetvalue: ' + e.target.selectedOptions[0].value);
+    console.log('contactEmail: ' + contactEmail);
+    this.allOwners$.subscribe(contacts =>
+      owner = contacts.find(contact => contact.email === contactEmail)
+    )
+    console.log('owner.name: ' + owner.name);
+    let item = { ...oldItem, owner: owner }
+    this.store.dispatch(updateCartItemOwner({ item }))
+
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/order/cart']);
+    });
   }
 
 }

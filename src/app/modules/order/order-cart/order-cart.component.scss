@@ -17,6 +17,7 @@
   background-color: $primary-light;
   border: 1px solid $primary-dark;
   margin-bottom: 0.5rem;
+  box-sizing: border-box;
 }
 
 .owner img {
@@ -76,10 +77,12 @@
   justify-content: center;
   justify-items: center;
   font-size: 2rem;
+  margin-right: 0.5rem;
 }
 
 .qtyContainer img {
-  width: 1.5rem;
+  width: 1.25rem;
+  height: 1.5rem;
   object-fit: scale-down;
   margin-inline: auto;
 }
@@ -103,6 +106,21 @@
   align-self: center;
 }
 
+.ownerSelect {
+  border: 1px solid $secondary-light;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.ownerSelect option:hover {
+  background-color: $primary-bg;
+}
+
+.userSelect select option {
+  border-bottom: 5px solid $secondary;
+}
+
 .itemPrice {
   border: 1px solid $primary-dark;
   border-radius: 0.2rem;
@@ -120,6 +138,7 @@
 .itemActions button {
   width: fit-content;
   padding: 0 1rem;
+  margin-bottom: 0;
 }
 
 .itemDetails {

@@ -73,10 +73,10 @@ export class OrderService {
     */
     if (cartItems.length !== 0) {
       cartItems.forEach(item => {
-        let itemName: string = this.getOwnedItemName(item, owner.name)
+        // let itemName: string = this.getOwnedItemName(item, owner.name)
         let updatedItem = {
           ...item,
-          name: itemName,
+          // name: itemName,
           owner: owner
         }
         this.store.dispatch(updateCartItemOwner({ item: updatedItem }))

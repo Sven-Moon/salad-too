@@ -80,7 +80,7 @@ export class OrderCustomizeItemComponent implements OnInit {
     // create a modifiable item equal to the current item
     let cartItem: CartItem = { ...this.cartItem }
 
-    cartItem.name = this.orderService.getOwnedItemName(cartItem, cartItem.owner.name)
+    // cartItem.name = this.orderService.getOwnedItemName(cartItem, cartItem.owner.name)
     cartItem.id = this.orderService.generateItemId(cartItem.id)
 
 

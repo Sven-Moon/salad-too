@@ -46,7 +46,23 @@
               <!-- ----------- Item Info ----------- -->
               <div class="itemInfo">
                 <div class="header">
-                  <div class="itemName">{{item.name}}</div>
+                  <div class="itemName">
+
+
+                    <select class="ownerSelect"
+                    (change)="changeOwner(item, $event)">
+                      <option [ngValue]="item.owner.name" hidden selected>
+                        {{shortName(owner.name)}}
+                      </option>
+                      <ng-container *ngFor="let contact of allOwners$ |async">
+                        <option *ngIf="contact.name != item.owner.name"
+                        [value]='contact.email'>
+                          {{shortName(contact.name)}}
+                        </option>
+                      </ng-container>
+                    </select>'s {{item.name}}
+
+                  </div>
                   <div class="itemPrice">${{item.price}}</div>
                 </div>
                 <!-- ========== ITEM ACTIONS ========== -->
