@@ -45,7 +45,7 @@ export const selectSelectedOrder = createSelector(
 export const selectReceipt = createSelector(
   selectSelectedOrder,
   selectLastTransaction,
-  (order, lastTransaction) => {
+  (order, lastTransaction): { order: Order, transaction: Payment } => {
     return {
       order: order,
       transaction: lastTransaction
@@ -55,7 +55,7 @@ export const selectReceipt = createSelector(
 
 export const selectOpenOrdersStatus = createSelector(
   selectOpenOrders,
-  (state: Orders) => {
+  (state: Orders): string => {
     if (state.length != 0) {
       return state[0].status
     } else {
@@ -66,5 +66,5 @@ export const selectOpenOrdersStatus = createSelector(
 
 export const selectFavoriteOrders = createSelector(
   selectClosedOrders,
-  (state: Orders) => state.filter(order => order.favorite === true)
+  (state: Orders): Orders => state.filter(order => order.favorite === true)
 );

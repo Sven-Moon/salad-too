@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { PayComponent } from '../pay/pay.component';
 
@@ -8,9 +10,12 @@ describe('PayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PayComponent]
-    })
-      .compileComponents();
+      declarations: [PayComponent],
+      imports: [
+        RouterTestingModule,
+        provideMockStore()
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

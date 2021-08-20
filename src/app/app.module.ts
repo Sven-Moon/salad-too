@@ -45,7 +45,6 @@ import { NgxMaskModule } from 'ngx-mask';
     AuthModule,
     OrderModule,
     OrdersModule,
-    // OwnerModule,
     PayModule,
     SharedModule,
     //#endregion app modules
@@ -62,7 +61,6 @@ import { NgxMaskModule } from 'ngx-mask';
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    // StoreModule.forFeature(fromContacts.contactsFeatureKey, fromContacts.reducer),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     //#endregion store
     EffectsModule.forRoot([SpinnerEffects, AlertEffects, RouteEffects]),
