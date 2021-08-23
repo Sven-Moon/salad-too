@@ -5,7 +5,7 @@ import { OrdersComponent } from './modules/orders/orders/orders.component';
 import { AccountComponent } from './modules/auth/account/account.component';
 import { PayComponent } from './modules/pay/pay/pay.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: 'order/', component: OrderComponent,
     loadChildren: () => import('./modules/order/order.module')

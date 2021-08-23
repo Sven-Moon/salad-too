@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavComponent } from '../nav/nav.component';
@@ -14,89 +14,91 @@ import { AppModule } from 'src/app/app.module';
 import { OrderService } from 'src/app/services/order.service';
 import { selectCartCount } from '../../order/state/cart/cart.selectors';
 import { selectOpenOrdersStatus } from '../../orders/state/orders.selectors';
+import { Router } from '@angular/router';
+import { routes } from 'src/app/app.routing';
+import { createComponent } from '@angular/compiler/src/core';
+import { AppComponent } from 'src/app/app-root/app.component';
+import { SpyLocation } from '@angular/common/testing'
+import { Type } from '@angular/core';
+
+let comp: NavComponent
+let fixture: ComponentFixture<NavComponent>
+let location: SpyLocation
 
 describe('NavComponent', () => {
-  let component: NavComponent;
-  let fixture: ComponentFixture<NavComponent>;
+  let authService: AuthService
   let store: MockStore;
-  let initialState = {
-    navPointer: 'order',
-    signedIn: false,
-    count: 0,
-    openOrderStatus: of(''),
-  }
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      // declarations: [NavComponent],
+      providers: [
+        NavComponent,
+        provideMockStore(),
+        { provide: AuthService, useClass: MockAuthService },
+        { provide: BsModalService, useClass: MockBSModalService }
+      ],
+      imports: [
+        AppModule,
+        RouterTestingModule.withRoutes(routes)
+      ]
+    }).compileComponents()
+    comp = TestBed.inject(NavComponent);
+    authService = TestBed.inject(AuthService)
+    storeSetup(store)
+  }))
+
+  it('should exist', () => {
+    expect(comp).toBeTruthy();
+  })
+
+  // it('should navigate to launch immediately', fakeAsync(() => {
+  //   createComponent()
+  //   tick() // wait for async data to arrive
+  //   expectPathToBe('order/launch', 'after initialNavigation()')
+  //   expectElementOf(NavComponent)
+  // }))
+
+});
+
+
+function storeSetup(store) {
   let mockNavPointer;
   let mockIsSignedIn;
   let mockUser;
   let mockCartCount;
   let mockOpenOrdersStatus;
+  let user = {
+    id: 'testId',
+    name: 'testName',
+    phoneNumber: 'testPhone',
+    email: 'testEmail',
+    contacts: [],
+    img: 'testImg'
+  }
 
+  store = TestBed.inject(MockStore)
+  mockNavPointer = store.overrideSelector(selectNavPointer, 'order')
+  mockIsSignedIn = store.overrideSelector(selectIsSignedIn, false)
+  mockUser = store.overrideSelector(selectUser, user)
+  mockCartCount = store.overrideSelector(selectCartCount, 3)
+  mockOpenOrdersStatus = store.overrideSelector(selectOpenOrdersStatus, 'status-none')
+}
 
+class MockAuthService {
 
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(NavComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
+}
 
-  // mockIsSignedIn = store.overrideSelector(selectIsSignedIn, false)
+class MockBSModalService {
 
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      declarations: [NavComponent],
-      providers: [
-        provideMockStore(),
-        BsModalService,
-        AuthService,
-        OrderService
-      ],
-      imports: [
-        RouterTestingModule,
-        AppModule
-      ],
-    }).compileComponents
-    store = TestBed.inject(MockStore)
+}
 
-    let user = {
-      id: 'testId',
-      name: 'testName',
-      phoneNumber: 'testPhone',
-      email: 'testEmail',
-      contacts: [],
-      img: 'testImg'
-    }
-    mockNavPointer = store.overrideSelector(selectNavPointer, 'order')
-    mockIsSignedIn = store.overrideSelector(selectIsSignedIn, false)
-    mockUser = store.overrideSelector(selectUser, user)
-    mockCartCount = store.overrideSelector(selectCartCount, 3)
-    mockOpenOrdersStatus = store.overrideSelector(selectOpenOrdersStatus, 'status-none')
-  })
+function expectPathToBe(path: string, expectationFailOutput?: any) {
+  expect(location.path()).toEqual(path, expectationFailOutput || 'location.path()')
+}
 
-  it('should create NavComponent', () => {
-    fixture = TestBed.createComponent(NavComponent);
-    component = fixture.debugElement.componentInstance;
-    fixture.detectChanges()
-    expect(component).toBeTruthy();
-  });
-
-  // it('Should navigate to /order/launch before menu button click',
-  //   () => {
-  //     // get the current location in the browser
-  //     const location = TestBed.get(Location);
-  //     expect(location.path()).toBe('/order/launch');
-  //   })
-
-  // it('Should navigate to /launch on menu button click',
-  //   () => {
-  //     // get starting location
-  //     const location = TestBed.get(Location);
-  //     // get the button to click
-  //     const someImg = fixture.debugElement.queryAll(By.css('div'));
-  //     const theImg: HTMLImageElement = someImg[0].nativeElement
-  //     theImg.click();
-  //     fixture.detectChanges();
-  //     fixture.whenStable().then(() => {
-  //       expect(location.path().toBe('/order/launch'))
-  //     })
-  //   })
-});
+function expectElementOf(type: Type<any>): any {
+  const el = fixture.debugElement.query(By.directive(type))
+  expect(el).toBeTruthy('expected an element for ' + type.name)
+  return el
+}
