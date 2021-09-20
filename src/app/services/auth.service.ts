@@ -8,7 +8,7 @@ import { of } from 'rxjs';
 import { Contact, User } from '../models/User';
 import { clearCart, updateLastOwner } from '../modules/order/state/cart/cart.actions';
 import { clearItem } from '../modules/order/state/item/item.actions';
-import { registerUserSuccess, setGuestId } from '../store/auth/auth.actions';
+import { clearContacts, registerUserSuccess, setGuestId } from '../store/auth/auth.actions';
 import { selectUser } from '../store/auth/auth.selectors';
 import { OrderService } from './order.service';
 
@@ -70,11 +70,14 @@ export class AuthService {
     this.store.dispatch(clearItem())
     this.store.dispatch(clearCart())
     // 2) set the user as the guest id
+    // TODO: id remains
     this.store.dispatch(setGuestId({ id }))
     // 3) set the last owner as the user
     this.store.select(selectUser).subscribe(user => guestUser = user)
     this.store.dispatch(updateLastOwner({ data: guestUser }))
     this.route.navigate(['/order/launch'])
+    // 4) clear contacts
+    this.store.dispatch(clearContacts())
   }
 
   public generateId(): string {

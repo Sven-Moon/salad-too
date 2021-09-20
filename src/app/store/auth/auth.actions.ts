@@ -55,16 +55,17 @@ export const addContact = createAction(
   }>()
 );
 
-export const editUserName = createAction(
-  '[Account] Edit User Name',
-  props<{ name: string }>()
-);
-//#endregion CONTACTS ------------
+  //#endregion CONTACTS ------------
 
 
-// ------------ ACCOUNT ------------
-// #region USERNAME -----------------------------
-export const updateUserName = createAction(
+  // ------------ ACCOUNT ------------
+  // #region USERNAME -----------------------------
+
+  export const editUserName = createAction(
+    '[Account] Edit User Name',
+    props<{ name: string }>()
+  );
+  export const updateUserName = createAction(
   '[Account Name Edit Modal] Update User Name',
   props<{
     id: string,

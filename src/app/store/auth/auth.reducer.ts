@@ -30,8 +30,7 @@ export const reducer = createReducer(
   // --------LOG IN / OUT ------------
   on(AuthActions.loginSuccess, (state, action) => ({
     ...state,
-    user: action.user
-    ,
+    user: action.user,
     error: null
   })),
   on(AuthActions.loginFailure, (state, action) => ({
@@ -55,12 +54,18 @@ export const reducer = createReducer(
   })),
 
   // --------GUEST ------------
+  // sets guest & clears contacts
   on(AuthActions.setGuestId, (state, action) => ({
     ...state,
     user: {
       ...state.user,
+      id: 'guest' + action.id + '@saladtoo.com',
       email: 'guest' + action.id + '@saladtoo.com',
-      name: 'Guest ' + action.id
+      name: 'Guest ' + action.id,
+      img: './assets/images/profile_1.png',
+      phoneNumber: null,
+      contacts: [],
+      password: null
     }
   })),
   mutableOn(AuthActions.addContact, (state: State, action) => {
