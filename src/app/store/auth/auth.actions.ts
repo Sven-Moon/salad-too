@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { Contact, Contacts, User } from 'src/app/models/User';
 
@@ -32,12 +33,27 @@ export const registerUser = createAction(
 export const registerUserSuccess = createAction(
   '[Login Modal] User Registration Success',
   props<{ user: User }>()
-);
+  );
 
-export const registerUserFailure = createAction(
-  '[Login Modal] User Registration Failure',
-  props<{ error: any }>()
-);
+  export const registerUserFailure = createAction(
+    '[Login Modal] User Registration Failure',
+    props<{ error: HttpErrorResponse }>()
+    );
+
+    export const checkRegistered = createAction(
+      '[Login Modal] Check if user exists',
+      props<{ email: string }>()
+    );
+
+    export const checkRegisteredSuccess = createAction(
+      '[Login Modal] User exists Success',
+      props<{ exists: boolean }>()
+    );
+
+    export const checkRegisteredFailure = createAction(
+      '[Login Modal] User exists Failure',
+      props<{ error: any }>()
+    );
 
 // ------------ INITIAL: GUEST ------------
 export const setGuestId = createAction(
@@ -169,3 +185,7 @@ export const addNewContactFailure = createAction(
 )
 
 // #endregion new contact
+
+export const resetAuthError = createAction(
+  '[Login Modal] Reset Errors on Component Teardown'
+);

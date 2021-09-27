@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { setItemOwner } from 'src/app/modules/order/state/item/item.actions';
 import { AuthAPIService } from 'src/app/services/auth-api.service';
 import { OrderService } from 'src/app/services/order.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Injectable()
@@ -73,10 +74,10 @@ export class AuthEffects {
   registerUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.registerUser),
-      switchMap((action) =>
+      concatMap((action) =>
         this.authAPIService.registerUser(action.email, action.username).pipe(
           map((user) => AuthActions.registerUserSuccess({ user })),
-          catchError(error => of(AuthActions.registerUserFailure({ error })))
+          catchError((error) => of(AuthActions.registerUserFailure({ error })))
         )
       )
     )
@@ -85,6 +86,7 @@ export class AuthEffects {
   registerUserSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.registerUserSuccess),
+      // handles alert service & login to order component
       tap((data) => { this.authService.processRegisteredUser(data.user) })
     ),
     { dispatch: false }

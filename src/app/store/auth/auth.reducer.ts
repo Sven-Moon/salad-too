@@ -8,6 +8,7 @@ export const authFeatureKey = 'auth';
 
 export interface State {
   user: User
+  userExists: boolean
   error: any
 }
 
@@ -20,6 +21,7 @@ export const initialState: State = {
     contacts: [],
     img: "./assets/images/profile_1.png",
   },
+  userExists: true,
   error: null,
 };
 
@@ -50,6 +52,14 @@ export const reducer = createReducer(
   on(AuthActions.registerUserFailure, (state, action) => ({
     ...state,
     user: null,
+    error: action.error
+  })),
+  on(AuthActions.checkRegisteredSuccess, (state, action) => ({
+    ...state,
+    userExists: action.exists
+  })),
+  on(AuthActions.checkRegisteredFailure, (state, action) => ({
+    ...state,
     error: action.error
   })),
 
@@ -107,5 +117,9 @@ export const reducer = createReducer(
   mutableOn(AuthActions.addNewContactSuccess, (state, action) => {
     state.user.contacts = action.contacts
   }),
+
+  on(AuthActions.resetAuthError, (state, action) => ({
+    ...state, error: null
+  }))
 
 );

@@ -1,4 +1,5 @@
 
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from '@full-fledged/alerts';
@@ -8,7 +9,7 @@ import { of } from 'rxjs';
 import { Contact, User } from '../models/User';
 import { clearCart, updateLastOwner } from '../modules/order/state/cart/cart.actions';
 import { clearItem } from '../modules/order/state/item/item.actions';
-import { clearContacts, registerUserSuccess, setGuestId } from '../store/auth/auth.actions';
+import { registerUserSuccess, setGuestId } from '../store/auth/auth.actions';
 import { selectUser } from '../store/auth/auth.selectors';
 import { OrderService } from './order.service';
 
@@ -25,9 +26,12 @@ export class AuthService {
     private orderService: OrderService
   ) { }
 
+  //#region --------- REGISTER
+
   public processRegisteredUser(user: User): void {
-    // set as user in store
-    this.store.dispatch(registerUserSuccess({ user }))
+    // set as user in store > registerUserSucces
+    // registerUserSuccess is performed as part of registerUser$ (authEffects)
+    // this.store.dispatch(registerUserSuccess({ user }))
     // alert user is registered
     this.alertService.success(
       `Congrats, ${user.name}, you are now a member of our hunger satisfaction site!`
@@ -35,6 +39,15 @@ export class AuthService {
     // go through login process
     this.orderService.processLoginSuccess(user)
   }
+
+  public failedUserRegister(data) {
+    let message = 'Unknown Error'
+    this.alertService.danger(`We couldn\'t register you. Feel free to try again. \n
+      Check out this brutal error message we got: \n
+      error: ${message}`)
+  }
+
+  //#endregion ------ register
 
   //#region --------- FAILED
   public failedLogin(): void {
@@ -47,13 +60,6 @@ export class AuthService {
       "Uh oh! Something didn't work there. Try again?"
     )
     this.modalService.hide()
-  }
-  public failedUserRegister(data) {
-    this.modalService.hide()
-    this.alertService.danger(`We couldn\'t register you. Feel free to try again. \n
-      Check out this brutal error message we got: \n
-      error.message: ${data.error.message}
-      `)
   }
   //#endregion ------ failed
 
@@ -70,14 +76,11 @@ export class AuthService {
     this.store.dispatch(clearItem())
     this.store.dispatch(clearCart())
     // 2) set the user as the guest id
-    // TODO: id remains
     this.store.dispatch(setGuestId({ id }))
-    // 3) set the last owner as the user
+    // 3) set the last owner as the user & clear contacts
     this.store.select(selectUser).subscribe(user => guestUser = user)
     this.store.dispatch(updateLastOwner({ data: guestUser }))
     this.route.navigate(['/order/launch'])
-    // 4) clear contacts
-    this.store.dispatch(clearContacts())
   }
 
   public generateId(): string {

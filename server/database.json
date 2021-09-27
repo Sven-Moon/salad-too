@@ -3,17 +3,17 @@
     {
       "name": "Mike Danforth",
       "phoneNumber": "1234567890",
-      "email": "MikeDanforth@npr.com",
-      "id": "MikeDanforth@npr.com",
+      "email": "mikedanforth@npr.com",
+      "id": "mikedanforth@npr.com",
       "contacts": [
         {
           "name": "Doug",
-          "email": "DougBerman@npr.com",
+          "email": "dougberman@npr.com",
           "img": "./assets/images/profile_1.png"
         },
         {
           "name": "Peter",
-          "email": "PeterSegal@npr.com",
+          "email": "petersegal@npr.com",
           "img": "./assets/images/profile_1.png"
         }
       ],
@@ -23,17 +23,17 @@
     {
       "name": "Doug",
       "phoneNumber": "9876543210",
-      "email": "DougBerman@npr.com",
-      "id": "DougBerman@npr.com",
+      "email": "dougberman@npr.com",
+      "id": "dougberman@npr.com",
       "contacts": [
         {
           "name": "Mike",
-          "email": "MikeDanforth@npr.com",
+          "email": "mikedanforth@npr.com",
           "img": "./assets/images/profile_1.png"
         },
         {
           "name": "Bill",
-          "email": "BillKurtis@npr.com",
+          "email": "billkurtis@npr.com",
           "img": "./assets/images/profile_1.png"
         }
       ],
@@ -42,17 +42,17 @@
     {
       "name": "Peter",
       "phoneNumber": "9876541381",
-      "email": "PeterSegal@npr.com",
-      "id": "PeterSegal@npr.com",
+      "email": "petersegal@npr.com",
+      "id": "petersegal@npr.com",
       "contacts": [
         {
           "name": "Mike",
-          "email": "MikeDanforth@npr.com",
+          "email": "mikedanforth@npr.com",
           "img": "./assets/images/profile_1.png"
         },
         {
           "name": "Bill",
-          "email": "BillKurtis@npr.com",
+          "email": "billkurtis@npr.com",
           "img": "./assets/images/profile_1.png"
         },
         {
@@ -66,8 +66,8 @@
     {
       "name": "Bill",
       "phoneNumber": "9876541942",
-      "email": "BillKurtis@npr.com",
-      "id": "BillKurtis@npr.com",
+      "email": "billkurtis@npr.com",
+      "id": "billkurtis@npr.com",
       "contacts": [
         {
           "name": "Martha",
@@ -75,6 +75,14 @@
           "img": "./assets/images/profile_1.png"
         }
       ],
+      "img": "./assets/images/profile_1.png"
+    },
+    {
+      "id": "svenpire@gmail.com",
+      "email": "svenpire@gmail.com",
+      "phoneNumber": "",
+      "name": "abc123A!!",
+      "contacts": [],
       "img": "./assets/images/profile_1.png"
     }
   ],
