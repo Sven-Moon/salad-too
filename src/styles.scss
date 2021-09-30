@@ -221,16 +221,28 @@ button {
 }
 
 .topActions {
+  display: flex;
+  flex-flow: row nowrap;
   width: 100%;
   height: 2.5rem;
   margin-bottom: 0.5rem;
   justify-content: space-around;
 }
 
+.topActions img {
+  height: 2rem;
+  object-fit: contain;
+  margin-right: .5rem;
+}
+
+
 .topActions button {
   width: fit-content;
-  height: 100%;
-  font-size: 1rem;
+  height: $ownerHeight;
+  padding: 0 .5rem;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
 }
 
 button:hover {
@@ -499,16 +511,18 @@ input {
   }
 }
 //#region ========= Media: LARGE =========
-@media only screen and (min-width: 500px) {
-  .actions {
-    flex-flow: row nowrap;
-    justify-content: space-around;
+@media only screen and (min-width: 700px) {
+  .topActions {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
-  .actions hr {
-    display: none;
-  }
-  .actions button {
-    width: 45%;
+
+  .topActions button {
+    font-size: 2rem;
   }
 }
 //#endregion Media: LARGE

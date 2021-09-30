@@ -1,14 +1,19 @@
-<div class="select-wrap">
-  <div class="componentWindow">
-    <router-outlet></router-outlet>
-    <!-- <app-order-item-owner class="owner"></app-order-item-owner> -->
-    <ng-container *ngFor="let type of itemGroups$ |async">
+<div class="main">
+
+    <div class="left-panel">
+      <ng-container *ngFor="let type of itemGroups$ |async">
       <div class="item-type" (click)="setItemGroup(type.id)"
       routerLink="/order/select-item">
         {{type.name}}
         <img src={{type.img}} class="type-img" alt="">
       </div>
     </ng-container>
-  </div>
-  <div class="actions" ><button class="btn-cancel" routerLink="../">Exit Order</button></div>
-</div>
+    </div>
+
+    <div class="top-right-panel">
+      <router-outlet></router-outlet>
+    </div> <!-- top-right-panel -->
+    <div class="bot-right-panel">
+      <button class="btn-cancel" routerLink="../">Exit Order</button>
+    </div> <!-- bot-right-panel -->
+</div> <!-- main -->

@@ -1,9 +1,6 @@
+<div class="main">
 
-<div class="select-wrap h-100-max">
-  <div class="componentWindow">
-    <router-outlet></router-outlet>
-    <!-- <app-order-item-owner class="owner"></app-order-item-owner> -->
-    <div class="scroll-y h-100">
+    <div class="left-panel">
       <ng-container *ngFor="let item of items$ |async">
         <div class="card flex-col item" (click)="setAsItem(item.id)">
           <div class="name-price container flex-row">
@@ -22,10 +19,12 @@
         </div>
       </ng-container>
     </div>
-  </div>
-  <div class="actions">
-    <button routerLink="/order/select-item-type" (click)="back()">Try a Different Category</button>
-  </div>
 
+    <div class="top-right-panel">
+      <router-outlet></router-outlet>
+    </div> <!-- top-right-panel -->
 
-</div>
+    <div class="bot-right-panel">
+      <button routerLink="/order/select-item-type" (click)="back()">Try a Different Category</button>
+    </div> <!-- bot-right-panel -->
+</div> <!-- main -->

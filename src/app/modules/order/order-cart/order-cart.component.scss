@@ -1,22 +1,16 @@
 @import "/src/styles.scss";
+@import "/src/app/scss/layout.scss";
 
-.cartWrap {
-  height: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-  overflow-y: auto;
-}
 
 .owner {
   $ownerPadding: 0.5rem;
   display: flex;
   padding: $ownerPadding;
-  width: calc(100% - (2 * #{$ownerPadding}));
+  width: 100%;
   border-radius: 0.5rem;
   background-color: $primary-light;
   border: 1px solid $primary-dark;
-  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
   box-sizing: border-box;
 }
 
@@ -190,37 +184,13 @@ hr {
 
 .addItems {
   background-color: $success;
-}
-
-.addItem {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 1.5rem;
-  width: 1.5rem;
-  border-radius: 50%;
-  border: 1px solid $success-dark;
-  background-color: $success-light;
-  color: $success-text;
-  font-size: 1.5rem;
-  font-weight: bolder;
-  margin-right: 0.75rem;
+  margin-left: auto;
 }
 
 .flexLeft-50 {
   width: 50%;
 }
 
-.flexRight {
-  // order: 2;
-  margin-left: auto;
-}
-
-.addItems img {
-  height: 2rem;
-  object-fit: scale-down;
-  margin-right: 0.5rem;
-}
 
 //#region ========= INGREDIENT COLORS =========
 
@@ -289,17 +259,23 @@ hr {
 }
 // #endregion
 
+.lg-view {
+  display: none;
+}
+
 //#region ========= Media: LARGE =========
-@media only screen and (min-width: 500px) {
-  .actions {
-    flex-flow: row nowrap;
-    justify-content: space-around;
+@media only screen and (min-width: 700px) {
+  .owner {
+    margin-top: 0;
   }
-  .actions hr {
-    display: none;
+
+  .lg-view {
+    display: inline;
   }
-  .actions button {
-    width: 45%;
+
+  .addItems {
+    margin-left: 0;
   }
 }
+
 //#endregion Media: LARGE

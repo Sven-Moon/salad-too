@@ -1,122 +1,132 @@
-<div class="componentWindow">
-  <div class="topActions flex-row">
-    <button type="button" class="mr-2"
-    *ngIf="cartItems && cartItems.length!=0"
-    (click)="collapseAll()">
-      Collapse All
-    </button>
-    <button type="button"
-    *ngIf="cartItems && cartItems.length!=0"
-    (click)="expandAll()">
-      Expand All</button>
-    <button class="addItems flexRight" routerLink="/order/select-item-type">
-      <div class="addItem">+</div>
-      Add Something Else
-    </button>
-  </div>
-  <!-- ========== OWNER ========== -->
-  <ng-container *ngFor="let owner of itemOwners">
+<div class="main">
 
-    <div class="owner flex-col" *ngIf="itemsByOwner[owner.email]" as thisOwner>
-      <div class="ownerInfo">
-        <div class="triangle">
-          <img src="./assets/images/collapsed.png" alt=""  *ngIf="!itemsVisible[owner.email].visible" (click)="viewOwnerItems(owner.email)">
-          <img src="./assets/images/expanded.png" alt=""  *ngIf="itemsVisible[owner.email].visible" (click)="hideOwnerItems(owner.email)">
-        </div>
-        <img src="./assets/images/profile_1.png" alt="">
-        <div class="ownerName">{{owner.name}}</div>
-        <div class="ownerSubtotal form-control">{{itemsByOwner[owner.email].total |currency}}
-        </div>
-      </div>
+  <div class="left-panel">
+    <!-- ========== OWNER ========== -->
+    <ng-container *ngFor="let owner of itemOwners">
 
-      <!-- ========== ITEM ========== -->
-      <div class="itemsContainer" *ngIf="itemsVisible[owner.email].visible">
-        <div *ngIf="removeWarningFlag" class="removeWarning">To remove an item, use the <b>Remove</b> button.</div>
-        <ng-container *ngFor="let item of itemsByOwner[owner.email].items">
-          <div class="card">
-            <div class="flex-row">
-              <!-- ----------- Item Qty ----------- -->
-              <div class="qtyContainer">
-                <img src="./assets/images/up_arrow.png" alt="" class="qtyUp"
-                (click)="increaseCartItemQty(item)">
-                <div class="qty text-center">{{item.quantity}}</div>
-                <img src="./assets/images/down_arrow.png" alt="" class="qtyUp"
-                (click)="decreaseCartItemQty(item)">
-              </div>
-              <!-- ----------- Item Info ----------- -->
-              <div class="itemInfo">
-                <div class="header">
-                  <div class="itemName">
-                    <!-- ------ Owner Select ------ -->
-                    <select class="ownerSelect"
-                    (change)="changeOwner(item, $event)">
-                      <option [ngValue]="item.owner.name" hidden selected>
-                        {{shortName(owner.name)}}
-                      </option>
-                      <ng-container *ngFor="let contact of allOwners$ |async">
-                        <option *ngIf="contact.name != item.owner.name"
-                        [value]='contact.email'>
-                          {{shortName(contact.name)}}
-                        </option>
-                      </ng-container>
-                    </select>'s {{item.name}}
-                    <!-- ------ Owner Select ------ -->
-                  </div>
-                  <div class="itemPrice">${{item.price}}</div>
+      <div class="owner flex-col" *ngIf="itemsByOwner[owner.email]" as thisOwner>
+        <div class="ownerInfo">
+          <div class="triangle">
+            <img src="./assets/images/collapsed.png" alt=""  *ngIf="!itemsVisible[owner.email].visible" (click)="viewOwnerItems(owner.email)">
+            <img src="./assets/images/expanded.png" alt=""  *ngIf="itemsVisible[owner.email].visible" (click)="hideOwnerItems(owner.email)">
+          </div>
+          <img src="./assets/images/profile_1.png" alt="">
+          <div class="ownerName">{{owner.name}}</div>
+          <div class="ownerSubtotal form-control">{{itemsByOwner[owner.email].total |currency}}
+          </div>
+        </div>
+
+        <!-- ========== ITEM ========== -->
+        <div class="itemsContainer" *ngIf="itemsVisible[owner.email].visible">
+          <div *ngIf="removeWarningFlag" class="removeWarning">To remove an item, use the <b>Remove</b> button.</div>
+          <ng-container *ngFor="let item of itemsByOwner[owner.email].items">
+            <div class="card">
+              <div class="flex-row">
+                <!-- ----------- Item Qty ----------- -->
+                <div class="qtyContainer">
+                  <img src="./assets/images/up_arrow.png" alt="" class="qtyUp"
+                  (click)="increaseCartItemQty(item)">
+                  <div class="qty text-center">{{item.quantity}}</div>
+                  <img src="./assets/images/down_arrow.png" alt="" class="qtyUp"
+                  (click)="decreaseCartItemQty(item)">
                 </div>
-                <!-- ========== ITEM ACTIONS ========== -->
-                <div class="itemActions">
-                  <button type="button"
-                  (click)="editCartItem(item.id)"
-                  class="btn-sm btn-warning"
-                  [disabled]="!item.ingredients">
-                    Edit
-                  </button>
-                  <button type="button"
-                  (click)="showDetails(item.name)" class="btn-sm btn-primary"
-                  [disabled]="!item.ingredients">
-                    View
-                  </button>
-                  <button type="button"
-                  (click)="duplicateItem(item)"
-                  class="btn-sm btn-go"
-                  [disabled]="!item.ingredients">
-                    Duplicate
-                  </button>
-                  <button type="button" (click)="removeItem(item.id)" class="btn-sm btn-cancel">Remove</button>
-                </div> <!-- item actions -->
-              </div>
-            </div> <!-- row -->
-            <!-- ========== ITEM DETAILS ========== -->
-            <div class="itemDetails" *ngIf="cartIngredients[item.name] as thisItem">
-              <div class="ingredients" [@toggleIngredientView]="cartIngredients[item.name].visible ? 'open' : 'closed'">
-                  <ng-container *ngFor="let ingredient of thisItem.ingredients">
-                    <div class="ingredient {{ingredient.type}}-border center-text">
-                      <img src={{ingredient.img}} alt="">
-                      {{ingredient.name}} - ${{ingredient.price}}
+                <!-- ----------- Item Info ----------- -->
+                <div class="itemInfo">
+                  <div class="header">
+                    <div class="itemName">
+                      <!-- ------ Owner Select ------ -->
+                      <select class="ownerSelect"
+                      (change)="changeOwner(item, $event)">
+                        <option [ngValue]="item.owner.name" hidden selected>
+                          {{shortName(owner.name)}}
+                        </option>
+                        <ng-container *ngFor="let contact of allOwners$ |async">
+                          <option *ngIf="contact.name != item.owner.name"
+                          [value]='contact.email'>
+                            {{shortName(contact.name)}}
+                          </option>
+                        </ng-container>
+                      </select>'s {{item.name}}
+                      <!-- ------ Owner Select ------ -->
                     </div>
-                  </ng-container>
-              </div>
-            </div> <!-- item details -->
-          </div> <!-- card -->
-        </ng-container>
-        <!-- ----------- EMPTY CART ----------- -->
-      </div> <!-- ========== item ========== -->
+                    <div class="itemPrice">${{item.price}}</div>
+                  </div>
+                  <!-- ========== ITEM ACTIONS ========== -->
+                  <div class="itemActions">
+                    <button type="button"
+                    (click)="editCartItem(item.id)"
+                    class="btn-sm btn-warning"
+                    [disabled]="!item.ingredients">
+                      Edit
+                    </button>
+                    <button type="button"
+                    (click)="showDetails(item.name)" class="btn-sm btn-primary"
+                    [disabled]="!item.ingredients">
+                      View
+                    </button>
+                    <button type="button"
+                    (click)="duplicateItem(item)"
+                    class="btn-sm btn-go"
+                    [disabled]="!item.ingredients">
+                      Duplicate
+                    </button>
+                    <button type="button" (click)="removeItem(item.id)" class="btn-sm btn-cancel">Remove</button>
+                  </div> <!-- item actions -->
+                </div>
+              </div> <!-- row -->
+              <!-- ========== ITEM DETAILS ========== -->
+              <div class="itemDetails" *ngIf="cartIngredients[item.name] as thisItem">
+                <div class="ingredients" [@toggleIngredientView]="cartIngredients[item.name].visible ? 'open' : 'closed'">
+                    <ng-container *ngFor="let ingredient of thisItem.ingredients">
+                      <div class="ingredient {{ingredient.type}}-border center-text">
+                        <img src={{ingredient.img}} alt="">
+                        {{ingredient.name}} - ${{ingredient.price}}
+                      </div>
+                    </ng-container>
+                </div>
+              </div> <!-- item details -->
+            </div> <!-- card -->
+          </ng-container>
+          <!-- ----------- EMPTY CART ----------- -->
+        </div> <!-- ========== item ========== -->
 
+      </div>
+    </ng-container> <!-- ========== owner ========== -->
+
+    <!-- ----------- empty cart  ----------- -->
+    <div *ngIf="!cartItems || cartItems.length==0" class="emptyCart text-center">
+      Your cart is empty!
     </div>
-  </ng-container> <!-- ========== owner ========== -->
+  </div> <!-- left-panel -->
 
-  <!-- ----------- empty cart  ----------- -->
-  <div *ngIf="!cartItems || cartItems.length==0" class="emptyCart text-center">
-    Your cart is empty!
-  </div>
-</div>
+    <div class="top-right-panel">
+      <div class="topActions">
+        <button type="button"
+        *ngIf="cartItems && cartItems.length!=0"
+        (click)="collapseAll()"  class="collapse">
+          <img src="./assets/images/collapse.png" alt="">
+          <div class="lg-view">Collapse All</div>
+        </button>
+        <button type="button"
+        *ngIf="cartItems && cartItems.length!=0"
+        (click)="expandAll()"
+        class="expand">
+          <img src="./assets/images/expand.png" alt="">
+          <div class="lg-view">Expand All</div>
+        </button>
+        <button class="addItems" routerLink="/order/select-item-type">
+            <img src="./assets/images/add.png" alt="">
+            <div class="lg-view">Add Item</div>
+        </button>
+      </div>
+    </div> <!-- top-right-panel -->
 
-<div class="actions">
-  <button type="button" routerLink="/pay" (click)="pay()">
-    Pay {{cartTotal$ |async |currency}}
-  </button>
-  <button type="button" class="btn-cancel" (click)="clearCartItems()">
-    Empty My Cart
-  </button>
-</div>
+    <div class="bot-right-panel">
+      <button type="button" routerLink="/pay" (click)="pay()">
+        Pay {{cartTotal$ |async |currency}}
+      </button>
+      <button type="button" class="btn-cancel" (click)="clearCartItems()">
+        Empty My Cart
+      </button>
+    </div> <!-- bot-right-panel -->
+</div> <!-- main -->
