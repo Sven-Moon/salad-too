@@ -48,6 +48,16 @@ $maxScreenWidth: 768px;
 $maxPopupWidth-lg: 700px;
 $maxPopupWidth-sm: 400px;
 
+// z-index
+$z-bg: -10;
+$z-struct: 10;
+$z-layout: 20;
+$z-ui: 30;
+$z-pop1: 40;
+$z-pop2: 50;
+$z-msg: 60;
+
+
 // main panel
 $hGap: 3vw;
 $vGap: 2vh;
@@ -161,10 +171,11 @@ button {
   align-items: center;
   text-align: center;
 
+  box-sizing: border-box;
   font-size: 2rem;
-  padding-inline: 1rem;
+  padding: 1rem .5rem;
   width: 100%;
-  height: 45%;
+  // height: 3rem;
   margin-bottom: 2.5%;
   font-weight: bold;
   cursor: pointer;
@@ -173,7 +184,7 @@ button {
   border-radius: 0.3rem;
   color: white;
   background-color: $primary-bg;
-  font-size: medium;
+  z-index: $z-ui;
 }
 
 .actions {

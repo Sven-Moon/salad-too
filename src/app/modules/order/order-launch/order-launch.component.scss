@@ -1,12 +1,20 @@
-@import "src/styles.scss";
+@import "/src/styles.scss";
+@import "/src/app/scss/layout.scss";
 
-.welcome {
+.splash-position {
+  margin-inline: auto;
+  position: relative;
+  align-self: flex-start;
+ }
+.background-splash {
   position: absolute;
-  left: 0;
-  top: $barHeight;
+  left: -$hGap;
+  top: calc(-#{$vGap} - 1rem);
   width: 100vw;
-  height: calc(100vh - #{$actionsHeight} - (#{$vGap}) - #{$barHeight});
-  overflow: hidden;
+  height: calc(100vh - #{$barHeight} - #{$vGap});
+  min-height: 300px;
+  overflow: visible;
+  z-index: $z-bg;
 }
 
 .positioning {
@@ -18,11 +26,9 @@
 }
 
 .banner {
-  // border: 4px solid $primary-bg;
-  // border-radius: 0.5rem;
   width: 100vw;
-  color: $primary-bg;
-  background-color: #548aa020;
+  color: white;
+  background-color: #548aa0e0;
   text-align: center;
   font-size: 2.5rem;
   font-weight: bolder;
@@ -31,7 +37,7 @@
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10;
+  z-index: $z-msg;
 }
 
 .sandwich1 {
@@ -103,6 +109,8 @@ img {
   object-fit: contain;
 }
 
-button {
-  z-index: 5;
-}
+@media only screen and (min-width: 700px) {
+  .background-splash {
+    transform: translate(-45%, -0%);
+  }
+ }

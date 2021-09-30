@@ -3,23 +3,38 @@
 .app-wrap {
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  min-width: calc(300px - (2 * #{$hGap}));
+  width: 100%;
+  height: calc(100vh);
+  min-width: 300px;
   position: fixed;
   display: flex;
   flex-direction: column;
   background-color: #eee;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: calc(1rem + #{$barHeight}) $hGap 0;
 }
 
 .main-panel-wrap {
   display: flex;
   flex-flow: column nowrap;
-  width: calc(100% - (2 * #{$hGap}));
-  margin: calc(#{$barHeight} + #{$vGap}) $hGap $vGap;
-  max-width: 768px;
-  height: 100vh;
-  overflow-y: auto;
+  width: 100%;
+  // max-width: 768px;
+  height: calc(100%);
+  overflow-y: visible;
   overflow-x: visible;
   margin-inline: auto;
+  position: relative;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  // border: 1px solid orange;
+}
+
+
+@media only screen and (min-width: 700px) {
+  .main-panel-wrap {
+    max-width: 900px;
+    flex-flow: row;
+    justify-content: center;
+  }
 }
