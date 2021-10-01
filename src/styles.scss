@@ -109,8 +109,9 @@ $modalActionsHt: 3rem;
 
 .container {
   width: 100%;
-  max-width: calc(100% - (2 * #{$panel-padding-side}));
+  max-width: 100%;
   padding: $panel-padding-vert $panel-padding-side;
+  box-sizing: border-box;
 }
 
 .flex-row {

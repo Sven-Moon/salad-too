@@ -13,8 +13,8 @@
             </div>
           </div>
           <div class="desc-container container">
-            <div class="img-window"></div>
-            <div class="description">{{item.description}}</div>
+            <!-- <div class="img-window"></div> -->
+            <div class="description" *ngIf="item.description">{{item.description}}</div>
           </div>
         </div>
       </ng-container>

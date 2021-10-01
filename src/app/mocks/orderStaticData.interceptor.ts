@@ -163,14 +163,14 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
         {
           "id": "chocolateCake",
           "name": "Chocolate Cake",
-          "img": "./assets/images/desserts/chocolateCake",
+          "img": "./assets/images/desserts/chocolateCake.png",
           "price": "4.75",
           "itemGroup": "dessert"
         },
         {
           "id": "bananaPudding",
           "name": "Banana Pudding",
-          "img": "./assets/images/desserts/bananaPudding",
+          "img": "./assets/images/desserts/bananaPudding.png",
           "price": "3.85",
           "itemGroup": "dessert"
 
@@ -178,7 +178,7 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
         {
           "id": "cremeBrulee",
           "name": "Creme Brulee",
-          "img": "./assets/images/desserts/cremeBrulee",
+          "img": "./assets/images/desserts/cremeBrulee.png",
           "price": "5.45",
           "itemGroup": "dessert"
         }
