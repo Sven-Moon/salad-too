@@ -34,38 +34,14 @@ $border-wide: 0.5rem;
   border-radius: 0.5rem;
 }
 
-.actions {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  width: 100%;
-}
-
-// .profile-img {
-//   object-fit: scale-down;
-//   height: 2rem;
-// }
-
 .form-control {
   height: 1.25rem;
   margin-right: 0.5rem;
   min-width: fit-content;
 }
 
-button {
-  font-size: 1rem;
-  min-height: 1.5rem;
-  max-width: 300px;
-}
-
 @media only screen and (max-width: 600px) {
   .profile-wrap {
     width: fit-content;
-  }
-
-  // .form-control
-
-  button {
-    width: 80%;
   }
 }

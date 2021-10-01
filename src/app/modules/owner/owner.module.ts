@@ -10,13 +10,15 @@ import * as fromOwner from './state/owner.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { OwnerEffects } from './state/owner.effects';
 import { FormsModule } from '@angular/forms';
+import { TruncatePipe } from 'src/app/pipes/truncate';
 
 
 @NgModule({
   declarations: [
     OwnerComponent,
     OwnerPickComponent,
-    OwnerAddComponent
+    OwnerAddComponent,
+    TruncatePipe
   ],
   imports: [
     CommonModule,

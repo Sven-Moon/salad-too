@@ -41,8 +41,8 @@
       </div>
       <div class="text-center w-100">* = Required</div>
           <hr>
-      <div class="actions">
-        <button type="submit" class="btn-go">+ Contact</button>
+      <div class="modalActions">
+        <button type="submit" class="btn-go" [disabled]="f.invalid">+ Contact</button>
         <button type="button" (click)="closeAddContact()" class="btn-cancel">Cancel</button>
       </div>
     </form>

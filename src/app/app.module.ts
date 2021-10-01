@@ -26,12 +26,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PayModule } from './modules/pay/pay.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { TruncatePipe } from './pipes/truncate';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     NavComponent
+
   ],
   imports: [
     //#region ============= Core Function

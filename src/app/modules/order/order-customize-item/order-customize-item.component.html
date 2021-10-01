@@ -1,66 +1,62 @@
-
-
-
-
 <div class="main">
 
-    <div class="left-panel">
-      <!-- ========== SELECTOR ========== -->
-      <div class="card selector">
-        <!-- <div class="card-header">Customize It</div> -->
-        <ng-container *ngIf="typeFilter$ |async as ingredientType;else emptyHeader" >
-          <div  class="card-header">
-            {{ingredientType.name}} @ ${{ingredientType.price}} each
-          </div>
-        </ng-container>
-        <ng-template #emptyHeader>
-          <div class="card-header">All Ingredients <span style="font-size: medium;">(click to filter)</span></div>
-        </ng-template>
-        <div class="types-filter">
-          <!-- ---------- FILTER ---------- -->
-          <ng-container *ngFor="let type of ingredientTypes$ |async">
-            <img src={{type.img}} alt="" (click)=updateFilter(type.id) class="{{type.id}}-border">
-          </ng-container>
+  <div class="left-panel">
+    <!-- ========== SELECTOR ========== -->
+    <div class="card selector">
+      <ng-container *ngIf="typeFilter$ |async as ingredientType;else emptyHeader" >
+        <div  class="card-header">
+          {{ingredientType.name}} @ ${{ingredientType.price}} each
         </div>
-        <!-- ---------- INGREDIENTS CONTAINER ---------- -->
-        <div class="ingredients ingredients-all">
-          <!-- INGREDIENT -->
-          <ng-container *ngFor="let ingredient of filteredIngredients$ |async">
-            <div
-            (click)="toggleIngredient(ingredient)"
-            [ngClass]="calcClasses(ingredient)"
-            >
-            <img src={{ingredient.img}} alt="">
-            {{ingredient.name}}
+      </ng-container>
+      <ng-template #emptyHeader>
+        <div class="card-header">
+          All Ingredients <span style="font-size: medium;">(click to filter)</span>
+        </div>
+      </ng-template>
+      <div class="types-filter">
+        <!-- ---------- FILTER ---------- -->
+        <ng-container *ngFor="let type of ingredientTypes$ |async">
+          <img src={{type.img}} alt="" (click)=updateFilter(type.id) class="{{type.id}}-border">
+        </ng-container>
+      </div>
+      <!-- ---------- INGREDIENTS CONTAINER ---------- -->
+      <div class="ingredients ingredients-all">
+        <!-- INGREDIENT -->
+        <ng-container *ngFor="let ingredient of filteredIngredients$ |async">
+          <div (click)="toggleIngredient(ingredient)"
+          [ngClass]="calcClasses(ingredient)"
+          >
+          <img src={{ingredient.img}} alt="">
+          {{ingredient.name}}
           </div>
         </ng-container> <!-- ingredient -->
       </div> <!-- ingredient container-->
     </div> <!-- selector card -->
-  </div>
+  </div> <!-- left-panel -->
 
   <div class="top-right-panel">
     <router-outlet></router-outlet>
-    <div class="ingredient-panel">
     <!-- ========== ITEM INGREDIENTS ========== -->
-    <div class="card item-ingredients">
-      <div class="card-header">
-        <div>Current Ingredients</div>
-        <div class="price">${{price}}</div>
-      </div>
-      <div class="ingredients">
-        <ng-container *ngFor="let ingredient of itemIngredients$ |async">
-          <div class="ingredient {{ingredient.type}}-border center-text">
-            <img src={{ingredient.img}} alt="">
-            {{ingredient.name}}
-          </div>
-        </ng-container>
-      </div>
-    </div>
-  </div> <!-- ingredient panel-->
+    <div class="ingredient-panel">
+      <div class="card item-ingredients">
+        <div class="card-header">
+          <div>Current Ingredients</div>
+          <div class="price">${{price}}</div>
+        </div>
+        <div class="ingredients">
+          <ng-container *ngFor="let ingredient of itemIngredients$ |async">
+            <div class="ingredient {{ingredient.type}}-border center-text">
+              <img src={{ingredient.img}} alt="">
+              {{ingredient.name}}
+            </div>
+          </ng-container>
+        </div> <!-- ingredients -->
+      </div> <!-- ingredient card -->
+    </div> <!-- ingredient panel-->
   </div> <!-- top-right-panel -->
 
   <div class="bot-right-panel">
     <button type="button" (click)="addItemToCart()">+ Item to Cart</button>
     <button type="button" class="btn-cancel" (click)="cancelItem()" routerLink="../select-item">Cancel Item</button>
-    </div> <!-- bot-right-panel -->
+  </div> <!-- bot-right-panel -->
 </div> <!-- main -->

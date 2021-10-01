@@ -2,33 +2,15 @@
 @import "/src/app/scss/layout.scss";
 @import "../order/order.component.scss";
 
-.customize-wrap {
-  display: flex;
-  flex-flow: column nowrap;
-  overflow-y: auto;
-  justify-content: flex-start;
-  height: calc(100vh - #{$barHeight});
-}
-
-.owner {
-  position: relative;
-  width: 100%;
-  height: $ownerHeight;
-}
-
 .card-header {
+  display: flex;
+  justify-content: space-between;
   font-size: 1.75rem;
   border-bottom: 1px solid lightgrey;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
-
-  display: flex;
-  justify-content: space-between;
 }
 
-.price {
-  // font-size: ;
-}
 
 // #region size control for main components
 // *********************************
@@ -36,15 +18,10 @@
   display: flex;
   flex-flow: column nowrap;
   height: min-content;
-  height: calc(100vh - #{$barHeight} - #{$ownerHeight} - #{$actionsHeight});
+  // height: calc(100vh - #{$barHeight} - #{$ownerHeight} - #{$actionsHeight});
 }
 
-.item-ingredients {
-}
 
-.selector {
-  // overflow-y: hidden;
-}
 // *********************************
 // #endregion component size control
 
@@ -52,7 +29,7 @@
   display: flex;
   flex-flow: row wrap;
   background-color: $bg-soft;
-  padding: 2vw;
+  padding: .5rem;
   overflow-y: auto;
   margin: 0.5rem 0;
 }
@@ -71,7 +48,6 @@
   font-size: 1.25rem;
   padding: 0.2rem 0.4rem;
   background-color: white;
-  // width: fit-content;
 }
 
 .ingredient img {
@@ -100,11 +76,6 @@
   flex-shrink: 1;
 }
 
-.actions {
-  margin: 0 1rem;
-  max-height: 15vh;
-}
-
 .small-text {
   font-size: 0.5rem;
 }
@@ -114,12 +85,7 @@
   color: white;
 }
 
-// ========= BUTTONS =========
-.actions button {
-  font-size: 1.5rem;
-}
-
-// ========= INGREDIENT COLORS =========
+// #region ------------ INGREDIENT COLORS
 
 .meats {
   background-color: rgb(233, 233, 237);
@@ -182,5 +148,12 @@
 
   &-border {
     border-color: rgb(28, 179, 209);
+  }
+}
+// #endregion ~~~~~~~~~~~ INGREDIENT COLORS
+
+@media only screen and (min-width:700px) {
+  .ingredients {
+    padding: 1rem;
   }
 }

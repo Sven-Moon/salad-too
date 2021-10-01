@@ -7,7 +7,7 @@
   height: 100%;
 
   grid-template:
-    [s1] "top-right-panel" $ownerHeight [e1] [s2] "left-panel"auto [e2] [s3] "bot-right-panel"auto [e3]
+    [s1] "top-right-panel" auto [e1] [s2] "left-panel"1fr [e2] [s3] "bot-right-panel"auto [e3]
 }
 
 .top-right-panel {

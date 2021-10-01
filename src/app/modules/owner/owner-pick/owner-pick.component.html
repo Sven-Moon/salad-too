@@ -21,8 +21,8 @@
         </ng-container>
       </div>
       <hr style="margin: .5rem; width:100%; color:white">
-        <div class="actions expandable-v">
-          <button (click)="openAddContact()" class="btn-go">+ New Contact</button>
+        <div class="modalActions expandable-v">
+          <button (click)="openAddContact()" class="btn-go">New Contact</button>
           <ng-container *ngIf="!(signedIn$ |async)">
             <button (click)="openLogin()">Sign In / Up</button>
           </ng-container>

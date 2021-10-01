@@ -202,7 +202,7 @@ export class AuthEffects {
           AuthActions.updatePasswordFailure,
           AuthActions.updateEmailFailure,
           AuthActions.updatePhoneFailure,
-          AuthActions.addContact),
+          AuthActions.addNewContactFailure),
         tap(() => this.authService.failedAccountEdit())
       ),
     { dispatch: false }
