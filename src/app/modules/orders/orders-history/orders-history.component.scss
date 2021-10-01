@@ -162,3 +162,9 @@ hr {
   color: $secondary-text;
   border-color: $secondary-dark;
 }
+
+@media only screen and (min-width: 700px) {
+  .statusWindow {
+    min-width: 650px; // ???
+  }
+}

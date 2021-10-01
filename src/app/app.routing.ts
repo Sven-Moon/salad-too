@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OrderComponent } from './modules/order/order/order.component';
-import { OrdersComponent } from './modules/orders/orders/orders.component';
 import { AccountComponent } from './modules/auth/account/account.component';
 import { PayComponent } from './modules/pay/pay/pay.component';
 
@@ -16,7 +15,6 @@ export const routes: Routes = [
     loadChildren: () => import('./modules/pay/pay.module')
       .then((m) => m.PayModule)
   },
-  { path: 'orders', component: OrdersComponent },
   { path: 'account', component: AccountComponent },
   { path: '', redirectTo: 'order', pathMatch: 'full' },
 ];

@@ -21,7 +21,7 @@
 
 .header {
   display: flex;
-  max-width: 768px;
+  max-width: 900px;
   min-width: 300px;
   width: 100%;
   justify-content: space-between;
@@ -46,4 +46,10 @@
   display: flex;
   flex-flow: row nowrap;
   margin: 0 3vw;
+}
+
+@media only screen and (min-width: 925px) {
+  .nav {
+    margin-right: 0;
+  }
 }
