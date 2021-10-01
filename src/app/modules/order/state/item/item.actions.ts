@@ -70,6 +70,10 @@ export const updatePrice = createAction(
   '[Customize] Update Current Item Price'
 );
 
+export const cancelItem = createAction(
+'[Customize] Cancel Item (clear item)'
+);
+
 // ======== CART ========
 export const editCartItem = createAction(
   '[Cart] Return Cart Item to Customize',

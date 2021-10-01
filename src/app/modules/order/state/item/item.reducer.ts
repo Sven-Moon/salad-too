@@ -1,3 +1,4 @@
+import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
 import { mutableOn } from 'ngrx-etc';
 import { Item } from 'src/app/models/Item';
@@ -111,6 +112,9 @@ export const reducer = createReducer(
       state.ingredients = newList
     }
   ),
+  on(ItemActions.cancelItem, (state,action) => ({
+    ...initialState,
+  })),
   //#endregion customize
 
   // ======== CART ========

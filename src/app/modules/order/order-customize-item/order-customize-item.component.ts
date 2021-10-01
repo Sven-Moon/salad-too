@@ -9,7 +9,7 @@ import { NavService } from 'src/app/services/nav.service';
 import { OrderService } from 'src/app/services/order.service';
 import { addItemToCart } from '../state/cart/cart.actions';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
-import { clearItem, deselectAllIngredientsOfType, filterIngredientType, setLastItemOwnerAsItemOwner, setItemId, toggleIngredient } from '../state/item/item.actions';
+import { clearItem, deselectAllIngredientsOfType, filterIngredientType, setLastItemOwnerAsItemOwner, setItemId, toggleIngredient, cancelItem } from '../state/item/item.actions';
 import { selectCurrentItem, selectFilteredIngredientsByType, selectItemGroupTypes, selectItemIngredients, selectItemPrice, selectPickedIngredientType, selectSingleSelectIngredientTypes } from '../state/item/item.selectors';
 import { selectAllItems, selectIngredients } from '../state/staticData/static-data.selectors';
 
@@ -80,7 +80,7 @@ export class OrderCustomizeItemComponent implements OnInit {
     // create a modifiable item equal to the current item
     let cartItem: CartItem = { ...this.cartItem }
 
-    // cartItem.name = this.orderService.getOwnedItemName(cartItem, cartItem.owner.name)
+    //generate & apply a unique id
     cartItem.id = this.orderService.generateItemId(cartItem.id)
 
 
@@ -98,7 +98,7 @@ export class OrderCustomizeItemComponent implements OnInit {
   }
 
   public cancelItem(): void {
-
+    this.store.dispatch(cancelItem())
   }
 
   calcClasses(ingredient: Ingredient): string {

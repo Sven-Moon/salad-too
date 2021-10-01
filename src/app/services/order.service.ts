@@ -91,26 +91,6 @@ export class OrderService {
   }
   //#endregion processLoginSuccess
 
-  public getOwnedItemName(item: Item, ownerName: string): string {
-    // **** Adds owner name to the item to show ownership ******
-    // modifies items after they have been added to the cart
-    // accounts for duplicate items, which art suffixed with 1+ '*'
-
-
-    let allItems: Items
-    this.store.select(selectAllItems).subscribe(items => allItems = items)
-
-    // ========== Item Owner may have changed ==========
-    // account for possibility that this is a duplicate item
-    let pureId = item.id.split('__')[0]
-    // get the name without modification
-    let itemName: string = allItems.find(item => item.id == pureId).name
-    // add (first name of) <contact name>'s before item name
-    itemName = ownerName.split(' ')[0].concat('\'s ', itemName)
-
-    return itemName
-  }
-
   public generateItemId(itemId: string): string {
     let uniqueId: string = itemId
     let itemIds: string[]
