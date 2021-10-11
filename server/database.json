@@ -17,11 +17,11 @@
           "img": "./assets/images/profile_1.png"
         }
       ],
-      "img": "./assets/images/profile_1.png",
+      "img": "mikedanforth@npr.com",
       "password": "abc123A!!"
     },
     {
-      "name": "Doug",
+      "name": "Doug Berman",
       "phoneNumber": "9876543210",
       "email": "dougberman@npr.com",
       "id": "dougberman@npr.com",
@@ -40,10 +40,10 @@
       "img": "./assets/images/profile_1.png"
     },
     {
-      "name": "Peter",
+      "name": "Peter Segal",
       "phoneNumber": "9876541381",
       "email": "petersegal@npr.com",
-      "id": "petersegal@npr.com",
+      "id": "petersegal@npr.cjom",
       "contacts": [
         {
           "name": "Mike",
@@ -64,7 +64,7 @@
       "img": "./assets/images/profile_1.png"
     },
     {
-      "name": "Bill",
+      "name": "Bill Kurtis",
       "phoneNumber": "9876541942",
       "email": "billkurtis@npr.com",
       "id": "billkurtis@npr.com",
