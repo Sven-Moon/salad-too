@@ -15,7 +15,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace WebAPI.Controllers
 {
-  // [Authorize]
   public class AccountController : BaseController
   {
     private readonly IUnitOfWork uow;
@@ -45,6 +44,19 @@ namespace WebAPI.Controllers
       loginRes.name = user.name;
       loginRes.Token = CreateJWT(user);
       return Ok(loginRes);
+    }
+
+
+    // /api/account/register
+    [HttpPost("register")]
+    public async Task<IActionResult> Register(RegisterReqDto regReq)
+    {
+      if (await uow.UserRepository.UserAlreadyExists(regReq.name))
+        return BadRequest("User already exists");
+
+      uow.UserRepository.Register(regReq.name, regReq.email, regReq.password);
+      await uow.SaveAsync();
+      return StatusCode(201);
     }
 
     private string CreateJWT(User user)
@@ -84,7 +96,7 @@ namespace WebAPI.Controllers
     {
       var user = mapper.Map<User>(userDto);
       // ToDo: remove default
-      user.password = "string";
+      // user.password = "string";
       uow.UserRepository.AddUser(user);
       await uow.SaveAsync();
       return StatusCode(201);

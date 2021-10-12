@@ -12,6 +12,7 @@ using WebAPI.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Data.SqlClient;
 
 namespace WebAPI
 {
@@ -27,11 +28,17 @@ namespace WebAPI
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      // USE BUILDER IF USING USER ID/PASSWORD, NOT INTEGRATED
+      // var builder = new SqlConnectionStringBuilder(
+      //   Configuration.GetConnectionString("IdPass"));
+      // builder.Password = Configuration.GetSection("DBPassword").Value;
+      // var connectionString = builder.ConnectionString;
+      // services.AddDbContext<DataContext>(options =>
+      //   options.UseSqlServer(connectionString));
       services.AddDbContext<DataContext>(options =>
-        options.UseSqlServer(
-          Configuration.GetConnectionString("Default")
-        )
-      );
+        options.UseSqlServer(Configuration
+          .GetConnectionString("IntegratedSecurity")));
+
       services.AddControllers();
       services.AddCors();
       services.AddSwaggerGen(c =>
@@ -71,6 +78,9 @@ namespace WebAPI
       }
 
       app.UseRouting();
+
+      app.UseHsts();
+      app.UseHttpsRedirection();
 
       app.UseCors(m => m.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 

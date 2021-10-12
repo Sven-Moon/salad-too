@@ -17,7 +17,8 @@ namespace WebAPI.Models
     public string img { get; set; }
 
     [Required]
-    public string password { get; set; }
+    public byte[] password { get; set; }
+    public byte[] passwordKey { get; set; }
   }
 
   // public class Contact
