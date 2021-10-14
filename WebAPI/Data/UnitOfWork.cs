@@ -13,6 +13,8 @@ namespace WebAPI.Data
     }
     public IUserRepository UserRepository =>
       new UserRepository(dc);
+    public IUsersRepository UsersRepository =>
+      new UsersRepository(dc);
     public IDrinkTypeRepository DrinkTypeRepository =>
       new DrinkTypeRepository(dc);
 

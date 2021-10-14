@@ -78,27 +78,5 @@ namespace WebAPI.Data.Repo
       return await dc.Users.AnyAsync(x => x.name == name);
     }
 
-    // GET
-    public async Task<IEnumerable<User>> GetUsersAsync()
-    {
-      return await dc.Users.ToListAsync();
-    }
-    // POST
-    public void AddUser(User user)
-    {
-      dc.Users.AddAsync(user);
-    }
-    // DELETE
-    public void DeleteUser(string userId)
-    {
-      var user = dc.Users.Find(userId);
-      dc.Users.Remove(user);
-    }
-    // PUT
-    public async Task<User> FindUser(string id)
-    {
-      return await dc.Users.FindAsync(id);
-    }
-
   }
 }

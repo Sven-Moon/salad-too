@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  useMocking: true
+  useMocking: true,
+  baseUrl: "http://localhost:5000/api"
 };
 
 /*
