@@ -17,6 +17,12 @@ export const selectError = createSelector(
   (state): HttpErrorResponse => state.error
 )
 
+/**
+ * SignedIn status dependent on two things:
+ * 1) is there a user object at all (initial state)
+ * 2) does the object have an 'guest...@saladtoo.com' email
+ * ... so to sign in a "valid" email must be entered
+ */
 export const selectIsSignedIn = createSelector(
   selectUser,
   (user): boolean => {
@@ -48,12 +54,8 @@ export const selectUserEmail = createSelector(
 export const selectErrorMessage = createSelector(
   selectError,
   (error: HttpErrorResponse): string => {
-    if (error) {
-    if (error.error.includes('duplicate id')) {
-      return 'Duplicate ID'
-    } else {
-      return 'Unknown server error'
-     }
+    if (error && error.error) {
+      return error.error
     } else { return null }
   }
 );

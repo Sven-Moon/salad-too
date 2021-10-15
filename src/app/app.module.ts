@@ -52,7 +52,7 @@ import { TruncatePipe } from './pipes/truncate';
     //#endregion app modules
     //#region ============= Third Party
     AlertModule.forRoot(
-      { maxMessages: 5, timeout: 5000, positionX: 'left', positionY: 'top' }
+      { maxMessages: 5, timeout: 5000, positionX: 'left', positionY: 'bottom' }
     ),
     NgxMaskModule.forRoot(),
     NgxSpinnerModule,

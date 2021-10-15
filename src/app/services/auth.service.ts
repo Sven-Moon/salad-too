@@ -6,6 +6,7 @@ import { AlertService } from '@full-fledged/alerts';
 import { Store } from '@ngrx/store';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { of } from 'rxjs';
+import { AuthResp } from '../models/Auth';
 import { Contact, User } from '../models/User';
 import { clearCart, updateLastOwner } from '../modules/order/state/cart/cart.actions';
 import { clearItem } from '../modules/order/state/item/item.actions';
@@ -28,16 +29,16 @@ export class AuthService {
 
   //#region --------- REGISTER
 
-  public processRegisteredUser(user: User): void {
+  public processRegisteredUser(resp: AuthResp): void {
     // set as user in store > registerUserSucces
     // registerUserSuccess is performed as part of registerUser$ (authEffects)
     // this.store.dispatch(registerUserSuccess({ user }))
     // alert user is registered
     this.alertService.success(
-      `Congrats, ${user.name}, you are now a member of our hunger satisfaction site!`
+      `Congrats, ${resp.name}, you are now a member of our hunger satisfaction site!`
     )
     // go through login process
-    this.orderService.processLoginSuccess(user)
+    this.orderService.processLoginSuccess(resp)
   }
 
   public failedUserRegister(data) {

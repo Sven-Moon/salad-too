@@ -10,6 +10,7 @@ import { AlertService } from '@full-fledged/alerts';
 import { selectItemId } from '../modules/order/state/item/item.selectors';
 import { Router } from '@angular/router';
 import { Order } from '../models/Order';
+import { AuthResp } from '../models/Auth';
 
 
 @Injectable({
@@ -23,7 +24,7 @@ export class OrderService {
     private router: Router
   ) { }
 
-  public processLoginSuccess(user: User) {
+  public processLoginSuccess(resp: AuthResp) {
     /**
      * processes all post login success items:
      * 1) alert of success
@@ -33,6 +34,16 @@ export class OrderService {
      * 3.1) if item in customization, add User as owner property
      * 3.2) convert all items in cart (owner property & name)
     */
+    let user: User = {
+      id: resp.id,
+      name: resp.name,
+      email: resp.email,
+      phoneNumber: resp.phoneNumber,
+      img: resp.img
+    }
+
+    // localStorage.setItem('token', resp.token)
+    // localStorage.setItem('userEmail', resp.email)
     let itemId: string
     this.store.select(selectItemId).subscribe(id =>
       itemId = id

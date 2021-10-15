@@ -12,6 +12,7 @@ import { setItemOwner } from 'src/app/modules/order/state/item/item.actions';
 import { AuthAPIService } from 'src/app/services/auth-api.service';
 import { OrderService } from 'src/app/services/order.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthResp } from 'src/app/models/Auth';
 
 
 @Injectable()
@@ -23,8 +24,9 @@ export class AuthEffects {
       ofType(AuthActions.loginAttempt),
       concatMap((action) =>
         this.authAPIService.login(action.email, action.password).pipe(
-          map((user) => AuthActions.loginSuccess({ user })),
-          catchError(error => of(AuthActions.loginFailure({ error }))))
+          map((resp: AuthResp) => AuthActions.loginSuccess({ resp })),
+          catchError(error => of(AuthActions.loginFailure({ error })))
+        )
       )
     );
   });
@@ -41,7 +43,7 @@ export class AuthEffects {
   loginSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginSuccess),
-      tap((action) => this.orderService.processLoginSuccess(action.user))
+      tap((action) => this.orderService.processLoginSuccess(action.resp))
     ),
     { dispatch: false }
   )
@@ -52,7 +54,7 @@ export class AuthEffects {
         ofType(AuthActions.loginSuccess),
         tap((action) =>
           this.alertService.success(
-            'Welcome Back ' + action.user.name + ' !'
+            'Welcome Back ' + action.resp.name + ' !'
           )
         )
       ),
@@ -75,8 +77,8 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.registerUser),
       concatMap((action) =>
-        this.authAPIService.registerUser(action.email, action.username).pipe(
-          map((user) => AuthActions.registerUserSuccess({ user })),
+        this.authAPIService.registerUser(action.email, action.username, action.password).pipe(
+          map((resp) => AuthActions.registerUserSuccess({ resp })),
           catchError((error) => of(AuthActions.registerUserFailure({ error })))
         )
       )
@@ -87,7 +89,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.registerUserSuccess),
       // handles alert service & login to order component
-      tap((data) => { this.authService.processRegisteredUser(data.user) })
+      tap((data) => { this.authService.processRegisteredUser(data.resp) })
     ),
     { dispatch: false }
   )

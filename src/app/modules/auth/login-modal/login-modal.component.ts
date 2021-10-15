@@ -33,7 +33,7 @@ export class LoginModalComponent implements OnInit, OnDestroy {
     })
   }
 
-  public onSubmit(f: NgForm): void {
+  public login(f: NgForm): void {
     this.store.dispatch(loginAttempt({
       email: f.value.email,
       password: f.value.password
@@ -48,7 +48,8 @@ export class LoginModalComponent implements OnInit, OnDestroy {
      */
     this.store.dispatch(registerUser({
       username: f.value.username,
-      email: f.value.email
+      email: f.value.email,
+      password: f.value.password
     }))
   }
 

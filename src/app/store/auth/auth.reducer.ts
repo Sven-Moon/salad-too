@@ -8,6 +8,7 @@ export const authFeatureKey = 'auth';
 
 export interface State {
   user: User
+  token: string
   userExists: boolean
   error: any
 }
@@ -21,6 +22,7 @@ export const initialState: State = {
     contacts: [],
     img: "./assets/images/profile_1.png",
   },
+  token: null,
   userExists: true,
   error: null,
 };
@@ -32,7 +34,14 @@ export const reducer = createReducer(
   // --------LOG IN / OUT ------------
   on(AuthActions.loginSuccess, (state, action) => ({
     ...state,
-    user: action.user,
+    token: action.resp.token,
+    user: {
+      id: action.resp.id,
+      name: action.resp.name,
+      email: action.resp.email,
+      phoneNumber: action.resp.phoneNumber,
+      img: action.resp.img
+    },
     error: null
   })),
   on(AuthActions.loginFailure, (state, action) => ({
@@ -46,7 +55,13 @@ export const reducer = createReducer(
   // --------REGISTRATION ------------
   on(AuthActions.registerUserSuccess, (state, action) => ({
     ...state,
-    user: action.user,
+    user: {
+      id: action.resp.id,
+      name: action.resp.name,
+      email: action.resp.email,
+      phoneNumber: action.resp.phoneNumber,
+      img: action.resp.img
+    },
     error: null
   })),
   on(AuthActions.registerUserFailure, (state, action) => ({

@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Contacts } from '../models/User';
 
 @Injectable({
@@ -11,48 +12,37 @@ export class AuthAPIService {
 
   constructor(private httpClient: HttpClient) { }
 
-  baseUrl: string = 'http://localhost:3000/users/'
   body = {}
 
   public login(email: string, password: string): Observable<any> {
     let userEmail = email.toLowerCase();
-    return this.httpClient.get(this.baseUrl
-      + '?email=' + userEmail
-      + '&password=' + password
-    )
-      .pipe(
-        switchMap((users) => {
-          let user = users[0]
-          if (user) {
-            return of(user)
-          } else return throwError('Unable to log in')
-        })
-      )
-  }
-
-  public registerUser(email: string, username: string): Observable<any> {
-    let body = {
-      id: email.toLowerCase(),
-      email: email.toLowerCase(),
-      phoneNumber: '',
-      name: username,
-      contacts: [],
-      img: './assets/images/profile_1.png'
+    let url: string = environment.baseUrl + '/account/login'
+    this.body = {
+      email: userEmail,
+      password: password
     }
-    return this.httpClient.post(this.baseUrl, body)
+    return this.httpClient.post(url, this.body)
+      // .pipe(
+      //   switchMap((resp) => {
+      //     if (resp) {
+      //       return of(resp)
+      //     } else return throwError('Unable to log in')
+      //   })
+      // )
   }
 
-  // public checkRegistered(email: string): Observable<any> {
-  //   let userEmail: string = email.toLowerCase()
+  public registerUser(
+    email: string, username: string, password: string
+  ): Observable<any> {
 
-  //   return this.httpClient.get(this.baseUrl + '?email=' + userEmail)
-  //    .pipe(switchMap((users) => {
-  //      let user = users[0]
-  //      if (user) { return of(true) }
-  //      else { return of(false) }
-  //     }),
-  //     catchError(this.handleError))
-  //  }
+    let url: string = environment.baseUrl + '/account/register'
+    let body = {
+      email: email.toLowerCase(),
+      name: username,
+      password: password
+    }
+    return this.httpClient.post(url, body)
+  }
 
    private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
@@ -111,7 +101,10 @@ export class AuthAPIService {
     )
   }
 
-  public updateUsername(data: { id: string, password: string, newUsername: string }): Observable<any> {
+  public updateUsername(data: {
+    id: string, password: string, newUsername: string
+  }): Observable<any> {
+    let url: string = environment.baseUrl + '/users/update'
     this.body = { name: data.newUsername }
     let httpOptions = {
       headers: new HttpHeaders({
@@ -121,7 +114,7 @@ export class AuthAPIService {
     }
 
     return this.httpClient.patch(
-      this.baseUrl + "/" + data.id, this.body
+      url + "/" + data.id, this.body
     ).pipe(
       switchMap((userReply) => {
         let user = userReply
@@ -132,7 +125,10 @@ export class AuthAPIService {
     )
   }
 
-  public updatePassword(data: { id: string, password: string, newPassword: string }): Observable<any> {
+  public updatePassword(data: {
+    id: string, password: string, newPassword: string
+  }): Observable<any> {
+    let url: string = environment.baseUrl + '/users/update'
     this.body = { password: data.newPassword }
     let httpOptions = {
       headers: new HttpHeaders({
@@ -142,7 +138,7 @@ export class AuthAPIService {
     }
 
     return this.httpClient.patch(
-      this.baseUrl + "/" + data.id, this.body
+      url + "/" + data.id, this.body
     ).pipe(
       switchMap((userReply) => {
         let user = userReply
@@ -154,7 +150,10 @@ export class AuthAPIService {
     )
   }
 
-  public updateEmail(data: { id: string, password: string, newEmail: string }): Observable<any> {
+  public updateEmail(data: {
+    id: string, password: string, newEmail: string
+  }): Observable<any> {
+    let url: string = environment.baseUrl + '/users/update'
     this.body = { email: data.newEmail }
     let httpOptions = {
       headers: new HttpHeaders({
@@ -164,7 +163,7 @@ export class AuthAPIService {
     }
 
     return this.httpClient.patch(
-      this.baseUrl + "/" + "data.id", this.body
+      url + "/" + "data.id", this.body
     ).pipe(
       switchMap((userReply) => {
         let user = userReply
@@ -175,7 +174,10 @@ export class AuthAPIService {
     )
   }
 
-  public updatePhoneNumber(data: { id: string, password: string, newPhoneNumber: string }): Observable<any> {
+  public updatePhoneNumber(data: {
+    id: string, password: string, newPhoneNumber: string
+  }): Observable<any> {
+    let url: string = environment.baseUrl + '/users/update'
     this.body = { phoneNumber: data.newPhoneNumber }
     let httpOptions = {
       headers: new HttpHeaders({
@@ -185,7 +187,7 @@ export class AuthAPIService {
     }
 
     return this.httpClient.patch(
-      this.baseUrl + "/" + data.id, this.body
+      url + "/" + data.id, this.body
     ).pipe(
       switchMap((userReply) => {
         let user = userReply
@@ -196,7 +198,10 @@ export class AuthAPIService {
     )
   }
 
-  public addNewContact(data: { id: string, contacts: Contacts }): Observable<any> {
+  public addNewContact(data: {
+    id: string, contacts: Contacts
+  }): Observable<any> {
+    let url: string = environment.baseUrl + '/users/update'
     this.body = {
       id: data.id,
       contacts: data.contacts
@@ -209,7 +214,7 @@ export class AuthAPIService {
     }
 
     return this.httpClient.patch(
-      this.baseUrl + "/" + data.id, this.body
+      url + "/" + data.id, this.body
     ).pipe(
       switchMap((userReply) => {
         let user = userReply
@@ -220,7 +225,10 @@ export class AuthAPIService {
     )
   }
 
-  public updateContacts(data: { id: string, password: string, newUsername: string }): Observable<any> {
+  public updateContacts(data: {
+    id: string, password: string, newUsername: string
+  }): Observable<any> {
+    let url: string = environment.baseUrl + '/users/update'
     this.body = { name: data.newUsername }
     let httpOptions = {
       headers: new HttpHeaders({
@@ -230,7 +238,7 @@ export class AuthAPIService {
     }
 
     return this.httpClient.patch(
-      this.baseUrl + "/" + data.id, this.body
+      url + "/" + data.id, this.body
     ).pipe(
       switchMap((userReply) => {
         let user = userReply

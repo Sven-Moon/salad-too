@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
+import { AuthResp } from 'src/app/models/Auth';
 import { Contact, Contacts, User } from 'src/app/models/User';
 
 
@@ -11,7 +12,7 @@ export const loginAttempt = createAction(
 
 export const loginSuccess = createAction(
   '[Login Modal] User Log In Success',
-  props<{ user: User }>()
+  props<{ resp: AuthResp }>()
 );
 
 export const loginFailure = createAction(
@@ -26,13 +27,14 @@ export const registerUser = createAction(
   '[Login Modal] User Registration',
   props<{
     username: string,
-    email: string
+    email: string,
+    password: string
   }>()
 );
 
 export const registerUserSuccess = createAction(
   '[Login Modal] User Registration Success',
-  props<{ user: User }>()
+  props<{ resp: AuthResp }>()
   );
 
   export const registerUserFailure = createAction(

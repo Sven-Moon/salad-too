@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
     public async Task<IActionResult> Login(LoginReqDto loginReq)
     {
       var user = await uow.UserRepository.Authenticate(
-        loginReq.name, loginReq.password
+        loginReq.email, loginReq.password
       );
 
       if (user == null)
@@ -41,8 +41,12 @@ namespace WebAPI.Controllers
       }
 
       var loginRes = new LoginResDto();
-      loginRes.name = user.name;
       loginRes.Token = CreateJWT(user);
+      loginRes.id = user.name;
+      loginRes.name = user.name;
+      loginRes.email = user.email;
+      loginRes.phoneNumber = user.phoneNumber;
+      loginRes.img = user.img;
       return Ok(loginRes);
     }
 
@@ -56,7 +60,8 @@ namespace WebAPI.Controllers
 
       uow.UserRepository.Register(regReq.name, regReq.email, regReq.password);
       await uow.SaveAsync();
-      return StatusCode(201);
+      var LoginResDto = await uow.UsersRepository.FindUser(regReq.email);
+      return Ok(LoginResDto);
     }
 
     private string CreateJWT(User user)
