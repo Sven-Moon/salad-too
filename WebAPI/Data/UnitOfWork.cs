@@ -17,6 +17,8 @@ namespace WebAPI.Data
       new UsersRepository(dc);
     public IDrinkTypeRepository DrinkTypeRepository =>
       new DrinkTypeRepository(dc);
+    public IContactsRepository ContactsRepository =>
+      new ContactsRepository(dc);
 
     public async Task<bool> SaveAsync()
     {

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Data;
 
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211014182726_contactsArray")]
+    partial class contactsArray
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +23,10 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Data.Contact", b =>
                 {
-                    b.Property<string>("id")
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Userid")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("img")
@@ -31,25 +36,11 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("email");
 
-                    b.ToTable("Contacts");
-                });
+                    b.HasIndex("Userid");
 
-            modelBuilder.Entity("WebAPI.Data.ContactList", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ContactId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId");
-
-                    b.HasIndex("ContactId");
-
-                    b.ToTable("ContactLists");
+                    b.ToTable("Contact");
                 });
 
             modelBuilder.Entity("WebAPI.Models.DrinkType", b =>
@@ -97,23 +88,16 @@ namespace WebAPI.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("WebAPI.Data.ContactList", b =>
+            modelBuilder.Entity("WebAPI.Data.Contact", b =>
                 {
-                    b.HasOne("WebAPI.Data.Contact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("WebAPI.Models.User", null)
+                        .WithMany("contacts")
+                        .HasForeignKey("Userid");
+                });
 
-                    b.HasOne("WebAPI.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Contact");
-
-                    b.Navigation("User");
+            modelBuilder.Entity("WebAPI.Models.User", b =>
+                {
+                    b.Navigation("contacts");
                 });
 #pragma warning restore 612, 618
         }

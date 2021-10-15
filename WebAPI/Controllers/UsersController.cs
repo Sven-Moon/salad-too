@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
     }
 
     // get users api/users/users
-    [HttpGet("users")]
+    [HttpGet("get-all")]
     public async Task<IActionResult> GetUsers()
     {
       var users = await uow.UsersRepository.GetUsersAsync();
@@ -72,10 +72,15 @@ namespace WebAPI.Controllers
         return BadRequest("Update not allowed.");
       if (id != userDto.id)
         return BadRequest("Update not allowed.");
-      // throw new Exception("Some intentional error");
+
+      userFromDb.name = userDto.name;
+      userFromDb.email = userDto.email;
+      userFromDb.img = userDto.img;
+      userFromDb.phoneNumber = userDto.phoneNumber;
+
       mapper.Map(userDto, userFromDb);
       await uow.SaveAsync();
-      return Ok(userDto);
+      return Ok(userFromDb);
     }
   }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using WebAPI.Data;
 
@@ -15,7 +16,6 @@ namespace WebAPI.Models
     [Required]
     public string email { get; set; }
     public string phoneNumber { get; set; }
-    public string contacts { get; set; }
     public string img { get; set; }
     [Required]
     public byte[] password { get; set; }

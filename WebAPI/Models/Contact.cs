@@ -5,10 +5,10 @@ namespace WebAPI.Data
   public class Contact
   {
     [Required]
-    public string email { get; set; }
+    [Key]
+    public string id { get; set; } // email
     [Required]
     public string name { get; set; }
     public string img { get; set; }
-    public string selected { get; set; }
   }
 }

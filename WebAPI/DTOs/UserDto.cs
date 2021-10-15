@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using WebAPI.Data;
 
 namespace WebAPI.DTOs
 {
@@ -11,7 +12,7 @@ namespace WebAPI.DTOs
     public string phoneNumber { get; set; }
     [Required]
     public string email { get; set; }
-    public string contacts { get; set; }
+    public Contact[] contacts { get; set; }
     public string img { get; set; }
   }
 }

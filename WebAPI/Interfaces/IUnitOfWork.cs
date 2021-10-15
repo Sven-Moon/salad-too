@@ -7,6 +7,7 @@ namespace WebAPI.Interfaces
     IUserRepository UserRepository { get; }
     IUsersRepository UsersRepository { get; }
     IDrinkTypeRepository DrinkTypeRepository { get; }
+    IContactsRepository ContactsRepository { get; }
     Task<bool> SaveAsync();
   }
 }
