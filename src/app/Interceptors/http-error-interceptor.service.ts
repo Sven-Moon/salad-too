@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import {
   HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, concatMap, retryWhen } from 'rxjs/operators';
 import { AlertService } from '@full-fledged/alerts';
+import { ErrorCode } from '../Enums/enums';
 
 @Injectable({ providedIn: 'root' })
 export class HttpErrorServiceInterceptor implements HttpInterceptor {
@@ -14,6 +15,7 @@ export class HttpErrorServiceInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
+      retryWhen(error => this.retryRequest(error, 10)),
       catchError((error: HttpErrorResponse) => {
         // get error even if api &/or database down
         const errorMessage = this.setError(error)
@@ -23,6 +25,26 @@ export class HttpErrorServiceInterceptor implements HttpInterceptor {
         return throwError(errorMessage)
       })
     );
+  }
+
+  // retry request in case of error
+  private retryRequest(
+    error: Observable<unknown>, retryCount: number
+  ):Observable<unknown> {
+    return error.pipe(
+      concatMap((checkErr: HttpErrorResponse, count: number) => {
+        if (count <= retryCount) {
+          switch (checkErr.status) {
+            case ErrorCode.serverDown:
+              return of(checkErr);
+
+            // case ErrorCode.unauthorized:
+            //   return of(checkErr);
+          }
+        }
+        return throwError(checkErr)
+      })
+    )
   }
 
   /**

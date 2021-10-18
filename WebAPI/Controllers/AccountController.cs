@@ -13,6 +13,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using WebAPI.Errors;
+using WebAPI.Extensions;
 
 namespace WebAPI.Controllers
 {
@@ -63,17 +64,23 @@ namespace WebAPI.Controllers
     {
       ApiError apiError = new ApiError();
       // CHECK FOR EMPTY EMAIL (ID)
-      if (regReq.email == null)
+      if (regReq.email.IsEmpty())
       {
         apiError.ErrorCode = BadRequest().StatusCode;
         apiError.ErrorMessage = "Username cannot be null or empty";
         return BadRequest(apiError);
       }
       // CHECK FOR EMPTY PASSWORD
-      if (regReq.password == null)
+      if (regReq.password.IsEmpty())
       {
         apiError.ErrorCode = BadRequest().StatusCode;
         apiError.ErrorMessage = "Password cannot be null or empty";
+        return BadRequest(apiError);
+      }
+      if (regReq.name.IsEmpty())
+      {
+        apiError.ErrorCode = BadRequest().StatusCode;
+        apiError.ErrorMessage = "Name cannot be null or empty";
         return BadRequest(apiError);
       }
       // CHECK FOR EMPTY EXISTING USER
