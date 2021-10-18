@@ -6,6 +6,7 @@ import { AlertService } from '@full-fledged/alerts';
 import { Store } from '@ngrx/store';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AuthResp } from '../models/Auth';
 import { Contact, User } from '../models/User';
 import { clearCart, updateLastOwner } from '../modules/order/state/cart/cart.actions';
@@ -27,7 +28,30 @@ export class AuthService {
     private orderService: OrderService
   ) { }
 
-  //#region --------- REGISTER
+  public failedLogin(): void {
+    this.modalService.hide()
+    this.alertService.danger('We couldn\'t log you in. Feel free to try again.')
+  }
+  public logout() {
+    // *****************
+    // 1) clear item and cart
+    // 2) set the user as the guest id
+    // 3) set the last owner as the user
+
+    let id = this.generateId()
+    let guestUser: User
+
+    // 1) clear item and cart
+    this.store.dispatch(clearItem())
+    this.store.dispatch(clearCart())
+    // 2) set the user as the guest id
+    this.store.dispatch(setGuestId({ id }))
+    // 3) set the last owner as the user & clear contacts
+    this.store.select(selectUser).subscribe(user => guestUser = user)
+    this.store.dispatch(updateLastOwner({ data: guestUser }))
+    this.route.navigate(['/order/launch'])
+    this.alertService.success('You have been successfully logged out')
+  }
 
   public processRegisteredUser(resp: AuthResp): void {
     // set as user in store > registerUserSucces
@@ -48,42 +72,6 @@ export class AuthService {
       error: ${message}`)
   }
 
-  //#endregion ------ register
-
-  //#region --------- FAILED
-  public failedLogin(): void {
-    this.modalService.hide()
-    this.alertService.danger('We couldn\'t log you in. Feel free to try again.')
-  }
-
-  public failedAccountEdit() {
-    this.alertService.danger(
-      "Uh oh! Something didn't work there. Try again?"
-    )
-    this.modalService.hide()
-  }
-  //#endregion ------ failed
-
-  public logout() {
-    // *****************
-    // 1) clear item and cart
-    // 2) set the user as the guest id
-    // 3) set the last owner as the user
-
-    let id = this.generateId()
-    let guestUser: User
-
-    // 1) clear item and cart
-    this.store.dispatch(clearItem())
-    this.store.dispatch(clearCart())
-    // 2) set the user as the guest id
-    this.store.dispatch(setGuestId({ id }))
-    // 3) set the last owner as the user & clear contacts
-    this.store.select(selectUser).subscribe(user => guestUser = user)
-    this.store.dispatch(updateLastOwner({ data: guestUser }))
-    this.route.navigate(['/order/launch'])
-  }
-
   public generateId(): string {
     // returns an 8-digit number to be appended to 'guest'
     let id = (Math.random() * 1E8).toFixed(0).toString()
@@ -94,34 +82,27 @@ export class AuthService {
     return id
   }
 
-  //#region USER NAME ------------------------
   public updateUserNameSuccess(name: string) {
     this.alertService.success(
       "Username updated. We\'ll call you " + name + " from now on!"
     ),
       this.modalService.hide()
   }
-  //#endregion user name ---------------
 
-  //#region PASSWORD ------------------------
   public updatePasswordSuccess() {
     this.alertService.success(
       "Password successfully updated to **********"
     ),
       this.modalService.hide()
   }
-  //#endregion password ---------------
 
-  //#region EMAIL ------------------------
   public updateEmailSuccess(email: string) {
     this.alertService.success(
       "Email updated: " + email
     ),
       this.modalService.hide()
   }
-  //#endregion email ---------------
 
-  //#region PHONE NUMBER ------------------------
   public updatePhoneNumberSuccess(phone: string) {
     this.alertService.success(
       "Phone Number updated to: ("
@@ -131,9 +112,7 @@ export class AuthService {
     ),
       this.modalService.hide()
   }
-  //#endregion phone number ---------------
 
-  //#region ADD CONTACT ------------------------
   public addNewContact(contact: Contact) {
     this.alertService.success(
       "New Contact Added: \n" + contact.name
@@ -141,6 +120,11 @@ export class AuthService {
     ),
       this.modalService.hide()
   }
-  //#endregion add contact ---------------
 
+  public failedAccountEdit() {
+    this.alertService.danger(
+      "Uh oh! Something didn't work there. Try again?"
+    )
+    this.modalService.hide()
+  }
 }

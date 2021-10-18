@@ -64,8 +64,7 @@ namespace WebAPI.Middlewares
           response = new ApiError(
             (int)statusCode,
             message                 // note use of message instead of ex.message
-                                    // no stacktrace for prod
-          );
+          );                        // no stacktrace for prod
         }
         logger.LogError(ex, ex.Message);
         context.Response.StatusCode = (int)statusCode;    // not hardcoded (500)

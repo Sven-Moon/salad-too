@@ -27,6 +27,7 @@ import { PayModule } from './modules/pay/pay.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { TruncatePipe } from './pipes/truncate';
+import { AppInterceptors } from './barrels/app-interceptors';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { TruncatePipe } from './pipes/truncate';
     EffectsModule.forRoot([SpinnerEffects, AlertEffects, RouteEffects]),
   ],
   providers: [
-    ...(environment.useMocking ? AppMockInterceptors : [])
+    ...(environment.useMocking ? AppMockInterceptors : []),
+    AppInterceptors
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],

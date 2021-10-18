@@ -75,7 +75,7 @@ export class AuthAPIService {
     let errorMsg = error.message
     // Return an observable with a user facing error message
     if (errorMsg.includes('duplicate id')) {
-      return throwError('Apparently you already live here because we already have that email address on file.'
+      return throwError('Apparently you already have a home here because we already have that email address on file.'
       )
     } else {
       return throwError(

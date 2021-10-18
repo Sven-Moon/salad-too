@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
+using WebAPI.Errors;
 
 namespace WebAPI.Controllers
 {
@@ -35,9 +36,14 @@ namespace WebAPI.Controllers
         loginReq.email, loginReq.password
       );
 
+      ApiError apiError = new ApiError();
+
       if (user == null)
       {
-        return Unauthorized();
+        apiError.ErrorCode = Unauthorized().StatusCode;
+        apiError.ErrorMessage = "Invalid user name or password";
+        apiError.ErrorDetails = "Occurs when an invalid name/password combination is used.";
+        return Unauthorized(apiError);
       }
 
       var loginRes = new LoginResDto();
@@ -55,11 +61,32 @@ namespace WebAPI.Controllers
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterReqDto regReq)
     {
+      ApiError apiError = new ApiError();
+      // CHECK FOR EMPTY EMAIL (ID)
+      if (regReq.email == null)
+      {
+        apiError.ErrorCode = BadRequest().StatusCode;
+        apiError.ErrorMessage = "Username cannot be null or empty";
+        return BadRequest(apiError);
+      }
+      // CHECK FOR EMPTY PASSWORD
+      if (regReq.password == null)
+      {
+        apiError.ErrorCode = BadRequest().StatusCode;
+        apiError.ErrorMessage = "Password cannot be null or empty";
+        return BadRequest(apiError);
+      }
+      // CHECK FOR EMPTY EXISTING USER
       if (await uow.UserRepository.UserAlreadyExists(regReq.name))
-        return BadRequest("User already exists");
-
+      {
+        apiError.ErrorCode = BadRequest().StatusCode;
+        apiError.ErrorMessage = "User already exists.";
+        return BadRequest(apiError);
+      }
+      // REGISTER TO DATABASE
       uow.UserRepository.Register(regReq.name, regReq.email, regReq.password);
       await uow.SaveAsync();
+      // REPLY WITH GENERATED USER INFO
       var LoginResDto = await uow.UsersRepository.FindUser(regReq.email);
       return Ok(LoginResDto);
     }
