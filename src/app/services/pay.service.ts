@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { CartItems } from '../models/Item';
 import { Order, OrderStatus } from '../models/Order';
 import { ccPayment, Payment, Payments } from '../models/Payment';
@@ -25,20 +26,21 @@ export class PayService {
   ) {
   }
 
-  baseUrl: string = 'http://localhost:3000/payments'
-  body = {}
+
 
   public pay(ccPayment: ccPayment): Observable<any> {
-    return this.httpClient.post(this.baseUrl, ccPayment)
-      .pipe(
-        switchMap(() => {
-          let payReply = this.buildReplyObj(ccPayment)
-          if (ccPayment) {
-            return of(payReply)
-          } else return throwError('Unknown Server Error')
-        }),
-        catchError(this.handleLoginError)
-      )
+    let url: string = environment.baseUrl + '/payments'
+
+    return this.httpClient.post(url, ccPayment)
+      // .pipe(
+      //   switchMap((resp) => {
+      //     let payReply = this.buildReplyObj(ccPayment)
+      //     if (ccPayment) {
+      //       return of(resp)
+      //     } else return throwError('Unknown Server Error')
+      //   }),
+      //   catchError(this.handleLoginError)
+      // )
   }
 
   private handleLoginError(error: HttpErrorResponse) {
@@ -54,32 +56,6 @@ export class PayService {
     }
     // Return an observable with a user facing error message
     return throwError('Unknown Server Error')
-  }
-
-  private buildReplyObj(info: ccPayment): Payment {
-    let transactionId = Math.random().toFixed(8).slice(2)
-    let dateTime = Date.now()
-    return {
-      orderId: info.id,
-      transactionId: transactionId,
-      amount: info.amount,
-      status: this.successByCcNum(info.ccNum),
-      cc4: info.ccNum.slice(15),
-      dateTime: dateTime
-    }
-  }
-
-  private successByCcNum(ccNum: string): string {
-    return ccNum === '1234 5678 9012 3451'
-      ? 'declined'
-      : 'approved'
-  }
-
-  private randSuccess(): string {
-    let success: boolean = Math.random() % 2 < .95
-    return success
-      ? 'approved'
-      : 'declined'
   }
 
   public processReply(data: Payment): void {
