@@ -65,11 +65,11 @@ export class AuthService {
     this.orderService.processLoginSuccess(resp)
   }
 
-  public failedUserRegister(data) {
-    let message = 'Unknown Error'
+  public failedUserRegister(error: HttpErrorResponse) {
+    let message = error.status + ": " + error.statusText
     this.alertService.danger(`We couldn\'t register you. Feel free to try again. \n
-      Check out this brutal error message we got: \n
-      error: ${message}`)
+      Error: \n
+      ${message}`)
   }
 
   public generateId(): string {

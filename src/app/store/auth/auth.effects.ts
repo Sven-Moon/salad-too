@@ -97,7 +97,7 @@ export class AuthEffects {
   registerUserFailed$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.registerUserFailure),
-      tap((data) => { this.authService.failedUserRegister(data) })
+      tap((data) => { this.authService.failedUserRegister(data.error) })
     ),
     { dispatch: false }
   )

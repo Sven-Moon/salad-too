@@ -1,18 +1,27 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Contacts } from '../models/User';
+import { selectUser } from '../store/auth/auth.selectors';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthAPIService {
-
-  constructor(private httpClient: HttpClient) { }
-
   body = {}
+
+  constructor(
+    private httpClient: HttpClient,
+    private store: Store
+  ) {
+    this.store.select(selectUser).subscribe(user =>
+      this.body = user
+    )
+  }
+
 
   public login(email: string, password: string): Observable<any> {
     let userEmail = email.toLowerCase();
@@ -22,13 +31,6 @@ export class AuthAPIService {
       password: password
     }
     return this.httpClient.post(url, this.body)
-      // .pipe(
-      //   switchMap((resp) => {
-      //     if (resp) {
-      //       return of(resp)
-      //     } else return throwError('Unable to log in')
-      //   })
-      // )
   }
 
   public registerUser(
@@ -44,63 +46,6 @@ export class AuthAPIService {
     return this.httpClient.post(url, body)
   }
 
-   private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      // Client side or network error occurred.
-      console.error('An error occurred: ', error.error)
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what's wrong.
-      console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
-      )
-    }
-    // Return an observable with a user facing error message
-    return throwError(
-      'Bad things: Try another user/password combo'
-    )
-  }
-
-  private handleRegisterError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      // Client side or network error occurred.
-      console.error('An error occurred: ', error.error)
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what's wrong.
-      console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
-      )
-    }
-    let errorMsg = error.message
-    // Return an observable with a user facing error message
-    if (errorMsg.includes('duplicate id')) {
-      return throwError('Apparently you already have a home here because we already have that email address on file.'
-      )
-    } else {
-      return throwError(
-        'Bad things: User could not be registered'
-      )
-    }
-  }
-
-  private handleEditError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      // Client side or network error occurred.
-      console.error('An error occurred: ', error.error)
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what's wrong.
-      console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
-      )
-    }
-    // Return an observable with a user facing error message
-    return throwError(
-      'Bad things: User could not be found'
-    )
-  }
-
   public updateUsername(data: {
     id: string, password: string, newUsername: string
   }): Observable<any> {
@@ -113,16 +58,7 @@ export class AuthAPIService {
       })
     }
 
-    return this.httpClient.patch(
-      url + "/" + data.id, this.body
-    ).pipe(
-      switchMap((userReply) => {
-        let user = userReply
-        if (user) {
-          return of(user)
-        } else return throwError('Can\'t find user')
-      })
-    )
+    return this.updateServer(url, data)
   }
 
   public updatePassword(data: {
@@ -137,17 +73,7 @@ export class AuthAPIService {
       })
     }
 
-    return this.httpClient.patch(
-      url + "/" + data.id, this.body
-    ).pipe(
-      switchMap((userReply) => {
-        let user = userReply
-        if (user) {
-          return of(user)
-        } else return throwError('Can\'t find user')
-      }),
-      catchError(this.handleEditError)
-    )
+    return this.updateServer(url, data)
   }
 
   public updateEmail(data: {
@@ -162,16 +88,7 @@ export class AuthAPIService {
       })
     }
 
-    return this.httpClient.patch(
-      url + "/" + "data.id", this.body
-    ).pipe(
-      switchMap((userReply) => {
-        let user = userReply
-        if (user) {
-          return of(user)
-        } else return throwError('Can\'t find user')
-      })
-    )
+    return this.updateServer(url, data)
   }
 
   public updatePhoneNumber(data: {
@@ -186,16 +103,7 @@ export class AuthAPIService {
       })
     }
 
-    return this.httpClient.patch(
-      url + "/" + data.id, this.body
-    ).pipe(
-      switchMap((userReply) => {
-        let user = userReply
-        if (user) {
-          return of(user)
-        } else return throwError('Can\'t find user')
-      })
-    )
+    return this.updateServer(url, data)
   }
 
   public addNewContact(data: {
@@ -213,16 +121,7 @@ export class AuthAPIService {
       })
     }
 
-    return this.httpClient.patch(
-      url + "/" + data.id, this.body
-    ).pipe(
-      switchMap((userReply) => {
-        let user = userReply
-        if (user) {
-          return of(user)
-        } else return throwError('Can\'t find user')
-      })
-    )
+    return this.updateServer(url, data)
   }
 
   public updateContacts(data: {
@@ -237,16 +136,48 @@ export class AuthAPIService {
       })
     }
 
-    return this.httpClient.patch(
+    return this.updateServer(url, data)
+
+    // return this.httpClient.put(
+    //   url + "/" + data.id, this.body
+    // ).pipe(
+    //   switchMap((userReply) => {
+    //     let user = userReply
+    //     if (user) {
+    //       return of(user)
+    //     } else return throwError('Can\'t find user')
+    //   })
+    // )
+  }
+
+  private updateServer(url, data) {
+    return this.httpClient.put(
       url + "/" + data.id, this.body
     ).pipe(
       switchMap((userReply) => {
         let user = userReply
         if (user) {
           return of(user)
-        } else return throwError('Can\'t find user')
+        } else return throwError("Can't find user")
       })
     )
   }
 
+  // private handleEditError(error: HttpErrorResponse) {
+  //   if (error.status === 0) {
+  //     // Client side or network error occurred.
+  //     console.error("The server couldn't be reached")
+  //     console.error('Error: ', error.error)
+  //   } else {
+  //     // The backend returned an unsuccessful response code.
+  //     // The response body may contain clues as to what's wrong.
+  //     console.error(
+  //       `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+  //     )
+  //   }
+  //   // Return an observable with a user facing error message
+  //   return throwError(
+  //     'Bad things: User could not be found'
+  //   )
+  // }
 }

@@ -51,7 +51,7 @@ import { AppInterceptors, AppMockInterceptors } from './barrels/app-interceptors
     //#endregion app modules
     //#region ============= Third Party
     AlertModule.forRoot(
-      { maxMessages: 5, timeout: 5000, positionX: 'left', positionY: 'bottom' }
+      { maxMessages: 5, timeout: 10000, positionX: 'left', positionY: 'bottom' }
     ),
     NgxMaskModule.forRoot(),
     NgxSpinnerModule,
