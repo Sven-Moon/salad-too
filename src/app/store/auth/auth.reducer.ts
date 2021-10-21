@@ -40,7 +40,8 @@ export const reducer = createReducer(
       name: action.resp.name,
       email: action.resp.email,
       phoneNumber: action.resp.phoneNumber,
-      img: action.resp.img
+      img: action.resp.img,
+      contacts: action.resp.contacts
     },
     error: null
   })),

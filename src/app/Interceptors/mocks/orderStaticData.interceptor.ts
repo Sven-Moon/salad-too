@@ -1,16 +1,16 @@
 import { HttpRequest, HttpEvent, HttpHandler, HttpInterceptor, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
-import { StaticData } from "../models/StaticData";
+import { environment } from "src/environments/environment";
+import { StaticData } from "../../models/StaticData";
 
 @Injectable({ providedIn: 'root' })
-export class MockStaticDataInterceptor implements HttpInterceptor {
-  constructor(private store: Store<{}>) { }
+export class StaticDataMockInterceptor implements HttpInterceptor {
+  constructor() { }
 
   public intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
-    if (req.method === 'GET' && req.url == 'https://localhost:3000/static-data/') {
+    if (req.method === 'GET' && req.url == environment.baseUrl + '/staticdata') {
       const orderStaticData = this.getStaticData()
       const response = new HttpResponse({
         body: orderStaticData
@@ -19,7 +19,6 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
     }
     return next.handle(req)
   }
-
 
   public getStaticData(): StaticData {
     let data: StaticData = {
@@ -444,5 +443,4 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
     }
     return data
   } // get data
-
 }

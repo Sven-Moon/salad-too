@@ -21,7 +21,6 @@ export class OrderItemSelectComponent implements OnInit {
   items$: Observable<Items>
   itemGroup$: Observable<string>
   owner: Contact
-  debugitems
 
 
   constructor(
@@ -38,7 +37,6 @@ export class OrderItemSelectComponent implements OnInit {
     this.store.select(selectLastItemOwner).subscribe(owner =>
       this.owner = owner
     )
-    this.debugitems = this.store.select(selectAllItems)
   }
 
   public back() {

@@ -10,7 +10,6 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { reducers, metaReducers } from './store';
-import { AppMockInterceptors } from './barrels/app-mocks';
 import { SharedModule } from './modules/shared/shared.module';
 import { OrderModule } from './modules/order/order.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,7 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PayModule } from './modules/pay/pay.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { NgxMaskModule } from 'ngx-mask';
-import { AppInterceptors } from './barrels/app-interceptors';
+import { AppInterceptors, AppMockInterceptors } from './barrels/app-interceptors';
 
 @NgModule({
   declarations: [

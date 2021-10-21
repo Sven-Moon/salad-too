@@ -39,7 +39,8 @@ export class OrderService {
       name: resp.name,
       email: resp.email,
       phoneNumber: resp.phoneNumber,
-      img: resp.img
+      img: resp.img,
+      contacts: resp.contacts
     }
 
     // localStorage.setItem('token', resp.token)
@@ -64,7 +65,7 @@ export class OrderService {
     this.convertGuestItems(cartItems, user)
   }
 
-  //#region processLoginSuccess
+  //#region ---------- processLoginSuccess Functions
   public setUserAsLastOwner(user: User) {
     this.store.dispatch(updateLastOwner({
       data: user
@@ -100,7 +101,7 @@ export class OrderService {
       });
     }
   }
-  //#endregion processLoginSuccess
+  //#endregion ---------- processLoginSuccess Functions
 
   public generateItemId(itemId: string): string {
     let uniqueId: string = itemId

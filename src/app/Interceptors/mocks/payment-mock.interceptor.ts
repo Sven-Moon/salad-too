@@ -9,17 +9,17 @@ import {
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
-import { ccPayment, Payment } from '../models/Payment';
+import { ccPayment, Payment } from '../../models/Payment';
 
 @Injectable({ providedIn: 'root' })
 export class PaymentMockInterceptor implements HttpInterceptor {
 
-  constructor(private store: Store<{}>) { }
+  constructor() { }
 
 
   public intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
-    let url = environment.baseUrl + '/payments'
+    let url = environment.baseUrl + '/pay/payments'
     if (req.method === 'POST' && req.url == url) {
       let paymentReq = req.body;
 
