@@ -12,6 +12,10 @@ namespace WebAPI.Data
     public DbSet<DrinkType> DrinkTypes { get; set; }
     public DbSet<Contact> Contacts { get; set; }
     public DbSet<ContactList> ContactLists { get; set; }
+    public DbSet<IngredientType> IngredientTypes { get; set; }
+    public DbSet<Ingredient> Ingredients { get; set; }
+    public DbSet<ItemGroup> ItemGroups { get; set; }
+    public DbSet<Item> Items { get; set; }
 
   }
 }

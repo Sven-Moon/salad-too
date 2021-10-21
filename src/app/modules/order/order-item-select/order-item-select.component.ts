@@ -10,6 +10,7 @@ import { addItemToCart } from '../state/cart/cart.actions';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
 import { clearItem, clearItemGroup, loadItem, setItemId } from '../state/item/item.actions';
 import { selectItemGroupPicked, selectItemsWithPrice, selectPickedItem } from '../state/item/item.selectors';
+import { selectAllItems } from '../state/staticData/static-data.selectors';
 
 @Component({
   selector: 'app-order-item-select',
@@ -20,6 +21,7 @@ export class OrderItemSelectComponent implements OnInit {
   items$: Observable<Items>
   itemGroup$: Observable<string>
   owner: Contact
+  debugitems
 
 
   constructor(
@@ -36,6 +38,7 @@ export class OrderItemSelectComponent implements OnInit {
     this.store.select(selectLastItemOwner).subscribe(owner =>
       this.owner = owner
     )
+    this.debugitems = this.store.select(selectAllItems)
   }
 
   public back() {

@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
     }
 
     // get drinkTypes api/drinkTypes/drinktypes
-    [HttpGet("drinktypes")]
+    [HttpGet()]
     [AllowAnonymous]
     public async Task<IActionResult> GetDrinkTypes()
     {

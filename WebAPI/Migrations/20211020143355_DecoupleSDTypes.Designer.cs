@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Data;
 
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211020143355_DecoupleSDTypes")]
+    partial class DecoupleSDTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +56,10 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Data.Ingredient", b =>
                 {
-                    b.Property<string>("id")
+                    b.Property<string>("ingredientId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Ingredient")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("img")
@@ -68,14 +73,16 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("ingredientId");
+
+                    b.HasIndex("Ingredient");
 
                     b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("WebAPI.Data.IngredientType", b =>
                 {
-                    b.Property<string>("id")
+                    b.Property<string>("ingredientTypeId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("img")
@@ -93,14 +100,14 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("ingredientTypeId");
 
                     b.ToTable("IngredientTypes");
                 });
 
             modelBuilder.Entity("WebAPI.Data.Item", b =>
                 {
-                    b.Property<string>("id")
+                    b.Property<string>("itemId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("description")
@@ -117,14 +124,17 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("itemId");
 
                     b.ToTable("Items");
                 });
 
             modelBuilder.Entity("WebAPI.Data.ItemGroup", b =>
                 {
-                    b.Property<string>("id")
+                    b.Property<string>("itemGroupId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ItemGroup")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("img")
@@ -134,21 +144,23 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("itemGroupId");
+
+                    b.HasIndex("ItemGroup");
 
                     b.ToTable("ItemGroups");
                 });
 
             modelBuilder.Entity("WebAPI.Models.DrinkType", b =>
                 {
-                    b.Property<string>("id")
+                    b.Property<string>("drinkTypeId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("price")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("drinkTypeId");
 
                     b.ToTable("DrinkTypes");
                 });
@@ -201,6 +213,30 @@ namespace WebAPI.Migrations
                     b.Navigation("Contact");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebAPI.Data.Ingredient", b =>
+                {
+                    b.HasOne("WebAPI.Data.Item", null)
+                        .WithMany("ingredients")
+                        .HasForeignKey("Ingredient");
+                });
+
+            modelBuilder.Entity("WebAPI.Data.ItemGroup", b =>
+                {
+                    b.HasOne("WebAPI.Data.Ingredient", null)
+                        .WithMany("itemGroups")
+                        .HasForeignKey("ItemGroup");
+                });
+
+            modelBuilder.Entity("WebAPI.Data.Ingredient", b =>
+                {
+                    b.Navigation("itemGroups");
+                });
+
+            modelBuilder.Entity("WebAPI.Data.Item", b =>
+                {
+                    b.Navigation("ingredients");
                 });
 #pragma warning restore 612, 618
         }

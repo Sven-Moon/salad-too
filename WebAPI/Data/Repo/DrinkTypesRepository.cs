@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Models;
 using WebAPI.Interfaces;
-using WebAPI.DTOs;
 
 namespace WebAPI.Data.Repo
 {

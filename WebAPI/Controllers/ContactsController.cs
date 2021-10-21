@@ -34,8 +34,8 @@ namespace WebAPI.Controllers
     [HttpGet("{id}")]
     public async Task<IActionResult> GetContact()
     {
-      var contacts = await uow.ContactsRepository.GetContactsAsync();
-      return Ok(contacts);
+      var data = await uow.ContactsRepository.GetContactsAsync();
+      return Ok(data);
     }
 
     // add contacts api/contacts/post

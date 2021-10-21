@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Data;
 
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211020152501_SetRefsAsVirtual")]
+    partial class SetRefsAsVirtual
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,11 +59,14 @@ namespace WebAPI.Migrations
                     b.Property<string>("id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("img")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Ingredient")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ingredientType")
+                    b.Property<string>("IngredientType")
                         .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("img")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
@@ -69,6 +74,11 @@ namespace WebAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
+
+                    b.HasIndex("Ingredient");
+
+                    b.HasIndex("IngredientType")
+                        .IsUnique();
 
                     b.ToTable("Ingredients");
                 });
@@ -103,14 +113,14 @@ namespace WebAPI.Migrations
                     b.Property<string>("id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("ItemGroup")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("img")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("itemGroup")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
@@ -119,12 +129,17 @@ namespace WebAPI.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("ItemGroup");
+
                     b.ToTable("Items");
                 });
 
             modelBuilder.Entity("WebAPI.Data.ItemGroup", b =>
                 {
                     b.Property<string>("id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ItemGroup")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("img")
@@ -135,6 +150,8 @@ namespace WebAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
+
+                    b.HasIndex("ItemGroup");
 
                     b.ToTable("ItemGroups");
                 });
@@ -201,6 +218,56 @@ namespace WebAPI.Migrations
                     b.Navigation("Contact");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebAPI.Data.Ingredient", b =>
+                {
+                    b.HasOne("WebAPI.Data.Item", "items")
+                        .WithMany("ingredients")
+                        .HasForeignKey("Ingredient");
+
+                    b.HasOne("WebAPI.Data.IngredientType", "ingredientType")
+                        .WithOne("Ingredient")
+                        .HasForeignKey("WebAPI.Data.Ingredient", "IngredientType")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ingredientType");
+
+                    b.Navigation("items");
+                });
+
+            modelBuilder.Entity("WebAPI.Data.Item", b =>
+                {
+                    b.HasOne("WebAPI.Data.ItemGroup", "itemGroup")
+                        .WithMany()
+                        .HasForeignKey("ItemGroup")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("itemGroup");
+                });
+
+            modelBuilder.Entity("WebAPI.Data.ItemGroup", b =>
+                {
+                    b.HasOne("WebAPI.Data.Ingredient", null)
+                        .WithMany("itemGroups")
+                        .HasForeignKey("ItemGroup");
+                });
+
+            modelBuilder.Entity("WebAPI.Data.Ingredient", b =>
+                {
+                    b.Navigation("itemGroups");
+                });
+
+            modelBuilder.Entity("WebAPI.Data.IngredientType", b =>
+                {
+                    b.Navigation("Ingredient");
+                });
+
+            modelBuilder.Entity("WebAPI.Data.Item", b =>
+                {
+                    b.Navigation("ingredients");
                 });
 #pragma warning restore 612, 618
         }

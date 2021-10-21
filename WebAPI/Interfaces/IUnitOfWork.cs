@@ -8,6 +8,10 @@ namespace WebAPI.Interfaces
     IUsersRepository UsersRepository { get; }
     IDrinkTypeRepository DrinkTypeRepository { get; }
     IContactsRepository ContactsRepository { get; }
+    IIngredientTypeRepository IngredientTypeRepository { get; }
+    IIngredientRepository IngredientRepository { get; }
+    IItemGroupRepository ItemGroupRepository { get; }
+    IItemRepository ItemRepository { get; }
     Task<bool> SaveAsync();
   }
 }

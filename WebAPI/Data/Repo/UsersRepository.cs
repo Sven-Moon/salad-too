@@ -21,7 +21,7 @@ namespace WebAPI.Data.Repo
     {
       return await dc.Users.ToListAsync();
     }
-    // GET USER
+    // GET one
     public async Task<User> GetUserAsync(string userId)
     {
       return await dc.Users.FindAsync(userId);

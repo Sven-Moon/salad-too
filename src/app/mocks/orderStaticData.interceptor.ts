@@ -100,63 +100,63 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
         {
           "id": "sprite",
           "name": "Sprite",
-          "type": "soda",
+          "ingredientType": "soda",
           "img": "./assets/images/drinks/sprite.png",
           "itemGroup": "drink"
         },
         {
           "id": "coke",
           "name": "Coke",
-          "type": "soda",
+          "ingredientType": "soda",
           "img": "./assets/images/drinks/coke.png",
           "itemGroup": "drink"
         },
         {
           "id": "diet-coke",
           "name": "Diet Coke",
-          "type": "soda",
+          "ingredientType": "soda",
           "img": "./assets/images/drinks/diet-coke.png",
           "itemGroup": "drink"
         },
         {
           "id": "orange-juice",
           "name": "Orange Juice",
-          "type": "juice",
+          "ingredientType": "juice",
           "img": "./assets/images/drinks/orange-juice.png",
           "itemGroup": "drink"
         },
         {
           "id": "cranberry-juice",
           "name": "Cranberry Juice",
-          "type": "juice",
+          "ingredientType": "juice",
           "img": "./assets/images/drinks/cranberry-juice.png",
           "itemGroup": "drink"
         },
         {
           "id": "latte",
           "name": "Latte",
-          "type": "espresso",
+          "ingredientType": "espresso",
           "img": "./assets/images/drinks/latte.png",
           "itemGroup": "drink"
         },
         {
           "id": "cappuccino",
           "name": "Cappuccino",
-          "type": "espresso",
+          "ingredientType": "espresso",
           "img": "./assets/images/drinks/cappuccino.png",
           "itemGroup": "drink"
         },
         {
           "id": "sparkling",
           "name": "Sparkling Water",
-          "type": "water",
+          "ingredientType": "water",
           "img": "./assets/images/drinks/sparkling.png",
           "itemGroup": "drink"
         },
         {
           "id": "bottled",
           "name": "Bottled Water",
-          "type": "water",
+          "ingredientType": "water",
           "img": "./assets/images/drinks/bottled.png",
           "itemGroup": "drink"
         },
@@ -216,155 +216,155 @@ export class MockStaticDataInterceptor implements HttpInterceptor {
           "id": "ham",
           "name": "Ham",
           "img": "./assets/images/ingredients/ham.png",
-          "itemGroup": ["salad", "sandwich"],
-          "type": "meats"
+          "itemGroups": ["salad", "sandwich"],
+          "ingredientType": "meats"
         },
         {
           "id": "turkey",
           "name": "Turkey",
           "img": "./assets/images/ingredients/turkey.png",
-          "itemGroup": ["salad", "sandwich"],
-          "type": "meats"
+          "itemGroups": ["salad", "sandwich"],
+          "ingredientType": "meats"
         },
         {
           "id": "roast_beef",
           "name": "Roast Beef",
           "img": "./assets/images/ingredients/roast_beef.png",
-          "itemGroup": ["sandwich"],
-          "type": "meats"
+          "itemGroups": ["sandwich"],
+          "ingredientType": "meats"
         },
         {
           "id": "red_lettuce",
           "name": "Red Lettuce",
           "img": "./assets/images/ingredients/red_lettuce.png",
-          "itemGroup": ["salad"],
-          "type": "greens"
+          "itemGroups": ["salad"],
+          "ingredientType": "greens"
         },
         {
           "id": "green_lettuce",
           "name": "Green Lettuce",
           "img": "./assets/images/ingredients/green_lettuce.png",
-          "itemGroup": ["salad"],
-          "type": "greens"
+          "itemGroups": ["salad"],
+          "ingredientType": "greens"
         },
         {
           "id": "mixed_greens",
           "name": "Mixed greens",
           "img": "./assets/images/ingredients/mixed_greens.png",
-          "itemGroup": ["salad"],
-          "type": "greens"
+          "itemGroups": ["salad"],
+          "ingredientType": "greens"
         },
         {
           "id": "lettuce",
           "name": "Lettuce",
           "img": "./assets/images/ingredients/lettuce.png",
-          "itemGroup": ["sandwich"],
-          "type": "veggies"
+          "itemGroups": ["sandwich"],
+          "ingredientType": "veggies"
         },
         {
           "id": "tomatoes",
           "name": "Tomatoes",
           "img": "./assets/images/ingredients/tomatoes.png",
-          "itemGroup": ["salad", "sandwich"],
-          "type": "veggies"
+          "itemGroups": ["salad", "sandwich"],
+          "ingredientType": "veggies"
         },
         {
           "id": "pickles",
           "name": "Pickles",
           "img": "./assets/images/ingredients/pickles.png",
-          "itemGroup": ["sandwich"],
-          "type": "veggies"
+          "itemGroups": ["sandwich"],
+          "ingredientType": "veggies"
         },
         {
           "id": "onions",
           "name": "Onions",
           "img": "./assets/images/ingredients/onions.png",
-          "itemGroup": ["salad", "sandwich"],
-          "type": "veggies"
+          "itemGroups": ["salad", "sandwich"],
+          "ingredientType": "veggies"
         },
         {
           "id": "cucumbers",
           "name": "Cucumbers",
           "img": "./assets/images/ingredients/cucumbers.png",
-          "itemGroup": ["salad"],
-          "type": "veggies"
+          "itemGroups": ["salad"],
+          "ingredientType": "veggies"
         },
         {
           "id": "cheddar",
           "name": "Cheddar",
           "img": "./assets/images/ingredients/cheddar.png",
-          "itemGroup": ["salad", "sandwich"],
-          "type": "cheeses"
+          "itemGroups": ["salad", "sandwich"],
+          "ingredientType": "cheeses"
         },
         {
           "id": "provolone",
           "name": "Provolone",
           "img": "./assets/images/ingredients/provolone.png",
-          "itemGroup": ["sandwich"],
-          "type": "cheeses"
+          "itemGroups": ["sandwich"],
+          "ingredientType": "cheeses"
         },
         {
           "id": "blue_cheese",
           "name": "Blue cheese",
           "img": "./assets/images/ingredients/blue_cheese.png",
-          "itemGroup": ["sandwich"],
-          "type": "cheeses"
+          "itemGroups": ["sandwich"],
+          "ingredientType": "cheeses"
         },
         {
           "id": "sourdough",
           "name": "Sourdough",
           "img": "./assets/images/ingredients/sourdough.png",
-          "itemGroup": ["sandwich"],
-          "type": "breads"
+          "itemGroups": ["sandwich"],
+          "ingredientType": "breads"
         },
         {
           "id": "kaiser_roll",
           "name": "Kaiser Roll",
           "img": "./assets/images/ingredients/kaiser_roll.png",
-          "itemGroup": ["sandwich"],
-          "type": "breads"
+          "itemGroups": ["sandwich"],
+          "ingredientType": "breads"
         },
         {
           "id": "mustard",
           "name": "Mustard",
           "img": "./assets/images/ingredients/mustard.png",
-          "itemGroup": ["sandwich"],
-          "type": "condiments"
+          "itemGroups": ["sandwich"],
+          "ingredientType": "condiments"
         },
         {
           "id": "mayo",
           "name": "Mayo",
           "img": "./assets/images/ingredients/mayo.png",
-          "itemGroup": ["sandwich"],
-          "type": "condiments"
+          "itemGroups": ["sandwich"],
+          "ingredientType": "condiments"
         },
         {
           "id": "ranch",
           "name": "Ranch",
           "img": "./assets/images/ingredients/ranch.png",
-          "itemGroup": ["salad"],
-          "type": "dressings"
+          "itemGroups": ["salad"],
+          "ingredientType": "dressings"
         },
         {
           "id": "almonds",
           "name": "Almonds",
           "img": "./assets/images/ingredients/almonds.png",
-          "itemGroup": ["salad"],
-          "type": "nuts_fruit"
+          "itemGroups": ["salad"],
+          "ingredientType": "nuts_fruit"
         },
         {
           "id": "cranberries",
           "name": "Cranberries",
           "img": "./assets/images/ingredients/cranberries.png",
-          "itemGroup": ["salad"],
-          "type": "nuts_fruit"
+          "itemGroups": ["salad"],
+          "ingredientType": "nuts_fruit"
         },
         {
           "id": "vinaigrette",
           "name": "Vinaigrette",
           "img": "./assets/images/ingredients/vinaigrette.png",
-          "itemGroup": ["salad"],
-          "type": "dressings"
+          "itemGroups": ["salad"],
+          "ingredientType": "dressings"
         }
       ],
       "ingredientTypes": [

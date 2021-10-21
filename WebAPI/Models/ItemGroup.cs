@@ -1,14 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 
-
-namespace WebAPI.Models
+namespace WebAPI.Data
 {
-  public class DrinkType
+  public class ItemGroup
   {
     [Required]
     [Key]
     public string id { get; set; }
     [Required]
-    public string price { get; set; }
+    public string name { get; set; }
+    public string img { get; set; }
   }
 }

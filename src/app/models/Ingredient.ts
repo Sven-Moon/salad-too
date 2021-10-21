@@ -2,9 +2,9 @@
 export interface Ingredient {
   id: string
   name: string
-  type: string
+  ingredientType: string
   img: string
-  itemGroup: string[]
+  itemGroups: string[]
   price?: string
 }
 

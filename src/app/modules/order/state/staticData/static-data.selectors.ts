@@ -72,7 +72,7 @@ export const selectIngredientWithPrice = createSelector(
     ingredients.forEach(ingredient =>
       ingredientsWithPrice.push({
         ...ingredient,
-        price: types.find(type => type.id === ingredient.type).price
+        price: types.find(type => type.id === ingredient.ingredientType).price
       })
     )
     return ingredientsWithPrice

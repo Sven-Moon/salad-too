@@ -10,7 +10,7 @@ export interface Item {
   ingredients?: string[]
   description?: string
   price?: string
-  type?: string // itemGroup subtype: eg juice (kind of drink)
+  ingredientType?: string // itemGroup subtype: eg juice (kind of drink)
   owner?: Contact,
   quantity?: number
 }

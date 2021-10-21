@@ -20,7 +20,7 @@ export const selectCurrentItem = createSelector(
       img: state.img,
       ingredients: state.ingredients,
       price: state.price,
-      type: state.type,
+      ingredientType: state.ingredientType,
       owner: state.owner,
       quantity: state.quantity
     }
@@ -65,7 +65,7 @@ export const selectItemsWithPrice = createSelector(
           let ingredientType = ingredients.find(ingredientRef =>
             // return the ingredient type (string)
             ingredientRef.id === itemIngredient
-          ).type
+          ).ingredientType
           // use that to return the type
           let ingredientPrice: string
           ingredientTypes.forEach(knownType => {
@@ -84,7 +84,7 @@ export const selectItemsWithPrice = createSelector(
       groupItems.forEach(item => {
         let drink: Item = Object.assign({}, item)
         drink.price = drinkTypes.find(drinkType =>
-          drinkType.id === drink.type).price
+          drinkType.id === drink.ingredientType).price
         itemsWithPrice.push(drink)
       })
       return itemsWithPrice
@@ -156,7 +156,7 @@ export const selectItemGroupIngredients = createSelector(
   selectIngredients,
   (item: Item, allIngredients: Ingredients): Ingredients =>
     allIngredients.filter((ingredient) =>
-      ingredient.itemGroup.find(group =>
+      ingredient.itemGroups.find(group =>
         group === item.itemGroup)
     )
 
@@ -173,8 +173,8 @@ export const selectItemGroupTypeIds = createSelector(
     // look at each ingredient in the itemGroup
     groupIngredients.forEach(ingredient => {
       // if the type isn't in the typeList yet, add it
-      if (!typeList.find(type => type === ingredient.type)) {
-        typeList.push(ingredient.type)
+      if (!typeList.find(type => type === ingredient.ingredientType)) {
+        typeList.push(ingredient.ingredientType)
       }
     })
     return typeList
@@ -200,7 +200,7 @@ export const selectFilteredIngredientsByType = createSelector(
     if (selectedType) {
       let ingredientList: Ingredients = []
       ingredientList = ingredients.filter(ingredient =>
-        ingredient.type === selectedType.id
+        ingredient.ingredientType === selectedType.id
       )
       return ingredientList
     } else { return ingredients }
@@ -226,7 +226,7 @@ export const selectItemPrice = createSelector(
   (ingredients: Ingredients, types: IngredientTypes): string =>
     // let ingredientPrices: number[] =
     ingredients.map((ingredient) =>
-      +types.find(type => type.id === ingredient.type).price
+      +types.find(type => type.id === ingredient.ingredientType).price
     ).reduce((acc, value) => acc + value, 0).toFixed(2)
 
 )

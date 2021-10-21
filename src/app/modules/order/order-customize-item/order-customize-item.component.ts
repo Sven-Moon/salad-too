@@ -59,12 +59,12 @@ export class OrderCustomizeItemComponent implements OnInit {
 
   public toggleIngredient(ingredient: Ingredient): void {
     // if ingredient type is on the single type list
-    if (this.singleSelectIngredientTypes.find(type => type.id === ingredient.type)) {
+    if (this.singleSelectIngredientTypes.find(type => type.id === ingredient.ingredientType)) {
       // nuke all of the ingredients from the item list (ids)
       let ingredientsToRemove: string[] = []
       this.store.select(selectIngredients).subscribe(itemIngredients => {
         itemIngredients.forEach(itemIngredient => {
-          if (itemIngredient.type === ingredient.type) {
+          if (itemIngredient.ingredientType === ingredient.ingredientType) {
             ingredientsToRemove.push(itemIngredient.id)
           }
         })
@@ -103,7 +103,7 @@ export class OrderCustomizeItemComponent implements OnInit {
 
   calcClasses(ingredient: Ingredient): string {
 
-    let type = ingredient.type + "-border"
+    let type = ingredient.ingredientType + "-border"
     let classes: string = 'ingredient center-text ';
     classes = classes.concat(type)
 
@@ -120,7 +120,7 @@ export class OrderCustomizeItemComponent implements OnInit {
     if (isSelected) {
       classes = classes.concat(" selected")
     } else {
-      classes = classes.concat(" " + ingredient.type)
+      classes = classes.concat(" " + ingredient.ingredientType)
     }
 
     return classes
