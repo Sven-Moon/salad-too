@@ -97,7 +97,7 @@ export class AuthEffects {
   registerUserFailed$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.registerUserFailure),
-      tap((data) => { this.authService.failedUserRegister(data.error) })
+      tap((data) => { this.authService.alertFailedUserRegister(data.error) })
     ),
     { dispatch: false }
   )
@@ -182,11 +182,11 @@ export class AuthEffects {
       concatMap((action) =>
         this.authAPIService.addNewContact({
           id: action.id,
-          contacts: action.contacts
+          contact: action.contact
         }).pipe(
           map(data => AuthActions.addNewContactSuccess({
             id: data.id,
-            contacts: data.contacts
+            contact: data.contact
           })),
           catchError(error => of(AuthActions.addNewContactFailure({ error })))
         )
@@ -205,7 +205,7 @@ export class AuthEffects {
           AuthActions.updateEmailFailure,
           AuthActions.updatePhoneFailure,
           AuthActions.addNewContactFailure),
-        tap(() => this.authService.failedAccountEdit())
+        tap((error) => this.authService.alertFailedAccountEdit(error.error))
       ),
     { dispatch: false }
   );
@@ -217,7 +217,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.updateUserNameSuccess),
-        tap((action) => this.authService.updateUserNameSuccess(action.name))
+        tap((action) => this.authService.alertUsernameUpated(action.name))
       ),
     { dispatch: false }
   );
@@ -226,7 +226,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.updatePasswordSuccess),
-        tap(() => this.authService.updatePasswordSuccess())
+        tap(() => this.authService.alertPasswordUpdated())
       ),
     { dispatch: false }
   );
@@ -235,7 +235,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.updateEmailSuccess),
-        tap((action) => this.authService.updateEmailSuccess(action.email))
+        tap((action) => this.authService.alertEmailUpdated(action.email))
       ),
     { dispatch: false }
   );
@@ -244,7 +244,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.updatePhoneSuccess),
-        tap((action) => this.authService.updatePhoneNumberSuccess(action.phoneNumber))
+        tap((action) => this.authService.alertPhoneNumberUpdated(action.phoneNumber))
       ),
     { dispatch: false }
   );
@@ -253,7 +253,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.addNewContactSuccess),
-        tap((action) => this.authService.addNewContact(action.contacts[action.contacts.length - 1]))
+        tap((action) => this.authService.alertNewContactAdded(action.contact))
       ),
     { dispatch: false }
   );
@@ -265,7 +265,6 @@ export class AuthEffects {
     private authAPIService: AuthAPIService,
     private modalService: BsModalService,
     private alertService: AlertService,
-    private store: Store,
     private orderService: OrderService
   ) { }
 

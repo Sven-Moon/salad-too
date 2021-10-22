@@ -1,35 +1,61 @@
 <div class="accountContainer flex-col">
   <ng-container *ngIf="user">
     <div class="tag flex-row">
-      <img src="./assets/images/profile_1.png" alt="" class="profile-img">
+      <img src="./assets/images/profile_1.png" alt="" class="profile-img" />
       <div class="nameContainer flex-row card">
-        <div class="info text-center">{{user.name}}</div>
-        <img src="https://i.ibb.co/fd0kLdN/edit.png"  (click)="openModal(editName)" class="edit"  alt="">
+        <div class="info text-center">{{ user.name }}</div>
+        <img
+          src="https://i.ibb.co/fd0kLdN/edit.png"
+          (click)="openModal(editName)"
+          class="edit"
+          alt=""
+        />
       </div>
     </div>
     <h2>Password</h2>
     <div class="infoContainer flex-row card">
       <div class="info">**********</div>
-      <div class="edit"><img src="https://i.ibb.co/fd0kLdN/edit.png" class="edit" alt="" (click)="openModal(editPassword)"></div>
+      <div class="edit">
+        <img
+          src="https://i.ibb.co/fd0kLdN/edit.png"
+          class="edit"
+          alt=""
+          (click)="openModal(editPassword)"
+        />
+      </div>
     </div>
     <h2>Email</h2>
     <div class="infoContainer flex-row card">
-      <div class="info">{{user.email}}</div>
-      <div class="edit"><img src="https://i.ibb.co/fd0kLdN/edit.png" class="edit" alt="" (click)="openModal(editEmail)"></div>
+      <div class="info">{{ user.email }}</div>
+      <div class="edit">
+        <img
+          src="https://i.ibb.co/fd0kLdN/edit.png"
+          class="edit"
+          alt=""
+          (click)="openModal(editEmail)"
+        />
+      </div>
     </div>
     <h2>Phone Number</h2>
     <div class="infoContainer flex-row card">
-      <div class="info">{{user.phoneNumber | mask: '(000) 000-0000'}}</div>
-      <div class="edit"><img src="https://i.ibb.co/fd0kLdN/edit.png" class="edit" alt="" (click)="openModal(editPhone)"></div>
+      <div class="info">{{ user.phoneNumber | mask: "(000) 000-0000" }}</div>
+      <div class="edit">
+        <img
+          src="https://i.ibb.co/fd0kLdN/edit.png"
+          class="edit"
+          alt=""
+          (click)="openModal(editPhone)"
+        />
+      </div>
     </div>
   </ng-container>
 </div>
 <h2>Contacts</h2>
 <div class="contactsContainer">
-  <div class="addContact pointer" (click)="openModal(addContact)" >+</div>
-  <ng-container *ngFor="let contact of contacts$ |async">
+  <div class="addContact pointer" (click)="openModal(addContact)">+</div>
+  <ng-container *ngFor="let contact of contacts$ | async">
     <div class="profile-wrap">
-      <img src="./assets/images/profile_1.png" class="contact-img" alt="">
+      <img src="./assets/images/profile_1.png" class="contact-img" alt="" />
       <div class="form-control">{{ contact.name }}</div>
     </div>
   </ng-container>
@@ -38,27 +64,37 @@
 <ng-template #editName>
   <div class="modal-container">
     <div class="modal-header">
-      <div class=modal-title>Change User Name</div>
+      <div class="modal-title">Change User Name</div>
     </div>
     <div class="modal-body">
-      <div> abc123A!!</div>
+      <div>abc123A!!</div>
       <form #f="ngForm">
         <div class="login-form flex-col flex-center">
-
           <!-- ======= New Username ======= -->
           <div class="form-group flex-col flex-center">
             <label for="newUsername">New User Name</label>
-            <input type="text" name="newUsername" id=""
-            class="form-control" required
-            placeholder="Name" [(ngModel)]="editNameForm.newUsername "#newUsername="ngModel"
-            minlength="3">
-            <div *ngIf="newUsername.errors?.minlength && (password.dirty)">Username must be at least 3 characters in length.</div>
-          </div> <!-- New Username -->
+            <input
+              type="text"
+              name="newUsername"
+              id=""
+              class="form-control"
+              required
+              placeholder="Name"
+              [(ngModel)]="editNameForm.newUsername"
+              #newUsername="ngModel"
+              minlength="3"
+            />
+            <div *ngIf="newUsername.errors?.minlength && password.dirty">
+              Username must be at least 3 characters in length.
+            </div>
+          </div>
+          <!-- New Username -->
 
           <!-- ======= Password ======= -->
           <div class="form-group flex-col flex-center">
             <label for="password">Password</label>
-            <input type="password"
+            <input
+              type="password"
               name="password"
               class="form-control"
               id="editNamePassword"
@@ -66,42 +102,54 @@
               placeholder="Password"
               [(ngModel)]="editNameForm.password"
               #password="ngModel"
-              [ngModelOptions]="{ updateOn: 'change' }">
-          </div> <!--  password -->
+              [ngModelOptions]="{ updateOn: 'change' }"
+            />
+          </div>
+          <!--  password -->
 
           <!-- ======= ACTIONS ======= -->
           <div class="actions container flex-row">
-            <button type="button" class="btn btn-go"
-            (click)="editUserName(f)"
-            [disabled]="!f.valid">
-            Change Name
+            <button
+              type="button"
+              class="btn btn-go"
+              (click)="editUserName(f)"
+              [disabled]="!f.valid"
+            >
+              Change Name
             </button>
-            <button type="button" class="btn btn-cancel"
-            (click)="modalRef.hide()">
+            <button
+              type="button"
+              class="btn btn-cancel"
+              (click)="modalRef.hide()"
+            >
               Cancel
             </button>
-          </div> <!--  actions -->
-
-        </div> <!-- content column -->
+          </div>
+          <!--  actions -->
+        </div>
+        <!-- content column -->
       </form>
-    </div> <!-- modal body-->
-  </div> <!-- modal container-->
-</ng-template> <!-- edit name modal -->
+    </div>
+    <!-- modal body-->
+  </div>
+  <!-- modal container-->
+</ng-template>
+<!-- edit name modal -->
 
 <ng-template #editPassword>
   <div class="modal-container">
     <div class="modal-header">
-      <div class=modal-title>Change Password</div>
+      <div class="modal-title">Change Password</div>
     </div>
     <div class="modal-body">
-      <div> abc123A!!</div>
+      <div>abc123A!!</div>
       <form #f="ngForm" passwordsMatch>
         <div class="login-form flex-col flex-center">
-
           <!-- ======= Old Password ======= -->
           <div class="form-group flex-col flex-center">
             <label for="password">Current Password</label>
-            <input type="password"
+            <input
+              type="password"
               name="password"
               class="form-control"
               id="oldPassword"
@@ -109,13 +157,15 @@
               placeholder="Current Password"
               [(ngModel)]="editPasswordForm.password"
               #password="ngModel"
-              [ngModelOptions]="{ updateOn: 'change' }">
+              [ngModelOptions]="{ updateOn: 'change' }"
+            />
           </div>
 
           <!-- ======= New Password ======= -->
           <div class="form-group flex-col flex-center">
             <label for="password">New Password</label>
-            <input type="password"
+            <input
+              type="password"
               name="newPassword"
               class="form-control"
               id="newPassword"
@@ -124,16 +174,18 @@
               [(ngModel)]="editPasswordForm.newPassword"
               #newPassword="ngModel"
               pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-              [ngModelOptions]="{ updateOn: 'change' }">
-            <div *ngIf="newPassword.errors?.pattern && (newPassword.touched)">Password must contain a minimum of
+              [ngModelOptions]="{ updateOn: 'change' }"
+            />
+            <div *ngIf="newPassword.errors?.pattern && newPassword.touched">
+              Password must contain a minimum of
               <div class="flex-row">
                 <div class="col-6">
                   <ul>
                     <li>8 characters</li>
                     <li>1+ uppercase letters</li>
                   </ul>
-                  </div>
-                  <div class="col-6">
+                </div>
+                <div class="col-6">
                   <ul>
                     <li>1+ lowercase letters</li>
                     <li>1+ numbers</li>
@@ -141,76 +193,98 @@
                 </div>
               </div>
             </div>
-          </div> <!--  password -->
+          </div>
+          <!--  password -->
 
-        <!--======== Confirm Password ========-->
-        <div class="form-group flex-col flex-center">
-          <label for="confirmPassword">Confirm Password</label>
-          <input
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          class="form-control"
-          [(ngModel)]="editPasswordForm.confirmPassword"
-          #confirmPassword="ngModel"
-          [ngModelOptions]="{ updateOn: 'change' }">
+          <!--======== Confirm Password ========-->
+          <div class="form-group flex-col flex-center">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              class="form-control"
+              [(ngModel)]="editPasswordForm.confirmPassword"
+              #confirmPassword="ngModel"
+              [ngModelOptions]="{ updateOn: 'change' }"
+            />
 
-          <!-- ---- check passwords match ---- -->
-          <div *ngIf="f.errors?.passwordsMatch && (f.controls.confirmPassword.touched || f.controls.confirmPassword.dirty)">No Matchy</div>
-        </div> <!--  Confirm PW -->
+            <!-- ---- check passwords match ---- -->
+            <div
+              *ngIf="
+                f.errors?.passwordsMatch &&
+                (f.controls.confirmPassword.touched ||
+                  f.controls.confirmPassword.dirty)
+              "
+            >
+              No Matchy
+            </div>
+          </div>
+          <!--  Confirm PW -->
 
           <!-- ======= ACTIONS ======= -->
           <div class="actions container flex-row">
-            <button type="button" class="btn btn-go"
-            (click)="editUserPassword(f)"
-            [disabled]="!f.valid">
-            Change Password
+            <button
+              type="button"
+              class="btn btn-go"
+              (click)="editUserPassword(f)"
+              [disabled]="!f.valid"
+            >
+              Change Password
             </button>
-            <button type="button" class="btn btn-cancel"
-            (click)="modalRef.hide()">
+            <button
+              type="button"
+              class="btn btn-cancel"
+              (click)="modalRef.hide()"
+            >
               Cancel
             </button>
-          </div> <!--  actions -->
-
-        </div> <!-- content column -->
+          </div>
+          <!--  actions -->
+        </div>
+        <!-- content column -->
       </form>
-    </div> <!-- modal body-->
-  </div> <!-- modal container-->
-
-</ng-template> <!-- edit password modal -->
+    </div>
+    <!-- modal body-->
+  </div>
+  <!-- modal container-->
+</ng-template>
+<!-- edit password modal -->
 
 <ng-template #editEmail>
   <div class="modal-container">
     <div class="modal-header">
-      <div class=modal-title>Change Email Address</div>
+      <div class="modal-title">Change Email Address</div>
     </div>
     <div class="modal-body">
-      <div> abc123A!!</div>
+      <div>abc123A!!</div>
       <form #f="ngForm">
         <div class="login-form flex-col flex-center">
-
           <!-- ======= New Email ======= -->
           <div class="form-group flex-col flex-center">
             <label for="newEmail">Email Address</label>
             <input
-            type="text"
-            name="newEmail"
-            id="newEmail"
-            class="form-control"
-            [(ngModel)]="editEmailForm.newEmail"
-            #newEmail="ngModel"
-            placeholder="me@example.com"
-            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-            required>
-            <div *ngIf="newEmail.errors?.pattern && (f.touched)">
+              type="text"
+              name="newEmail"
+              id="newEmail"
+              class="form-control"
+              [(ngModel)]="editEmailForm.newEmail"
+              #newEmail="ngModel"
+              placeholder="me@example.com"
+              pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+              required
+            />
+            <div *ngIf="newEmail.errors?.pattern && f.touched">
               A valid email is required.
             </div>
-          </div> <!--  Email -->
+          </div>
+          <!--  Email -->
 
           <!-- ======= Password ======= -->
           <div class="form-group flex-col flex-center">
             <label for="password">Password</label>
-            <input type="password"
+            <input
+              type="password"
               name="password"
               class="form-control"
               id="password"
@@ -218,110 +292,152 @@
               placeholder="Password"
               [(ngModel)]="editEmailForm.password"
               #editEmailPassword="ngModel"
-              [ngModelOptions]="{ updateOn: 'change' }">
-          </div> <!--  password -->
+              [ngModelOptions]="{ updateOn: 'change' }"
+            />
+          </div>
+          <!--  password -->
 
           <!-- ======= ACTIONS ======= -->
           <div class="actions container flex-row">
-            <button type="button" class="btn btn-go"
-            (click)="editUserEmail(f)"
-            [disabled]="!f.valid">
-            Change Email
+            <button
+              type="button"
+              class="btn btn-go"
+              (click)="editUserEmail(f)"
+              [disabled]="!f.valid"
+            >
+              Change Email
             </button>
-            <button type="button" class="btn btn-cancel"
-            (click)="modalRef.hide()">
+            <button
+              type="button"
+              class="btn btn-cancel"
+              (click)="modalRef.hide()"
+            >
               Cancel
             </button>
-          </div> <!--  actions -->
-
-        </div> <!-- content column -->
+          </div>
+          <!--  actions -->
+        </div>
+        <!-- content column -->
       </form>
-    </div> <!-- modal body-->
-  </div> <!-- modal container-->
-</ng-template> <!-- edit email modal -->
+    </div>
+    <!-- modal body-->
+  </div>
+  <!-- modal container-->
+</ng-template>
+<!-- edit email modal -->
 
 <ng-template #editPhone>
   <div class="modal-container">
     <div class="modal-header">
-      <div class=modal-title>Change User Phone Number</div>
+      <div class="modal-title">Change User Phone Number</div>
     </div>
     <div class="modal-body">
-      <div> abc123A!!</div>
+      <div>abc123A!!</div>
       <form #f="ngForm">
         <div class="login-form flex-col flex-center">
-
           <!-- ======= New Phone Number ======= -->
           <div class="form-group flex-col flex-center">
             <label for="newPhoneNumber">New Phone Number</label>
-            <input type="text" name="newPhoneNumber"
-            class="form-control" required
-            maxlength="14"
-            mask="(000) 000-0000"
-            placeholder="(000) 000-0000" [(ngModel)]="editPhoneForm.newPhoneNumber "#newUsername="ngModel"
-            pattern="^\d{10}$"
-            #newPhoneNumber="ngModel">
-            <div *ngIf="newPhoneNumber.errors?.pattern && (newPhoneNumber.touched)">Phone number must be 10 characters in length, only digits (no spaces).</div>
-          </div> <!-- New phone number -->
+            <input
+              type="text"
+              name="newPhoneNumber"
+              class="form-control"
+              required
+              maxlength="14"
+              mask="(000) 000-0000"
+              placeholder="(000) 000-0000"
+              [(ngModel)]="editPhoneForm.newPhoneNumber"
+              #newUsername="ngModel"
+              pattern="^\d{10}$"
+              #newPhoneNumber="ngModel"
+            />
+            <div
+              *ngIf="newPhoneNumber.errors?.pattern && newPhoneNumber.touched"
+            >
+              Phone number must be 10 characters in length, only digits (no
+              spaces).
+            </div>
+          </div>
+          <!-- New phone number -->
 
           <!-- ======= Password ======= -->
           <div class="form-group flex-col flex-center">
             <label for="password">Password</label>
-            <input type="password"
-              name="password" id=""
+            <input
+              type="password"
+              name="password"
+              id=""
               class="form-control"
               id="password"
               required
               placeholder="Password"
               [(ngModel)]="editNameForm.password"
               #password="ngModel"
-              [ngModelOptions]="{ updateOn: 'change' }">
-          </div> <!--  password -->
+              [ngModelOptions]="{ updateOn: 'change' }"
+            />
+          </div>
+          <!--  password -->
 
           <!-- ======= ACTIONS ======= -->
           <div class="actions container flex-row">
-            <button type="button" class="btn btn-go"
-            (click)="editUserPhone(f)"
-            [disabled]="!f.valid">
-            Change Phone Number
+            <button
+              type="button"
+              class="btn btn-go"
+              (click)="editUserPhone(f)"
+              [disabled]="!f.valid"
+            >
+              Change Phone Number
             </button>
-            <button type="button" class="btn btn-cancel"
-            (click)="modalRef.hide()">
+            <button
+              type="button"
+              class="btn btn-cancel"
+              (click)="modalRef.hide()"
+            >
               Cancel
             </button>
-          </div> <!--  actions -->
-
-        </div> <!-- content column -->
+          </div>
+          <!--  actions -->
+        </div>
+        <!-- content column -->
       </form>
-    </div> <!-- modal body-->
-  </div> <!-- modal container-->
-
-</ng-template> <!-- edit phone number modal -->
+    </div>
+    <!-- modal body-->
+  </div>
+  <!-- modal container-->
+</ng-template>
+<!-- edit phone number modal -->
 
 <ng-template #addContact>
   <div class="modal-container">
     <div class="modal-header">
-      <div class=modal-title>Add Contact</div>
+      <div class="modal-title">Add Contact</div>
     </div>
     <div class="modal-body">
       <form #f="ngForm">
         <div class="login-form flex-col flex-center">
-
           <!-- ======= Name ======= -->
           <div class="form-group flex-col flex-center">
             <label for="name">Name</label>
-            <input type="text" name="name"
-            class="form-control"
-            required
-            placeholder="my buddy"
-            minLength="1"
-            [(ngModel)]="addContactForm.contactName "#contactName="ngModel"
-            #newContactName="ngModel">
-            <div *ngIf="newContactName.errors?.pattern && (newContactName.dirty)">Name must be at least 1 character in length.</div>
-          </div> <!-- contact -->
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              required
+              placeholder="my buddy"
+              minLength="1"
+              [(ngModel)]="addContactForm.contactName"
+              #contactName="ngModel"
+              #newContactName="ngModel"
+            />
+            <div *ngIf="newContactName.errors?.pattern && newContactName.dirty">
+              Name must be at least 1 character in length.
+            </div>
+          </div>
+          <!-- contact -->
 
           <!-- ======= Email ======= -->
           <div class="form-group flex-col flex-center">
-            <label for="password">Password</label>
+            <label for="password">Email</label>
             <input
               type="text"
               name="contactEmail"
@@ -334,28 +450,39 @@
               [ngModelOptions]="{ updateOn: 'change' }"
               placeholder="me@example.com"
               pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-              required>
-            <div *ngIf="contactEmail.errors?.pattern && (f.dirty)">
+              required
+            />
+            <div *ngIf="contactEmail.errors?.pattern && f.dirty">
               A valid email is required.
             </div>
-          </div> <!--  password -->
+          </div>
+          <!--  password -->
 
           <!-- ======= ACTIONS ======= -->
-          <div class="actions container flex-row">
-            <button type="button" class="btn-go"
-            (click)="addNewContact(f)"
-            [disabled]="!f.valid">
-            Add Contact
+          <div class="actions container flex-col">
+            <button
+              type="button"
+              class="btn-go"
+              (click)="updateContacts(f)"
+              [disabled]="!f.valid"
+            >
+              Add Contact
             </button>
-            <button type="button" class="btn btn-cancel"
-            (click)="modalRef.hide()">
+            <button
+              type="button"
+              class="btn btn-cancel"
+              (click)="modalRef.hide()"
+            >
               Cancel
             </button>
-          </div> <!--  actions -->
-
-        </div> <!-- content column -->
+          </div>
+          <!--  actions -->
+        </div>
+        <!-- content column -->
       </form>
-    </div> <!-- modal body-->
-  </div> <!-- modal container-->
-
-</ng-template> <!-- add contact modal -->
+    </div>
+    <!-- modal body-->
+  </div>
+  <!-- modal container-->
+</ng-template>
+<!-- add contact modal -->

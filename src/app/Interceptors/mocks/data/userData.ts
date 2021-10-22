@@ -42,7 +42,6 @@ export const userData: Users = [
         "password": "abc123A!!"
       },
       {
-
         "id": "petersegal@npr.com",
         "name": "Peter",
         "phoneNumber": "987-654-1381",
@@ -68,7 +67,6 @@ export const userData: Users = [
         "password": "abc123A!!"
       },
       {
-
         "id": "billburtis@npr.com",
         "name": "Bill",
         "phoneNumber": "987-654-1942",

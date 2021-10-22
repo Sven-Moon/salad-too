@@ -92,22 +92,17 @@ export class AccountComponent implements OnInit {
     }))
   }
 
-  public addNewContact(f: NgForm) {
+  public updateContacts(f: NgForm) {
     // create new contacts list from current & add new contact
     let newContact: Contact = {
       name: f.value.name,
       email: f.value.contactEmail,
       img: './assets/images/profile_1.png'
     }
-    let contacts: Contacts
-    this.store.select(selectContacts).subscribe(currentContacts =>
-      contacts = [...currentContacts]
-    )
-    contacts.push(newContact)
     // addNewContacts calls API to update server
     this.store.dispatch(addNewContact({
       id: this.user.id,
-      contacts: contacts
+      contact: newContact
     }))
   }
 

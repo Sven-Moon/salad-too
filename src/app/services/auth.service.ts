@@ -54,9 +54,6 @@ export class AuthService {
   }
 
   public processRegisteredUser(resp: AuthResp): void {
-    // set as user in store > registerUserSucces
-    // registerUserSuccess is performed as part of registerUser$ (authEffects)
-    // this.store.dispatch(registerUserSuccess({ user }))
     // alert user is registered
     this.alertService.success(
       `Congrats, ${resp.name}, you are now a member of our hunger satisfaction site!`
@@ -65,7 +62,7 @@ export class AuthService {
     this.orderService.processLoginSuccess(resp)
   }
 
-  public failedUserRegister(error: HttpErrorResponse) {
+  public alertFailedUserRegister(error: HttpErrorResponse) {
     let message = error.status + ": " + error.statusText
     this.alertService.danger(`We couldn\'t register you. Feel free to try again. \n
       Error: \n
@@ -82,28 +79,28 @@ export class AuthService {
     return id
   }
 
-  public updateUserNameSuccess(name: string) {
+  public alertUsernameUpated(name: string) {
     this.alertService.success(
       "Username updated. We\'ll call you " + name + " from now on!"
     ),
       this.modalService.hide()
   }
 
-  public updatePasswordSuccess() {
+  public alertPasswordUpdated() {
     this.alertService.success(
       "Password successfully updated to **********"
     ),
       this.modalService.hide()
   }
 
-  public updateEmailSuccess(email: string) {
+  public alertEmailUpdated(email: string) {
     this.alertService.success(
       "Email updated: " + email
     ),
       this.modalService.hide()
   }
 
-  public updatePhoneNumberSuccess(phone: string) {
+  public alertPhoneNumberUpdated(phone: string) {
     this.alertService.success(
       "Phone Number updated to: ("
       + phone.slice(0, 3) + ")"
@@ -113,7 +110,7 @@ export class AuthService {
       this.modalService.hide()
   }
 
-  public addNewContact(contact: Contact) {
+  public alertNewContactAdded(contact: Contact) {
     this.alertService.success(
       "New Contact Added: \n" + contact.name
       + "\n(" + contact.email + ")"
@@ -121,9 +118,12 @@ export class AuthService {
       this.modalService.hide()
   }
 
-  public failedAccountEdit() {
+  public alertFailedAccountEdit(error: HttpErrorResponse) {
+    console.log(error);
+
     this.alertService.danger(
-      "Uh oh! Something didn't work there. Try again?"
+      "Uh oh! Something didn't work there. \n" +
+      "Error: " + error.error
     )
     this.modalService.hide()
   }

@@ -1,5 +1,6 @@
 @import "/src/styles.scss";
 @import "/src/app/modules/owner/owner/owner.component.scss";
+@import "../login-modal/login-modal.component.scss";
 
 $editButtonWidth: 2rem;
 
@@ -105,25 +106,6 @@ h2 {
   justify-content: center;
   align-items: center;
 }
-
-//#region ========== MODAL ==========
-.modal-container {
-  max-width: 400px;
-  margin-inline: 2rem;
-}
-
-.login-form {
-  display: flex;
-  justify-content: center;
-  flex-flow: column;
-  width: 100%;
-}
-
-.actions {
-  justify-content: space-around;
-  justify-items: stretch;
-}
-//#endregion ---- modal ----
 
 @media only screen and (min-width: 500px) {
   .info {

@@ -131,7 +131,7 @@ export const reducer = createReducer(
     } else return { ...state }
   }),
   mutableOn(AuthActions.addNewContactSuccess, (state, action) => {
-    state.user.contacts = action.contacts
+    state.user.contacts.push(action.contact)
   }),
 
   on(AuthActions.resetAuthError, (state, action) => ({

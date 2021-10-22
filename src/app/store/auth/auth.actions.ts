@@ -172,13 +172,13 @@ export const addNewContact = createAction(
   '[Account Add Contact Modal] Add Contact',
   props<{
     id: string,
-    contacts: Contacts
+    contact: Contact
   }>()
 )
 
 export const addNewContactSuccess = createAction(
   '[Account Add Contact Modal] Add Contact Success',
-  props<{ id: string, contacts: Contacts }>()
+  props<{ id: string, contact: Contact }>()
 )
 
 export const addNewContactFailure = createAction(
