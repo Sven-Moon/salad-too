@@ -41,69 +41,20 @@ export class AuthAPIService {
     return this.httpClient.post(url, body)
   }
 
-  public updateUsername(data: {
-    id: string, password: string, newUsername: string
-  }): Observable<any> {
-    let body: User
-    body = this.fillBody()
-    body.name = data.newUsername
-
-
-    return this.updateServer(body)
+  public updateUser(user: User, password: string) {
+    let url: string = environment.baseUrl + '/users/update/' + user.id
+    return this.httpClient.put(url, user)
   }
 
-  public updatePassword(data: {
-    id: string, password: string, newPassword: string
-  }): Observable<any> {
-    let body: User
-    body = this.fillBody()
-    body.name = data.password
-
-
-    return this.updateServer(body)
+  public addContact(name: string, email: string, img: string): Observable<any> {
+    let url: string = environment.baseUrl + '/users/contacts/new/'
+    let body = { name: name, email: email, img: img }
+    return this.httpClient.post(url, body)
   }
 
-  public updateEmail(data: {
-    id: string, password: string, newEmail: string
-  }): Observable<any> {
-    let body: User
-    body = this.fillBody()
-    body.name = data.newEmail
-
-
-    return this.updateServer(body)
-  }
-
-  public updatePhoneNumber(data: {
-    id: string, password: string, newPhoneNumber: string
-  }): Observable<any> {
-    let body: User
-    body = this.fillBody()
-    body.name = data.newPhoneNumber
-
-    return this.updateServer(body)
-  }
-
-  public addNewContact(data: {
-    id: string, contact: Contact
-  }): Observable<any> {
-    let body: User
-    body = Object.assign({},this.fillBody())
-    let contacts = Object.assign([],body.contacts)
-    contacts.push(data.contact)
-    body.contacts = contacts
-
-    return this.updateServer(body)
-  }
-
-  public updateContacts(data: {id: string, contacts: Contacts
-  }): Observable<any> {
-    let body: User
-    body = this.fillBody()
-    body.contacts = data.contacts
-
-
-    return this.updateServer(body)
+  public deleteContact(email: string) {
+    let url: string = environment.baseUrl + '/users/contacts/delete/' + email
+    return this.httpClient.delete(url)
   }
 
   private updateServer(body:User) {

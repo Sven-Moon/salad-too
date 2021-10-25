@@ -1,17 +1,15 @@
-
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertService } from '@full-fledged/alerts';
 import { Store } from '@ngrx/store';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { of } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { MaskService } from 'ngx-mask';
 import { AuthResp } from '../models/Auth';
 import { Contact, User } from '../models/User';
 import { clearCart, updateLastOwner } from '../modules/order/state/cart/cart.actions';
 import { clearItem } from '../modules/order/state/item/item.actions';
-import { registerUserSuccess, setGuestId } from '../store/auth/auth.actions';
+import { setGuestId } from '../store/auth/auth.actions';
 import { selectUser } from '../store/auth/auth.selectors';
 import { OrderService } from './order.service';
 
@@ -79,43 +77,37 @@ export class AuthService {
     return id
   }
 
-  public alertUsernameUpated(name: string) {
-    this.alertService.success(
-      "Username updated. We\'ll call you " + name + " from now on!"
-    ),
-      this.modalService.hide()
-  }
-
-  public alertPasswordUpdated() {
-    this.alertService.success(
-      "Password successfully updated to **********"
-    ),
-      this.modalService.hide()
-  }
-
-  public alertEmailUpdated(email: string) {
-    this.alertService.success(
-      "Email updated: " + email
-    ),
-      this.modalService.hide()
-  }
-
-  public alertPhoneNumberUpdated(phone: string) {
-    this.alertService.success(
-      "Phone Number updated to: ("
-      + phone.slice(0, 3) + ")"
-      + phone.slice(3, 6) + "-"
-      + phone.slice(6, 10)
-    ),
-      this.modalService.hide()
-  }
-
-  public alertNewContactAdded(contact: Contact) {
+  public alertContactAdded(contact: Contact) {
     this.alertService.success(
       "New Contact Added: \n" + contact.name
       + "\n(" + contact.email + ")"
     ),
       this.modalService.hide()
+  }
+
+  public alertUserUpdated( oldValue: string,
+    newValue: string, field: string
+  ): void {
+    let newVal = newValue
+    let oldVal = oldValue
+    let message: string
+    switch (field) {
+      case 'password':
+        message = "Password updated"
+        break;
+      case 'phone number':
+        newVal = newValue.slice(0,3) + "-" +
+          newValue.slice(3,6) + "-" +
+          newValue.slice(6)
+          message = "Phone number updated from "
+          + oldVal + "to " + newVal
+        break;
+      case 'username':
+        message = "Phone number updated from "
+        + oldVal + "to " + newVal
+    }
+    this.alertService.success(message),
+    this.modalService.hide()
   }
 
   public alertFailedAccountEdit(error: HttpErrorResponse) {

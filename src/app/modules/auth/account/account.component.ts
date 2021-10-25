@@ -5,7 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { Contact, Contacts, User } from 'src/app/models/User';
 import { NavService } from 'src/app/services/nav.service';
-import { addContact, addNewContact, updateEmail, updatePassword, updatePhone, updateUserName } from 'src/app/store/auth/auth.actions';
+import { addContact,  deleteContact,  updateUser } from 'src/app/store/auth/auth.actions';
 import { selectContacts, selectUser } from 'src/app/store/auth/auth.selectors';
 
 @Component({
@@ -22,8 +22,8 @@ export class AccountComponent implements OnInit {
     newUsername: null,
   }
   editPasswordForm = {
+    currentPassword: null,
     password: null,
-    newPassword: null,
     confirmPassword: null,
   }
   editEmailForm = {
@@ -51,7 +51,7 @@ export class AccountComponent implements OnInit {
     this.navService.updateNavPosition()
     this.contacts$ = this.store.select(selectContacts)
     this.store.select(selectUser).subscribe(user =>
-      this.user = user
+      this.user = Object.assign({}, user)
     )
   }
 
@@ -61,50 +61,72 @@ export class AccountComponent implements OnInit {
   }
 
   public editUserName(f: NgForm): void {
-    this.store.dispatch(updateUserName({
-      id: this.user.id,
-      password: f.value.password,
-      newUsername: f.value.newUsername
-    }))
+    let oldName = this.user.name
+    this.user.name = f.value.newUsername
+    this.updateUser(
+      this.user,
+      oldName,
+      f.value.newUsername,
+      'username',
+      f.value.password
+    )
+
   }
 
   public editUserPassword(f: NgForm): void {
-    this.store.dispatch(updatePassword({
-      id: this.user.id,
-      password: f.value.password,
-      newPassword: f.value.newPassword
-    }))
+    let oldPassword = this.user.password
+    this.user.password = f.value.password
+    this.updateUser(
+      this.user,
+      oldPassword,
+      f.value.password,
+      'password',
+      f.value.currentPassword
+    )
   }
 
   public editUserEmail(f: NgForm): void {
-    this.store.dispatch(updateEmail({
-      id: this.user.id,
-      password: f.value.password,
-      newEmail: f.value.newEmail
-    }))
+    let oldEmail = this.user.email
+    this.user.email = f.value.newEmail
+    this.updateUser(
+      this.user,
+      oldEmail,
+      f.value.newEmail,
+      'email',
+      f.value.password
+    )
   }
 
   public editUserPhone(f: NgForm): void {
-    this.store.dispatch(updatePhone({
-      id: this.user.id,
-      password: f.value.password,
-      newPhone: f.value.newPhoneNumber
-    }))
+    let oldPhoneNumber = this.user.phoneNumber
+    this.user.phoneNumber = f.value.newPhoneNumber
+    this.updateUser(
+      this.user,
+      oldPhoneNumber,
+      f.value.newPhoneNumber,
+      'phone number',
+      f.value.password
+    )
   }
 
-  public updateContacts(f: NgForm) {
-    // create new contacts list from current & add new contact
-    let newContact: Contact = {
-      name: f.value.name,
+  private updateUser(user: User, oldValue: string,newValue: string,
+    field: string, password: string
+  ): void {
+    this.store.dispatch(updateUser({user, oldValue, newValue, field, password}))
+  }
+
+  /** CONTACTS*/
+  public addNewContact(f: NgForm): void {
+    this.store.dispatch(addContact({
+      name: f.value.contactName,
       email: f.value.contactEmail,
-      img: './assets/images/profile_1.png'
-    }
-    // addNewContacts calls API to update server
-    this.store.dispatch(addNewContact({
-      id: this.user.id,
-      contact: newContact
-    }))
+      img: './assets/images/profile_1.png' }))
   }
 
+  public deleteContact(f: NgForm): void {
+    this.store.dispatch(deleteContact({
+      email: f.value.email
+    }))
+  }
 
 }

@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { AuthResp } from 'src/app/models/Auth';
 import { Contact, Contacts, User } from 'src/app/models/User';
@@ -42,21 +42,6 @@ export const registerUserSuccess = createAction(
     props<{ error: HttpErrorResponse }>()
     );
 
-    export const checkRegistered = createAction(
-      '[Login Modal] Check if user exists',
-      props<{ email: string }>()
-    );
-
-    export const checkRegisteredSuccess = createAction(
-      '[Login Modal] User exists Success',
-      props<{ exists: boolean }>()
-    );
-
-    export const checkRegisteredFailure = createAction(
-      '[Login Modal] User exists Failure',
-      props<{ error: any }>()
-    );
-
 // ------------ INITIAL: GUEST ------------
 export const setGuestId = createAction(
   '[App Root] Set Guest ID',
@@ -65,7 +50,7 @@ export const setGuestId = createAction(
 
 //#region CONTACTS ------------
 export const addContact = createAction(
-  '[Owner Add] Add Contact',
+  '[Owner Add/Account] Add Contact',
   props<{
     name: string,
     email: string,
@@ -73,121 +58,70 @@ export const addContact = createAction(
   }>()
 );
 
+export const addContactSuccess = createAction(
+  '[API] Add Contact Success',
+  props<{contact: Contact }>()
+);
+
+export const addContactFailure = createAction(
+  '[API] Add Contact Failure',
+  props<{ error: any }>()
+);
+
+export const deleteContact = createAction(
+  '[Account] Delete Contact',
+  props<{ email: string }>()
+);
+
+export const deleteContactSuccess = createAction(
+  '[API] Add Contact Success',
+  props<{ email: string }>()
+);
+
+export const deleteContactFailure = createAction(
+  '[API] Add Contact Failure',
+  props<{ error: any }>()
+);
+
+
+
   //#endregion CONTACTS ------------
 
 
-  // ------------ ACCOUNT ------------
-  // #region USERNAME -----------------------------
-
-  export const editUserName = createAction(
-    '[Account] Edit User Name',
-    props<{ name: string }>()
-  );
-  export const updateUserName = createAction(
-  '[Account Name Edit Modal] Update User Name',
-  props<{
-    id: string,
-    password: string,
-    newUsername: string
-  }>()
-)
-
-export const updateUserNameSuccess = createAction(
-  '[Account Name Edit Modal] Update User Name Success',
-  props<{ id: string, name: string }>()
-)
-
-export const updateUserNameFailure = createAction(
-  '[Account Name Edit Modal] Update User Name Failure',
-  props<{ error: any }>()
-)
-//#endregion username
-
-// #region PASSWORD -----------------------------
-export const updatePassword = createAction(
-  '[Account Password Edit Modal] Update Password',
-  props<{
-    id: string,
-    password: string,
-    newPassword: string
-  }>()
-)
-
-export const updatePasswordSuccess = createAction(
-  '[Account Password Edit Modal] Update Password Success',
-  // password is not locally stored
-  // props<{ id: string, password: string }>()
-)
-
-export const updatePasswordFailure = createAction(
-  '[Account Password Edit Modal] Update Password Failure',
-  props<{ error: any }>()
-)
-//#endregion username
-
-// #region EMAIL -----------------------------
-export const updateEmail = createAction(
-  '[Account Email Edit Modal] Update Email',
-  props<{
-    id: string,
-    password: string,
-    newEmail: string
-  }>()
-)
-
-export const updateEmailSuccess = createAction(
-  '[Account Email Edit Modal] Update Email Success',
-  props<{ id: string, email: string }>()
-)
-
-export const updateEmailFailure = createAction(
-  '[Account Email Edit Modal] Update Email Failure',
-  props<{ error: any }>()
-)
-// #endregion email
-
-// #region PHONE -----------------------------
-export const updatePhone = createAction(
-  '[Account Phone Edit Modal] Update Phone',
-  props<{
-    id: string,
-    password: string,
-    newPhone: string
-  }>()
-)
-
-export const updatePhoneSuccess = createAction(
-  '[Account Phone Edit Modal] Update Phone Success',
-  props<{ id: string, phoneNumber: string }>()
-)
-
-export const updatePhoneFailure = createAction(
-  '[Account Phone Edit Modal] Update Phone Failure',
-  props<{ error: any }>()
-)
-// #endregion phone
-
-// #region NEW CONTACT -----------------------------
-export const addNewContact = createAction(
-  '[Account Add Contact Modal] Add Contact',
-  props<{
-    id: string,
-    contact: Contact
-  }>()
-)
-
-export const addNewContactSuccess = createAction(
-  '[Account Add Contact Modal] Add Contact Success',
-  props<{ id: string, contact: Contact }>()
-)
-
-export const addNewContactFailure = createAction(
-  '[Account Add Contact Modal] Add Contact Failure',
-  props<{ error: any }>()
-)
 
 // #endregion new contact
 
 export const resetAuthError = createAction(
   '[Login Modal] Reset Errors on Component Teardown'
 );
+
+export const updateUser = createAction(
+  '[Account] Update User',
+  props<{
+    user: User,
+    oldValue: string,
+    newValue: string,
+    field: string,
+    password: string
+  }>()
+)
+
+export const updateUserSuccess = createAction(
+ '[Account] Update User Success',
+ props<{
+  user: User, oldValue: string,
+  newValue: string, field: string
+}>()
+);
+
+export const updateUserFailure = createAction(
+ '[Account] Update User Failure',
+ props<{ error: any}>()
+);
+
+export const alertUserUpdated = createAction(
+ '[Account] Update User Failure',
+ props<{ oldValue: string,
+  newValue: string, field: string}>()
+);
+

@@ -15,9 +15,10 @@ export class UsersMockInterceptor implements HttpInterceptor {
     Observable<HttpEvent<any>> {
     let urlMatchy: boolean = req.url.includes('/users/update')
     if (req.method === 'PUT' && urlMatchy) {
-    console.log('intercepted');
-
-      const userData = this.getUserData(req.body.id)
+      // const userData = this.getUserData(req.body.id)
+      // interceptor reflects the indicated change back to client
+      // as if it had changed it in a database
+      const userData = req.body
       const response = new HttpResponse({
         body: userData,
         status: 200

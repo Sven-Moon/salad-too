@@ -150,12 +150,12 @@
             <label for="password">Current Password</label>
             <input
               type="password"
-              name="password"
+              name="currentPassword"
               class="form-control"
-              id="oldPassword"
+              id="currentPassword"
               required
               placeholder="Current Password"
-              [(ngModel)]="editPasswordForm.password"
+              [(ngModel)]="editPasswordForm.currentPassword"
               #password="ngModel"
               [ngModelOptions]="{ updateOn: 'change' }"
             />
@@ -166,17 +166,17 @@
             <label for="password">New Password</label>
             <input
               type="password"
-              name="newPassword"
+              name="password"
               class="form-control"
-              id="newPassword"
+              id="password"
               required
               placeholder="New Password"
-              [(ngModel)]="editPasswordForm.newPassword"
+              [(ngModel)]="editPasswordForm.password"
               #newPassword="ngModel"
               pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
               [ngModelOptions]="{ updateOn: 'change' }"
             />
-            <div *ngIf="newPassword.errors?.pattern && newPassword.touched">
+            <div *ngIf="password.errors?.pattern && password.touched">
               Password must contain a minimum of
               <div class="flex-row">
                 <div class="col-6">
@@ -463,7 +463,7 @@
             <button
               type="button"
               class="btn-go"
-              (click)="updateContacts(f)"
+              (click)="addNewContact(f)"
               [disabled]="!f.valid"
             >
               Add Contact

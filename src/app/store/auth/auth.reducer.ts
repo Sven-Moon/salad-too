@@ -70,14 +70,6 @@ export const reducer = createReducer(
     user: null,
     error: action.error
   })),
-  on(AuthActions.checkRegisteredSuccess, (state, action) => ({
-    ...state,
-    userExists: action.exists
-  })),
-  on(AuthActions.checkRegisteredFailure, (state, action) => ({
-    ...state,
-    error: action.error
-  })),
 
   // --------GUEST ------------
   // sets guest & clears contacts
@@ -101,41 +93,24 @@ export const reducer = createReducer(
       img: action.img
     })
   }),
-  on(AuthActions.updateUserName, (state, action) => {
-    if (state.user.email === action.id) {
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          name: action.newUsername
-        }
-      }
-    } else return { ...state }
+  mutableOn(AuthActions.addContactSuccess, (state: State, action) => {
+    state.user.contacts.push({
+      name: action.contact.name,
+      email: action.contact.email,
+      img: action.contact.img
+    })
   }),
-  on(AuthActions.updateEmailSuccess, (state, action) => ({
-    ...state,
-    user: {
-      ...state.user,
-      email: action.email
-    }
-  })),
-  on(AuthActions.updatePhoneSuccess, (state, action) => {
-    if (state.user.email === action.id) {
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          phoneNumber: action.phoneNumber
-        }
-      }
-    } else return { ...state }
+  mutableOn(AuthActions.deleteContactSuccess, (state: State, action) => {
+    state.user.contacts = state.user.contacts.filter(contact =>
+      contact.email = action.email
+    )
   }),
-  mutableOn(AuthActions.addNewContactSuccess, (state, action) => {
-    state.user.contacts.push(action.contact)
-  }),
-
   on(AuthActions.resetAuthError, (state, action) => ({
     ...state, error: null
-  }))
+  })),
+  on(AuthActions.updateUserSuccess, (state, action) => ({
+  ...state, user: action.user
+  })),
+
 
 );

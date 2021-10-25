@@ -11,8 +11,9 @@ import { Store } from '@ngrx/store';
 import { setItemOwner } from 'src/app/modules/order/state/item/item.actions';
 import { AuthAPIService } from 'src/app/services/auth-api.service';
 import { OrderService } from 'src/app/services/order.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AuthResp } from 'src/app/models/Auth';
+import { User } from 'src/app/models/User';
 
 
 @Injectable()
@@ -101,160 +102,54 @@ export class AuthEffects {
     ),
     { dispatch: false }
   )
-  //#endregion ------------ REGISTER USER
+  //#endregion ------------ register user
 
-  //#region ------------ EDIT ACCOUNT
-  editUserName$ = createEffect(() => {
+  addContact$ = createEffect(() => {
     return this.actions$.pipe(
-
-      ofType(AuthActions.updateUserName),
+      ofType(AuthActions.addContact),
       concatMap((action) =>
-        this.authAPIService.updateUsername({
-          id: action.id,
-          password: action.password,
-          newUsername: action.newUsername
-        }).pipe(
-          map(data => AuthActions.updateUserNameSuccess({ id: data.id, name: data.name, })),
-          catchError(error => of(AuthActions.updateUserNameFailure({ error })))
+        this.authAPIService.addContact(action.email, action.name, action.img).pipe(
+          map((contact) => AuthActions.addContactSuccess({ contact })),
+          catchError((error) => of(AuthActions.addContactFailure({ error })))
         )
       )
-    );
-  });
-
-  editPassword$ = createEffect(() => {
-    return this.actions$.pipe(
-
-      ofType(AuthActions.updatePassword),
-      concatMap((action) =>
-        this.authAPIService.updatePassword({
-          id: action.id,
-          password: action.password,
-          newPassword: action.newPassword
-        }).pipe(
-          map(data => AuthActions.updatePasswordSuccess()),
-          catchError(error => of(AuthActions.updatePasswordFailure({ error })))
-        )
-      )
-    );
-  });
-
-  editEmail$ = createEffect(() => {
-    return this.actions$.pipe(
-
-      ofType(AuthActions.updateEmail),
-      concatMap((action) =>
-        this.authAPIService.updateEmail({
-          id: action.id,
-          password: action.password,
-          newEmail: action.newEmail
-        }).pipe(
-          map(data => AuthActions.updateEmailSuccess({
-            id: data.id,
-            email: data.email,
-          })),
-          catchError(error => of(AuthActions.updateEmailFailure({ error })))
-        )
-      )
-    );
-  });
-
-  editPhoneNumber$ = createEffect(() => {
-    return this.actions$.pipe(
-
-      ofType(AuthActions.updatePhone),
-      concatMap((action) =>
-        this.authAPIService.updatePhoneNumber({
-          id: action.id,
-          password: action.password,
-          newPhoneNumber: action.newPhone
-        }).pipe(
-          map(data => AuthActions.updatePhoneSuccess({ id: data.id, phoneNumber: data.phoneNumber, })),
-          catchError(error => of(AuthActions.updatePhoneFailure({ error })))
-        )
-      )
-    );
-  });
-
-  addNewContact$ = createEffect(() => {
-    return this.actions$.pipe(
-
-      ofType(AuthActions.addNewContact),
-      concatMap((action) =>
-        this.authAPIService.addNewContact({
-          id: action.id,
-          contact: action.contact
-        }).pipe(
-          map(data => AuthActions.addNewContactSuccess({
-            id: data.id,
-            contact: data.contact
-          })),
-          catchError(error => of(AuthActions.addNewContactFailure({ error })))
-        )
-      )
-    );
-  });
-  //#endregion ------------ ACCOUNT USER
-
-  //#region ------------- EDIT ACCOUNT FAILURE
-  alertAccountEditFailure$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(
-          AuthActions.updateUserNameFailure,
-          AuthActions.updatePasswordFailure,
-          AuthActions.updateEmailFailure,
-          AuthActions.updatePhoneFailure,
-          AuthActions.addNewContactFailure),
-        tap((error) => this.authService.alertFailedAccountEdit(error.error))
-      ),
-    { dispatch: false }
-  );
-  //#endregion ---------- EDIT ACCOUNT FAILURE
-
-  //#region ------------- EDIT ACCOUNT SUCCESS
-
-  alertUsernameUpdated$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.updateUserNameSuccess),
-        tap((action) => this.authService.alertUsernameUpated(action.name))
-      ),
-    { dispatch: false }
-  );
-
-  alertPasswordUpdated$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.updatePasswordSuccess),
-        tap(() => this.authService.alertPasswordUpdated())
-      ),
-    { dispatch: false }
-  );
-
-  alertEmailUpdated$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.updateEmailSuccess),
-        tap((action) => this.authService.alertEmailUpdated(action.email))
-      ),
-    { dispatch: false }
-  );
-
-  alertPhoneNumberUpdated$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.updatePhoneSuccess),
-        tap((action) => this.authService.alertPhoneNumberUpdated(action.phoneNumber))
-      ),
-    { dispatch: false }
-  );
+    )
+  })
 
   alertContactsUpdated$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(AuthActions.addNewContactSuccess),
-        tap((action) => this.authService.alertNewContactAdded(action.contact))
+        ofType(AuthActions.addContactSuccess),
+        tap((action) => this.authService.alertContactAdded(action.contact))
       ),
+    { dispatch: false }
+  );
+
+  updateUser$ = createEffect(() => {
+    return this.actions$.pipe(
+        ofType(AuthActions.updateUser),
+        concatMap((action) =>
+          this.authAPIService.updateUser(action.user, action.password).pipe(
+            map(
+              (user: User) => AuthActions.updateUserSuccess({
+                user, oldValue: action.oldValue,
+                newValue: action.newValue, field: action.field
+              })),
+            catchError(error => of(AuthActions.updateUserFailure({ error }))))
+          ),
+    );
+  });
+
+  alertUpdateUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.updateUserSuccess),
+      tap((action) => {
+        this.authService.alertUserUpdated(
+        action.oldValue,
+        action.newValue,
+        action.field)
+      })
+    ),
     { dispatch: false }
   );
   //#endregion ----------------- EDIT ACCOUNT SUCCESS
