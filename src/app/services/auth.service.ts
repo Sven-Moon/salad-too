@@ -89,6 +89,13 @@ export class AuthService {
       this.modalService.hide()
   }
 
+  public alertContactDeleted(id: string) {
+    this.alertService.success(
+      `New Contact Deleted (ID: ${id}) \n`
+    ),
+      this.modalService.hide()
+  }
+
   public alertUserUpdated( oldValue: string,
     newValue: string, field: string
   ): void {

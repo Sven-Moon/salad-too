@@ -38,7 +38,7 @@ export class AccountComponent implements OnInit {
     newPhoneNumber: null,
   }
   addContactForm = {
-    contactName: null,
+    newContactName: null,
     contactEmail: null
   }
 
@@ -118,11 +118,17 @@ export class AccountComponent implements OnInit {
 
   /** CONTACTS*/
   public addNewContact(f: NgForm): void {
+    console.log('contact (new)');
+
+
     let contact = {
       id: f.value.contactEmail,
-      name: f.value.contactName,
+      name: f.value.newContactName,
       email: f.value.contactEmail,
-      img: './assets/images/profile_1.png' }
+      img: './assets/images/profile_1.png'
+    }
+
+    console.log(f.value.newContactName);
     this.store.dispatch(addContact({ contact }))
   }
 

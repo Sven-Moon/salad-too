@@ -1,6 +1,7 @@
 import { HttpRequest, HttpEvent, HttpHandler, HttpInterceptor, HttpResponse, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
+import { Contact } from "src/app/models/Contact";
 import { environment } from "src/environments/environment";
 
 @Injectable({ providedIn: 'root' })
@@ -16,7 +17,11 @@ export class ContactsMockInterceptor implements HttpInterceptor {
       // const userData = this.getUserData(req.body.id)
       // interceptor reflects the indicated change back to client
       // as if it had changed it in a database
-      const contact = req.body
+      const contact:Contact = req.body
+      // if email is empty, replace with unique ID
+      if (contact.id === null) {
+        contact.id = this.generateRandomId()
+      }
       const response = new HttpResponse({
         body: contact,
         status: 200
@@ -34,24 +39,29 @@ export class ContactsMockInterceptor implements HttpInterceptor {
      * be removed from local store
      */
     let deleteUrl = baseUrl + '/users/contacts/delete/'
-    // const queryString = window.location.search
-    // const urlParams = new URLSearchParams(queryString)
-    // const id = urlParams.get('id')
-    // console.log(queryString)
     if (req.method === 'DELETE' && req.url.includes(deleteUrl)) {
       // interceptor reflects the indicated change back to client
       // as if it had changed it in a database
-      // let regMatch: RegExp = "/(?:\/contacts\/delete/)([^\r\n])*/"
-      const id = req.url.match("/(?:\/contacts\/delete/)([^\r\n])*/")
+      console.log(req.url)
+      // const id = req.url.match("/(?:\/contacts\/delete\/)([^\r\n])*/")
+      const id = req.url.slice(req.url.lastIndexOf('/')+1)
       console.log(id)
       const response = new HttpResponse({
-        body: id,
+        body: { id: id },
         status: 200
       })
       return of(response)
     }
 
     return next.handle(req)
+  }
+
+  generateRandomId():string {
+    let id: string = (Math.random() * 1E8).toFixed(0).toString()
+    while (id.length > length) {
+      id = "0" + id
+    }
+    return id
   }
 
 }

@@ -52,7 +52,12 @@
 </div>
 <h2>Contacts</h2>
 <div class="contactsContainer">
-  <div class="addContact pointer" (click)="openModal(addContact)">+</div>
+  <img
+    src="./assets/images/add.png"
+    (click)="openModal(addContact)"
+    class="addContact pointer"
+    alt="Add Contact Button"
+  />
   <ng-container *ngFor="let contact of contacts$ | async">
     <div class="profile-wrap">
       <img
@@ -427,16 +432,16 @@
         <div class="login-form flex-col flex-center">
           <!-- ======= Name ======= -->
           <div class="form-group flex-col flex-center">
-            <label for="name">Name</label>
+            <label for="newContactName">Name</label>
             <input
               type="text"
-              name="name"
+              name="newContactName"
               class="form-control"
+              id="newContactName"
               required
               placeholder="my buddy"
               minLength="1"
-              [(ngModel)]="addContactForm.contactName"
-              #contactName="ngModel"
+              [(ngModel)]="addContactForm.newContactName"
               #newContactName="ngModel"
             />
             <div *ngIf="newContactName.errors?.pattern && newContactName.dirty">
@@ -460,7 +465,6 @@
               [ngModelOptions]="{ updateOn: 'change' }"
               placeholder="me@example.com"
               pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-              required
             />
             <div *ngIf="contactEmail.errors?.pattern && f.dirty">
               A valid email is required.

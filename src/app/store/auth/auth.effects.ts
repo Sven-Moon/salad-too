@@ -113,7 +113,7 @@ export class AuthEffects {
     )
   })
 
-  alertContactsAdded$ = createEffect(
+  alertContactAdded$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(AuthActions.addContactSuccess),
@@ -133,6 +133,15 @@ export class AuthEffects {
       )
     )
   })
+
+  alertContactDeleted$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.deleteContactSuccess),
+        tap((action) => this.authService.alertContactDeleted(action.id))
+      ),
+    { dispatch: false }
+  );
 
   updateUser$ = createEffect(() => {
     return this.actions$.pipe(

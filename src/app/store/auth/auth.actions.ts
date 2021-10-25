@@ -1,8 +1,8 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { AuthResp } from 'src/app/models/Auth';
 import { User } from 'src/app/models/User';
-import { Contact, Contacts } from 'src/app/models/Contact';
+import { Contact } from 'src/app/models/Contact';
 
 
 // ------------ LOG IN / OUT ------------
@@ -71,12 +71,12 @@ export const deleteContact = createAction(
 );
 
 export const deleteContactSuccess = createAction(
-  '[API] Add Contact Success',
+  '[API] Delete Contact Success',
   props<{ id: string }>()
 );
 
 export const deleteContactFailure = createAction(
-  '[API] Add Contact Failure',
+  '[API] Delete Contact Failure',
   props<{ error: any }>()
 );
 

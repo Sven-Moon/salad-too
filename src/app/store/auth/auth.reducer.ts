@@ -84,10 +84,20 @@ export const reducer = createReducer(
   mutableOn(AuthActions.addContactSuccess, (state: State, action) => {
     state.user.contacts.push(action.contact)
   }),
-  mutableOn(AuthActions.deleteContactSuccess, (state: State, action) => {
-    state.user.contacts = state.user.contacts.filter(contact =>
-      contact.email !== action.id
-    )
+  on(AuthActions.deleteContactSuccess, (state, action) => {
+    // console.log('user');
+    // console.log(state.user);
+    // console.log('contacts');
+    // console.log(state.user.contacts);
+    //  contacts = Object.assign([],state.user.contacts)
+    let contacts = state.user.contacts.filter(contact => contact.id !== action.id)
+
+    return {
+      ...state,
+      user: {
+      ...state.user, contacts: contacts
+     }
+    }
   }),
   on(AuthActions.resetAuthError, (state, action) => ({
     ...state, error: null
