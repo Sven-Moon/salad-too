@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { addContact } from 'src/app/store/auth/auth.actions';
+import { Contact } from 'src/app/models/Contact';
+import { addContact, addContactSuccess } from 'src/app/store/auth/auth.actions';
+import { selectIsSignedIn } from 'src/app/store/auth/auth.selectors';
 
 @Component({
   selector: 'app-owner-add',
@@ -10,6 +12,7 @@ import { addContact } from 'src/app/store/auth/auth.actions';
   styleUrls: ['./owner-add.component.scss']
 })
 export class OwnerAddComponent implements OnInit {
+  signedIn: boolean
   // --------- MODAL ---------
   bsModalRef: BsModalRef
   form = {
@@ -23,6 +26,8 @@ export class OwnerAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.store.select(selectIsSignedIn)
+      .subscribe(state => this.signedIn = state)
   }
 
   public closeAddContact() {
@@ -30,11 +35,18 @@ export class OwnerAddComponent implements OnInit {
   }
 
   public addContact(f: NgForm) {
-    this.store.dispatch(addContact({
+    let contact: Contact = {
+      id: f.value.email,
       name: f.value.name,
       email: f.value.email,
       img: './assets/images/profile_1.png'
-    }))
+    }
+    if (this.signedIn) {
+      this.store.dispatch(addContact({ contact }))
+    } else {
+      this.store.dispatch(addContactSuccess({ contact }))
+    }
+
     this.closeAddContact()
   }
 

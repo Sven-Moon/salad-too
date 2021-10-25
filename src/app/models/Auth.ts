@@ -1,4 +1,4 @@
-import { Contacts } from "./User";
+import { Contacts } from "./Contact";
 
 export interface AuthResp {
   id: string;

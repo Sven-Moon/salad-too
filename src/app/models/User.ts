@@ -1,3 +1,5 @@
+import { Contacts } from "./Contact";
+
 export interface User {
   id: string
   name: string
@@ -9,12 +11,3 @@ export interface User {
 }
 
 export type Users = User[]
-
-export interface Contact {
-  email: string
-  name: string
-  img: string
-  selected?: boolean
-}
-
-export type Contacts = Contact[]

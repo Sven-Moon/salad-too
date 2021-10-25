@@ -71,9 +71,16 @@ h2 {
 
 .contact-img {
   object-fit: scale-down;
-  height: 1.75rem;
-  margin: 0.5rem;
+  height: 2rem;
+  margin-inline: 0.5rem;
 }
+
+.remove-img {
+  object-fit: scale-down;
+  height: 1.5rem;
+  margin-inline-end: .5rem;
+  cursor: pointer;
+ }
 
 .contactsContainer {
   $contactsPadding: 0.5rem;

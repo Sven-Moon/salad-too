@@ -1,6 +1,6 @@
 import { Ingredients } from "./Ingredient";
 import { ItemGroup } from "./ItemGroup";
-import { Contact } from "./User";
+import { Contact } from "./Contact";
 
 export interface Item {
   id: string

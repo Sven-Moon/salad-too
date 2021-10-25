@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StaticData } from 'src/app/models/StaticData';
-import { Contact, User } from 'src/app/models/User';
+import { Contact } from 'src/app/models/Contact';
 import { selectIsSignedIn, selectUser } from 'src/app/store/auth/auth.selectors';
 import { updateLastOwner } from '../state/cart/cart.actions';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
-import { selectItemGroupTypes } from '../state/item/item.selectors';
 import { loadStaticData } from '../state/staticData/static-data.actions';
 import { selectStaticDataState } from '../state/staticData/static-data.selectors';
 
@@ -31,9 +30,10 @@ export class OrderComponent implements OnInit {
     this.store.select(selectIsSignedIn).subscribe(signedIn =>
       this.isSignedIn = signedIn
     )
-    if (!this.lastOwner.email && this.isSignedIn) {
+    if (!this.lastOwner.email) {
       this.store.select(selectUser).subscribe(user =>
         this.currentUser = {
+          id: user.id,
           name: user.name,
           img: user.img,
           email: user.email

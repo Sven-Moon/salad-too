@@ -16,6 +16,7 @@ namespace WebAPI.Data
     public DbSet<Ingredient> Ingredients { get; set; }
     public DbSet<ItemGroup> ItemGroups { get; set; }
     public DbSet<Item> Items { get; set; }
+    public DbSet<Recipe> Recipe { get; set; }
 
   }
 }

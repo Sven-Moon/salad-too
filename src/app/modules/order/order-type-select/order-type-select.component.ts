@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { ItemGroups } from 'src/app/models/ItemGroup';
-import { Contact } from 'src/app/models/User';
+import { Contact } from 'src/app/models/Contact';
 import { NavService } from 'src/app/services/nav.service';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
 import { setItemGroup, setLastItemOwnerAsItemOwner, setItemId, clearItem } from '../state/item/item.actions';

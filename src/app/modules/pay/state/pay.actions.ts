@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { ItemsByOwner } from 'src/app/models/Item';
 import { CreditInfo, Payment } from 'src/app/models/Payment';
-import { Contact, Contacts } from 'src/app/models/User';
+import { Contacts } from 'src/app/models/Contact';
 
 // ============ Pay Choose ============
 export const updateItemsByOwner = createAction(

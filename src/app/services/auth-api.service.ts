@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable, of, throwError } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Contact, Contacts, User } from '../models/User';
+import { User } from '../models/User';
+import { Contact } from '../models/Contact';
 import { selectUser } from '../store/auth/auth.selectors';
 
 @Injectable({
@@ -46,14 +47,14 @@ export class AuthAPIService {
     return this.httpClient.put(url, user)
   }
 
-  public addContact(name: string, email: string, img: string): Observable<any> {
-    let url: string = environment.baseUrl + '/users/contacts/new/'
-    let body = { name: name, email: email, img: img }
+  public addContact(contact: Contact): Observable<any> {
+    let url: string = environment.baseUrl + '/users/contacts/add'
+    let body = { id: contact.id, name: contact.name, email: contact.email, img: contact.img }
     return this.httpClient.post(url, body)
   }
 
-  public deleteContact(email: string) {
-    let url: string = environment.baseUrl + '/users/contacts/delete/' + email
+  public deleteContact(id: string): Observable<any> {
+    let url: string = environment.baseUrl + '/users/contacts/delete/' + id
     return this.httpClient.delete(url)
   }
 

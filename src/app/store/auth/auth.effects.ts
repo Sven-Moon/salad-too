@@ -7,11 +7,8 @@ import * as AuthActions from './auth.actions';
 import { AuthService } from 'src/app/services/auth.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { AlertService } from '@full-fledged/alerts';
-import { Store } from '@ngrx/store';
-import { setItemOwner } from 'src/app/modules/order/state/item/item.actions';
 import { AuthAPIService } from 'src/app/services/auth-api.service';
 import { OrderService } from 'src/app/services/order.service';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AuthResp } from 'src/app/models/Auth';
 import { User } from 'src/app/models/User';
 
@@ -79,7 +76,7 @@ export class AuthEffects {
       ofType(AuthActions.registerUser),
       concatMap((action) =>
         this.authAPIService.registerUser(action.email, action.username, action.password).pipe(
-          map((resp) => AuthActions.registerUserSuccess({ resp })),
+          map((user) => AuthActions.registerUserSuccess({ user })),
           catchError((error) => of(AuthActions.registerUserFailure({ error })))
         )
       )
@@ -90,7 +87,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.registerUserSuccess),
       // handles alert service & login to order component
-      tap((data) => { this.authService.processRegisteredUser(data.resp) })
+      tap((data) => { this.authService.processRegisteredUser(data.user) })
     ),
     { dispatch: false }
   )
@@ -108,7 +105,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.addContact),
       concatMap((action) =>
-        this.authAPIService.addContact(action.email, action.name, action.img).pipe(
+        this.authAPIService.addContact(action.contact).pipe(
           map((contact) => AuthActions.addContactSuccess({ contact })),
           catchError((error) => of(AuthActions.addContactFailure({ error })))
         )
@@ -116,7 +113,7 @@ export class AuthEffects {
     )
   })
 
-  alertContactsUpdated$ = createEffect(
+  alertContactsAdded$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(AuthActions.addContactSuccess),
@@ -124,6 +121,18 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
+
+  deleteContact$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.deleteContact),
+      concatMap((action) =>
+        this.authAPIService.deleteContact(action.id).pipe(
+          map((id) => AuthActions.deleteContactSuccess(id)),
+          catchError((error) => of(AuthActions.deleteContactFailure({ error })))
+        )
+      )
+    )
+  })
 
   updateUser$ = createEffect(() => {
     return this.actions$.pipe(

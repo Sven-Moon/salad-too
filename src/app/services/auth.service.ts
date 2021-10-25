@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { AlertService } from '@full-fledged/alerts';
 import { Store } from '@ngrx/store';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { MaskService } from 'ngx-mask';
 import { AuthResp } from '../models/Auth';
-import { Contact, User } from '../models/User';
+import { User } from '../models/User';
+import { Contact } from '../models/Contact';
 import { clearCart, updateLastOwner } from '../modules/order/state/cart/cart.actions';
 import { clearItem } from '../modules/order/state/item/item.actions';
 import { setGuestId } from '../store/auth/auth.actions';
@@ -78,9 +78,13 @@ export class AuthService {
   }
 
   public alertContactAdded(contact: Contact) {
+    let emailLine = ""
+    if (contact.email !== null) {
+      emailLine = "\n(" + contact.email + ")"
+    }
     this.alertService.success(
       "New Contact Added: \n" + contact.name
-      + "\n(" + contact.email + ")"
+      + emailLine
     ),
       this.modalService.hide()
   }

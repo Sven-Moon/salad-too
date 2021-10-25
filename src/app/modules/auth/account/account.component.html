@@ -55,8 +55,18 @@
   <div class="addContact pointer" (click)="openModal(addContact)">+</div>
   <ng-container *ngFor="let contact of contacts$ | async">
     <div class="profile-wrap">
-      <img src="./assets/images/profile_1.png" class="contact-img" alt="" />
+      <img
+        src="./assets/images/profile_1.png"
+        class="contact-img"
+        alt="default profile image"
+      />
       <div class="form-control">{{ contact.name }}</div>
+      <img
+        src="./assets/images/remove.png"
+        class="remove-img"
+        alt="remove button"
+        (click)="deleteContact(contact.email)"
+      />
     </div>
   </ng-container>
 </div>

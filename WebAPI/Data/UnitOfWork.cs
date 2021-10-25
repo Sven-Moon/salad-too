@@ -27,6 +27,8 @@ namespace WebAPI.Data
       new ItemGroupRepository(dc);
     public IItemRepository ItemRepository =>
       new ItemRepository(dc);
+    public IItemRepository ReceipeRepository =>
+      new ItemRepository(dc);
 
     public async Task<bool> SaveAsync()
     {

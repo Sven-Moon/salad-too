@@ -2,7 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
 import { CartItem, Item, Items } from 'src/app/models/Item';
 import { DrinkTypes, ItemGroup, ItemGroups } from 'src/app/models/ItemGroup';
-import { Contact } from 'src/app/models/User';
+import { Contact } from 'src/app/models/Contact';
 import { selectDrinkTypes, selectIngredients, selectIngredientTypes, selectAllItems, selectStaticDataState, selectItemGroups } from '../staticData/static-data.selectors';
 import * as fromItem from './item.reducer';
 

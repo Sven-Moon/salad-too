@@ -5,17 +5,16 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { Ingredient, Ingredients } from 'src/app/models/Ingredient';
 import { CartItem, CartItems, ItemsByOwner } from 'src/app/models/Item';
-import { Contact, Contacts } from 'src/app/models/User';
+import { Contact, Contacts } from 'src/app/models/Contact';
 import { NavService } from 'src/app/services/nav.service';
 import { OrderService } from 'src/app/services/order.service';
 import { PayInfoComponent } from '../../pay/pay-info/pay-info.component';
 import { changeCartItemQty, clearCart, duplicateCartItem, removeCartItem, updateCartItemOwner } from '../state/cart/cart.actions';
-import { selectCartItems, selectCartState, selectCartTotal, selectItemOwners, selectItemsByOwner, selectPossibleItemOwners } from '../state/cart/cart.selectors';
+import { selectCartItems, selectCartTotal, selectItemOwners, selectItemsByOwner, selectPossibleItemOwners } from '../state/cart/cart.selectors';
 import { editCartItem } from '../state/item/item.actions';
 import { selectIngredientWithPrice } from '../state/staticData/static-data.selectors';
 import { trigger, style, state, animate, transition } from '@angular/animations';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
-import { selectContacts, selectUser } from 'src/app/store/auth/auth.selectors';
 
 @Component({
   selector: 'app-order-cart',

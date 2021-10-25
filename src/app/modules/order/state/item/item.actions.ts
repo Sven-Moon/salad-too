@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { CartItem, Item } from 'src/app/models/Item';
-import { ItemGroup } from 'src/app/models/ItemGroup';
-import { Contact, User } from 'src/app/models/User';
+import { Contact } from 'src/app/models/Contact';
 
 // ======== OWNER ========
 

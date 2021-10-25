@@ -3,7 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
-import { Contact, Contacts, User } from 'src/app/models/User';
+import { User } from 'src/app/models/User';
+import { Contacts } from 'src/app/models/Contact';
 import { NavService } from 'src/app/services/nav.service';
 import { addContact,  deleteContact,  updateUser } from 'src/app/store/auth/auth.actions';
 import { selectContacts, selectUser } from 'src/app/store/auth/auth.selectors';
@@ -117,15 +118,17 @@ export class AccountComponent implements OnInit {
 
   /** CONTACTS*/
   public addNewContact(f: NgForm): void {
-    this.store.dispatch(addContact({
+    let contact = {
+      id: f.value.contactEmail,
       name: f.value.contactName,
       email: f.value.contactEmail,
-      img: './assets/images/profile_1.png' }))
+      img: './assets/images/profile_1.png' }
+    this.store.dispatch(addContact({ contact }))
   }
 
-  public deleteContact(f: NgForm): void {
+  public deleteContact(id: string): void {
     this.store.dispatch(deleteContact({
-      email: f.value.email
+      id: id
     }))
   }
 

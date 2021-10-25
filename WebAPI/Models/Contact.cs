@@ -6,9 +6,10 @@ namespace WebAPI.Data
   {
     [Required]
     [Key]
-    public string id { get; set; } // email
+    public string id { get; set; }
     [Required]
     public string name { get; set; }
+    public string email { get; set; }
     public string img { get; set; }
   }
 }

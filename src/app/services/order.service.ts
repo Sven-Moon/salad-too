@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CartItems, Item, Items } from '../models/Item';
-import { Contact, User } from '../models/User';
+import { CartItems } from '../models/Item';
+import { User } from '../models/User';
+import { Contact } from '../models/Contact';
 import { updateCartItemOwner, updateLastOwner } from '../modules/order/state/cart/cart.actions';
-import { selectCartItems, selectCartItemsIds, selectLastItemOwner } from '../modules/order/state/cart/cart.selectors';
+import { selectCartItems, selectCartItemsIds } from '../modules/order/state/cart/cart.selectors';
 import { setItemOwner } from '../modules/order/state/item/item.actions';
-import { selectAllItems } from '../modules/order/state/staticData/static-data.selectors';
 import { AlertService } from '@full-fledged/alerts';
 import { selectItemId } from '../modules/order/state/item/item.selectors';
 import { Router } from '@angular/router';

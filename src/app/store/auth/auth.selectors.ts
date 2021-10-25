@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Contacts, User } from 'src/app/models/User';
+import { User } from 'src/app/models/User';
 import * as fromAuth from './auth.reducer';
 
 export const selectAuthState = createFeatureSelector<fromAuth.State>(

@@ -38,11 +38,13 @@ export class MockUserDataInterceptor implements HttpInterceptor {
         "email": "MikeDanforth@npr.com",
         "contacts": [
           {
+            id: null,
             name: "Doug",
             email: null,
             img: "./assets/images/profile_1.png"
           },
           {
+            id: null,
             name: "Peter",
             email: null,
             img: "./assets/images/profile_1.png"
@@ -58,11 +60,13 @@ export class MockUserDataInterceptor implements HttpInterceptor {
         "email": "DougBerman@npr.com",
         "contacts": [
           {
+            id: null,
             name: "Mike",
             email: null,
             img: "./assets/images/profile_1.png"
           },
           {
+            id: null,
             name: "Bill",
             email: null,
             img: "./assets/images/profile_1.png"
@@ -78,16 +82,19 @@ export class MockUserDataInterceptor implements HttpInterceptor {
         "email": "PeterSegal@npr.com",
         "contacts": [
           {
+            id: null,
             name: "Mike",
             email: null,
             img: "./assets/images/profile_1.png"
           },
           {
+            id: null,
             name: "Bill",
             email: null,
             img: "./assets/images/profile_1.png"
           },
           {
+            id: null,
             name: "Martha",
             email: null,
             img: "./assets/images/profile_1.png"
@@ -103,6 +110,7 @@ export class MockUserDataInterceptor implements HttpInterceptor {
         "email": "BillKurtis@npr.com",
         "contacts": [
           {
+            id: null,
             name: "Martha",
             email: null,
             img: null

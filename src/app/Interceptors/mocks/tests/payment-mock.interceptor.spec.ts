@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PaymentMockInterceptor } from '../payment-mock.interceptor';
+import { PaymentMockInterceptor } from '../paymentMock.interceptor';
 
 describe('PaymentMockInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({

@@ -4,12 +4,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/app/models/Ingredient';
 import { CartItem, Items } from 'src/app/models/Item';
-import { Contact } from 'src/app/models/User';
 import { NavService } from 'src/app/services/nav.service';
 import { OrderService } from 'src/app/services/order.service';
 import { addItemToCart } from '../state/cart/cart.actions';
-import { selectLastItemOwner } from '../state/cart/cart.selectors';
-import { clearItem, deselectAllIngredientsOfType, filterIngredientType, setLastItemOwnerAsItemOwner, setItemId, toggleIngredient, cancelItem } from '../state/item/item.actions';
+import { clearItem, deselectAllIngredientsOfType, filterIngredientType, setItemId, toggleIngredient, cancelItem } from '../state/item/item.actions';
 import { selectCurrentItem, selectFilteredIngredientsByType, selectItemGroupTypes, selectItemIngredients, selectItemPrice, selectPickedIngredientType, selectSingleSelectIngredientTypes } from '../state/item/item.selectors';
 import { selectAllItems, selectIngredients } from '../state/staticData/static-data.selectors';
 

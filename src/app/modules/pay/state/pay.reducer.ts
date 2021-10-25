@@ -1,10 +1,4 @@
-import { EntityState } from '@ngrx/entity';
-import { Action, createReducer, on } from '@ngrx/store';
-import { mutableOn } from 'ngrx-etc';
-import { CartItem, ItemsByOwner } from 'src/app/models/Item';
-import { CreditInfo, Payment, Payments } from 'src/app/models/Payment';
-import { Contacts } from 'src/app/models/User';
-import * as PayActions from './pay.actions';
+import { createReducer } from '@ngrx/store';
 
 export const payFeatureKey = 'pay';
 

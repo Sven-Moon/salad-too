@@ -30,6 +30,7 @@ export const reducer = createReducer(
   //#region =============== Item Owner ===============
   on(ItemActions.setItemOwner, (state, action) => ({
     ...state, owner: {
+      id: action.owner.id,
       email: action.owner.email,
       img: action.owner.img,
       name: action.owner.name
@@ -38,6 +39,7 @@ export const reducer = createReducer(
   on(ItemActions.setLastItemOwnerAsItemOwner, (state, action) => ({
     ...state,
     owner: {
+      id: action.owner.id,
       email: action.owner.email,
       img: action.owner.img,
       name: action.owner.name

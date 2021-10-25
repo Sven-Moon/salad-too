@@ -3,11 +3,12 @@ import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs/internal/Observable';
 import { Item, Items } from 'src/app/models/Item';
-import { Contact, Contacts, User } from 'src/app/models/User';
+import { User } from 'src/app/models/User';
+import { Contact, Contacts } from 'src/app/models/Contact';
 import { selectContacts, selectIsSignedIn, selectUser, selectUserEmail } from 'src/app/store/auth/auth.selectors';
 import { LoginModalComponent } from '../../auth/login-modal/login-modal.component';
 import { OwnerAddComponent } from '../owner-add/owner-add.component';
-import { setItemName, setItemOwner } from '../../order/state/item/item.actions'
+import { setItemOwner } from '../../order/state/item/item.actions'
 import { selectCurrentItem } from '../../order/state/item/item.selectors';
 import { selectAllItems } from '../../order/state/staticData/static-data.selectors';
 import { OrderService } from 'src/app/services/order.service';

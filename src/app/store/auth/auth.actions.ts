@@ -1,7 +1,8 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { AuthResp } from 'src/app/models/Auth';
-import { Contact, Contacts, User } from 'src/app/models/User';
+import { User } from 'src/app/models/User';
+import { Contact, Contacts } from 'src/app/models/Contact';
 
 
 // ------------ LOG IN / OUT ------------
@@ -34,7 +35,7 @@ export const registerUser = createAction(
 
 export const registerUserSuccess = createAction(
   '[Login Modal] User Registration Success',
-  props<{ resp: AuthResp }>()
+  props<{ user: AuthResp }>()
   );
 
   export const registerUserFailure = createAction(
@@ -51,11 +52,7 @@ export const setGuestId = createAction(
 //#region CONTACTS ------------
 export const addContact = createAction(
   '[Owner Add/Account] Add Contact',
-  props<{
-    name: string,
-    email: string,
-    img: string
-  }>()
+  props<{ contact: Contact }>()
 );
 
 export const addContactSuccess = createAction(
@@ -70,12 +67,12 @@ export const addContactFailure = createAction(
 
 export const deleteContact = createAction(
   '[Account] Delete Contact',
-  props<{ email: string }>()
+  props<{ id: string }>()
 );
 
 export const deleteContactSuccess = createAction(
   '[API] Add Contact Success',
-  props<{ email: string }>()
+  props<{ id: string }>()
 );
 
 export const deleteContactFailure = createAction(

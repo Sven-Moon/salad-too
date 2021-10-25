@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { CartItem, Item, Items } from 'src/app/models/Item';
-import { Contact } from 'src/app/models/User';
+import { CartItem, Items } from 'src/app/models/Item';
+import { Contact } from 'src/app/models/Contact';
 import { NavService } from 'src/app/services/nav.service';
 import { OrderService } from 'src/app/services/order.service';
 import { addItemToCart } from '../state/cart/cart.actions';
 import { selectLastItemOwner } from '../state/cart/cart.selectors';
 import { clearItem, clearItemGroup, loadItem, setItemId } from '../state/item/item.actions';
 import { selectItemGroupPicked, selectItemsWithPrice, selectPickedItem } from '../state/item/item.selectors';
-import { selectAllItems } from '../state/staticData/static-data.selectors';
 
 @Component({
   selector: 'app-order-item-select',

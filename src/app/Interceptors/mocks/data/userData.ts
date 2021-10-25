@@ -8,13 +8,15 @@ export const userData: Users = [
         "email": "MikeDanforth@npr.com",
         "contacts": [
           {
+            id: "dougberman@npr.com",
             name: "Doug",
-            email: null,
+            email: "dougberman@npr.com",
             img: "./assets/images/profile_1.png"
           },
           {
+            id: "petersegal@npr.com",
             name: "Peter",
-            email: null,
+            email: "petersegal@npr.com",
             img: "./assets/images/profile_1.png"
           }
         ],
@@ -28,13 +30,15 @@ export const userData: Users = [
         "email": "DougBerman@npr.com",
         "contacts": [
           {
+            id: "mikedanforth@npr.com",
             name: "Mike",
-            email: null,
+            email: "mikedanforth@npr.com",
             img: "./assets/images/profile_1.png"
           },
           {
+            id: "billburtis@npr.com",
             name: "Bill",
-            email: null,
+            email: "billburtis@npr.com",
             img: "./assets/images/profile_1.png"
           }
         ],
@@ -48,16 +52,19 @@ export const userData: Users = [
         "email": "PeterSegal@npr.com",
         "contacts": [
           {
+            id: "mikedanforth@npr.com",
             name: "Mike",
-            email: null,
+            email: "mikedanforth@npr.com",
             img: "./assets/images/profile_1.png"
           },
           {
+            id: "billburtis@npr.com",
             name: "Bill",
-            email: null,
+            email: "billburtis@npr.com",
             img: "./assets/images/profile_1.png"
           },
           {
+            id: "00005",
             name: "Martha",
             email: null,
             img: "./assets/images/profile_1.png"
@@ -73,6 +80,7 @@ export const userData: Users = [
         "email": "BillKurtis@npr.com",
         "contacts": [
           {
+            id: "00006",
             name: "Martha",
             email: null,
             img: null
