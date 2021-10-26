@@ -4,13 +4,13 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100vh);
+  height: 100vh;
   min-width: 300px;
   position: fixed;
   display: flex;
   flex-direction: column;
   background-color: #eee;
-  overflow: hidden;
+  overflow: auto;
   box-sizing: border-box;
   padding: calc(1rem + #{$barHeight}) $hGap 0;
 }
@@ -20,7 +20,7 @@
   flex-flow: column nowrap;
   width: 100%;
   // max-width: 768px;
-  height: calc(100%);
+  height: 100%;
   overflow-y: visible;
   overflow-x: visible;
   margin-inline: auto;
@@ -29,7 +29,6 @@
   justify-content: flex-start;
   // border: 1px solid orange;
 }
-
 
 @media only screen and (min-width: 700px) {
   .main-panel-wrap {
