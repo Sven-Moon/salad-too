@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Payment, Payments } from 'src/app/models/Payment';
-import { attemptPayment, clearPayment } from '../state/pay.actions';
+import { attemptPayment, clearPayment, toggleFailFlag } from '../state/pay.actions';
 import { ViewChild, ElementRef } from '@angular/core';
 import { selectCartItems, selectCartTotal } from '../../order/state/cart/cart.selectors';
 import { Order } from 'src/app/models/Order';
@@ -20,30 +20,30 @@ import { OrderService } from 'src/app/services/order.service';
 export class PayInfoComponent implements OnInit {
   total: number = 0
   ccForm = this.fb.group({
-    name: ['Bob', [
+    name: ['', [
       Validators.required,
       Validators.minLength(1)
     ]],
-    ccNum: ['1234567890123456', [
+    ccNum: ['', [
       Validators.required,
       Validators.pattern('^[ 0-9]*$'),
       Validators.minLength(17)
     ]],
-    expMonth: ['12', [
+    expMonth: ['', [
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(2),
       Validators.max(12),
       Validators.min(1),
     ]],
-    expYear: ['34', [
+    expYear: ['', [
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(2),
       Validators.max(99),
       Validators.min(1),
     ]],
-    cvv: ['234', [
+    cvv: ['', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(3)
@@ -51,6 +51,7 @@ export class PayInfoComponent implements OnInit {
   })
   payment: Payment
   payments: Payments
+  failFlag
 
   @ViewChild('ccNum') ccNumberField: ElementRef
 
@@ -67,7 +68,7 @@ export class PayInfoComponent implements OnInit {
     )
   }
 
-  public submit() {
+  public submit():void {
     // create a ccInfo Object
     let ccInfo = {
       name: this.ccForm.controls.name.value,
@@ -113,7 +114,7 @@ export class PayInfoComponent implements OnInit {
   }
 
   /* Insert spaces to enhance legibility of credit card numbers */
-  creditCardNumberSpacing() {
+  creditCardNumberSpacing():void {
     const input = this.ccNumberField.nativeElement;
     const { selectionStart } = input;
     const { ccNum } = this.ccForm.controls;
@@ -144,5 +145,21 @@ export class PayInfoComponent implements OnInit {
       input.setSelectionRange(selectionStart, selectionStart, 'none');
     }
   }
+
+  public toggleFail():void {
+    this.store.dispatch(toggleFailFlag({flag: this.failFlag}))
+  }
+
+  public autoFill(): void {
+    this.ccForm.setValue({
+      name: 'Bob',
+      ccNum: '1234567890123456',
+      cvv: '123',
+      expMonth: '01',
+      expYear: '24'
+    })
+    this.creditCardNumberSpacing()
+  }
+
 
 }

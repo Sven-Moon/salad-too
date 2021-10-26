@@ -57,7 +57,7 @@ export class AccountComponent implements OnInit {
   }
 
   // Opens all modals, only allowing 1 open at a time
-  openModal(template: TemplateRef<any>) {
+  public openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template);
   }
 

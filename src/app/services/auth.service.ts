@@ -114,7 +114,7 @@ export class AuthService {
           + oldVal + "to " + newVal
         break;
       case 'username':
-        message = "Phone number updated from "
+        message = "Name updated from "
         + oldVal + "to " + newVal
     }
     this.alertService.success(message),

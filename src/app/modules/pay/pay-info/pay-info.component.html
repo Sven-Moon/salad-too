@@ -1,24 +1,61 @@
 <div class="modal-wrap">
   <div class="div modal-header">
-    <div class="modal-title">
-      Credit Cart Info
-    </div>
+    <div class="modal-title">Credit Cart Info</div>
   </div>
   <div class="modal-body">
     <!-- ================ TOTAL ================ -->
     <div class="totalPanel flex-row">
       <div class="totalLabel">Your Total</div>
-      <div class="total form-control">{{total|currency}}</div>
+      <div class="total form-control">{{ total | currency }}</div>
     </div>
+
+    <!-- ================ Fail Flag ================ -->
+    <div class="flex-row">
+      <div class="flexcol">Make this payment fail</div>
+      <input
+        type="checkbox"
+        name="failFlag"
+        id="failFlag"
+        [(ngModel)]="failFlag"
+        (ngModelChange)="toggleFail()"
+      />
+    </div>
+    <!-- ================ Auto-fill ================ -->
+    <button
+      (click)="autoFill()"
+      type="button"
+      style="
+        margin-left: 1rem;
+        font-size: 1rem;
+        background-color: orange;
+        color: black;
+        padding: 0.25rem;
+      "
+    >
+      Autofill Info
+    </button>
     <!-- ================ CC FORM ================ -->
-    <form [formGroup]="ccForm" class="ccForm">
+    <form [formGroup]="ccForm" class="ccForm" (ngSubmit)="(submit)">
       <div class="form-group">
         <label>Name on card</label>
-        <input type="text" placeholder="Name" class="form-control" maxlength=20 formControlName="name">
+        <input
+          type="text"
+          placeholder="Name"
+          class="form-control"
+          maxlength="20"
+          formControlName="name"
+        />
       </div>
       <div class="form-group">
         <label>Card Number</label>
-        <input type="tel" placeholder="#### #### #### ####" class="form-control" formControlName="ccNum" (keyup)="creditCardNumberSpacing()" #ccNum>
+        <input
+          type="tel"
+          placeholder="#### #### #### ####"
+          class="form-control"
+          formControlName="ccNum"
+          (keyup)="creditCardNumberSpacing()"
+          #ccNum
+        />
       </div>
 
       <div class="exp_cvv flex-row">
@@ -26,9 +63,19 @@
           <div class="form-group">
             <label>Exp Date (mm/yy)</label>
             <div class="flex-row form-control">
-              <input type="text" placeholder="mm" class="" formControlName="expMonth">
+              <input
+                type="text"
+                placeholder="mm"
+                class=""
+                formControlName="expMonth"
+              />
               /
-              <input type="text" placeholder="yy" class="" formControlName="expYear">
+              <input
+                type="text"
+                placeholder="yy"
+                class=""
+                formControlName="expYear"
+              />
             </div>
           </div>
         </div>
@@ -36,20 +83,36 @@
         <div class="cvv flex-col">
           <div class="form-group">
             <label>CVV</label>
-            <input type="text" placeholder="###" class="form-control" formControlName="cvv">
+            <input
+              type="text"
+              placeholder="###"
+              class="form-control"
+              formControlName="cvv"
+            />
           </div>
         </div>
       </div>
-
-    </form> <!-- ---- cc form ---- -->
-  </div> <!-- ---- modal body ---- -->
-  <!-- ================ ACTIONS ================ -->
-  <div class="actions modalActions">
-    <button type="submit" [disabled]="ccForm.invalid" class="btn-go" (click)="submit()">
-      Pay {{total |currency}}
-    </button>
-    <button type="button" class="btn-cancel" (click)="payModalRef.hide()">
-      Cancel
-    </button>
-  </div> <!-- ---- actions ---- -->
-</div> <!-- ---- modal wrap ---- -->
+      <!-- ================ ACTIONS ================ -->
+      <div class="actions modalActions">
+        <button
+          type="submit"
+          [disabled]="ccForm.invalid"
+          class="btn-go"
+          name="submitPayment"
+          id="submitPayment"
+          (keyup.enter)="submit()"
+          (click)="submit()"
+        >
+          Pay {{ total | currency }}
+        </button>
+        <button type="button" class="btn-cancel" (click)="payModalRef.hide()">
+          Cancel
+        </button>
+      </div>
+      <!-- ---- actions ---- -->
+    </form>
+    <!-- ---- cc form ---- -->
+  </div>
+  <!-- ---- modal body ---- -->
+</div>
+<!-- ---- modal wrap ---- -->

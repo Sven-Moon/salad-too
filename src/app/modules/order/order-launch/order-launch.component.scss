@@ -109,6 +109,15 @@ img {
   object-fit: contain;
 }
 
+.under-construction {
+  background-color: gray;
+  color: rgb(172, 172, 172);
+}
+
+.under-construction:hover {
+  background-color: darkgray;
+}
+
 @media only screen and (min-width: 700px) {
   .background-splash {
     transform: translate(-45%, -0%);

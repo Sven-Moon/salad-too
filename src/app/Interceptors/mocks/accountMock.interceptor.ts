@@ -50,6 +50,8 @@ export class AccountMockInterceptor implements HttpInterceptor {
   /** login: returns User or throws userNotFound error */
   public getUserData(req: AuthReg): User | null  {
     let data: Users = userData // see mocks/data/userData
+    console.log(req.email)
+    data.forEach(user => console.log(user.email.toLowerCase()))
 
     let user: User = data.find(user =>
       user.email.toLowerCase() === req.email.toLowerCase()

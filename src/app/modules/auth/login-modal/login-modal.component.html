@@ -3,7 +3,20 @@
     <div class="modal-title">Log In</div>
   </div>
   <div class="modal-body">
-    <div>abc123A!!</div>
+    <div class="flex-row" style="background-color: #eee">
+      <div class="flex-col">
+        <div>MikeDanforth@gmail.com</div>
+        <div>abc123A!!</div>
+      </div>
+      <button
+        type="button"
+        (click)="fillCreds()"
+        style="margin-left: 1rem; font-size: 1rem"
+      >
+        Fill creds
+      </button>
+    </div>
+    <!-- auto fill -->
     <form #f="ngForm" (ngSubmit)="login(f)" passwordsMatch>
       <div class="login-form flex-col flex-center">
         <!--======== Email ========-->

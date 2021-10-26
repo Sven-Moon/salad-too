@@ -26,36 +26,10 @@ export class PayService {
   ) {
   }
 
-
-
   public pay(ccPayment: ccPayment): Observable<any> {
     let url: string = environment.baseUrl + '/payments'
 
     return this.httpClient.post(url, ccPayment)
-      // .pipe(
-      //   switchMap((resp) => {
-      //     let payReply = this.buildReplyObj(ccPayment)
-      //     if (ccPayment) {
-      //       return of(resp)
-      //     } else return throwError('Unknown Server Error')
-      //   }),
-      //   catchError(this.handleLoginError)
-      // )
-  }
-
-  private handleLoginError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      // Client side or network error occurred.
-      console.error('An error occurred: ', error.error)
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what's wrong.
-      console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
-      )
-    }
-    // Return an observable with a user facing error message
-    return throwError('Unknown Server Error')
   }
 
   public processReply(data: Payment): void {
@@ -72,10 +46,6 @@ export class PayService {
 
     // if the status came back paid,
     if (data.status === 'approved') {
-      let cartItems: CartItems
-      this.store.select(selectCartItems).subscribe(items =>
-        cartItems = items
-      )
       this.store.dispatch(updateOrderStatus({
         orderId: data.orderId, status: 'Paid'
       }))

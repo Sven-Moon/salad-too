@@ -79,3 +79,8 @@ export const updateTransactionNumber = createAction(
   props<{ id: string }>()
 );
 
+export const toggleFailFlag = createAction(
+ '[Pay Info] Toggle Fail Flag',
+ props<{ flag: boolean }>()
+);
+

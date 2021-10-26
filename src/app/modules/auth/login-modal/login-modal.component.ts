@@ -57,5 +57,10 @@ export class LoginModalComponent implements OnInit, OnDestroy {
     this.store.dispatch(resetAuthError())
   }
 
+  public fillCreds() {
+    this.form.email = 'MikeDanforth@npr.com'
+    this.form.password = 'abc123A!!'
+   }
+
 
 }

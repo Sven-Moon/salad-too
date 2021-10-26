@@ -10,16 +10,20 @@ import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
 import { ccPayment, Payment } from '../../models/Payment';
+import { selectFail } from 'src/app/modules/pay/state/pay.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class PaymentMockInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  constructor(
+    private store: Store
+  ) {
+  }
 
 
   public intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
-    let url = environment.baseUrl + '/pay/payments'
+    let url = environment.baseUrl + '/payments'
     if (req.method === 'POST' && req.url == url) {
       let paymentReq = req.body;
 
@@ -36,30 +40,24 @@ export class PaymentMockInterceptor implements HttpInterceptor {
   }
 
   private buildReplyObj(info: ccPayment): Payment {
+    let fail: boolean
+    this.store.select(selectFail)
+      .subscribe(failFlag => {fail = failFlag})
+    let status: string = 'approved'
+    if (fail) { status = 'declined' }
+    console.log(fail)
+
     let transactionId = Math.random().toFixed(8).slice(2)
     let dateTime = Date.now()
+
     return {
       orderId: info.id,
       transactionId: transactionId,
       amount: info.amount,
-      status: this.successByCcNum(info.ccNum),
+      status: status,
       cc4: info.ccNum.slice(15),
       dateTime: dateTime
     }
-  }
-
-  //TODO: Fail by checkbox
-  private successByCcNum(ccNum: string): string {
-    return ccNum === '1234 5678 9012 3451'
-      ? 'declined'
-      : 'approved'
-  }
-
-  private randSuccess(): string {
-    let success: boolean = Math.random() % 2 < .95
-    return success
-      ? 'approved'
-      : 'declined'
   }
 
 }
