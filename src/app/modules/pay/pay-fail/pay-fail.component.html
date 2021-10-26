@@ -1,15 +1,28 @@
 <div class="componentWindow">
   <div class="message card text-center bold">
-    Oops!
-    We tried but there was an error with your payment.
+    Oops! We tried but there was an error with your payment.
   </div>
   <div class="errorReport text-center">
-    <div>Looks like ...</div>
-    <div class="errorMessage">CUSTOM MESSAGE</div>
+    <div>Response from the server says ...</div>
+    <div class="errorMessage flex-row">
+      <div class="flex-col m-rt text-left">
+        <div>ORDER ID:</div>
+        <div>ORDER STATUS:</div>
+        <div>PAYMENT AMOUNT:</div>
+        <div>PAYMENT STATUS:</div>
+      </div>
+      <div class="flex-col text-left">
+        <div>{{ order.id }}</div>
+        <div>{{ order.status }}</div>
+        <div>{{ transaction.amount | currency }}</div>
+        <div>{{ transaction.status }}</div>
+      </div>
+    </div>
     <div>Give it another go. It might work out better next time around!</div>
   </div>
-</div> <!------------ component window ------------>
+</div>
+<!------------ component window ------------>
 <div class="actions">
   <button type="button" (click)="tryAgain()">Try Again</button>
-  <button type="button" (click)="cancel()" >Cancel Order</button>
+  <button type="button" (click)="cancel()">Cancel Order</button>
 </div>

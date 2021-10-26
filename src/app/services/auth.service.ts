@@ -122,6 +122,7 @@ export class AuthService {
   }
 
   public alertFailedAccountEdit(error: HttpErrorResponse) {
+    console.log('Account Edit Error:');
     console.log(error);
 
     this.alertService.danger(

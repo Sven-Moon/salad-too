@@ -45,7 +45,6 @@ export class PaymentMockInterceptor implements HttpInterceptor {
       .subscribe(failFlag => {fail = failFlag})
     let status: string = 'approved'
     if (fail) { status = 'declined' }
-    console.log(fail)
 
     let transactionId = Math.random().toFixed(8).slice(2)
     let dateTime = Date.now()

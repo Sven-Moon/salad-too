@@ -85,11 +85,6 @@ export const reducer = createReducer(
     state.user.contacts.push(action.contact)
   }),
   on(AuthActions.deleteContactSuccess, (state, action) => {
-    // console.log('user');
-    // console.log(state.user);
-    // console.log('contacts');
-    // console.log(state.user.contacts);
-    //  contacts = Object.assign([],state.user.contacts)
     let contacts = state.user.contacts.filter(contact => contact.id !== action.id)
 
     return {

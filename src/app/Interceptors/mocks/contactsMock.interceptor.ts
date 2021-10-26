@@ -42,10 +42,7 @@ export class ContactsMockInterceptor implements HttpInterceptor {
     if (req.method === 'DELETE' && req.url.includes(deleteUrl)) {
       // interceptor reflects the indicated change back to client
       // as if it had changed it in a database
-      console.log(req.url)
-      // const id = req.url.match("/(?:\/contacts\/delete\/)([^\r\n])*/")
       const id = req.url.slice(req.url.lastIndexOf('/')+1)
-      console.log(id)
       const response = new HttpResponse({
         body: { id: id },
         status: 200

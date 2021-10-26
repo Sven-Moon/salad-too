@@ -63,9 +63,9 @@ export class PayInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.store.select(selectCartTotal).subscribe(total =>
-      this.total = total
-    )
+    this.store.select(selectCartTotal)
+      .subscribe(total => this.total = total)
+    this.store.dispatch(toggleFailFlag({flag: false}))
   }
 
   public submit():void {

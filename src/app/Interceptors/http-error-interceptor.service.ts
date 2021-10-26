@@ -19,6 +19,7 @@ export class HttpErrorServiceInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         // get error even if api &/or database down
         const errorMessage = this.setError(error)
+        console.log('Full Error:')
         console.log(error)
         this.alertService.danger('Message: ' + errorMessage +
         '   Status: ' + error.status)

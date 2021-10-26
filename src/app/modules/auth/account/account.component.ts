@@ -118,9 +118,6 @@ export class AccountComponent implements OnInit {
 
   /** CONTACTS*/
   public addNewContact(f: NgForm): void {
-    console.log('contact (new)');
-
-
     let contact = {
       id: f.value.contactEmail,
       name: f.value.newContactName,
@@ -128,7 +125,6 @@ export class AccountComponent implements OnInit {
       img: './assets/images/profile_1.png'
     }
 
-    console.log(f.value.newContactName);
     this.store.dispatch(addContact({ contact }))
   }
 

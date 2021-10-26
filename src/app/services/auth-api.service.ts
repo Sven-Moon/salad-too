@@ -60,7 +60,6 @@ export class AuthAPIService {
 
   private updateServer(body:User) {
     let url: string = environment.baseUrl + '/users/update/' + body.id
-    console.log('here');
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

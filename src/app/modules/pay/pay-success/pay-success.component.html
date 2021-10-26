@@ -3,67 +3,80 @@
     <h2 class="text-center">Success!</h2>
     <div class="text-center">
       Go to
-      <div routerLink="/orders/status" class="inlineLink">
-        order status
-      </div> to see how your order is doing
+      <div routerLink="/orders/status" class="inlineLink">order status</div>
+      to see how your order is doing
     </div>
-    <hr>
+    <hr />
     <div class="incompleteAlert text-center">
-      <b>NOTE:</b><br>
-      We'll start making your part of the order right away. Make sure any unpaid items are paid for as soon as possible to prevent delay on the complete order.
+      <b>NOTE:</b><br />
+      We'll start making your part of the order right away. Make sure any unpaid
+      items are paid for as soon as possible to prevent delay on the complete
+      order.
     </div>
-  </div> <!--------- message --------->
+  </div>
+  <!--------- message --------->
   <!-- ========= RECEIPT ========= -->
   <div class="receipt" id="receipt">
     <div class="receiptContent">
       <div class="metaData flex-row">
+        <H2>Your Receipt</H2>
         <div class="flex-col">
           <label for="">Transaction ID:</label>
           <div class="transactionID">
-            {{receipt.transaction.transactionId}}
+            {{ receipt.transaction.transactionId }}
           </div>
         </div>
         <div class="flex-col">
           <label for="">Order ID:</label>
-          <div>{{receipt.order.id}}</div>
+          <div>{{ receipt.order.id }}</div>
         </div>
         <div class="dateTime flex-col">
-          <div>{{receipt.transaction.dateTime |date:'mediumDate'}}</div>
-          <div>{{receipt.transaction.dateTime |date:'mediumTime'}}</div>
+          <div>{{ receipt.transaction.dateTime | date: "mediumDate" }}</div>
+          <div>{{ receipt.transaction.dateTime | date: "mediumTime" }}</div>
         </div>
       </div>
       <div class="lineItems">
         <ng-container *ngFor="let item of receipt.order.items">
           <div class="flex-row lineItem">
-           {{item.name}}
+            {{ item.name }}
             <div class="itemPrice flex-row">
-              {{item.quantity}} @ {{item.price |currency}}
-              <div class="itemSubtotal"> {{item.quantity * item.price |currency}}</div>
+              {{ item.quantity }} @ {{ item.price | currency }}
+              <div class="itemSubtotal">
+                {{ item.quantity * item.price | currency }}
+              </div>
             </div>
           </div>
         </ng-container>
       </div>
       <div class="totalContainer flex-row">
         <label for="total">Your Total:</label>
-          <div class="form-control total">
-            {{receipt.order.total}}
-          </div>
+        <div class="form-control total">
+          {{ receipt.order.total }}
+        </div>
       </div>
       <div class="paidStatus">
         <div>Payment Method: Credit card</div>
-        <div>Card Number: **** **** **** {{receipt.transaction.cc4}}</div>
+        <div>Card Number: **** **** **** {{ receipt.transaction.cc4 }}</div>
         <div>Approved</div>
       </div>
     </div>
-  </div>  <!------------ receipt ------------>
-</div> <!------------ component window ------------>
+  </div>
+  <!------------ receipt ------------>
+</div>
+<!------------ component window ------------>
 <div class="actions actions-col">
   <div class="actions-2row around">
     <button type="button" class="btn" (click)="print()">Print Receipt</button>
-    <button type="button" class="btn" (click)="emailReceipt()" >Email Receipt</button>
+    <button type="button" class="btn" (click)="emailReceipt()">
+      Email Receipt
+    </button>
   </div>
   <div class="actions-2row around">
-    <button type="button" class="btn" routerLink="/orders/status">Order Status</button>
-    <button type="button" class="btn" routerLink="/order/launch">Order Home</button>
+    <button type="button" class="btn" routerLink="/orders/status">
+      Order Status
+    </button>
+    <button type="button" class="btn" routerLink="/order/launch">
+      Order Home
+    </button>
   </div>
 </div>

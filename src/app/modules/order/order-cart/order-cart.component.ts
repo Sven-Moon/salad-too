@@ -193,17 +193,11 @@ export class OrderCartComponent implements OnInit {
 
   // public changeOwner(oldItem: CartItem, owner: Contact): void {
   public changeOwner(oldItem: CartItem, e: any): void {
-    // console.log('e: ');
-    // console.log(e);
-    // console.log('owner.name: ' + owner.name);
     let owner: Contact
     let contactEmail = e.target.selectedOptions[0].value
-    console.log('targetvalue: ' + e.target.selectedOptions[0].value);
-    console.log('contactEmail: ' + contactEmail);
     this.allOwners$.subscribe(contacts =>
       owner = contacts.find(contact => contact.email === contactEmail)
     )
-    console.log('owner.name: ' + owner.name);
     let item = { ...oldItem, owner: owner }
     this.store.dispatch(updateCartItemOwner({ item }))
 
