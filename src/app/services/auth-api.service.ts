@@ -5,7 +5,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/User';
-import { Contact } from '../models/Contact';
+import { Contact, Contacts } from '../models/Contact';
 import { selectUser } from '../store/auth/auth.selectors';
 
 @Injectable({
@@ -29,15 +29,15 @@ export class AuthAPIService {
   }
 
   public registerUser(
-    email: string, username: string, password: string
+    email: string, username: string, password: string, contacts:Contacts
   ): Observable<any> {
-
     let url: string = environment.baseUrl + '/account/register'
     let userEmail = email.toLowerCase();
     let body = {
       email: userEmail,
       name: username,
-      password: password
+      password: password,
+      contacts: contacts
     }
     return this.httpClient.post(url, body)
   }
@@ -56,33 +56,5 @@ export class AuthAPIService {
   public deleteContact(id: string): Observable<any> {
     let url: string = environment.baseUrl + '/users/contacts/delete/' + id
     return this.httpClient.delete(url)
-  }
-
-  private updateServer(body:User) {
-    let url: string = environment.baseUrl + '/users/update/' + body.id
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        // Authorization: 'my-auth-token'
-      })
-    }
-
-    return this.httpClient.put(url, body, httpOptions).pipe(
-      switchMap((userReply) => {
-        let user = userReply
-
-        if (user) {
-          return of(user)
-        } else return throwError("Can't find user")
-      })
-    )
-  }
-
-  private fillBody(): User {
-    let user: User
-    this.store.select(selectUser).subscribe(data =>
-      user = Object.assign({}, data)
-    )
-    return user
   }
 }

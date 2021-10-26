@@ -35,10 +35,17 @@ export class OwnerAddComponent implements OnInit {
   }
 
   public addContact(f: NgForm) {
+    let emailId: string
+    if (f.value.email===null) {
+      emailId = (Math.random()*1E8).toFixed(0).toString() + '@unknown.com'
+    } else {
+      emailId = f.value.email
+    }
+
     let contact: Contact = {
-      id: f.value.email,
+      id: emailId,
       name: f.value.name,
-      email: f.value.email,
+      email: emailId,
       img: './assets/images/profile_1.png'
     }
     if (this.signedIn) {

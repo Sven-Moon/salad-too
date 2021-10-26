@@ -14,4 +14,5 @@ export interface AuthReg {
   email: string;
   name: string;
   password: string;
+  contacts: Contacts
 }

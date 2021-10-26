@@ -91,7 +91,8 @@ export class AccountMockInterceptor implements HttpInterceptor {
       name: req.body.name,
       phoneNumber: null,
       email: req.body.email,
-      img: './assets/images/profile_1.png'
+      img: './assets/images/profile_1.png',
+      contacts: req.body.contacts
     }
   }
 

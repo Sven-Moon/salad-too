@@ -75,7 +75,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.registerUser),
       concatMap((action) =>
-        this.authAPIService.registerUser(action.email, action.username, action.password).pipe(
+        this.authAPIService.registerUser(action.email, action.username, action.password, action.contacts).pipe(
           map((user) => AuthActions.registerUserSuccess({ user })),
           catchError((error) => of(AuthActions.registerUserFailure({ error })))
         )
@@ -87,7 +87,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.registerUserSuccess),
       // handles alert service & login to order component
-      tap((data) => { this.authService.processRegisteredUser(data.user) })
+      tap((data) => {this.authService.processRegisteredUser(data.user) })
     ),
     { dispatch: false }
   )

@@ -4,7 +4,7 @@
   </div>
   <div class="modal-body">
     <div class="flex-row" style="background-color: #eee">
-      <div class="flex-col">
+      <div class="flex-col" style="padding: 0.25rem">
         <div>MikeDanforth@gmail.com</div>
         <div>abc123A!!</div>
       </div>
@@ -19,6 +19,42 @@
     <!-- auto fill -->
     <form #f="ngForm" (ngSubmit)="login(f)" passwordsMatch>
       <div class="login-form flex-col flex-center">
+        <div class="newUser">
+          <input
+            type="checkbox"
+            name="newUser"
+            id="newUser"
+            [(ngModel)]="form.newUser"
+            #newUser="ngModel"
+          />
+          <label for="newUser">I'm new here</label>
+        </div>
+        <!--  New User -->
+
+        <!--======== Username ========-->
+        <div *ngIf="form.newUser" class="form-group flex-col flex-center">
+          <label for="username">User Name</label>
+          <input
+            type="text"
+            name="username"
+            id=""
+            class="form-control"
+            required
+            placeholder="Name"
+            [(ngModel)]="form.username"
+            #username="ngModel"
+            minlength="3"
+          />
+          <div
+            *ngIf="
+              username.errors?.minlength && (password.touched || password.dirty)
+            "
+          >
+            Username must be at least 3 characters in length.
+          </div>
+        </div>
+        <!--  Username -->
+
         <!--======== Email ========-->
         <div class="form-group flex-col flex-center">
           <label for="email">Email Address</label>
@@ -95,30 +131,6 @@
         </div>
         <!--  Confirm PW -->
 
-        <!--======== Username ========-->
-        <div *ngIf="form.newUser" class="form-group flex-col flex-center">
-          <label for="username">User Name</label>
-          <input
-            type="text"
-            name="username"
-            id=""
-            class="form-control"
-            required
-            placeholder="Name"
-            [(ngModel)]="form.username"
-            #username="ngModel"
-            minlength="3"
-          />
-          <div
-            *ngIf="
-              username.errors?.minlength && (password.touched || password.dirty)
-            "
-          >
-            Username must be at least 3 characters in length.
-          </div>
-        </div>
-        <!--  Username -->
-
         <div
           *ngIf="
             f.errors?.passwordsMatch &&
@@ -157,17 +169,6 @@
           </button>
         </div>
         <!--  actions -->
-        <div class="newUser">
-          <input
-            type="checkbox"
-            name="newUser"
-            id="newUser"
-            [(ngModel)]="form.newUser"
-            #newUser="ngModel"
-          />
-          <label for="newUser">I'm new here</label>
-        </div>
-        <!--  New User -->
       </div>
     </form>
   </div>

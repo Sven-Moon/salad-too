@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { AuthResp } from 'src/app/models/Auth';
 import { User } from 'src/app/models/User';
-import { Contact } from 'src/app/models/Contact';
+import { Contact, Contacts } from 'src/app/models/Contact';
 
 
 // ------------ LOG IN / OUT ------------
@@ -30,6 +30,7 @@ export const registerUser = createAction(
     username: string,
     email: string,
     password: string
+    contacts: Contacts
   }>()
 );
 
