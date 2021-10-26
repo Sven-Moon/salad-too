@@ -13,28 +13,14 @@ import { changeCartItemQty, clearCart, duplicateCartItem, removeCartItem, update
 import { selectCartItems, selectCartTotal, selectItemOwners, selectItemsByOwner, selectPossibleItemOwners } from '../state/cart/cart.selectors';
 import { editCartItem } from '../state/item/item.actions';
 import { selectIngredientWithPrice } from '../state/staticData/static-data.selectors';
-import { trigger, style, state, animate, transition } from '@angular/animations';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+import { expandContract } from '../OrderAnimations';
 
 @Component({
   selector: 'app-order-cart',
   templateUrl: './order-cart.component.html',
   styleUrls: ['./order-cart.component.scss'],
-  animations: [
-    trigger('toggleIngredientView', [
-      state('closed', style({
-        height: '0px',
-        'padding-top': '0px',
-        'padding-bottom': '0px'
-      })),
-      state('open', style({
-
-      })),
-      transition('closed => open, open => closed', [
-        animate('.3s')
-      ])
-    ])
-  ],
+  animations: expandContract,
   providers: [{
     provide: BsDropdownConfig, useValue: {
       isAnimated: true,

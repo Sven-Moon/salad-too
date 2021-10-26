@@ -139,7 +139,11 @@ export const selectItemIngredients = createSelector(
 
 export const selectPickedIngredientTypeId = createSelector(
   selectItemState,
-  (state) => state.pickedIngredientTypeId
+  (state) => {
+    if (state.pickedIngredientTypeId === null) {
+      return 'meats'
+    }
+    return state.pickedIngredientTypeId}
 )
 
 export const selectPickedIngredientType = createSelector(

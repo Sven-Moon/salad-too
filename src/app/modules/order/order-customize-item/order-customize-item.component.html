@@ -51,11 +51,29 @@
     <!-- ========== ITEM INGREDIENTS ========== -->
     <div class="ingredient-panel">
       <div class="card item-ingredients">
-        <div class="card-header">
-          <div>Current Ingredients</div>
+        <div class="card-header" (click)="toggleCurrentIngredientsVisible()">
+          <img
+            *ngIf="!currentIngredientsVisible"
+            src="./assets/images/expand.png"
+            alt="Expand Current Ingredients"
+            class="collapseExpand"
+          />
+          <img
+            *ngIf="currentIngredientsVisible"
+            src="./assets/images/collapse.png"
+            alt="Collapse Current Ingredients"
+            class="collapseExpand"
+          />
+          Currently...
           <div class="price">${{ price }}</div>
         </div>
-        <div class="ingredients">
+        <!-- card header -->
+        <div
+          class="ingredients"
+          [@toggleIngredientView]="
+            currentIngredientsVisible ? 'open' : 'closed'
+          "
+        >
           <ng-container *ngFor="let ingredient of itemIngredients$ | async">
             <div
               class="ingredient {{
@@ -65,6 +83,7 @@
               <img src="{{ ingredient.img }}" alt="" />
               {{ ingredient.name }}
             </div>
+            <!-- ingredient -->
           </ng-container>
         </div>
         <!-- ingredients -->

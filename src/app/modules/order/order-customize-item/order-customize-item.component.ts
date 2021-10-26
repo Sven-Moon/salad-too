@@ -6,6 +6,7 @@ import { Ingredient, Ingredients, IngredientType, IngredientTypes } from 'src/ap
 import { CartItem, Items } from 'src/app/models/Item';
 import { NavService } from 'src/app/services/nav.service';
 import { OrderService } from 'src/app/services/order.service';
+import { expandContract } from '../OrderAnimations';
 import { addItemToCart } from '../state/cart/cart.actions';
 import { clearItem, deselectAllIngredientsOfType, filterIngredientType, setItemId, toggleIngredient, cancelItem } from '../state/item/item.actions';
 import { selectCurrentItem, selectFilteredIngredientsByType, selectItemGroupTypes, selectItemIngredients, selectItemPrice, selectPickedIngredientType, selectSingleSelectIngredientTypes } from '../state/item/item.selectors';
@@ -14,7 +15,8 @@ import { selectAllItems, selectIngredients } from '../state/staticData/static-da
 @Component({
   selector: 'app-order-customize-item',
   templateUrl: './order-customize-item.component.html',
-  styleUrls: ['./order-customize-item.component.scss']
+  styleUrls: ['./order-customize-item.component.scss'],
+  animations: expandContract,
 })
 export class OrderCustomizeItemComponent implements OnInit {
   itemIngredients$: Observable<Ingredients>
@@ -25,6 +27,7 @@ export class OrderCustomizeItemComponent implements OnInit {
   cartItem: CartItem
   price: string // of current ingredient
   allItems: Items
+  currentIngredientsVisible:boolean = true
 
   constructor(
     private store: Store,
@@ -123,5 +126,9 @@ export class OrderCustomizeItemComponent implements OnInit {
 
     return classes
 
+  }
+
+  public toggleCurrentIngredientsVisible() {
+    this.currentIngredientsVisible = !this.currentIngredientsVisible
   }
 }
