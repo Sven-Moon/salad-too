@@ -1,6 +1,8 @@
 # SaladToo
 
-** In Progress **
+Status: Deployed -- See it Here [See it Here: Salad Too](https://salad-too.web.app/)
+
+In Progress: My work on a backend .NET WebAPI is 75% finished, so I should be able to replace the interceptor backend with a functioning API pretty soon here, enabling persistent state. 
 
 This project was is actually a re-hash of the salad-plus project. I wanted to see how much I could improve the project starting from scratch & also to see how much more efficiently I could complete the project. Overall I'm pleasantly surprised by the results. Things were much easier, and consequently faster, this time around, and I was able to implement massive improvements and greater functionality in only a portion of the same time. 
 
@@ -15,37 +17,29 @@ This project was is actually a re-hash of the salad-plus project. I wanted to se
 
 ### Backend Features
 - NGRX store, routing
-- both template & reactive forms
-- json-server & interceptors for data
+- template & reactive forms
+- interceptors for data
 
 ## What I Learned
 ### Styling
 - how to effectively turn a site plan into an html page
 - use of box-sizing: border-box! (ugh, things were hard before that)
-- (in progress: animations)
 - animations: smooth open/close, moving menu highlight
 
 ### Backend / State
 - I really upped the game on NGRX selector use, making the code more clearly speak for itself
 - intermediate routing (use of parameters, snapshots, routing config)
 - sass variables & import of style sheets
-- use of post, patch operations on a server
+- use of GET, POST, & PUT operations on a server
 - effects to handle async operations (alerts, spinner, routes)
-- use of RXJS became a little less confusing: it's clearer when to use mergeMap vs concatMap vs tap... etc.
-
-### IDE 
-- use of snippets in VS Code!
-- custom folder images
-- removing the collapse/expand arrows
+- use of RXJS became less confusing: it's clearer when to use mergeMap vs concatMap vs tap, especially when used with NgRx effects
 
 ### Project Structure & Working Meta
 - basic elements of authorization
 - consistent & meaningful commit structure
 - Jira epic/task project structure improvements
 
-### Third Party Libraries
-- ngx-spinner
-- ngx-alerts
-- concurrently
-- ngx-mask
-- ngx-bootstrap
+### IDE 
+- use of custom snippets in VS Code! This is really helpful when wiring up NGRX actions.
+- custom folder images
+- removing the collapse/expand arrows
