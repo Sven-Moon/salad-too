@@ -15,6 +15,7 @@ import { editCartItem } from '../state/item/item.actions';
 import { selectIngredientWithPrice } from '../state/staticData/static-data.selectors';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { expandContract } from '../OrderAnimations';
+import { AlertService } from '@full-fledged/alerts';
 
 @Component({
   selector: 'app-order-cart',
@@ -53,6 +54,7 @@ export class OrderCartComponent implements OnInit {
     private modalService: BsModalService,
     private orderService: OrderService,
     private navService: NavService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -148,10 +150,7 @@ export class OrderCartComponent implements OnInit {
   public decreaseCartItemQty(oldItem: CartItem) {
     let item = { ...oldItem, quantity: oldItem.quantity - 1 }
     if (item.quantity == 0) {
-      this.removeWarningFlag = true
-      setTimeout(() => {
-        this.removeWarningFlag = false
-      }, 3000);
+      this.alertService.info( { html: 'To remove an item, use the <b>Remove</b> button.' } )
     } else {
       this.store.dispatch(changeCartItemQty({ item }))
     }

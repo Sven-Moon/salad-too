@@ -32,9 +32,6 @@
 
         <!-- ========== ITEM ========== -->
         <div class="itemsContainer" *ngIf="itemsVisible[owner.email].visible">
-          <div *ngIf="removeWarningFlag" class="removeWarning">
-            To remove an item, use the <b>Remove</b> button.
-          </div>
           <ng-container *ngFor="let item of itemsByOwner[owner.email].items">
             <div class="card">
               <div class="flex-row">
@@ -84,6 +81,9 @@
                   <!-- ========== ITEM ACTIONS ========== -->
                   <div class="cardActions">
                     <button
+                      [style.visibility]="
+                        !item.ingredients ? 'hidden' : 'visible'
+                      "
                       type="button"
                       (click)="editCartItem(item.id)"
                       class="btn-sm btn-warning"
@@ -92,18 +92,22 @@
                       Edit
                     </button>
                     <button
+                      [style.visibility]="
+                        !item.ingredients ? 'hidden' : 'visible'
+                      "
                       type="button"
                       (click)="showDetails(item.name)"
                       class="btn-sm btn-primary"
-                      [disabled]="!item.ingredients"
                     >
                       View
                     </button>
                     <button
+                      [style.visibility]="
+                        !item.ingredients ? 'hidden' : 'visible'
+                      "
                       type="button"
                       (click)="duplicateItem(item)"
                       class="btn-sm btn-go"
-                      [disabled]="!item.ingredients"
                     >
                       Duplicate
                     </button>
