@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Ingredients } from 'src/app/models/Ingredient';
+import { Ingredient, Ingredients } from 'src/app/models/Ingredient';
 import { Order, Orders } from 'src/app/models/Order';
 import { Visible } from 'src/app/models/Visible';
 import { NavService } from 'src/app/services/nav.service';
@@ -103,6 +103,16 @@ export class OrdersHistoryComponent implements OnInit {
 
   public toggleFavorite(id: string) {
     this.store.dispatch(toggleOrderFavorite({ id }))
+  }
+
+  public ingredientName(id: string):string {
+    let name: string = ''
+    name = this.allIngredients.find((ingredient: Ingredient) =>
+      id = ingredient.id
+    ).name
+    console.log(name)
+    if (!name) { name = 'unknown' }
+    return name
   }
 
 }
