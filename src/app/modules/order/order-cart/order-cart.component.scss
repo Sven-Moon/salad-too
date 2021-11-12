@@ -124,17 +124,29 @@
   padding: 0.2rem 0.4rem;
 }
 
-.cardActions {
+.cardActions  {
+  margin-inline: 0;
+  // justify-content: space-around;
+}
+
+.cardActions button {
+  margin-bottom: .2rem;
+}
+
+
+.itemActions {
+  display: flex;
+  flex-grow: 1;
+  min-width: 50%;
 }
 
 .itemActions button {
-  width: fit-content;
-  padding: 0 1rem;
-  margin-bottom: 0;
+  display: inline-block;
+  margin-right: 0.2rem;
+  margin-inline: auto;
 }
 
-.itemDetails {
-}
+// .itemDetails {}
 
 .ingredients {
   display: flex;
@@ -310,6 +322,7 @@ hr {
 
   .topActions button {
     font-size: 2rem;
+    width: 100%;
   }
 
   .topActions img {

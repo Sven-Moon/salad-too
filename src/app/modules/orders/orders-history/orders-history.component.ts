@@ -1,10 +1,13 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from '@full-fledged/alerts';
 import { Store } from '@ngrx/store';
 import { Ingredient, Ingredients } from 'src/app/models/Ingredient';
+import { CartItems, Items } from 'src/app/models/Item';
 import { Order, Orders } from 'src/app/models/Order';
 import { Visible } from 'src/app/models/Visible';
 import { NavService } from 'src/app/services/nav.service';
+import { addItemToCart, clearCart } from '../../order/state/cart/cart.actions';
 import { selectIngredientWithPrice } from '../../order/state/staticData/static-data.selectors';
 import { toggleOrderFavorite } from '../state/orders.actions';
 import { selectClosedOrders, selectFavoriteOrders, selectOpenOrders, selectOrders } from '../state/orders.selectors';
@@ -16,12 +19,12 @@ import { selectClosedOrders, selectFavoriteOrders, selectOpenOrders, selectOrder
   styleUrls: ['./orders-history.component.scss'],
   animations: [
     trigger('toggleIngredientView', [
-      state('open', style({
+      state('closed', style({
         height: 0,
         'padding-top': 0,
         'padding-bottom': 0
       })),
-      state('closed', style({})),
+      state('open', style({})),
       transition('closed => open, open => closed', [
         animate('.3s')
       ])
@@ -36,25 +39,34 @@ export class OrdersHistoryComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private navService: NavService
+    private navService: NavService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
     this.navService.updateNavPosition()
-    // closed orders: those in 'delivered status (reverse chronological)
-    this.store.select(selectClosedOrders).subscribe(closedOrders =>
+    this.initSubscriptions()
+  }
+
+  private initSubscriptions() {
+      // closed orders: those in 'delivered status (reverse chronological)
+    this.store.select(selectClosedOrders).subscribe(closedOrders =>{
       this.closedOrders = closedOrders.slice().reverse()
-    )
-    this.store.select(selectFavoriteOrders).subscribe(favorites =>
+      this.initVisibility(this.closedOrders)
+    })
+    this.store.select(selectFavoriteOrders).subscribe(favorites =>{
       this.favoriteOrders = favorites
-    )
+      this.initVisibility(this.favoriteOrders)
+    })
     // used to look up item ingredients lists
     this.store.select(selectIngredientWithPrice).subscribe(allIngredients =>
       this.allIngredients = allIngredients
     )
+  }
 
-    // set the visible object orders & items all to false
-    this.closedOrders.forEach(order => {
+  private initVisibility(orders:Orders) {
+// set orders to collapsed
+    orders.forEach(order => {
       this.visible[order.id] = {
         itemsVisible: false,
         items: {}
@@ -66,7 +78,6 @@ export class OrdersHistoryComponent implements OnInit {
         }
       )
     })
-
   }
 
   /**
@@ -101,18 +112,21 @@ export class OrdersHistoryComponent implements OnInit {
       = !this.visible[id].items[itemId].ingredientsVisible
   }
 
-  public toggleFavorite(id: string) {
+  public toggleFavorite(id: string):void {
     this.store.dispatch(toggleOrderFavorite({ id }))
   }
 
-  public ingredientName(id: string):string {
-    let name: string = ''
-    name = this.allIngredients.find((ingredient: Ingredient) =>
-      id = ingredient.id
-    ).name
-    console.log(name)
-    if (!name) { name = 'unknown' }
-    return name
+  public startFromOrder(id:string):void {
+    let items:CartItems = this.closedOrders
+    .find(order => id === order.id).items
+
+    this.store.dispatch(clearCart())
+    this.store.dispatch(clearCart())
+
+    items.forEach(item => this.store
+      .dispatch(addItemToCart({ cartItem: item })))
+
+    this.alertService.info('Your order has been added to the cart!')
   }
 
 }

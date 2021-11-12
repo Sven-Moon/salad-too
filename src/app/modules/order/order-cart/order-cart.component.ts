@@ -149,8 +149,9 @@ export class OrderCartComponent implements OnInit {
 
   public decreaseCartItemQty(oldItem: CartItem) {
     let item = { ...oldItem, quantity: oldItem.quantity - 1 }
+    let htmlMsg = "To remove an item, use the <b>Remove</b> button."
     if (item.quantity == 0) {
-      this.alertService.info( { html: 'To remove an item, use the <b>Remove</b> button.' } )
+      this.alertService.info( { html: htmlMsg } )
     } else {
       this.store.dispatch(changeCartItemQty({ item }))
     }

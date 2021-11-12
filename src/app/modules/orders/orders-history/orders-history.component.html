@@ -34,6 +34,19 @@
           class="info2 flex-row pointer"
           (click)="toggleItemsVisible(order.id)"
         >
+          <!-- ---- Click to View -->
+          <div class="clickMeOrder">
+            <img
+              src="./assets/images/click_pointer.png"
+              alt="click to expand order"
+              class="clickMe"
+            />
+            to
+            <div
+              *ngIf="visible[order.id].itemsVisible; then hide; else view"
+            ></div>
+          </div>
+          <!-- ---- click to view -->
           <div class="orderId">Order: {{ order.id }}</div>
           <div class="time text-center">
             {{ order.received | date: "mediumTime" }}
@@ -47,7 +60,7 @@
           "
         >
           <hr />
-          <ng-container *ngFor="let item of order.items">
+          <div *ngFor="let item of order.items">
             <div class="item flex-col">
               <div
                 class="flex-row w-100 itemName pointer"
@@ -57,6 +70,23 @@
                 <div class="qty" *ngIf="item.quantity != 1">
                   ({{ item.quantity }})
                 </div>
+                <!-- ---- Click to View -->
+                <div class="clickMeItems" *ngIf="item.ingredients">
+                  <img
+                    src="./assets/images/click_pointer.png"
+                    alt="click to expand order"
+                    class="clickMe"
+                  />
+                  to
+                  <div
+                    *ngIf="
+                      visible[order.id].items[item.id].ingredientsVisible;
+                      then hide;
+                      else view
+                    "
+                  ></div>
+                </div>
+                <!-- ---- click to view -->
               </div>
               <!-- ========= INGREDIENT CONTAINER ========= -->
               <div
@@ -80,10 +110,18 @@
               <!-- --- ingredient container --- -->
             </div>
             <!-- --- item --- -->
-          </ng-container>
-          <!-- --- item --- -->
+          </div>
+          <!-- --- items --- -->
+          <button
+            type="button"
+            class="btn-sm btn-go startOrder"
+            (click)="startFromOrder(order.id)"
+          >
+            Start New Order From This One
+          </button>
         </div>
         <!-- --- item container --- -->
+        <!-- --- start from order button-->
       </div>
       <!-- --- card --- -->
     </ng-container>
@@ -93,6 +131,7 @@
   </div>
 </ng-container>
 <!-- favorite orders-->
+
 <!-- ======== ALL ORDERS ======== -->
 <div class="statusWindow allHistory flex-col">
   <div class="header">Order History</div>
@@ -126,6 +165,19 @@
         class="info2 flex-row pointer"
         (click)="toggleItemsVisible(order.id)"
       >
+        <!-- ---- Click to View -->
+        <div class="clickMeOrder">
+          <img
+            src="./assets/images/click_pointer.png"
+            alt="click to expand order"
+            class="clickMe"
+          />
+          to
+          <div
+            *ngIf="visible[order.id].itemsVisible; then hide; else view"
+          ></div>
+        </div>
+        <!-- ---- click to view -->
         <div class="orderId">Order: {{ order.id }}</div>
         <div class="time text-center">
           {{ order.received | date: "mediumTime" }}
@@ -149,6 +201,23 @@
               <div class="qty" *ngIf="item.quantity != 1">
                 ({{ item.quantity }})
               </div>
+              <!-- ---- Click to View -->
+              <div class="clickMeItems" *ngIf="item.ingredients">
+                <img
+                  src="./assets/images/click_pointer.png"
+                  alt="click to expand order"
+                  class="clickMe"
+                />
+                to
+                <div
+                  *ngIf="
+                    visible[order.id].items[item.id].ingredientsVisible;
+                    then hide;
+                    else view
+                  "
+                ></div>
+              </div>
+              <!-- ---- click to view -->
             </div>
             <!-- ========= INGREDIENT CONTAINER ========= -->
             <div
@@ -174,13 +243,23 @@
           <!-- --- item --- -->
         </ng-container>
         <!-- --- item --- -->
+        <button
+          type="button"
+          class="btn-sm btn-go startOrder"
+          (click)="startFromOrder(order.id)"
+        >
+          Start New Order From This One
+        </button>
       </div>
       <!-- --- item container --- -->
     </div>
-    <!-- --- card --- -->
+    <!-- --- order card --- -->
   </ng-container>
   <div class="emptyMessage noOrders" *ngIf="closedOrders.length == 0">
     <h2>You have no order history!</h2>
   </div>
 </div>
 <!-- all orders -->
+
+<ng-template #view> View</ng-template>
+<ng-template #hide> Hide</ng-template>

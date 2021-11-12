@@ -80,44 +80,42 @@
                   </div>
                   <!-- ========== ITEM ACTIONS ========== -->
                   <div class="cardActions">
-                    <button
-                      [style.visibility]="
-                        !item.ingredients ? 'hidden' : 'visible'
-                      "
-                      type="button"
-                      (click)="editCartItem(item.id)"
-                      class="btn-sm btn-warning"
-                      [disabled]="!item.ingredients"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      [style.visibility]="
-                        !item.ingredients ? 'hidden' : 'visible'
-                      "
-                      type="button"
-                      (click)="showDetails(item.name)"
-                      class="btn-sm btn-primary"
-                    >
-                      View
-                    </button>
-                    <button
-                      [style.visibility]="
-                        !item.ingredients ? 'hidden' : 'visible'
-                      "
-                      type="button"
-                      (click)="duplicateItem(item)"
-                      class="btn-sm btn-go"
-                    >
-                      Duplicate
-                    </button>
-                    <button
-                      type="button"
-                      (click)="removeItem(item.id)"
-                      class="btn-sm btn-cancel"
-                    >
-                      Remove
-                    </button>
+                    <div class="itemActions" *ngIf="item.ingredients">
+                      <button
+                        type="button"
+                        (click)="editCartItem(item.id)"
+                        class="btn-sm btn-warning"
+                        [disabled]="!item.ingredients"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        type="button"
+                        (click)="showDetails(item.name)"
+                        class="btn-sm btn-primary"
+                      >
+                        View
+                      </button>
+                    </div>
+                    <div class="itemActions">
+                      <button
+                        [style.visibility]="
+                          !item.ingredients ? 'hidden' : 'visible'
+                        "
+                        type="button"
+                        (click)="duplicateItem(item)"
+                        class="btn-sm btn-go"
+                      >
+                        Duplicate
+                      </button>
+                      <button
+                        type="button"
+                        (click)="removeItem(item.id)"
+                        class="btn-sm btn-cancel"
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
                   <!-- item actions -->
                 </div>
